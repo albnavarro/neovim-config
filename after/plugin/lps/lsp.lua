@@ -41,6 +41,7 @@ local function lsp_keymaps(bufnr)
 	map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
 	-- map('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<cr>')
 	map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
+	map({ "n", "x" }, "<leader>r", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
 	map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 	map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
 
@@ -65,7 +66,7 @@ local function lsp_settings()
 	sign({ name = "DiagnosticSignInfo", text = "I" })
 
 	vim.diagnostic.config({
-		virtual_text = true,
+		virtual_text = false,
 		signs = true,
 		update_in_insert = false,
 		underline = true,
