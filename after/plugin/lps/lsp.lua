@@ -147,3 +147,17 @@ end
 lsp_config.emmet_ls.setup({
 	filetypes = { "html", "php", "twig" },
 })
+
+---
+-- Remove undefined global vim warning.
+---
+lsp_config.lua_ls.setup({
+	settings = {
+		Lua = {
+			diagnostics = {
+				-- Get the language server to recognize the `vim` global
+				globals = { "vim" },
+			},
+		},
+	},
+})

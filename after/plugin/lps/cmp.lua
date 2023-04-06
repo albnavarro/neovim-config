@@ -24,14 +24,9 @@ if not cmp_status then
 	return
 end
 
-vim.opt.completeopt = { "menu", "menuone", "noselect" }
-
 local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
 local cmp_config = {
-	completion = {
-		completeopt = "menu,menuone,noinsert",
-	},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -76,33 +71,17 @@ local cmp_config = {
 			return item
 		end,
 	},
-	mapping = {
-		-- confirm selection
-		["<CR>"] = cmp.mapping.confirm({ select = false }),
-		["<C-y>"] = cmp.mapping.confirm({ select = false }),
-
-		-- navigate items on the list
-		["<Up>"] = cmp.mapping.select_prev_item(select_opts),
-		["<Down>"] = cmp.mapping.select_next_item(select_opts),
-		["<C-p>"] = cmp.mapping.select_prev_item(select_opts),
-		["<C-n>"] = cmp.mapping.select_next_item(select_opts),
+	mapping = cmp.mapping.preset.insert({
+		["<C-Space>"] = cmp.mapping.complete(),
+		["<C-e>"] = cmp.mapping.abort(),
+		["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 
 		-- scroll up and down in the completion documentation
-		["<C-f>"] = cmp.mapping.scroll_docs(5),
+		["<C-d>"] = cmp.mapping.scroll_docs(5),
 		["<C-u>"] = cmp.mapping.scroll_docs(-5),
 
-		-- toggle completion
-		["<C-e>"] = cmp.mapping(function(fallback)
-			if cmp.visible() then
-				cmp.abort()
-				fallback()
-			else
-				cmp.complete()
-			end
-		end),
-
 		-- go to next placeholder in the snippet
-		["<C-d>"] = cmp.mapping(function(fallback)
+		["<C-n>"] = cmp.mapping(function(fallback)
 			if luasnip.jumpable(1) then
 				luasnip.jump(1)
 			else
@@ -111,7 +90,7 @@ local cmp_config = {
 		end, { "i", "s" }),
 
 		-- go to previous placeholder in the snippet
-		["<C-b>"] = cmp.mapping(function(fallback)
+		["<C-p>"] = cmp.mapping(function(fallback)
 			if luasnip.jumpable(-1) then
 				luasnip.jump(-1)
 			else
@@ -143,7 +122,7 @@ local cmp_config = {
 				fallback()
 			end
 		end, { "i", "s" }),
-	},
+	}),
 }
 
 cmp.setup(cmp_config)
