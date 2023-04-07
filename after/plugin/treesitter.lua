@@ -15,7 +15,7 @@ treesitter_configs.setup({
 		"php",
 		"json",
 		"lua",
-		"help",
+		"vimdoc",
 		"vim",
 		"svelte",
 	},
