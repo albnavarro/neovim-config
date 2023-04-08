@@ -76,7 +76,7 @@ map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = f
 map("v", "<leader>s", ":s/", { silent = false })
 --
 -- Shortcut :normal from election
-map("v", "n", ":normal<Space>^", { silent = false })
+map("v", "<leader>n", ":normal<Space>^", { silent = false })
 
 -- :q
 map("n", "<Leader>q", ":q<CR>")
