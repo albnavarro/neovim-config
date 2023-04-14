@@ -48,22 +48,78 @@ local function getWindowLineNumber(useFirstLine)
 	end
 end
 
+-- get case insensitive regex
+local function getCase(value)
+	return value == true and [[\c]] or ""
+end
+
+-- search down
+local function searchDown(ignoreCase)
+	local case = getCase(ignoreCase)
+
+	return [[/]]
+		.. case
+		.. [[\%>]]
+		.. getCurrentLineNumber() - 1
+		.. [[l\%<]]
+		.. getWindowLineNumber(false)
+		.. [[l]]
+		.. t("<C-b>")
+end
+
+-- search up
+local function searchUp(ignoreCase)
+	local case = getCase(ignoreCase)
+
+	return [[?]]
+		.. case
+		.. [[\%<]]
+		.. getCurrentLineNumber() + 1
+		.. [[l\%>]]
+		.. getWindowLineNumber(true)
+		.. [[l]]
+		.. t("<C-b>")
+end
+
+-- ignore case
 A.nvim_set_keymap("n", "<Leader>d", "", {
 	noremap = true,
 	silent = false,
 	expr = true,
 	callback = function()
 		initSettings()
-		return [[/\c\%>]] .. getCurrentLineNumber() - 1 .. [[l\%<]] .. getWindowLineNumber(false) .. [[l]] .. t("<C-b>")
+		return searchDown(true)
 	end,
 })
 
+-- ignore case
 A.nvim_set_keymap("n", "<Leader>u", "", {
 	noremap = true,
 	expr = true,
 	callback = function()
 		initSettings()
-		return [[?\c\%<]] .. getCurrentLineNumber() + 1 .. [[l\%>]] .. getWindowLineNumber(true) .. [[l]] .. t("<C-b>")
+		return searchUp(true)
+	end,
+})
+
+-- exact match
+A.nvim_set_keymap("n", "<Leader>D", "", {
+	noremap = true,
+	silent = false,
+	expr = true,
+	callback = function()
+		initSettings()
+		return searchDown(false)
+	end,
+})
+
+-- exact match
+A.nvim_set_keymap("n", "<Leader>U", "", {
+	noremap = true,
+	expr = true,
+	callback = function()
+		initSettings()
+		return searchUp(false)
 	end,
 })
 
