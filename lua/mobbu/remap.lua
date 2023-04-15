@@ -19,8 +19,8 @@ map("n", "<down>", ":m .+1<CR>==")
 map("n", "<up>", ":m .-2<CR>==")
 
 -- Go to start of line and jump by 5 lines up/down and add to jumplist.
-map("n", "<C-J>", "04jm'")
-map("n", "<C-k>", "04km'")
+map("n", "<C-J>", "05jm'")
+map("n", "<C-k>", "05km'")
 
 -- Move to viewport
 map("n", "<leader>1", "1<C-w><C-w>")

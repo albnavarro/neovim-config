@@ -22,6 +22,10 @@ nvim_tree.setup({
 		mappings = {
 			list = {
 				{ key = "u", action = "dir_up" },
+				{ key = "<C-k>", action = "" },
+				{ key = "<C-j>", action = "" },
+				{ key = "<C-e>", action = "" },
+				{ key = "<C-y>", action = "" },
 				-- { key = "<Tab>", action = "" },
 			},
 		},
