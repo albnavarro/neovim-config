@@ -68,8 +68,9 @@ map("n", "<leader>s", [[:.,$s/\<<C-r><C-w>\>//gc<Left><Left><Left>]], { silent =
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
 
--- Shortcut :s/ from election
-map("v", "<leader>s", ":s/", { silent = false })
+-- Replce inside section.
+-- Use in combination with <leader>* to get occurrence, before use this command.
+map("v", "<leader>s", ":s//", { silent = false })
 --
 -- Shortcut :normal from election
 map("v", "<leader>n", ":normal<Space>^", { silent = false })
