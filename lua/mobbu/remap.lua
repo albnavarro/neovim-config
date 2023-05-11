@@ -26,11 +26,6 @@ map("n", "<C-k>", "05km'")
 map("n", "<C-l>", "20l")
 map("n", "<C-h>", "20h")
 
--- Macro on register a, use native q to stop recording
-map("n", "<leader>m", "0qa")
-map("n", "<leader>M", "0@a")
-map("v", "<leader>M", ":normal<Space>0@a<CR>")
-
 -- Move to viewport
 map("n", "<leader>1", "1<C-w><C-w>")
 map("n", "<leader>2", "2<C-w><C-w>")
