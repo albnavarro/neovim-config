@@ -1,4 +1,5 @@
--- Macro on register a, use native q to stop recording
+-- Toggle macro with "q" key in normal mode.
+-- Play macro in visual mode for each line with "q" key.
 
 local V = vim
 local A = V.api
