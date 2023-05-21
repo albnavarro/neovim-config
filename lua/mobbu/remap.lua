@@ -21,11 +21,15 @@ map("n", "<C-l>", "20l")
 map("n", "<C-h>", "20h")
 
 -- Move to viewport
-map("n", "<leader>1", "1<C-w><C-w>")
-map("n", "<leader>2", "2<C-w><C-w>")
-map("n", "<leader>3", "3<C-w><C-w>")
-map("n", "<leader>4", "4<C-w><C-w>")
-map("n", "<leader>5", "5<C-w><C-w>")
+-- map("n", "<leader>1", "1<C-w><C-w>")
+-- map("n", "<leader>2", "2<C-w><C-w>")
+-- map("n", "<leader>3", "3<C-w><C-w>")
+-- map("n", "<leader>4", "4<C-w><C-w>")
+-- map("n", "<leader>5", "5<C-w><C-w>")
+
+-- Move to nex/previous viewport
+map("n", "<Tab>", "<C-w>w")
+map("n", "<S-Tab>", "<C-w><S-w>")
 
 -- Resize viewport
 map("n", "<C-right>", ":exe 'vertical resize' . (winwidth(0) * 3/2)<CR>")
