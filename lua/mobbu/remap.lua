@@ -15,6 +15,8 @@ map("n", "<up>", ":m .-2<CR>==")
 -- Go to start of line and jump by 5 lines up/down and add to jumplist.
 map("n", "<C-J>", "05jm'")
 map("n", "<C-k>", "05km'")
+map("v", "<C-J>", "05j")
+map("v", "<C-k>", "05k")
 
 -- Move fast horizontally by 20 char
 map("n", "<C-l>", "20l")
