@@ -1,4 +1,4 @@
-require("mobbu.packer")
+require("mobbu.lazy")
 require("mobbu.set")
 require("mobbu.remap")
 require("mobbu.macro")
