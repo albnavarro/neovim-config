@@ -5,6 +5,7 @@ end
 
 treesitter_configs.setup({
 	ensure_installed = {
+		"html",
 		"javascript",
 		"typescript",
 		"jsdoc",

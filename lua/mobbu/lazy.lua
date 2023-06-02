@@ -16,7 +16,6 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	"karb94/neoscroll.nvim",
 	"numToStr/Comment.nvim",
-	"JoosepAlviste/nvim-ts-context-commentstring",
 	"lukas-reineke/indent-blankline.nvim",
 	{
 		"nvim-telescope/telescope.nvim",
@@ -43,6 +42,9 @@ require("lazy").setup({
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring",
+		},
 	},
 	{
 		"kylechui/nvim-surround",
@@ -61,25 +63,40 @@ require("lazy").setup({
 	},
 
 	-- lsp
-	"neovim/nvim-lspconfig",
+	{
+		"neovim/nvim-lspconfig",
+		dependencies = {
+			-- manson
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
 
-	-- manson
-	"williamboman/mason.nvim",
-	"williamboman/mason-lspconfig.nvim",
-
-	--autocompletion
-	"hrsh7th/nvim-cmp",
-	"hrsh7th/cmp-buffer",
-	"hrsh7th/cmp-path",
-	"saadparwaiz1/cmp_luasnip",
-	"hrsh7th/cmp-nvim-lsp",
-	"hrsh7th/cmp-nvim-lua",
-
-	--snippets
-	"l3mon4d3/luasnip",
-	"rafamadriz/friendly-snippets",
+			--autocompletion
+			{
+				"hrsh7th/nvim-cmp",
+				dependencies = {
+					{
+						--snippets
+						"saadparwaiz1/cmp_luasnip",
+						{
+							"L3MON4D3/LuaSnip",
+							dependencies = { "rafamadriz/friendly-snippets" },
+						},
+						-- cmp sources plugins
+						"hrsh7th/cmp-buffer",
+						"hrsh7th/cmp-path",
+						"hrsh7th/cmp-nvim-lsp",
+						"hrsh7th/cmp-nvim-lua",
+					},
+				},
+			},
+		},
+	},
 
 	--null-ls
-	"jose-elias-alvarez/null-ls.nvim",
-	"jayp0521/mason-null-ls.nvim",
+	{
+		"jose-elias-alvarez/null-ls.nvim",
+		dependencies = {
+			"jayp0521/mason-null-ls.nvim",
+		},
+	},
 })
