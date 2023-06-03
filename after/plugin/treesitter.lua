@@ -35,6 +35,15 @@ treesitter_configs.setup({
 	auto_tag = {
 		enable = true,
 	},
+	incremental_selection = {
+		enable = true,
+		keymaps = {
+			init_selection = "+",
+			node_incremental = "+",
+			scope_incremental = false,
+			node_decremental = "_",
+		},
+	},
 	context_commentstring = {
 		enable = true,
 		enable_autocmd = false,
