@@ -6,7 +6,7 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 	},
-	event = "InsertEnter",
+	event = "VeryLazy",
 	config = function()
 		---
 		-- LSP Support

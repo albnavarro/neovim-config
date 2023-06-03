@@ -3,7 +3,7 @@ return {
 	dependencies = {
 		"jayp0521/mason-null-ls.nvim",
 	},
-	event = "InsertEnter",
+	event = "VeryLazy",
 	config = function()
 		---
 		-- null_ls
