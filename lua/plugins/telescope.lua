@@ -2,7 +2,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	tag = "0.1.1",
 	dependencies = { "nvim-lua/plenary.nvim" },
-	event = "VeryLazy",
+	keys = { "<leader>f", "<leader>o" },
 	config = function()
 		local builtin = require("telescope.builtin")
 		local actions = require("telescope.actions")

@@ -1,5 +1,5 @@
 return {
-	{ "lukas-reineke/indent-blankline.nvim", event = "VeryLazy" },
+	{ "lukas-reineke/indent-blankline.nvim", event = { "BufReadPost", "BufNewFile" } },
 	{
 		"folke/tokyonight.nvim",
 		name = "tokyonight",
