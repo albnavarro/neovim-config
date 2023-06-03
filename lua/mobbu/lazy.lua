@@ -14,9 +14,9 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"karb94/neoscroll.nvim",
-	"numToStr/Comment.nvim",
-	"lukas-reineke/indent-blankline.nvim",
+	{ "karb94/neoscroll.nvim", event = "VeryLazy" },
+	{ "numToStr/Comment.nvim", event = "VeryLazy" },
+	{ "lukas-reineke/indent-blankline.nvim", event = "VeryLazy" },
 	{
 		"nvim-telescope/telescope.nvim",
 		tag = "0.1.1",
