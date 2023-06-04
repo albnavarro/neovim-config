@@ -41,9 +41,7 @@ map("n", "<C-up>", ":exe 'resize' . (winheight(0) * 2/3)<CR>")
 
 -- move split
 map("n", "<Leader>j", "<C-w><S-j>")
-map("n", "<Leader>k", "<C-w><S-k>")
 map("n", "<Leader>l", "<C-w><S-l>")
-map("n", "<Leader>h", "<C-w><S-h>")
 
 -- Move up and down and center screen
 -- map("n", "<C-d>", "<C-d>zz")

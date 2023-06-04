@@ -46,6 +46,7 @@ return {
 				diagnostics.eslint_d,
 				diagnostics.stylelint,
 				code_action.eslint_d,
+				code_action.gitsigns,
 			},
 			-- you can reuse a shared lspconfig on_attach callback here
 			on_attach = function(client, bufnr)
