@@ -1,6 +1,6 @@
 return {
 	"lewis6991/gitsigns.nvim",
-	event = "InsertEnter",
+	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require("gitsigns").setup({
 			-- settings:
