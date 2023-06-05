@@ -14,65 +14,55 @@ return {
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
 		local lsp_config = require("lspconfig")
+		local lsp_defaults = lsp_config.util.default_config
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-		---
-		-- LSP config
-		---
-		local function lsp_keymaps(bufnr)
-			local map = function(m, lhs, rhs)
-				local opts = { remap = false, silent = true, buffer = bufnr }
-				vim.keymap.set(m, lhs, rhs, opts)
-			end
+		lsp_defaults.capabilities =
+			vim.tbl_deep_extend("force", lsp_defaults.capabilities, cmp_nvim_lsp.default_capabilities())
 
-			-- LSP actions
-			map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-			map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
-			map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-			map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
-			map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-			map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
-			map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-			map("n", "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
-			map("x", "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
-			map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-			map("x", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-			map("n", "<F5>", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
+		vim.api.nvim_create_autocmd("LspAttach", {
+			desc = "LSP actions",
+			callback = function(args)
+				local bufnr = args.buf
+				local map = function(m, lhs, rhs)
+					local opts = { buffer = bufnr }
+					vim.keymap.set(m, lhs, rhs, opts)
+				end
 
-			-- Diagnostics
-			map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-			map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-			map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
-		end
+				-- Format
+				local buf_command = vim.api.nvim_buf_create_user_command
+				buf_command(bufnr, "LspFormat", function()
+					vim.lsp.buf.format()
+				end, { desc = "Format buffer with language server" })
+
+				-- LSP actions
+				map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
+				map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
+				map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
+				map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
+				map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
+				map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
+				map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
+				map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
+				map({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
+				map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
+				map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
+
+				-- Diagnostics
+				map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
+				map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
+				map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+			end,
+		})
 
 		local function lsp_settings()
-			local sign = function(opts)
-				vim.fn.sign_define(opts.name, {
-					texthl = opts.name,
-					text = opts.text,
-					numhl = "",
-				})
-			end
-
-			sign({ name = "DiagnosticSignError", text = "E" })
-			sign({ name = "DiagnosticSignWarn", text = "W" })
-			sign({ name = "DiagnosticSignHint", text = "H" })
-			sign({ name = "DiagnosticSignInfo", text = "I" })
-
 			vim.diagnostic.config({
+				severity_sort = true,
 				virtual_text = false,
 				signs = true,
 				update_in_insert = false,
 				underline = true,
-				severity_sort = true,
-				float = {
-					focusable = false,
-					style = "minimal",
-					border = "rounded",
-					source = "always",
-					header = "",
-					prefix = "",
-				},
+				float = { border = "rounded" },
 			})
 
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
@@ -95,16 +85,6 @@ return {
 			end, { desc = "Remove folder from workspace" })
 		end
 
-		local function lsp_attach(client, bufnr)
-			local buf_command = vim.api.nvim_buf_create_user_command
-
-			lsp_keymaps(bufnr)
-
-			buf_command(bufnr, "LspFormat", function()
-				vim.lsp.buf.format()
-			end, { desc = "Format buffer with language server" })
-		end
-
 		lsp_settings()
 
 		---
@@ -112,7 +92,6 @@ return {
 		---
 
 		mason.setup({})
-
 		mason_lspconfig.setup({
 			ensure_installed = {
 				"tsserver",
@@ -125,15 +104,12 @@ return {
 		})
 
 		---
-		-- Apply configuration
+		-- Inizializa servers
 		---
 
 		local get_servers = mason_lspconfig.get_installed_servers
 		for _, server_name in ipairs(get_servers()) do
-			lsp_config[server_name].setup({
-				on_attach = lsp_attach,
-				capabilities = cmp_nvim_lsp.default_capabilities(),
-			})
+			lsp_config[server_name].setup({})
 		end
 
 		---
