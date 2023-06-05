@@ -20,3 +20,9 @@ vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 vim.opt.cursorline = true
 vim.g.netrw_banner = 0
+
+-- Allow to move to previous line with arrow.
+vim.opt.whichwrap:append({
+	["<"] = true,
+	[">"] = true,
+})

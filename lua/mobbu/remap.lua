@@ -96,3 +96,10 @@ map("n", "<Leader>=", "gg=G``")
 
 -- Select all document
 map("n", "<Leader>a", "ggVG")
+
+-- After treesitter context selection
+-- If needed select inner surround.
+map("v", "`", "<Left>o<Right>")
+
+--Refresh buffer
+map("n", "<leader>r", ":e!<CR>")
