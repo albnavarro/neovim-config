@@ -99,7 +99,8 @@ map("n", "<Leader>a", "ggVG")
 
 -- After treesitter context selection
 -- If needed select inner surround.
-map("v", "`", "<Left>o<Right>")
+map("v", "`", "<Left>o<Right>o")
+map("v", "~", "<Right>o<Left>o")
 
 --Refresh buffer
 map("n", "<leader>r", ":e!<CR>")
