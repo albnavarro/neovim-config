@@ -1,9 +1,10 @@
 return {
-	"jose-elias-alvarez/null-ls.nvim",
-	dependencies = {
-		"jayp0521/mason-null-ls.nvim",
-	},
+	"jay-babu/mason-null-ls.nvim",
 	event = "VeryLazy",
+	dependencies = {
+		"williamboman/mason.nvim",
+		"jose-elias-alvarez/null-ls.nvim",
+	},
 	config = function()
 		---
 		-- null_ls

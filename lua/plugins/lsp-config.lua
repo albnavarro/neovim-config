@@ -29,11 +29,11 @@ return {
 					vim.keymap.set(m, lhs, rhs, opts)
 				end
 
-				-- Format
-				local buf_command = vim.api.nvim_buf_create_user_command
-				buf_command(bufnr, "LspFormat", function()
-					vim.lsp.buf.format()
-				end, { desc = "Format buffer with language server" })
+				-- Format ( inactive use only mason )
+				-- local buf_command = vim.api.nvim_buf_create_user_command
+				-- buf_command(bufnr, "LspFormat", function()
+				-- 	vim.lsp.buf.format()
+				-- end, { desc = "Format buffer with language server" })
 
 				-- LSP actions
 				map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
