@@ -107,10 +107,15 @@ return {
 		-- Inizializa servers
 		---
 
-		local get_servers = mason_lspconfig.get_installed_servers
-		for _, server_name in ipairs(get_servers()) do
-			lsp_config[server_name].setup({})
-		end
+		-- local get_servers = mason_lspconfig.get_installed_servers
+		-- for _, server_name in ipairs(get_servers()) do
+		-- 	lsp_config[server_name].setup({})
+		-- end
+
+		lsp_config.tsserver.setup({})
+		lsp_config.html.setup({})
+		lsp_config.cssls.setup({})
+		lsp_config.svelte.setup({})
 
 		---
 		-- Extend emmet_ls to twig and javascript
