@@ -1,6 +1,3 @@
--- Run Stylelint from node modules
-vim.api.nvim_create_user_command("StylelintFix", ":! npx stylelint % --fix", {})
-
 -- set conceallevel=0
 vim.api.nvim_create_user_command("ConcealLevelZero", ":set conceallevel=0", {})
 

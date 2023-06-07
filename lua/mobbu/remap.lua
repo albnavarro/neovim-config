@@ -104,3 +104,14 @@ map("v", "~", "<Right>o<Left>o")
 
 --Refresh buffer
 map("n", "<leader>r", ":e!<CR>")
+
+-- Run stylelijnt --fix
+map(
+	"n",
+	"<leader>=s",
+	":! npx stylelint % --fix --cache --cache-location='./node_modules/.stylelintcache'<CR><CR>",
+	{ noremap = true, silent = true }
+)
+
+-- Run eslint --fix
+map("n", "<leader>=j", ":! npx eslint % --fix<CR><CR>", { noremap = true, silent = true })
