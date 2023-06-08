@@ -22,13 +22,6 @@ map("v", "<C-k>", "05k")
 map("n", "<C-l>", "20l")
 map("n", "<C-h>", "20h")
 
--- Move to viewport
--- map("n", "<leader>1", "1<C-w><C-w>")
--- map("n", "<leader>2", "2<C-w><C-w>")
--- map("n", "<leader>3", "3<C-w><C-w>")
--- map("n", "<leader>4", "4<C-w><C-w>")
--- map("n", "<leader>5", "5<C-w><C-w>")
-
 -- Move to nex/previous viewport
 map("n", "<Tab>", "<C-w>w")
 map("n", "<S-Tab>", "<C-w><S-w>")
@@ -42,10 +35,6 @@ map("n", "<C-up>", ":exe 'resize' . (winheight(0) * 2/3)<CR>")
 -- move split
 map("n", "<Leader>j", "<C-w><S-j>")
 map("n", "<Leader>l", "<C-w><S-l>")
-
--- Move up and down and center screen
--- map("n", "<C-d>", "<C-d>zz")
--- map("n", "<C-u>", "<C-u>zz")
 
 --  Paste from register 0
 map("n", "<Leader>p", '"0p')
@@ -91,9 +80,6 @@ map("n", "<Leader>Q", ":qa!<CR>")
 -- Center horizontally
 map("n", "<Leader>z", "zszH")
 
--- Format all document
-map("n", "<Leader>=", "gg=G``")
-
 -- Select all document
 map("n", "<Leader>a", "ggVG")
 
@@ -113,5 +99,11 @@ map(
 	{ noremap = true, silent = true }
 )
 
+-- Run prettier
+map("n", "<leader>=p", ":! npx prettier % --write --cache<CR><CR>", { noremap = true, silent = true })
+
 -- Run eslint --fix
 map("n", "<leader>=j", ":! npx eslint % --fix<CR><CR>", { noremap = true, silent = true })
+
+-- Terminal
+map("t", "<Esc>", [[ <C-\><C-n> ]], {})
