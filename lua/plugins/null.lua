@@ -62,6 +62,10 @@ return {
 					})
 				end
 			end,
+
+			-- vim.api.nvim_create_user_command("FormatCommandExample", function(args)
+			-- 	lsp_formatting(args.buf)
+			-- end, {}),
 		})
 	end,
 }

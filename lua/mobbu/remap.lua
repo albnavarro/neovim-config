@@ -107,3 +107,7 @@ map("n", "<leader>=j", ":! npx eslint % --fix<CR><CR>", { noremap = true, silent
 
 -- Terminal
 map("t", "<Esc>", [[ <C-\><C-n> ]], {})
+
+--- test:
+-- map("n", "<leader>=s", "mF:%!stylelint --fix --stdin --stdin-filename <CR>`F", { noremap = true, silent = true })
+-- map("n", "<leader>=j", "mF:%!eslint_d --stdin --fix-to-stdout<CR>`F", { noremap = true, silent = true })
