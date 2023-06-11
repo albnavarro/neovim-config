@@ -92,12 +92,7 @@ map("v", "~", "<Right>o<Left>o")
 map("n", "<leader>r", ":e!<CR>")
 
 -- Run stylelijnt --fix
-map(
-	"n",
-	"<leader>=s",
-	":! npx stylelint % --fix --cache --cache-location='./node_modules/.stylelintcache'<CR><CR>",
-	{ noremap = true, silent = true }
-)
+map("n", "<leader>=s", ":! npx stylelint % --fix <CR><CR>", { noremap = true, silent = true })
 
 -- Run prettier
 map("n", "<leader>=p", ":! npx prettier % --write --cache<CR><CR>", { noremap = true, silent = true })
