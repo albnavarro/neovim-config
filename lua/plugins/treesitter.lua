@@ -22,6 +22,7 @@ return {
 				"vimdoc",
 				"vim",
 				"svelte",
+				"vue",
 			},
 			sync_install = false,
 			highlight = {
