@@ -52,19 +52,20 @@ map("v", "<leader>c", [["+y]])
 map("n", "<leader>v", [["+p]])
 map("v", "<leader>v", [["+p]])
 
--- set active occurrence under the cursor
+-- 1) set active occurrence under the cursor.
+-- 2) replace occurence inside selection in one step.
 map("n", "<leader>*", [[:let @/="<C-r><C-w>"<CR>]], { silent = false })
+map("v", "<leader>r", ":s///g<left><left>", { silent = false })
 
--- fast replace word from current line to end of file with confirm.
-map("n", "<leader>s", [[:.,$s/\<<C-r><C-w>\>//gc<Left><Left><Left>]], { silent = false })
+-- Replace current word under cursor, use n to go next occurrence and . to replace.
+map("n", "<leader>s", "*``cgn")
+--
+-- Replace current selection under cursor, use n to go next occurrence and . to replace.
+map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
 
--- Replce inside section.
--- Use in combination with <leader>* to get occurrence, before use this command.
-map("v", "<leader>s", ":s///g<left><left>", { silent = false })
---
 -- Shortcut :normal from election
 map("v", "<leader>n", ":normal<Space>^", { silent = false })
 
