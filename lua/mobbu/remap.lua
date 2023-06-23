@@ -57,17 +57,21 @@ map("v", "<leader>v", [["+p]])
 map("n", "<leader>*", [[:let @/="<C-r><C-w>"<CR>]], { silent = false })
 map("v", "<leader>r", ":s///g<left><left>", { silent = false })
 
+-------------
+--
 -- Replace current word under cursor, use n to go next occurrence and . to replace.
 map("n", "<leader>s", "*``cgn")
 --
 -- Replace current selection under cursor, use n to go next occurrence and . to replace.
 map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 
+-- replace next accurrence, the "<leader>d" is only for convenience, d is hust at the side of s.
+map("n", "<leader>d", "n.")
+
+-------------
+
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
-
--- Shortcut :normal from election
-map("v", "<leader>n", ":normal<Space>^", { silent = false })
 
 -- :q
 map("n", "<Leader>q", ":q<CR>")
