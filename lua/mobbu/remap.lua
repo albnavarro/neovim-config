@@ -58,7 +58,7 @@ map("n", "<leader>*", [[:let @/="<C-r><C-w>"<CR>]], { silent = false })
 map("v", "<leader>r", ":s///g<left><left>", { silent = false })
 
 -------------
---
+
 -- Replace current word under cursor, use n to go next occurrence and . to replace.
 map("n", "<leader>s", "*``cgn")
 --
@@ -72,6 +72,9 @@ map("n", "<C-n>", ".n")
 
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
+
+-- Jump to the previous buffer
+map("n", "<C-b>", "<C-^>")
 
 -- :q
 map("n", "<Leader>q", ":q<CR>")
