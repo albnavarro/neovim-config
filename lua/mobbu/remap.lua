@@ -65,8 +65,8 @@ map("n", "<leader>s", "*``cgn")
 -- Replace current selection under cursor, use n to go next occurrence and . to replace.
 map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 
--- replace next accurrence, the "<leader>d" is only for convenience, d is hust at the side of s.
-map("n", "<leader>d", "n.")
+-- replace curent accurrence and fo to next.
+map("n", "<C-n>", ".n")
 
 -------------
 
