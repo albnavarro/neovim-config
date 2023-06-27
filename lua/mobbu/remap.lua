@@ -66,7 +66,7 @@ map("n", "<leader>s", "*``cgn")
 map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 
 -- replace curent accurrence and fo to next.
-map("n", "<C-n>", ".n")
+map("n", "<C-n>", "n.")
 
 -------------
 
