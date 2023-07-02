@@ -68,7 +68,9 @@ map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 -- replace curent accurrence and fo to next.
 map("n", "<C-n>", "n.")
 
--------------
+-- more ergonomic serach.
+map("n", "<leader>d", "/", { silent = false })
+map("n", "<leader>u", "?", { silent = false })
 
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
