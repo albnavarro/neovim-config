@@ -14,6 +14,7 @@ return {
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
 		vim.keymap.set("n", "<leader>fd", builtin.lsp_document_symbols, {})
+		vim.keymap.set("n", "<leader>fw", builtin.lsp_dynamic_workspace_symbols, {})
 		vim.keymap.set("n", "<leader>fj", builtin.jumplist, {})
 		vim.keymap.set("n", "<leader>fm", builtin.marks, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
