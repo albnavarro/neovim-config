@@ -1,28 +1,31 @@
-vim.opt.guicursor = ""
-vim.opt.nu = true
-vim.opt.relativenumber = true
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
-vim.opt.expandtab = true
-vim.opt.mouse:append("a")
-vim.opt.autoindent = true
-vim.opt.wrap = false
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-vim.opt.undofile = true
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
-vim.opt.termguicolors = true
-vim.opt.scrolloff = 4
-vim.opt.signcolumn = "yes"
-vim.opt.colorcolumn = "80"
-vim.opt.cursorline = true
-vim.g.netrw_banner = 0
+local O = vim.opt
+local G = vim.g
+
+O.guicursor = ""
+O.nu = true
+O.relativenumber = true
+O.tabstop = 4
+O.softtabstop = 4
+O.shiftwidth = 4
+O.expandtab = true
+O.mouse:append("a")
+O.autoindent = true
+O.wrap = false
+O.swapfile = false
+O.backup = false
+O.undodir = os.getenv("HOME") .. "/.vim/undodir"
+O.undofile = true
+O.hlsearch = false
+O.incsearch = true
+O.termguicolors = true
+O.scrolloff = 4
+O.signcolumn = "yes"
+O.colorcolumn = "80"
+O.cursorline = true
+G.netrw_banner = 0
 
 -- Allow to move to previous line with arrow.
-vim.opt.whichwrap:append({
+O.whichwrap:append({
 	["<"] = true,
 	[">"] = true,
 })
