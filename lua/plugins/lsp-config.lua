@@ -29,7 +29,6 @@ return {
 					vim.keymap.set(m, lhs, rhs, opts)
 				end
 
-				-- Format ( inactive use only mason )
 				-- local buf_command = vim.api.nvim_buf_create_user_command
 				-- buf_command(bufnr, "LspFormat", function()
 				-- 	vim.lsp.buf.format()
@@ -100,6 +99,8 @@ return {
 				"emmet_ls",
 				"lua_ls",
 				"svelte",
+				"eslint",
+				"stylelint_lsp",
 			},
 		})
 
@@ -116,6 +117,10 @@ return {
 		lsp_config.html.setup({})
 		lsp_config.cssls.setup({})
 		lsp_config.svelte.setup({})
+		lsp_config.eslint.setup({})
+		lsp_config.stylelint_lsp.setup({
+			filetypes = { "scss" },
+		})
 
 		---
 		-- Extend emmet_ls to twig and javascript
