@@ -11,6 +11,27 @@ return {
 			}
 		end
 
+		-- local prettierdConfig = function()
+		-- 	return {
+		-- 		exe = "prettierd",
+		-- 		args = { util.escape_path(util.get_current_buffer_file_path()) },
+		-- 		stdin = true,
+		-- 	}
+		-- end
+
+		-- local eslintdConfig = function()
+		-- 	return {
+		-- 		exe = "eslint_d",
+		-- 		args = {
+		-- 			"--stdin",
+		-- 			"--stdin-filename",
+		-- 			util.escape_path(util.get_current_buffer_file_path()),
+		-- 			"--fix-to-stdout",
+		-- 		},
+		-- 		stdin = true,
+		-- 	}
+		-- end
+
 		require("formatter").setup({
 			logging = true,
 			log_level = vim.log.levels.WARN,
@@ -18,11 +39,13 @@ return {
 				lua = { require("formatter.filetypes.lua").stylua },
 				typescript = { require("formatter.filetypes.typescript").prettierd },
 				javascript = { require("formatter.filetypes.javascript").prettierd },
+				-- javascript = { prettierdConfig, eslintdConfig },
 				yaml = { require("formatter.filetypes.yaml").prettierd },
 				json = { require("formatter.filetypes.json").prettierd },
 				scss = { require("formatter.filetypes.css").prettierd },
 				twig = { prettierConfig },
 				pug = { prettierConfig },
+
 				-- Use the special "*" filetype for defining formatter configurations on
 				-- any filetype
 				["*"] = {
