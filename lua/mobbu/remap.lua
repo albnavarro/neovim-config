@@ -26,15 +26,11 @@ map("n", "<C-h>", "20h")
 map("n", "<Tab>", "<C-w>w")
 map("n", "<S-Tab>", "<C-w><S-w>")
 
--- Resize viewport
-map("n", "<C-right>", ":exe 'vertical resize' . (winwidth(0) * 3/2)<CR>")
-map("n", "<C-left>", ":exe 'vertical resize' . (winwidth(0) * 2/3)<CR>")
-map("n", "<C-down>", ":exe 'resize' . (winheight(0) * 3/2)<CR>")
-map("n", "<C-up>", ":exe 'resize' . (winheight(0) * 2/3)<CR>")
-
 -- move split
 map("n", "<Leader>j", "<C-w><S-j>")
+map("n", "<Leader>k", "<C-w><S-k>")
 map("n", "<Leader>l", "<C-w><S-l>")
+map("n", "<Leader>h", "<C-w><S-h>")
 
 --  Paste from register 0
 map("n", "<Leader>p", '"0p')
