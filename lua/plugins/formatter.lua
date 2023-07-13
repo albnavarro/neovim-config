@@ -3,33 +3,25 @@ return {
 	event = "VeryLazy",
 	config = function()
 		local util = require("formatter.util")
-		local prettierConfig = function()
+		local prettierdConfig = function()
 			return {
-				exe = "prettier",
+				exe = "prettierd",
 				args = { util.escape_path(util.get_current_buffer_file_path()) },
 				stdin = true,
 			}
 		end
 
-		-- local prettierdConfig = function()
-		-- 	return {
-		-- 		exe = "prettierd",
-		-- 		args = { util.escape_path(util.get_current_buffer_file_path()) },
-		-- 		stdin = true,
-		-- 	}
-		-- end
-
 		-- local eslintdConfig = function()
-		-- 	return {
-		-- 		exe = "eslint_d",
-		-- 		args = {
-		-- 			"--stdin",
-		-- 			"--stdin-filename",
-		-- 			util.escape_path(util.get_current_buffer_file_path()),
-		-- 			"--fix-to-stdout",
-		-- 		},
-		-- 		stdin = true,
-		-- 	}
+		-- return {
+		-- exe = "eslint_d",
+		-- args = {
+		-- "--stdin",
+		-- "--stdin-filename",
+		-- util.escape_path(util.get_current_buffer_file_path()),
+		-- "--fix-to-stdout",
+		-- },
+		-- stdin = true,
+		-- }
 		-- end
 
 		require("formatter").setup({
@@ -43,8 +35,8 @@ return {
 				yaml = { require("formatter.filetypes.yaml").prettierd },
 				json = { require("formatter.filetypes.json").prettierd },
 				scss = { require("formatter.filetypes.css").prettierd },
-				twig = { prettierConfig },
-				pug = { prettierConfig },
+				twig = { prettierdConfig },
+				-- pug = { prettierdConfig },
 
 				-- Use the special "*" filetype for defining formatter configurations on
 				-- any filetype
