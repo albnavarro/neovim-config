@@ -3,25 +3,38 @@ return {
 	event = "VeryLazy",
 	config = function()
 		local util = require("formatter.util")
+		local mob_utils = require("utils/dir_utils")
+
+		-- Try to get Prettier for node_modules or get prettierd
+		local P = mob_utils.getExePath("/node_modules/.bin/prettier", "prettierd")
+		local prettierdConfigTryLocal = function()
+			return {
+				exe = P,
+				args = { "--stdin-filepath", util.escape_path(util.get_current_buffer_file_path()), "--single-quote" },
+				stdin = true,
+			}
+		end
+
+		-- Prettierd
 		local prettierdConfig = function()
 			return {
 				exe = "prettierd",
-				args = { util.escape_path(util.get_current_buffer_file_path()) },
+				args = { "--stdin-filepath", util.escape_path(util.get_current_buffer_file_path()), "--single-quote" },
 				stdin = true,
 			}
 		end
 
 		-- local eslintdConfig = function()
-		-- return {
-		-- exe = "eslint_d",
-		-- args = {
-		-- "--stdin",
-		-- "--stdin-filename",
-		-- util.escape_path(util.get_current_buffer_file_path()),
-		-- "--fix-to-stdout",
-		-- },
-		-- stdin = true,
-		-- }
+		-- 	return {
+		-- 		exe = "eslint_d",
+		-- 		args = {
+		-- 			"--stdin",
+		-- 			"--stdin-filename",
+		-- 			util.escape_path(util.get_current_buffer_file_path()),
+		-- 			"--fix-to-stdout",
+		-- 		},
+		-- 		stdin = true,
+		-- 	}
 		-- end
 
 		require("formatter").setup({
@@ -36,7 +49,7 @@ return {
 				json = { require("formatter.filetypes.json").prettierd },
 				scss = { require("formatter.filetypes.css").prettierd },
 				twig = { prettierdConfig },
-				-- pug = { prettierdConfig },
+				pug = { prettierdConfigTryLocal },
 
 				-- Use the special "*" filetype for defining formatter configurations on
 				-- any filetype
