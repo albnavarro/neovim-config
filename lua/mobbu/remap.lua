@@ -98,8 +98,8 @@ map("v", "~", "<Right>o<Left>o")
 map("n", "<leader>r", ":e!<CR>")
 
 -- Run stylelijnt --fix
--- map("n", "<leader>=s", ":! npx stylelint % --fix <CR><CR>", { noremap = true, silent = true })
 -- map("n", "<leader>=s", "mF:%!stylelint --fix --stdin --stdin-filename <CR>`F", { noremap = true, silent = true })
+map("n", "<leader>=S", ":! npx stylelint % --fix <CR><CR>", { noremap = true, silent = true })
 map("n", "<leader>=s", ":Stylelint<CR>", { noremap = true, silent = true })
 
 -- Run prettier
