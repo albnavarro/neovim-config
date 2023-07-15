@@ -38,9 +38,10 @@ return {
 		-- end
 
 		-- Stylelint
+		-- local S = mob_utils.getExePath("/node_modules/.bin/stylelint", "prettierd")
 		-- local stylelintConfig = function()
 		-- 	return {
-		-- 		exe = "stylelint",
+		-- 		exe = S,
 		-- 		args = {
 		-- 			"--cache",
 		-- 			"--fix",
