@@ -37,6 +37,21 @@ return {
 		-- 	}
 		-- end
 
+		-- Stylelint
+		-- local stylelintConfig = function()
+		-- 	return {
+		-- 		exe = "stylelint",
+		-- 		args = {
+		-- 			"--cache",
+		-- 			"--fix",
+		-- 			"--stdin",
+		-- 			"--stdin-filename",
+		-- 			util.escape_path(util.get_current_buffer_file_path()),
+		-- 		},
+		-- 		stdin = true,
+		-- 	}
+		-- end
+
 		require("formatter").setup({
 			logging = true,
 			log_level = vim.log.levels.WARN,
@@ -48,6 +63,7 @@ return {
 				yaml = { require("formatter.filetypes.yaml").prettierd },
 				json = { require("formatter.filetypes.json").prettierd },
 				scss = { require("formatter.filetypes.css").prettierd },
+				-- scss = { prettierdConfig, stylelintConfig },
 				twig = { prettierdConfig },
 				pug = { prettierdConfigTryLocal },
 
