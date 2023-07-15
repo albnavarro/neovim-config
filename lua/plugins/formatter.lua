@@ -24,7 +24,7 @@ return {
 			}
 		end
 
-        -- eslint_d
+		-- eslint_d
 		local eslintdConfig = function()
 			return {
 				exe = "eslint_d",
@@ -79,7 +79,7 @@ return {
 			},
 		})
 
-        -- Execute stylelint
+		-- Execute stylelint
 		vim.api.nvim_create_user_command("Stylelint", function()
 			local filetype = vim.bo.filetype
 			vim.cmd("set filetype=" .. "cssFake") -- fake filetype
@@ -89,7 +89,7 @@ return {
 			nargs = 0,
 		})
 
-        -- Execute eslint
+		-- Execute eslint
 		vim.api.nvim_create_user_command("Eslintd", function()
 			local filetype = vim.bo.filetype
 			vim.cmd("set filetype=" .. "jsFake") -- fake filetype
