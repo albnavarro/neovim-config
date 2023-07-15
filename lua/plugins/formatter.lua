@@ -24,34 +24,35 @@ return {
 			}
 		end
 
-		-- local eslintdConfig = function()
-		-- 	return {
-		-- 		exe = "eslint_d",
-		-- 		args = {
-		-- 			"--stdin",
-		-- 			"--stdin-filename",
-		-- 			util.escape_path(util.get_current_buffer_file_path()),
-		-- 			"--fix-to-stdout",
-		-- 		},
-		-- 		stdin = true,
-		-- 	}
-		-- end
+        -- eslint_d
+		local eslintdConfig = function()
+			return {
+				exe = "eslint_d",
+				args = {
+					"--stdin",
+					"--stdin-filename",
+					util.escape_path(util.get_current_buffer_file_path()),
+					"--fix-to-stdout",
+				},
+				stdin = true,
+			}
+		end
 
 		-- Stylelint
-		-- local S = mob_utils.getExePath("/node_modules/.bin/stylelint", "prettierd")
-		-- local stylelintConfig = function()
-		-- 	return {
-		-- 		exe = S,
-		-- 		args = {
-		-- 			"--cache",
-		-- 			"--fix",
-		-- 			"--stdin",
-		-- 			"--stdin-filename",
-		-- 			util.escape_path(util.get_current_buffer_file_path()),
-		-- 		},
-		-- 		stdin = true,
-		-- 	}
-		-- end
+		local S = mob_utils.getExePath("/node_modules/.bin/stylelint", "stylelint")
+		local stylelintConfig = function()
+			return {
+				exe = S,
+				args = {
+					"--cache",
+					"--fix",
+					"--stdin",
+					"--stdin-filename",
+					util.escape_path(util.get_current_buffer_file_path()),
+				},
+				stdin = true,
+			}
+		end
 
 		require("formatter").setup({
 			logging = true,
@@ -60,13 +61,15 @@ return {
 				lua = { require("formatter.filetypes.lua").stylua },
 				typescript = { require("formatter.filetypes.typescript").prettierd },
 				javascript = { require("formatter.filetypes.javascript").prettierd },
-				-- javascript = { prettierdConfig, eslintdConfig },
 				yaml = { require("formatter.filetypes.yaml").prettierd },
 				json = { require("formatter.filetypes.json").prettierd },
 				scss = { require("formatter.filetypes.css").prettierd },
-				-- scss = { prettierdConfig, stylelintConfig },
 				twig = { prettierdConfig },
 				pug = { prettierdConfigTryLocal },
+
+				-- Fake filetype to format with stylelint.
+				cssFake = { stylelintConfig },
+				jsFake = { eslintdConfig },
 
 				-- Use the special "*" filetype for defining formatter configurations on
 				-- any filetype
@@ -74,6 +77,26 @@ return {
 					require("formatter.filetypes.any").remove_trailing_whitespace,
 				},
 			},
+		})
+
+        -- Execute stylelint
+		vim.api.nvim_create_user_command("Stylelint", function()
+			local filetype = vim.bo.filetype
+			vim.cmd("set filetype=" .. "cssFake") -- fake filetype
+			vim.cmd(":Format")
+			vim.cmd("set filetype=" .. filetype) -- restore original filetype
+		end, {
+			nargs = 0,
+		})
+
+        -- Execute eslint
+		vim.api.nvim_create_user_command("Eslintd", function()
+			local filetype = vim.bo.filetype
+			vim.cmd("set filetype=" .. "jsFake") -- fake filetype
+			vim.cmd(":Format")
+			vim.cmd("set filetype=" .. filetype) -- restore original filetype
+		end, {
+			nargs = 0,
 		})
 
 		vim.api.nvim_exec(
