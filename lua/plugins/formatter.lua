@@ -44,7 +44,6 @@ return {
 			return {
 				exe = S,
 				args = {
-					"--cache",
 					"--fix",
 					"--stdin",
 					"--stdin-filename",
