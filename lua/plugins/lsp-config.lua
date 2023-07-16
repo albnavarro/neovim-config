@@ -1,8 +1,10 @@
 return {
 	"neovim/nvim-lspconfig",
 	dependencies = {
-		-- manson
-		"williamboman/mason.nvim",
+		{
+			"williamboman/mason.nvim",
+			build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+		},
 		"williamboman/mason-lspconfig.nvim",
 		"hrsh7th/cmp-nvim-lsp",
 	},
