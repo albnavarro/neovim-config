@@ -106,9 +106,9 @@ map("n", "<leader>=s", ":Stylelint<CR>", { noremap = true, silent = true })
 -- map("n", "<leader>=p", ":! npx prettier % --write --cache<CR><CR>", { noremap = true, silent = true })
 
 -- Run eslint --fix
--- map("n", "<leader>=j", ":! npx eslint % --fix<CR><CR>", { noremap = true, silent = true })
--- map("n", "<leader>=j", "mF:%!eslint_d --stdin --fix-to-stdout<CR>`F", { noremap = true, silent = true })
-map("n", "<leader>=j", ":Eslintd<CR>", { noremap = true, silent = true })
+-- map("n", "<leader>=e", "mF:%!eslint_d --stdin --fix-to-stdout<CR>`F", { noremap = true, silent = true })
+map("n", "<leader>=E", ":! npx eslint % --fix<CR><CR>", { noremap = true, silent = true })
+map("n", "<leader>=e", ":Eslintd<CR>", { noremap = true, silent = true })
 
 -- Terminal
 map("t", "<Esc>", [[ <C-\><C-n> ]], {})
