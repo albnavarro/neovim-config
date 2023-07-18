@@ -23,8 +23,19 @@ return {
 		vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {})
 		vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
 
+		-- Live grep inside folder. ( copy path from nvim-tree "Y" )
+		-- vim.keymap.set("n", "<leader>fd", ":Telescope live_grep search_dirs=", { silent = false })
+
 		-- Live grep inside folder.
-		vim.keymap.set("n", "<leader>fd", ":Telescope live_grep search_dirs=", { silent = false })
+		-- Open a file in specific folder and automplete dir without filename.
+		vim.api.nvim_set_keymap("n", "<leader>fd", "", {
+			expr = true,
+			callback = function()
+				local fullPath = vim.api.nvim_buf_get_name(0)
+				local fullPathLessName = fullPath:match("(.+)%/.+$")
+				return ":Telescope live_grep search_dirs=" .. fullPathLessName
+			end,
+		})
 
 		require("telescope").setup({
 			defaults = {
