@@ -19,13 +19,12 @@ return {
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
-		vim.keymap.set("n", "<leader>fd", builtin.lsp_document_symbols, {})
-		vim.keymap.set("n", "<leader>fw", builtin.lsp_dynamic_workspace_symbols, {})
-		vim.keymap.set("n", "<leader>fj", builtin.jumplist, {})
-		vim.keymap.set("n", "<leader>fm", builtin.marks, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
 		vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {})
 		vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
+
+		-- Live grep inside folder.
+		vim.keymap.set("n", "<leader>fd", ":Telescope live_grep search_dirs=", { silent = false })
 
 		require("telescope").setup({
 			defaults = {
