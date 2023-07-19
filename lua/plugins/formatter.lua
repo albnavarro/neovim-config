@@ -6,6 +6,10 @@ return {
 		local dir_utils = require("utils/dir_utils")
 		local tables_utils = require("utils/tables_utils")
 
+		-- filetype per linters
+		local stylelintFileType = { "scss", "css", "sass" }
+		local eslintFileType = { "javascript", "typescript" }
+
 		-- Try to get Prettier for node_modules or get prettierd
 		local P = dir_utils.getExePath("/node_modules/.bin/prettier", "prettierd")
 		local prettierdConfigTryLocal = function()
@@ -68,7 +72,7 @@ return {
 				twig = { prettierdConfig },
 				pug = { prettierdConfigTryLocal },
 
-				-- Fake filetype to format with stylelint.
+				-- Fake filetype for linter formatting
 				cssFake = { stylelintConfig },
 				jsFake = { eslintdConfig },
 
@@ -80,30 +84,25 @@ return {
 			},
 		})
 
-		-- Execute stylelint only on specific filetype.
-		-- Filtype is used to rpevent ignore_exitcode error on worng filetype.
-		local stylelintFileType = { "scss", "css", "sass" }
-		vim.api.nvim_create_user_command("Stylelint", function()
+		-- Format with linter for filetype.
+		vim.api.nvim_create_user_command("FixWithLinter", function()
 			local filetype = vim.bo.filetype
+
 			if tables_utils.has_value(stylelintFileType, filetype) then
 				vim.cmd("set filetype=" .. "cssFake") -- fake filetype
-				vim.cmd(":Format")
-				vim.cmd("set filetype=" .. filetype) -- restore original filetype
 			end
-		end, {
-			nargs = 0,
-		})
 
-		-- Execute eslint
-		vim.api.nvim_create_user_command("Eslintd", function()
-			local filetype = vim.bo.filetype
-			vim.cmd("set filetype=" .. "jsFake") -- fake filetype
+			if tables_utils.has_value(eslintFileType, filetype) then
+				vim.cmd("set filetype=" .. "jsFake") -- fake filetype
+			end
+
 			vim.cmd(":Format")
 			vim.cmd("set filetype=" .. filetype) -- restore original filetype
 		end, {
 			nargs = 0,
 		})
 
+		-- Format with default formatter on save.
 		vim.api.nvim_exec(
 			[[
                 augroup FormatAutogroup
