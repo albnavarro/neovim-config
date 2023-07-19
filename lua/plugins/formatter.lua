@@ -49,6 +49,7 @@ return {
 					"--stdin-filename",
 					util.escape_path(util.get_current_buffer_file_path()),
 				},
+				ignore_exitcode = true,
 				stdin = true,
 			}
 		end
