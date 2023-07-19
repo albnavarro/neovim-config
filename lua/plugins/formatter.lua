@@ -3,10 +3,11 @@ return {
 	event = "VeryLazy",
 	config = function()
 		local util = require("formatter.util")
-		local mob_utils = require("utils/dir_utils")
+		local dir_utils = require("utils/dir_utils")
+		local tables_utils = require("utils/tables_utils")
 
 		-- Try to get Prettier for node_modules or get prettierd
-		local P = mob_utils.getExePath("/node_modules/.bin/prettier", "prettierd")
+		local P = dir_utils.getExePath("/node_modules/.bin/prettier", "prettierd")
 		local prettierdConfigTryLocal = function()
 			return {
 				exe = P,
@@ -39,7 +40,7 @@ return {
 		end
 
 		-- Stylelint
-		local S = mob_utils.getExePath("/node_modules/.bin/stylelint", "stylelint")
+		local S = dir_utils.getExePath("/node_modules/.bin/stylelint", "stylelint")
 		local stylelintConfig = function()
 			return {
 				exe = S,
@@ -79,12 +80,16 @@ return {
 			},
 		})
 
-		-- Execute stylelint
+		-- Execute stylelint only on specific filetype.
+		-- Filtype is used to rpevent ignore_exitcode error on worng filetype.
+		local stylelintFileType = { "scss", "css", "sass" }
 		vim.api.nvim_create_user_command("Stylelint", function()
 			local filetype = vim.bo.filetype
-			vim.cmd("set filetype=" .. "cssFake") -- fake filetype
-			vim.cmd(":Format")
-			vim.cmd("set filetype=" .. filetype) -- restore original filetype
+			if tables_utils.has_value(stylelintFileType, filetype) then
+				vim.cmd("set filetype=" .. "cssFake") -- fake filetype
+				vim.cmd(":Format")
+				vim.cmd("set filetype=" .. filetype) -- restore original filetype
+			end
 		end, {
 			nargs = 0,
 		})
