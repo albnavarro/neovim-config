@@ -21,6 +21,8 @@ return {
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
 		vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {})
+		vim.keymap.set("n", "<leader>fl", builtin.resume, {})
+		vim.keymap.set("n", "<leader>fb", builtin.builtin, {})
 		vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
 
 		-- Live grep inside folder. ( copy path from nvim-tree "Y" )
