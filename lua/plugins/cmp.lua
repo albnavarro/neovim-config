@@ -33,8 +33,8 @@ return {
 
 		luaVsCode.lazy_load()
 
-		-- add twig snippet in html.
-		luasnip.filetype_extend("html", { "twig" })
+		-- add html snippet to twig.
+		luasnip.filetype_extend("twig", { "html" })
 
 		---
 		-- Autocompletion
