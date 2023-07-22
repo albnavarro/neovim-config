@@ -32,6 +32,12 @@ map("n", "<Leader>k", "<C-w><S-k>")
 map("n", "<Leader>l", "<C-w><S-l>")
 map("n", "<Leader>h", "<C-w><S-h>")
 
+-- Resize window using <ctrl> arrow keys
+map("n", "<C-Up>", "<cmd>resize +4<cr>", { desc = "Increase window height" })
+map("n", "<C-Down>", "<cmd>resize -4<cr>", { desc = "Decrease window height" })
+map("n", "<C-Left>", "<cmd>vertical resize -4<cr>", { desc = "Decrease window width" })
+map("n", "<C-Right>", "<cmd>vertical resize +4<cr>", { desc = "Increase window width" })
+
 --  Paste from register 0
 map("n", "<Leader>p", '"0p')
 map("n", "<Leader>P", '"0P')
