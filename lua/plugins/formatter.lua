@@ -96,7 +96,7 @@ return {
 				vim.cmd("set filetype=" .. "jsFake") -- fake filetype
 			end
 
-			vim.cmd(":Format")
+			vim.cmd(":FormatWrite")
 			vim.cmd("set filetype=" .. filetype) -- restore original filetype
 		end, {
 			nargs = 0,
