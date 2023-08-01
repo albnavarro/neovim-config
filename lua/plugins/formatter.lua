@@ -68,6 +68,7 @@ return {
 				javascript = { require("formatter.filetypes.javascript").prettierd },
 				yaml = { require("formatter.filetypes.yaml").prettierd },
 				json = { require("formatter.filetypes.json").prettierd },
+				jsonc = { require("formatter.filetypes.json").prettierd },
 				scss = { require("formatter.filetypes.css").prettierd },
 				twig = { prettierdConfig },
 				pug = { prettierdConfigTryLocal },
