@@ -119,3 +119,7 @@ map("n", "<leader>=", ":FixWithLinter<CR>", { noremap = true, silent = true })
 
 -- Terminal
 map("t", "<Esc>", [[ <C-\><C-n> ]], {})
+
+-- Fuck TNF
+map("n", "!", "0f;i!important<C-ESC>g_")
+map("v", "!", ":s/;/!important;/g<CR>")
