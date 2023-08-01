@@ -129,7 +129,7 @@ return {
 		-- Extend emmet_ls to twig and javascript
 		---
 		lsp_config.emmet_ls.setup({
-			filetypes = { "html", "php", "twig" },
+			filetypes = { "html", "php", "twig", "scss" },
 		})
 
 		---
