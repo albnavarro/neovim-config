@@ -110,8 +110,8 @@ return {
 			vim.keymap.del("n", "<C-e>", { buffer = bufnr })
 			vim.keymap.set("n", "<C-y>", "", { buffer = bufnr })
 			vim.keymap.del("n", "<C-y>", { buffer = bufnr })
-			-- vim.keymap.set("n", "<Tab>", "", { buffer = bufnr })
-			-- vim.keymap.del("n", "<Tab>", { buffer = bufnr })
+			vim.keymap.set("n", "<Tab>", "", { buffer = bufnr })
+			vim.keymap.del("n", "<Tab>", { buffer = bufnr })
 
 			-- Mappings migrated from view.mappings.list
 			--

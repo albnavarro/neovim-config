@@ -24,8 +24,10 @@ map("n", "<C-l>", "20l")
 map("n", "<C-h>", "20h")
 
 -- Move to nex/previous viewport
-map("n", "`", "<C-w>w")
-map("n", "~", "<C-w><S-w>")
+-- <C-i> use same code of <TAB> use <C-p> instead <C-i>
+map("n", "<C-p>", "<C-i>")
+map("n", "<tab>", "<C-w>w")
+map("n", "<S-tab>", "<C-w><S-w>")
 
 -- move split
 map("n", "<Leader>j", "<C-w><S-j>")
