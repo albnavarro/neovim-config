@@ -13,8 +13,9 @@ map("n", "<down>", ":m .+1<CR>==")
 map("n", "<up>", ":m .-2<CR>==")
 
 -- Go to start of line and jump by 5 lines up/down and add to jumplist.
-map("n", "<C-J>", "05jm'")
-map("n", "<C-k>", "05km'")
+-- ( add m' to insert in jumplit if needed es: 05jm' )
+map("n", "<C-J>", "05j")
+map("n", "<C-k>", "05k")
 map("v", "<C-J>", "05j")
 map("v", "<C-k>", "05k")
 
