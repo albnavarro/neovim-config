@@ -74,8 +74,8 @@ map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 map("n", "<C-n>", "n.")
 
 -- more ergonomic serach ingnore case.
-map("n", "<leader>i", [[/\c<Left><Left>]], { silent = false })
-map("n", "<leader>I", [[?\c<Left><Left>]], { silent = false })
+map("n", "`", [[/\c<Left><Left>]], { silent = false })
+map("n", "~", [[?\c<Left><Left>]], { silent = false })
 
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
