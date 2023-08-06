@@ -151,5 +151,6 @@ return {
 		vim.keymap.set("n", "<Leader>tf", ":NvimTreeFindFile<CR>")
 		vim.keymap.set("n", "<Leader>to", ":NvimTreeFocus<CR>")
 		vim.keymap.set("n", "<Leader>tc", ":NvimTreeClose<CR>")
+		vim.keymap.set("n", "<Leader>tr", ":NvimTreeRefresh<CR>")
 	end,
 }
