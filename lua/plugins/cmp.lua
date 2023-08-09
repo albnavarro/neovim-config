@@ -15,7 +15,6 @@ return {
 			"hrsh7th/cmp-path",
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lua",
-			"windwp/nvim-autopairs",
 		},
 	},
 	event = "InsertEnter",
@@ -26,9 +25,6 @@ return {
 		local cmp = require("cmp")
 		local luasnip = require("luasnip")
 		local luaVsCode = require("luasnip.loaders.from_vscode")
-
-		-- autopairs
-		local cmp_autopairs = require("nvim-autopairs.completion.cmp")
 
 		luasnip.config.set_config({
 			region_check_events = "InsertEnter",
@@ -145,8 +141,5 @@ return {
 		}
 
 		cmp.setup(cmp_config)
-
-		-- autopairs
-		cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 	end,
 }
