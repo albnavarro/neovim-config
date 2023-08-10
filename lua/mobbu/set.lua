@@ -29,3 +29,5 @@ O.whichwrap:append({
 	["<"] = true,
 	[">"] = true,
 })
+
+vim.opt.clipboard:append("unnamedplus")
