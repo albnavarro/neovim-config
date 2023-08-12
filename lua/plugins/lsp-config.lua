@@ -18,6 +18,8 @@ return {
 		local lsp_config = require("lspconfig")
 		local lsp_defaults = lsp_config.util.default_config
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local eslintFileType = { "javascript", "typescript" }
+		local tables_utils = require("utils/tables_utils")
 
 		lsp_defaults.capabilities =
 			vim.tbl_deep_extend("force", lsp_defaults.capabilities, cmp_nvim_lsp.default_capabilities())
@@ -30,6 +32,21 @@ return {
 					local opts = { buffer = bufnr }
 					vim.keymap.set(m, lhs, rhs, opts)
 				end
+
+				-- Format
+				local buf_command = vim.api.nvim_buf_create_user_command
+				buf_command(bufnr, "LspFormat", function()
+					local filetype = vim.bo.filetype
+
+					-- specific eslint format command
+					if tables_utils.has_value(eslintFileType, filetype) then
+						vim.cmd(":EslintFixAll")
+						return
+					end
+
+					-- default format command
+					vim.lsp.buf.format()
+				end, { desc = "Format buffer with language server" })
 
 				-- LSP actions
 				map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
@@ -126,11 +143,11 @@ return {
 		})
 		lsp_config.stylelint_lsp.setup({
 			filetypes = { "scss" },
-			-- settings = {
-			-- 	stylelintplus = {
-			-- 		autoFixOnSave = true,
-			-- 	},
-			-- },
+			settings = {
+				stylelintplus = {
+					autoFixOnFormat = true,
+				},
+			},
 		})
 
 		---
