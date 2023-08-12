@@ -31,11 +31,6 @@ return {
 					vim.keymap.set(m, lhs, rhs, opts)
 				end
 
-				-- local buf_command = vim.api.nvim_buf_create_user_command
-				-- buf_command(bufnr, "LspFormat", function()
-				-- 	vim.lsp.buf.format()
-				-- end, { desc = "Format buffer with language server" })
-
 				-- LSP actions
 				map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
 				map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
@@ -120,9 +115,22 @@ return {
 		lsp_config.html.setup({})
 		lsp_config.cssls.setup({})
 		lsp_config.svelte.setup({})
-		lsp_config.eslint.setup({})
+		lsp_config.eslint.setup({
+			-- on_attach = function(args)
+			-- 	local bufnr = args.buf
+			-- 	vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 		buffer = bufnr,
+			-- 		command = "EslintFixAll",
+			-- 	})
+			-- end,
+		})
 		lsp_config.stylelint_lsp.setup({
 			filetypes = { "scss" },
+			-- settings = {
+			-- 	stylelintplus = {
+			-- 		autoFixOnSave = true,
+			-- 	},
+			-- },
 		})
 
 		---
