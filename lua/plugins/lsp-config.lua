@@ -45,7 +45,7 @@ return {
 					end
 
 					-- default format command
-					vim.lsp.buf.format()
+					vim.lsp.buf.format({ async = true })
 				end, { desc = "Format buffer with language server" })
 
 				-- LSP actions
@@ -57,7 +57,7 @@ return {
 				map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
 				map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
 				map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-				map({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
+				map({ "n", "x" }, "<F3>", "<cmd>LspFormat<cr>")
 				map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 				map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
 
