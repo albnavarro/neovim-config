@@ -116,6 +116,7 @@ return {
 				"svelte",
 				"eslint",
 				"stylelint_lsp",
+				"jsonls",
 			},
 		})
 
@@ -131,6 +132,7 @@ return {
 		lsp_config.tsserver.setup({})
 		lsp_config.html.setup({})
 		lsp_config.cssls.setup({})
+		lsp_config.jsonls.setup({})
 		lsp_config.svelte.setup({})
 		lsp_config.eslint.setup({
 			-- on_attach = function(args)
