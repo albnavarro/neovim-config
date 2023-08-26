@@ -28,6 +28,7 @@ return {
 				json = { require("formatter.filetypes.json").prettierd },
 				jsonc = { require("formatter.filetypes.json").prettierd },
 				scss = { require("formatter.filetypes.css").prettierd },
+				html = { require("formatter.filetypes.html").prettierd },
 				twig = { util.copyf(defaults.prettierd) },
 				pug = { prettierdConfigTryLocal },
 
