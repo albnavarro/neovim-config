@@ -71,6 +71,7 @@ return {
 					max_height = 15,
 					max_width = 60,
 				}),
+				completion = cmp.config.window.bordered(),
 			},
 			formatting = {
 				fields = { "abbr", "menu", "kind" },
