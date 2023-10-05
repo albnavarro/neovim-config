@@ -3,7 +3,7 @@ local G = vim.g
 
 O.guicursor = ""
 O.nu = true
-O.relativenumber = true
+O.relativenumber = false
 O.tabstop = 4
 O.softtabstop = 4
 O.shiftwidth = 4
