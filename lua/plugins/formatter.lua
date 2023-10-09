@@ -30,6 +30,7 @@ return {
 				scss = { require("formatter.filetypes.css").prettierd },
 				html = { require("formatter.filetypes.html").prettierd },
 				twig = { util.copyf(defaults.prettierd) },
+				svelte = { util.copyf(defaults.prettierd) },
 				pug = { prettierdConfigTryLocal },
 
 				-- Use the special "*" filetype for defining formatter configurations on

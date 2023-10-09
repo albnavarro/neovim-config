@@ -144,7 +144,7 @@ return {
 			-- end,
 		})
 		lsp_config.stylelint_lsp.setup({
-			filetypes = { "scss" },
+			filetypes = { "scss", "css" },
 			settings = {
 				stylelintplus = {
 					autoFixOnFormat = true,
