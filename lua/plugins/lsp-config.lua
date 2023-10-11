@@ -18,7 +18,7 @@ return {
 		local lsp_config = require("lspconfig")
 		local lsp_defaults = lsp_config.util.default_config
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-		local eslintFileType = { "javascript", "typescript" }
+		local eslintFileType = { "javascript", "typescript", "svelte" }
 		local tables_utils = require("utils/tables_utils")
 
 		lsp_defaults.capabilities =
