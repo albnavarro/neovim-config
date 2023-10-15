@@ -15,6 +15,11 @@ return {
 				twig = { { "prettierd", "prettier" } },
 				svelte = { { "prettierd", "prettier" } },
 				pug = { { "prettierd", "prettier" } },
+				-- Use the "*" filetype to run formatters on all filetypes.
+				["*"] = { "codespell" },
+				-- Use the "_" filetype to run formatters on filetypes that don't
+				-- have other formatters configured.
+				["_"] = { "trim_whitespace" },
 			},
 		})
 
@@ -24,5 +29,19 @@ return {
 				require("conform").format({ bufnr = args.buf })
 			end,
 		})
+
+		-- Toggle codeSpell.
+		local useCodeSpell = false
+		require("conform.formatters.codespell").condition = function()
+			return useCodeSpell
+		end
+
+		vim.api.nvim_create_user_command("CodeSpellOn", function()
+			useCodeSpell = true
+		end, {})
+
+		vim.api.nvim_create_user_command("CodeSpellOff", function()
+			useCodeSpell = false
+		end, {})
 	end,
 }

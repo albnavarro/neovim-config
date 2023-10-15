@@ -5,6 +5,7 @@
 - prettierd
 - stylelint
 - stylua
+- codespell
 
 ## Final Mason installed package:
 - css-lsp
