@@ -36,11 +36,11 @@ return {
 			return useCodeSpell
 		end
 
-		vim.api.nvim_create_user_command("CodeSpellOn", function()
+		vim.api.nvim_create_user_command("CodeSpellFormatOn", function()
 			useCodeSpell = true
 		end, {})
 
-		vim.api.nvim_create_user_command("CodeSpellOff", function()
+		vim.api.nvim_create_user_command("CodeSpellFormatOff", function()
 			useCodeSpell = false
 		end, {})
 	end,
