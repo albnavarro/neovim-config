@@ -4,6 +4,7 @@ return {
 	event = { "BufReadPost", "BufNewFile" },
 	config = function()
 		require("ibl").setup({
+			indent = { highlight = { "MsgSeparator" }, char = "│" },
 			scope = { enabled = false },
 		})
 	end,
