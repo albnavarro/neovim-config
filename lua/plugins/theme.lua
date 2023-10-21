@@ -10,7 +10,7 @@ return {
 			cmp = false,
 		})
 
-		vim.cmd("colorscheme base16-black-metal-marduk")
+		vim.cmd("colorscheme base16-tokyo-night-light")
 
 		-- choice theme
 		vim.api.nvim_create_user_command("TokioDark", "colorscheme base16-tokyo-night-storm", {})
