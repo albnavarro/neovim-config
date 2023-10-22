@@ -217,7 +217,9 @@ end
 
 -- Add treesitter custom highlight
 vim.api.nvim_set_hl(0, "@parameter.javascript", { fg = black, bold = true })
-vim.api.nvim_set_hl(0, "@type", { fg = dark_grey })
+vim.api.nvim_set_hl(0, "@property.javascript", { fg = black, italic = true })
+vim.api.nvim_set_hl(0, "@punctuation.delimiter.javascript", { fg = black, bold = true })
+vim.api.nvim_set_hl(0, "@type.javascript", { fg = dark_grey })
 
 --- Terminal theme
 vim.api.nvim_create_augroup("_terminal", { clear = true })
