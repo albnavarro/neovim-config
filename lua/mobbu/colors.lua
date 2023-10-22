@@ -87,7 +87,7 @@ local highlights = {
 	InstanceVariable = { fg = purple },
 	Keyword = { fg = black, bold = true },
 	Label = { link = "Keyword" },
-	LineNr = { fg = black },
+	LineNr = { fg = medium_grey },
 	Macro = { fg = orange },
 	MatchParen = { bold = true },
 	MoreMsg = { fg = black },
