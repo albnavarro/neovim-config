@@ -192,15 +192,15 @@ local highlights = {
 	-- netrw
 	netrwClassify = { link = "Identifier" },
 	-- Telescope
-	TelescopeBorder = { fg = border, bg = grey_bg_light },
+	TelescopeBorder = { fg = border, bg = background },
 	TelescopeMatching = { fg = yellow, bold = true },
-	TelescopePromptNormal = { fg = black, bg = grey_bg_dark },
-	TelescopePromptBorder = { fg = border, bg = grey_bg_dark },
+	TelescopePromptNormal = { fg = black, bg = background },
+	TelescopePromptBorder = { fg = border, bg = background },
 	TelescopePromptPrefix = { fg = black, bold = true },
-	TelescopePromptTitle = { fg = black, bg = grey_bg_dark, bold = true },
+	TelescopePromptTitle = { fg = black, bg = background, bold = true },
 	TelescopeSelection = { bg = light_grey, bold = true },
-	TelescopeTitle = { fg = black, bg = grey_bg_light, bold = true },
-	TelescopeNormal = { fg = black, bg = grey_bg_light },
+	TelescopeTitle = { fg = black, bg = background, bold = true },
+	TelescopeNormal = { fg = black, bg = background },
 	-- Treesitter
 	TSEmphasis = { italic = true },
 	TSField = {},
