@@ -231,7 +231,7 @@ local mobbuLine = {}
 
 mobbuLine.normal = {
 	a = { bg = black, fg = background },
-	b = { bg = black, fg = background },
+	b = { bg = light_grey, fg = black },
 	c = { bg = light_grey, fg = black },
 }
 
