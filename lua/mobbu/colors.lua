@@ -17,6 +17,7 @@ local grey_bg_dark = "#e8e8e8"
 local black = "#000000"
 local blue = "#1561b8"
 local green = "#1C5708"
+local light_green = "#41ad1c"
 local light_red = "#f2d3cd"
 local red = "#c4331d"
 local grey = "#6e6e6e"
@@ -115,9 +116,10 @@ local highlights = {
 	SpellLocal = { fg = green, underline = true },
 	SpellRare = { fg = purple, underline = true },
 	Statement = { link = "Keyword" },
-	StatusLine = { fg = black, bg = background },
-	StatusLineNC = { fg = black, bg = grey_bg_light },
-	StatusLineTab = { fg = black, bg = background, bold = true },
+	-- Lualine ^^^^^^ problem derive by this settings.
+	-- StatusLine = { fg = background, bg = black },
+	-- StatusLineNC = { fg = background, bg = black },
+	StatusLineTab = { fg = background, bg = black },
 	WinBar = { fg = black, bg = light_grey, bold = true },
 	WinBarNc = { fg = black, bold = true },
 	WinBarFill = { fg = border },
@@ -231,3 +233,46 @@ end
 -- Add treesitter custom highlight
 vim.api.nvim_set_hl(0, "@parameter.javascript", { fg = black, bold = true })
 vim.api.nvim_set_hl(0, "@type", { fg = dark_grey })
+
+-- Lualine integration
+local mobbuLine = {}
+
+mobbuLine.normal = {
+	a = { bg = black, fg = background },
+	b = { bg = black, fg = background },
+	c = { bg = light_grey, fg = black },
+}
+
+mobbuLine.insert = {
+	a = { bg = blue, fg = background },
+}
+--
+mobbuLine.command = {
+	a = { bg = yellow, fg = black },
+}
+
+mobbuLine.visual = {
+	a = { bg = light_green, fg = black },
+}
+--
+-- mobbuLine.replace = {
+--   a = { bg = colors.red, fg = colors.black },
+--   b = { bg = colors.fg_gutter, fg = colors.red },
+-- }
+--
+-- mobbuLine.terminal = {
+--   a = {bg = colors.green1, fg = colors.black },
+--   b = {bg = colors.fg_gutter, fg=colors.green1 },
+-- }
+--
+mobbuLine.inactive = {
+	a = { bg = background, fg = black },
+	b = { bg = background, fg = black },
+	c = { bg = background, fg = background },
+}
+
+for _, mode in pairs(mobbuLine) do
+	mode.a.gui = "bold"
+end
+
+return mobbuLine
