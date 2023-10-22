@@ -10,7 +10,7 @@ return {
 			options = {
 				theme = mobbuLine,
 				icons_enabled = true,
-				component_separators = "|",
+				component_separators = "",
 				section_separators = "",
 				"filename",
 				-- path = 2,

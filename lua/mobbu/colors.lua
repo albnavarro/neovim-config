@@ -13,6 +13,7 @@ g.colors_name = "mobbu"
 
 local background = "#f2f2f2"
 local grey_bg_light = "#ececec"
+local white = "#ffffff"
 local black = "#000000"
 local blue = "#1561b8"
 local green = "#1C5708"
@@ -191,15 +192,15 @@ local highlights = {
 	-- netrw
 	netrwClassify = { link = "Identifier" },
 	-- Telescope
-	TelescopeBorder = { fg = border, bg = background },
-	TelescopeMatching = { fg = yellow, bold = true },
-	TelescopePromptNormal = { fg = black, bg = background },
-	TelescopePromptBorder = { fg = border, bg = background },
-	TelescopePromptPrefix = { fg = black, bold = true },
-	TelescopePromptTitle = { fg = black, bg = background, bold = true },
-	TelescopeSelection = { bg = light_grey, bold = true },
-	TelescopeTitle = { fg = black, bg = background, bold = true },
-	TelescopeNormal = { fg = black, bg = background },
+	-- TelescopeBorder = {},
+	-- TelescopeMatching = {},
+	-- TelescopePromptNormal = {},
+	-- TelescopePromptBorder = {},
+	-- TelescopePromptPrefix = {},
+	-- TelescopePromptTitle = {},
+	-- TelescopeSelection = {},
+	-- TelescopeTitle = {},
+	-- TelescopeNormal = {},
 	-- Treesitter
 	TSEmphasis = { italic = true },
 	TSField = {},
@@ -217,6 +218,11 @@ local highlights = {
 	TSSymbol = { link = "Symbol" },
 	TSTypeBuiltin = { link = "Keyword" },
 	TSWarning = { link = "Todo" },
+	-- Nvimtree
+	NvimTreeNormal = { bg = grey_bg_light },
+	NvimTreeLineNr = { fg = grey },
+	NvimTreeEndOfBuffer = { fg = grey_bg_light, bg = grey_bg_light },
+	NvimTreeRootFolder = { fg = grey },
 }
 
 -- Apply highrlight group
@@ -273,9 +279,9 @@ mobbuLine.terminal = {
 }
 --
 mobbuLine.inactive = {
-	a = { bg = background, fg = black },
-	b = { bg = background, fg = black },
-	c = { bg = background, fg = background },
+	a = { bg = grey_bg_light, fg = grey_bg_light },
+	b = { bg = grey_bg_light, fg = grey_bg_light },
+	c = { bg = grey_bg_light, fg = black },
 }
 
 for _, mode in pairs(mobbuLine) do

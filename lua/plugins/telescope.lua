@@ -51,6 +51,39 @@ return {
 					},
 				},
 			},
+			-- layout_config = {
+			-- 	cursor = { width = 40 },
+			-- 	-- other layout configuration here
+			-- },
+			pickers = {
+				find_files = {
+					theme = "ivy",
+				},
+				oldfiles = {
+					theme = "ivy",
+				},
+				live_grep = {
+					theme = "ivy",
+				},
+				grep_string = {
+					theme = "ivy",
+				},
+				help_tags = {
+					theme = "ivy",
+				},
+				lsp_references = {
+					theme = "ivy",
+				},
+				diagnostic = {
+					theme = "ivy",
+				},
+				current_buffer_fuzzy_find = {
+					theme = "ivy",
+				},
+				resume = {
+					theme = "ivy",
+				},
+			},
 			extensions = {
 				fzf = {},
 			},
