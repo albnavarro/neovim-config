@@ -96,6 +96,7 @@ local highlights = {
 	NonText = { fg = grey },
 	Normal = { fg = black, bg = background },
 	NormalFloat = { fg = black, bg = grey_bg_light },
+	TerminalFloat = { fg = black, bg = grey_bg_light },
 	Number = { fg = blue },
 	Operator = { fg = black },
 	Pmenu = { fg = black, bg = grey_bg_light },
@@ -234,6 +235,13 @@ end
 vim.api.nvim_set_hl(0, "@parameter.javascript", { fg = black, bold = true })
 vim.api.nvim_set_hl(0, "@type", { fg = dark_grey })
 
+--- Terminal theme
+vim.api.nvim_create_augroup("_terminal", { clear = true })
+vim.api.nvim_create_autocmd("TermOpen", {
+	command = "setlocal winhighlight=Normal:TerminalFloat",
+	group = "_terminal",
+})
+
 -- Lualine integration
 local mobbuLine = {}
 
@@ -256,14 +264,14 @@ mobbuLine.visual = {
 }
 --
 -- mobbuLine.replace = {
---   a = { bg = colors.red, fg = colors.black },
---   b = { bg = colors.fg_gutter, fg = colors.red },
+--   a = {},
+--   b = {},
 -- }
 --
--- mobbuLine.terminal = {
---   a = {bg = colors.green1, fg = colors.black },
---   b = {bg = colors.fg_gutter, fg=colors.green1 },
--- }
+mobbuLine.terminal = {
+	a = { bg = black, fg = background },
+	b = { bg = black, fg = background },
+}
 --
 mobbuLine.inactive = {
 	a = { bg = background, fg = black },
