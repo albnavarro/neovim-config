@@ -132,6 +132,21 @@ return {
 			},
 			renderer = {
 				group_empty = true,
+				icons = {
+					show = {
+						folder = false,
+					},
+					web_devicons = {
+						file = {
+							enable = false,
+							color = false,
+						},
+						folder = {
+							enable = false,
+							color = false,
+						},
+					},
+				},
 			},
 			diagnostics = {
 				enable = true,
