@@ -58,30 +58,48 @@ return {
 			pickers = {
 				find_files = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				oldfiles = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				live_grep = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				grep_string = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				help_tags = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				lsp_references = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				diagnostic = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				current_buffer_fuzzy_find = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 				resume = {
 					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
 				},
 			},
 			extensions = {
