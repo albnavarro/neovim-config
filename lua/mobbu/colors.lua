@@ -219,6 +219,17 @@ end
 vim.api.nvim_set_hl(0, "@parameter.javascript", { fg = black, bold = true })
 vim.api.nvim_set_hl(0, "@property.javascript", { fg = black, italic = true })
 vim.api.nvim_set_hl(0, "@punctuation.delimiter.javascript", { fg = black, bold = true })
+
+-- Function/Method
+vim.api.nvim_set_hl(0, "@function.javascript", { fg = dark_grey, italic = true })
+vim.api.nvim_set_hl(0, "@function.call.javascript", { fg = dark_grey, italic = true })
+vim.api.nvim_set_hl(0, "@method.javascript", { fg = dark_grey, italic = true })
+vim.api.nvim_set_hl(0, "@method.call.javascript", { fg = dark_grey, italic = true })
+vim.api.nvim_set_hl(0, "@function.builtin.javascript", { fg = dark_grey, italic = true })
+vim.api.nvim_set_hl(0, "@keyword.function.javascript", { fg = dark_grey, italic = true })
+vim.api.nvim_set_hl(0, "@method.function.javascript", { fg = dark_grey, italic = true })
+
+-- JsDoc
 vim.api.nvim_set_hl(0, "@type.javascript", { fg = dark_grey })
 
 --- Terminal theme
