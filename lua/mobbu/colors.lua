@@ -26,8 +26,7 @@ local dark_grey = "#706c6c"
 local border = "#cccccc"
 local highlight = "#eeeeee"
 local yellow = "#bf8f00"
-local light_yellow = "#f9e595"
-local bright_yellow = "#f9efc7"
+local light_yellow = "#ede858"
 local orange = "#a55000"
 local purple = "#5c21a5"
 local white = "#ffffff"
@@ -94,14 +93,14 @@ local highlights = {
 	MsgSeparator = { fg = border },
 	NonText = { fg = grey },
 	Normal = { fg = black, bg = background },
-	NormalFloat = { fg = black, bg = grey_bg_light },
+	NormalFloat = { fg = black, bg = background },
 	TerminalFloat = { fg = black, bg = grey_bg_light },
 	Number = { fg = blue },
 	Operator = { fg = black },
 	Pmenu = { fg = black, bg = grey_bg_light },
 	PmenuSbar = { bg = grey_bg_light },
 	PmenuSel = { fg = black, bg = light_grey, bold = true },
-	PmenuThumb = { bg = light_grey },
+	PmenuThumb = { bg = black },
 	PreCondit = { link = "Macro" },
 	PreProc = { fg = black },
 	Question = { fg = black },
@@ -137,57 +136,32 @@ local highlights = {
 	Visual = { bg = light_grey },
 	WarningMsg = { fg = yellow, bold = true },
 	WildMenu = { link = "PmenuSel" },
+
 	-- Diffs
-	DiffAdd = { fg = border },
-	DiffChange = { fg = border },
-	DiffDelete = { fg = red },
-	DiffText = { bg = bright_yellow },
-	diffAdded = { link = "DiffAdd" },
-	diffChanged = { link = "DiffChange" },
+	DiffAdd = { fg = black, bg = background },
+	DiffChange = { fg = border, bg = background },
+	DiffDelete = { fg = red, bg = background },
+	DiffText = { fg = black, bg = background },
+	diffAdded = { link = "DiffAdd", bg = background },
+	diffChanged = { link = "DiffChange", bg = background },
 	diffFile = { fg = black, bold = true },
 	diffLine = { fg = blue },
 	diffRemoved = { link = "DiffDelete" },
-	-- dressing.nvim
-	FloatTitle = { fg = black, bg = grey_bg_light, bold = true },
-	FloatBorder = { fg = grey_bg_light, bg = grey_bg_light },
-	-- Dot/Graphviz
-	dotKeyChar = { link = "Operator" },
-	-- diffview.nvim
-	DiffviewCursorLine = { bg = highlight },
-	DiffviewDiffAddAsDelete = { bg = light_red },
-	DiffviewDiffDelete = { fg = light_grey },
-	DiffviewDiffDeleteDim = { fg = light_grey },
-	DiffviewFilePanelFileName = { fg = black },
-	DiffviewFilePanelPath = { fg = purple },
-	DiffviewFilePanelRootPath = { fg = purple },
-	DiffviewFilePanelTitle = { fg = black, bold = true },
-	DiffviewStatusModified = { fg = yellow, bold = true },
-	DiffviewStatusAdded = { fg = green, bold = true },
-	DiffviewStatusCopied = { fg = green, bold = true },
-	DiffviewStatusDeleted = { fg = red, bold = true },
-	-- Flash
-	FlashBackdrop = { link = "None" },
-	FlashLabel = { fg = red, bold = true },
-	-- Fugitive
-	FugitiveblameHash = { fg = purple },
-	FugitiveblameTime = { fg = blue },
-	gitCommitOverflow = { link = "ErrorMsg" },
-	gitCommitSummary = { link = "String" },
+
 	-- LSP
 	DiagnosticUnderlineError = { underline = true, sp = red },
 	DiagnosticUnderlineWarn = { underline = true, sp = yellow },
 	LspDiagnosticsUnderlineError = { link = "DiagnosticUnderlineError" },
 	LspDiagnosticsUnderlineWarning = { link = "DiagnosticUnderlineWarn" },
-	DiagnosticFloatingError = { fg = red, bg = grey_bg_light, bold = true },
-	DiagnosticFloatingHint = { fg = black, bg = grey_bg_light, bold = true },
-	DiagnosticFloatingInfo = { fg = blue, bg = grey_bg_light, bold = true },
-	DiagnosticFloatingWarn = { fg = yellow, bg = grey_bg_light, bold = true },
+	DiagnosticFloatingError = { fg = red, bg = background, bold = true },
+	DiagnosticFloatingHint = { fg = black, bg = background, bold = true },
+	DiagnosticFloatingInfo = { fg = blue, bg = background, bold = true },
+	DiagnosticFloatingWarn = { fg = yellow, bg = background, bold = true },
 	DiagnosticError = { fg = red, bold = true },
 	DiagnosticHint = { fg = grey, bold = true },
 	DiagnosticInfo = { fg = blue, bold = true },
 	DiagnosticWarn = { fg = yellow, bold = true },
-	-- Make
-	makeTarget = { link = "Function" },
+
 	-- netrw
 	netrwClassify = { link = "Identifier" },
 	-- Telescope
@@ -200,6 +174,8 @@ local highlights = {
 	-- TelescopeSelection = {},
 	-- TelescopeTitle = {},
 	-- TelescopeNormal = {},
+	-- Treesitter
+
 	-- Treesitter
 	TSEmphasis = { italic = true },
 	TSField = {},
@@ -217,11 +193,15 @@ local highlights = {
 	TSSymbol = { link = "Symbol" },
 	TSTypeBuiltin = { link = "Keyword" },
 	TSWarning = { link = "Todo" },
+
 	-- Nvimtree
 	NvimTreeNormal = { bg = grey_bg_light },
 	NvimTreeLineNr = { fg = grey },
 	NvimTreeEndOfBuffer = { fg = grey_bg_light, bg = grey_bg_light },
 	NvimTreeRootFolder = { fg = grey },
+
+	-- Lazy.nvim
+	LazyNormal = { bg = background },
 }
 
 -- Apply highrlight group
