@@ -13,7 +13,6 @@ g.colors_name = "mobbu"
 
 local background = "#f2f2f2"
 local grey_bg_light = "#ececec"
-local white = "#ffffff"
 local black = "#000000"
 local blue = "#1561b8"
 local green = "#1C5708"
