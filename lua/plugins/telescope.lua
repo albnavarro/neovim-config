@@ -51,10 +51,6 @@ return {
 					},
 				},
 			},
-			-- layout_config = {
-			-- 	cursor = { width = 40 },
-			-- 	-- other layout configuration here
-			-- },
 			pickers = {
 				find_files = {
 					theme = "ivy",

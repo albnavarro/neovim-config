@@ -1,9 +1,6 @@
 return {
 	"nvim-tree/nvim-tree.lua",
 	version = "*",
-	dependencies = {
-		"nvim-tree/nvim-web-devicons",
-	},
 	lazy = false,
 	config = function()
 		-- disable netrw at the very start of your init.lua (strongly advised)
