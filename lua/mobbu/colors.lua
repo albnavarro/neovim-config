@@ -279,9 +279,9 @@ mobbuLine.terminal = {
 }
 --
 mobbuLine.inactive = {
-	a = { bg = grey_bg_light, fg = grey_bg_light },
-	b = { bg = grey_bg_light, fg = grey_bg_light },
-	c = { bg = grey_bg_light, fg = black },
+	a = { bg = black, fg = white },
+	b = { bg = black, fg = white },
+	c = { bg = black, fg = white },
 }
 
 for _, mode in pairs(mobbuLine) do
