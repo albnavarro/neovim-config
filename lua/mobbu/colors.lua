@@ -22,6 +22,7 @@ local red = "#c4331d"
 local grey = "#6e6e6e"
 local light_grey = "#e3e3e3"
 local medium_grey = "#b3aaaa"
+local dark_grey = "#706c6c"
 local border = "#cccccc"
 local highlight = "#eeeeee"
 local yellow = "#bf8f00"
@@ -74,7 +75,7 @@ local highlights = {
 	-- This is to work around https://github.com/neovim/neovim/issues/9800.
 	CursorLine = { ctermfg = "black" },
 	CursorLineNr = { fg = black, bold = true },
-	Directory = { fg = purple },
+	Directory = { fg = black },
 	EndOfBuffer = { fg = background, bg = background },
 	Error = { link = "ErrorMsg" },
 	ErrorMsg = { fg = red, bold = true },
@@ -134,18 +135,6 @@ local highlights = {
 	Visual = { bg = light_grey },
 	WarningMsg = { fg = yellow, bold = true },
 	WildMenu = { link = "PmenuSel" },
-	-- ALE
-	ALEError = { fg = red, bold = true },
-	ALEErrorSign = { fg = red, bold = true },
-	ALEWarning = { fg = yellow, bold = true },
-	ALEWarningSign = { fg = yellow, bold = true },
-	-- CSS
-	cssClassName = { link = "Keyword" },
-	cssColor = { link = "Number" },
-	cssIdentifier = { link = "Keyword" },
-	cssImportant = { link = "Keyword" },
-	cssProp = { link = "Identifier" },
-	cssTagName = { link = "Keyword" },
 	-- Diffs
 	DiffAdd = { fg = border },
 	DiffChange = { fg = border },
@@ -182,49 +171,6 @@ local highlights = {
 	FugitiveblameTime = { fg = blue },
 	gitCommitOverflow = { link = "ErrorMsg" },
 	gitCommitSummary = { link = "String" },
-	-- HAML
-	hamlClass = { fg = black },
-	hamlDocType = { link = "Comment" },
-	hamlId = { fg = black },
-	hamlTag = { fg = black, bold = true },
-	-- hop.nvim
-	HopNextKey = { fg = red, bold = true },
-	HopNextKey1 = { fg = yellow },
-	HopNextKey2 = { fg = yellow },
-	HopUnmatched = {},
-	-- HTML
-	htmlArg = { link = "Identifier" },
-	htmlLink = { link = "Directory" },
-	htmlScriptTag = { link = "htmlTag" },
-	htmlSpecialTagName = { link = "htmlTag" },
-	htmlTag = { fg = black, bold = true },
-	htmlTagName = { link = "htmlTag" },
-	htmlItalic = { italic = true },
-	htmlBold = { bold = true },
-	-- Inko
-	inkoCommentBold = { fg = grey, bold = true },
-	inkoCommentInlineUrl = { link = "Number" },
-	inkoCommentItalic = { fg = grey, italic = true },
-	inkoCommentTitle = { fg = grey, bold = true },
-	inkoInstanceVariable = { link = "InstanceVariable" },
-	inkoKeywordArgument = { link = "Regexp" },
-	-- Java
-	javaAnnotation = { link = "Directory" },
-	javaCommentTitle = { link = "javaComment" },
-	javaDocParam = { link = "Todo" },
-	javaDocTags = { link = "Todo" },
-	javaExternal = { link = "Keyword" },
-	javaStorageClass = { link = "Keyword" },
-	-- Javascript
-	JavaScriptNumber = { link = "Number" },
-	javaScriptBraces = { link = "Operator" },
-	javaScriptFunction = { link = "Keyword" },
-	javaScriptIdentifier = { link = "Keyword" },
-	javaScriptMember = { link = "Identifier" },
-	-- JSON
-	jsonKeyword = { link = "String" },
-	-- Lua
-	luaFunction = { link = "Keyword" },
 	-- LSP
 	DiagnosticUnderlineError = { underline = true, sp = red },
 	DiagnosticUnderlineWarn = { underline = true, sp = yellow },
@@ -240,66 +186,8 @@ local highlights = {
 	DiagnosticWarn = { fg = yellow, bold = true },
 	-- Make
 	makeTarget = { link = "Function" },
-	-- Markdown
-	markdownCode = { link = "markdownCodeBlock" },
-	markdownCodeBlock = { link = "Comment" },
-	markdownListMarker = { link = "Keyword" },
-	markdownOrderedListMarker = { link = "Keyword" },
-	markdownUrl = { fg = blue },
 	-- netrw
 	netrwClassify = { link = "Identifier" },
-	-- Perl
-	perlPackageDecl = { link = "Identifier" },
-	perlStatementInclude = { link = "Statement" },
-	perlStatementPackage = { link = "Statement" },
-	podCmdText = { link = "Todo" },
-	podCommand = { link = "Comment" },
-	podVerbatimLine = { link = "Todo" },
-	-- Ruby
-	rubyAttribute = { link = "Identifier" },
-	rubyClass = { link = "Keyword" },
-	rubyClassVariable = { link = "rubyInstancevariable" },
-	rubyConstant = { link = "Constant" },
-	rubyDefine = { link = "Keyword" },
-	rubyFunction = { link = "Function" },
-	rubyInstanceVariable = { link = "InstanceVariable" },
-	rubyMacro = { link = "Identifier" },
-	rubyModule = { link = "rubyClass" },
-	rubyRegexp = { link = "Regexp" },
-	rubyRegexpCharClass = { link = "Regexp" },
-	rubyRegexpDelimiter = { link = "Regexp" },
-	rubyRegexpQuantifier = { link = "Regexp" },
-	rubyRegexpSpecial = { link = "Regexp" },
-	rubyStringDelimiter = { link = "String" },
-	rubySymbol = { link = "Symbol" },
-	-- Rust
-	rustCommentBlockDoc = { link = "Comment" },
-	rustCommentLineDoc = { link = "Comment" },
-	rustFuncCall = { link = "Identifier" },
-	rustModPath = { link = "Identifier" },
-	-- pounce.nvim
-	PounceAccept = { fg = red, bold = true },
-	PounceAcceptBest = { fg = red, bold = true },
-	PounceMatch = { bg = light_yellow },
-	PounceUnmatched = {},
-	PounceGap = { link = "None" },
-	-- Python
-	pythonOperator = { link = "Keyword" },
-	-- SASS
-	sassClass = { link = "cssClassName" },
-	sassId = { link = "cssIdentifier" },
-	-- Shell
-	shFunctionKey = { link = "Keyword" },
-	-- SQL
-	sqlKeyword = { link = "Keyword" },
-	-- Typescript
-	typescriptBraces = { link = "Operator" },
-	typescriptEndColons = { link = "Operator" },
-	typescriptExceptions = { link = "Keyword" },
-	typescriptFuncKeyword = { link = "Keyword" },
-	typescriptFunction = { link = "Function" },
-	typescriptIdentifier = { link = "Identifier" },
-	typescriptLogicSymbols = { link = "Operator" },
 	-- Telescope
 	TelescopeBorder = { fg = border, bg = grey_bg_light },
 	TelescopeMatching = { fg = yellow, bold = true },
@@ -327,34 +215,19 @@ local highlights = {
 	TSSymbol = { link = "Symbol" },
 	TSTypeBuiltin = { link = "Keyword" },
 	TSWarning = { link = "Todo" },
-	-- Ruby uses "TSLabel" for instance variables, for some reason. See
-	-- https://github.com/tree-sitter/tree-sitter-ruby/issues/184 for more
-	-- details.
-	rubyTSLabel = { link = "InstanceVariable" },
-	-- TOML
-	--
-	-- tomlTSTypeBuiltin is used for section titles (e.g. `[dependencies]`), while
-	-- tomlTSProperty is used for key-value pairs. These rules ensure the syntax
-	-- is consistent with https://github.com/cespare/vim-toml.
-	tomlTSProperty = { fg = black },
-	tomlTSTypeBuiltin = { fg = black, bold = true },
-	-- Vimscript
-	VimCommentTitle = { link = "Todo" },
-	VimIsCommand = { link = "Constant" },
-	vimGroup = { link = "Constant" },
-	vimHiGroup = { link = "Constant" },
-	-- XML
-	xmlAttrib = { link = "Identifier" },
-	xmlTag = { link = "Identifier" },
-	xmlTagName = { link = "Identifier" },
-	-- YAML
-	yamlPlainScalar = { link = "String" },
-	-- YARD
-	yardComment = { link = "Comment" },
-	yardType = { link = "Todo" },
-	yardTypeList = { link = "Todo" },
 }
 
+-- Apply highrlight group
 for group, opts in pairs(highlights) do
 	api.nvim_set_hl(0, group, opts)
 end
+
+-- Reset lsp semantic Highlight
+-- Is slow and override custom highlight
+for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+	vim.api.nvim_set_hl(0, group, {})
+end
+
+-- Add treesitter custom highlight
+vim.api.nvim_set_hl(0, "@parameter.javascript", { fg = black, bold = true })
+vim.api.nvim_set_hl(0, "@type", { fg = dark_grey })
