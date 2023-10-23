@@ -95,7 +95,7 @@ local highlights = {
 	Normal = { fg = black, bg = background },
 	NormalFloat = { fg = black, bg = background },
 	TerminalFloat = { fg = black, bg = grey_bg_light },
-	Number = { fg = blue },
+	Number = { fg = black },
 	Operator = { fg = black },
 	Pmenu = { fg = black, bg = grey_bg_light },
 	PmenuSbar = { bg = grey_bg_light },
@@ -202,6 +202,53 @@ local highlights = {
 
 	-- Lazy.nvim
 	LazyNormal = { bg = background },
+
+	-- HTML
+	htmlArg = { link = "Identifier" },
+	htmlLink = { link = "Directory" },
+	htmlScriptTag = { link = "htmlTag" },
+	htmlSpecialTagName = { link = "htmlTag" },
+	htmlTag = { fg = black, bold = true },
+	htmlTagName = { link = "htmlTag" },
+	htmlItalic = { italic = true },
+	htmlBold = { bold = true },
+
+	-- Javascript
+	JavaScriptNumber = { link = "Number" },
+	javaScriptBraces = { link = "Operator" },
+	javaScriptFunction = { link = "Keyword" },
+	javaScriptIdentifier = { link = "Keyword" },
+	javaScriptMember = { link = "Identifier" },
+
+	-- Treesitter
+	["@parameter"] = { fg = black, bold = true },
+	["@property"] = { fg = black, italic = true },
+	["@property.scss"] = { fg = black, italic = false },
+	["@property.css"] = { fg = black, italic = false },
+	["@property.pug"] = { fg = black, italic = false },
+	["@punctuation.delimiter"] = { fg = black, bold = true },
+	["@function"] = { fg = dark_grey },
+	["@function.call"] = { fg = dark_grey },
+	["@method"] = { fg = dark_grey },
+	["@method.call"] = { fg = dark_grey },
+	["@function.builtin"] = { fg = dark_grey },
+	["@keyword.function"] = { fg = dark_grey },
+	["@method.function"] = { fg = dark_grey },
+	["@type.javascript"] = { fg = dark_grey },
+	["@comment"] = { fg = medium_grey, bold = false },
+	["@tag"] = { link = "htmlTag" },
+	["@tag.delimiter"] = { bold = false },
+	["@tag.attribute"] = { bold = false },
+	["@lsp.type.parameter"] = { fg = black, bold = true },
+	["@lsp.type.property"] = { fg = black, italic = true },
+	["@lsp.type.punctuation.delimiter"] = { fg = black, bold = true },
+	["@lsp.type.function"] = { fg = dark_grey },
+	["@lsp.type.function.call"] = { fg = dark_grey },
+	["@lsp.type.method"] = { fg = dark_grey },
+	["@lsp.type.method.call"] = { fg = dark_grey },
+	["@lsp.type.function.builtin"] = { fg = dark_grey },
+	["@lsp.type.keyword.function"] = { fg = dark_grey },
+	["@lsp.type.method.function"] = { fg = dark_grey },
 }
 
 -- Apply highrlight group
@@ -211,29 +258,9 @@ end
 
 -- Reset lsp semantic Highlight
 -- Is slow and override custom highlight
-for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-	vim.api.nvim_set_hl(0, group, {})
-end
-
--- Add treesitter custom highlight
-vim.api.nvim_set_hl(0, "@parameter.javascript", { fg = black, bold = true })
-vim.api.nvim_set_hl(0, "@property.javascript", { fg = black, italic = true })
-vim.api.nvim_set_hl(0, "@punctuation.delimiter.javascript", { fg = black, bold = true })
-vim.api.nvim_set_hl(0, "@parameter.typescript", { fg = black, bold = true })
-vim.api.nvim_set_hl(0, "@property.typescript", { fg = black, italic = true })
-vim.api.nvim_set_hl(0, "@punctuation.delimiter.typescript", { fg = black, bold = true })
-
--- Function/Method
-vim.api.nvim_set_hl(0, "@function", { fg = dark_grey })
-vim.api.nvim_set_hl(0, "@function.call", { fg = dark_grey })
-vim.api.nvim_set_hl(0, "@method", { fg = dark_grey })
-vim.api.nvim_set_hl(0, "@method.call", { fg = dark_grey })
-vim.api.nvim_set_hl(0, "@function.builtin", { fg = dark_grey })
-vim.api.nvim_set_hl(0, "@keyword.function", { fg = dark_grey })
-vim.api.nvim_set_hl(0, "@method.function", { fg = dark_grey })
-
--- JsDoc
-vim.api.nvim_set_hl(0, "@type.javascript", { fg = dark_grey })
+-- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
+-- 	vim.api.nvim_set_hl(0, group, {})
+-- end
 
 --- Terminal theme
 vim.api.nvim_create_augroup("_terminal", { clear = true })
