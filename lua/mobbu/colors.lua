@@ -221,6 +221,8 @@ local highlights = {
 	javaScriptMember = { link = "Identifier" },
 
 	-- Treesitter
+	["@keyword"] = { fg = black, bold = true },
+	["@keyword.jsdoc"] = { fg = dark_grey, bold = false },
 	["@parameter"] = { fg = black, bold = true },
 	["@property"] = { fg = black, italic = true },
 	["@property.scss"] = { fg = black, italic = false },
@@ -236,7 +238,7 @@ local highlights = {
 	["@method.function"] = { fg = dark_grey },
 	["@type.javascript"] = { fg = dark_grey },
 	["@comment"] = { fg = medium_grey, bold = false },
-	["@tag"] = { link = "htmlTag" },
+	["@tag.html"] = { link = "htmlTag" },
 	["@tag.delimiter"] = { bold = false },
 	["@tag.attribute"] = { fg = dark_grey, bold = false },
 	["@lsp.type.parameter"] = { fg = black, bold = true },
