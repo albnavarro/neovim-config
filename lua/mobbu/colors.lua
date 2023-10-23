@@ -238,7 +238,7 @@ local highlights = {
 	["@comment"] = { fg = medium_grey, bold = false },
 	["@tag"] = { link = "htmlTag" },
 	["@tag.delimiter"] = { bold = false },
-	["@tag.attribute"] = { bold = false },
+	["@tag.attribute"] = { fg = dark_grey, bold = false },
 	["@lsp.type.parameter"] = { fg = black, bold = true },
 	["@lsp.type.property"] = { fg = black, italic = true },
 	["@lsp.type.punctuation.delimiter"] = { fg = black, bold = true },
