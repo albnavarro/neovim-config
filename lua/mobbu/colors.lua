@@ -241,6 +241,7 @@ local highlights = {
 	["@tag.attribute"] = { fg = dark_grey, bold = false },
 	["@lsp.type.parameter"] = { fg = black, bold = true },
 	["@lsp.type.property"] = { fg = black, italic = true },
+	["@lsp.type.property.lua"] = { fg = black, italic = false },
 	["@lsp.type.punctuation.delimiter"] = { fg = black, bold = true },
 	["@lsp.type.function"] = { fg = dark_grey },
 	["@lsp.type.function.call"] = { fg = dark_grey },
