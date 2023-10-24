@@ -239,6 +239,7 @@ local highlights = {
 	["@type.javascript"] = { fg = dark_grey },
 	["@comment"] = { fg = medium_grey, bold = false },
 	["@tag.html"] = { link = "htmlTag" },
+	["@tag.svelte"] = { link = "htmlTag" },
 	["@tag.delimiter"] = { bold = false },
 	["@tag.attribute"] = { fg = dark_grey, bold = false },
 	["@lsp.type.parameter"] = { fg = black, bold = true },
