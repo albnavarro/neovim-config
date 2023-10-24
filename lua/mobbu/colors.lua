@@ -199,6 +199,10 @@ local highlights = {
 	NvimTreeLineNr = { fg = grey },
 	NvimTreeEndOfBuffer = { fg = grey_bg_light, bg = grey_bg_light },
 	NvimTreeRootFolder = { fg = grey },
+	NvimTreeCursorLine = { bg = white, fg = black },
+	NvimTreeCursorLineNr = { fg = black, bg = black },
+	NvimTreeCursorColumn = { fg = black },
+	NvimTreeWinSeparator = { bg = grey_bg_light, fg = grey_bg_light },
 
 	-- Lazy.nvim
 	LazyNormal = { bg = background },
