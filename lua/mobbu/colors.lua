@@ -203,6 +203,15 @@ local highlights = {
 	NvimTreeCursorLineNr = { fg = black, bg = black },
 	NvimTreeCursorColumn = { fg = black },
 	NvimTreeWinSeparator = { bg = grey_bg_light, fg = grey_bg_light },
+	NvimTreeFileIcon = { fg = black },
+	NvimTreeOpenedFileIcon = { fg = black },
+	NvimTreeSymlinkIcon = { fg = black },
+	NvimTreeFolderIcon = { fg = black },
+	NvimTreeOpenedFolderIcon = { fg = black },
+	NvimTreeClosedFolderIcon = { fg = black },
+	NvimTreeFolderArrowClosed = { fg = black },
+	NvimTreeFolderArrowOpen = { fg = black },
+	NvimTreeSpecialFile = { fg = black },
 
 	-- Lazy.nvim
 	LazyNormal = { bg = background },

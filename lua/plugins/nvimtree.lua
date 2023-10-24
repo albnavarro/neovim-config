@@ -132,17 +132,18 @@ return {
 			},
 			renderer = {
 				group_empty = true,
+				special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "package.json" },
 				icons = {
 					show = {
-						folder = false,
+						-- folder = false,
 					},
 					web_devicons = {
 						file = {
-							enable = false,
+							enable = true,
 							color = false,
 						},
 						folder = {
-							enable = false,
+							enable = true,
 							color = false,
 						},
 					},
