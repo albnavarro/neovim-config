@@ -256,6 +256,7 @@ local highlights = {
 	["@type.javascript"] = { fg = dark_grey },
 	["@comment"] = { fg = medium_grey, bold = false },
 	["@tag.html"] = { link = "htmlTag" },
+	["@tag.delimiter.html"] = { fg = dark_purple },
 	["@tag.svelte"] = { link = "htmlTag" },
 	["@tag.delimiter"] = { bold = false },
 	["@tag.attribute"] = { fg = dark_grey, bold = false },
