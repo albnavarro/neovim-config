@@ -214,7 +214,7 @@ local highlights = {
 	htmlLink = { link = "Directory" },
 	htmlScriptTag = { link = "htmlTag" },
 	htmlSpecialTagName = { link = "htmlTag" },
-	htmlTag = { fg = purple_grey, bold = true },
+	htmlTag = { fg = grey_blue, bold = true },
 	htmlTagName = { link = "htmlTag" },
 	htmlItalic = { italic = true },
 	htmlBold = { bold = true },
