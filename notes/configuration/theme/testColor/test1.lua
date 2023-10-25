@@ -13,8 +13,8 @@ g.colors_name = "mobbu"
 
 local background = "#f2f2f2"
 local grey_bg_light = "#ececec"
+local black = "#1c1b1b"
 local blue = "#1561b8"
-local grey_blue = "#38618c"
 local green = "#1C5708"
 local light_green = "#41ad1c"
 local light_red = "#f2d3cd"
@@ -29,12 +29,10 @@ local yellow = "#bf8f00"
 local light_yellow = "#ede858"
 local orange = "#a55000"
 local purple = "#5c21a5"
-local dark_purple = "#442b48"
 local white = "#ffffff"
-local black = "#000000"
 local cyan = "#007872"
 
-g.terminal_color_0 = dark_purple
+g.terminal_color_0 = black
 g.terminal_color_1 = red
 g.terminal_color_2 = green
 g.terminal_color_3 = yellow
@@ -43,7 +41,7 @@ g.terminal_color_5 = purple
 g.terminal_color_6 = cyan
 g.terminal_color_7 = grey
 
-g.terminal_color_8 = dark_purple
+g.terminal_color_8 = black
 g.terminal_color_9 = red
 g.terminal_color_10 = green
 g.terminal_color_11 = yellow
@@ -58,59 +56,59 @@ local highlights = {
 	Disabled = {},
 	-- These highlight groups can be used for statuslines, for example when
 	-- displaying ALE warnings and errors.
-	BlackOnLightYellow = { fg = dark_purple, bg = light_yellow },
+	BlackOnLightYellow = { fg = black, bg = light_yellow },
 	LightRedBackground = { bg = light_red },
 	WhiteOnBlue = { fg = white, bg = blue },
 	WhiteOnOrange = { fg = white, bg = orange },
 	WhiteOnRed = { fg = white, bg = red },
 	WhiteOnYellow = { fg = white, bg = yellow },
 	Yellow = { fg = yellow, bold = true },
-	Bold = { fg = dark_purple, bold = true },
+	Bold = { fg = black, bold = true },
 	Boolean = { link = "Keyword" },
 	Character = { link = "String" },
 	ColorColumn = { bg = highlight },
 	Comment = { fg = medium_grey },
 	Conceal = {},
-	Constant = { fg = dark_purple },
-	Cursor = { bg = dark_purple },
+	Constant = { fg = black },
+	Cursor = { bg = black },
 	-- This is to work around https://github.com/neovim/neovim/issues/9800.
 	CursorLine = { ctermfg = "black" },
-	CursorLineNr = { fg = dark_purple, bold = true },
-	Directory = { fg = dark_purple },
+	CursorLineNr = { fg = black, bold = true },
+	Directory = { fg = black },
 	EndOfBuffer = { fg = background, bg = background },
 	Error = { link = "ErrorMsg" },
 	ErrorMsg = { fg = red, bold = true },
 	FoldColumn = { fg = light_grey, bg = background },
 	Folded = { link = "Comment" },
-	Identifier = { fg = dark_purple },
+	Identifier = { fg = black },
 	IncSearch = { bg = light_yellow },
-	Include = { fg = dark_purple, bold = true },
+	Include = { fg = black, bold = true },
 	InstanceVariable = { fg = purple },
-	Keyword = { fg = dark_purple },
+	Keyword = { fg = black, bold = true },
 	Label = { link = "Keyword" },
 	LineNr = { fg = medium_grey },
 	Macro = { fg = orange },
 	MatchParen = { bold = true },
-	MoreMsg = { fg = dark_purple },
+	MoreMsg = { fg = black },
 	MsgSeparator = { fg = border },
 	NonText = { fg = grey },
-	Normal = { fg = dark_purple, bg = background },
-	NormalFloat = { fg = dark_purple, bg = background },
-	TerminalFloat = { fg = dark_purple, bg = grey_bg_light },
-	Number = { fg = dark_purple },
-	Operator = { fg = dark_purple },
-	Pmenu = { fg = dark_purple, bg = grey_bg_light },
+	Normal = { fg = black, bg = background },
+	NormalFloat = { fg = black, bg = background },
+	TerminalFloat = { fg = black, bg = grey_bg_light },
+	Number = { fg = black },
+	Operator = { fg = black },
+	Pmenu = { fg = black, bg = grey_bg_light },
 	PmenuSbar = { bg = grey_bg_light },
-	PmenuSel = { fg = dark_purple, bg = light_grey, bold = true },
-	PmenuThumb = { bg = dark_purple },
+	PmenuSel = { fg = black, bg = light_grey, bold = true },
+	PmenuThumb = { bg = black },
 	PreCondit = { link = "Macro" },
-	PreProc = { fg = dark_purple },
-	Question = { fg = dark_purple },
+	PreProc = { fg = black },
+	Question = { fg = black },
 	QuickFixLine = { bg = highlight, bold = true },
 	Regexp = { fg = orange },
 	Search = { bg = light_yellow },
 	SignColumn = { link = "FoldColumn" },
-	Special = { fg = dark_purple },
+	Special = { fg = black },
 	SpecialKey = { link = "Number" },
 	SpellBad = { fg = red, bold = true, underline = true },
 	SpellCap = { fg = purple, underline = true },
@@ -120,17 +118,17 @@ local highlights = {
 	-- Lualine ^^^^^^ problem derive by this settings.
 	-- StatusLine = { fg = background, bg = black },
 	-- StatusLineNC = { fg = background, bg = black },
-	StatusLineTab = { fg = background, bg = dark_purple },
-	WinBar = { fg = dark_purple, bg = light_grey, bold = true },
-	WinBarNc = { fg = dark_purple, bold = true },
+	StatusLineTab = { fg = background, bg = black },
+	WinBar = { fg = black, bg = light_grey, bold = true },
+	WinBarNc = { fg = black, bold = true },
 	WinBarFill = { fg = border },
 	StorageClass = { link = "Keyword" },
-	String = { fg = yellow },
+	String = { fg = green },
 	Symbol = { fg = orange },
-	TabLine = { fg = dark_purple, bg = light_grey },
-	TabLineFill = { fg = dark_purple, bg = border },
-	TabLineSel = { fg = dark_purple, bg = background, bold = true },
-	Title = { fg = dark_purple, bold = true },
+	TabLine = { fg = black, bg = light_grey },
+	TabLineFill = { fg = black, bg = border },
+	TabLineSel = { fg = black, bg = background, bold = true },
+	Title = { fg = black, bold = true },
 	Todo = { fg = grey, bold = true },
 	Type = { link = "Constant" },
 	Underlined = { underline = true },
@@ -140,13 +138,13 @@ local highlights = {
 	WildMenu = { link = "PmenuSel" },
 
 	-- Diffs
-	DiffAdd = { fg = dark_purple, bg = background },
+	DiffAdd = { fg = black, bg = background },
 	DiffChange = { fg = border, bg = background },
 	DiffDelete = { fg = red, bg = background },
-	DiffText = { fg = dark_purple, bg = background },
+	DiffText = { fg = black, bg = background },
 	diffAdded = { link = "DiffAdd", bg = background },
 	diffChanged = { link = "DiffChange", bg = background },
-	diffFile = { fg = dark_purple, bold = true },
+	diffFile = { fg = black, bold = true },
 	diffLine = { fg = blue },
 	diffRemoved = { link = "DiffDelete" },
 
@@ -156,7 +154,7 @@ local highlights = {
 	LspDiagnosticsUnderlineError = { link = "DiagnosticUnderlineError" },
 	LspDiagnosticsUnderlineWarning = { link = "DiagnosticUnderlineWarn" },
 	DiagnosticFloatingError = { fg = red, bg = background, bold = true },
-	DiagnosticFloatingHint = { fg = dark_purple, bg = background, bold = true },
+	DiagnosticFloatingHint = { fg = black, bg = background, bold = true },
 	DiagnosticFloatingInfo = { fg = blue, bg = background, bold = true },
 	DiagnosticFloatingWarn = { fg = yellow, bg = background, bold = true },
 	DiagnosticError = { fg = red, bold = true },
@@ -201,19 +199,19 @@ local highlights = {
 	NvimTreeLineNr = { fg = grey },
 	NvimTreeEndOfBuffer = { fg = grey_bg_light, bg = grey_bg_light },
 	NvimTreeRootFolder = { fg = grey },
-	NvimTreeCursorLine = { bg = white, fg = dark_purple },
-	NvimTreeCursorLineNr = { fg = dark_purple, bg = dark_purple },
-	NvimTreeCursorColumn = { fg = dark_purple },
+	NvimTreeCursorLine = { bg = white, fg = black },
+	NvimTreeCursorLineNr = { fg = black, bg = black },
+	NvimTreeCursorColumn = { fg = black },
 	NvimTreeWinSeparator = { bg = grey_bg_light, fg = grey_bg_light },
-	NvimTreeFileIcon = { fg = dark_purple },
-	NvimTreeOpenedFileIcon = { fg = dark_purple },
-	NvimTreeSymlinkIcon = { fg = dark_purple },
-	NvimTreeFolderIcon = { fg = dark_purple },
-	NvimTreeOpenedFolderIcon = { fg = dark_purple },
-	NvimTreeClosedFolderIcon = { fg = dark_purple },
-	NvimTreeFolderArrowClosed = { fg = dark_purple },
-	NvimTreeFolderArrowOpen = { fg = dark_purple },
-	NvimTreeSpecialFile = { fg = dark_purple },
+	NvimTreeFileIcon = { fg = black },
+	NvimTreeOpenedFileIcon = { fg = black },
+	NvimTreeSymlinkIcon = { fg = black },
+	NvimTreeFolderIcon = { fg = black },
+	NvimTreeOpenedFolderIcon = { fg = black },
+	NvimTreeClosedFolderIcon = { fg = black },
+	NvimTreeFolderArrowClosed = { fg = black },
+	NvimTreeFolderArrowOpen = { fg = black },
+	NvimTreeSpecialFile = { fg = black },
 
 	-- Lazy.nvim
 	LazyNormal = { bg = background },
@@ -223,7 +221,7 @@ local highlights = {
 	htmlLink = { link = "Directory" },
 	htmlScriptTag = { link = "htmlTag" },
 	htmlSpecialTagName = { link = "htmlTag" },
-	htmlTag = { fg = dark_purple, bold = true },
+	htmlTag = { fg = black, bold = true },
 	htmlTagName = { link = "htmlTag" },
 	htmlItalic = { italic = true },
 	htmlBold = { bold = true },
@@ -236,40 +234,38 @@ local highlights = {
 	javaScriptMember = { link = "Identifier" },
 
 	-- Treesitter
-	["@keyword"] = { fg = dark_purple },
-	["@keyword.jsdoc"] = { link = "comment" },
-	["@type.jsdoc"] = { link = "comment" },
-	["@parameter"] = { fg = dark_purple, bold = false },
-	["@property"] = { fg = dark_purple, italic = true },
-	["@property.scss"] = { fg = dark_purple, italic = false },
-	["@property.css"] = { fg = dark_purple, italic = false },
-	["@property.pug"] = { fg = dark_purple, italic = false },
-	["@punctuation.delimiter"] = { fg = dark_purple, bold = true },
-	["@function"] = { fg = black, bold = true },
-	["@function.call"] = { fg = black, bold = true },
-	["@method"] = { fg = black, bold = true },
-	["@method.call"] = { fg = black, bold = true },
-	["@function.builtin"] = { fg = black, bold = true },
-	["@keyword.javascript"] = { fg = grey_blue, bold = true },
-	["@keyword.function"] = { fg = black, bold = true },
-	["@method.function"] = { fg = black, bold = true },
+	["@keyword"] = { fg = black, bold = true },
+	["@keyword.jsdoc"] = { fg = dark_grey, bold = false },
+	["@parameter"] = { fg = black, bold = true },
+	["@property"] = { fg = black, italic = true },
+	["@property.scss"] = { fg = black, italic = false },
+	["@property.css"] = { fg = black, italic = false },
+	["@property.pug"] = { fg = black, italic = false },
+	["@punctuation.delimiter"] = { fg = black, bold = true },
+	["@function"] = { fg = dark_grey },
+	["@function.call"] = { fg = dark_grey },
+	["@method"] = { fg = dark_grey },
+	["@method.call"] = { fg = dark_grey },
+	["@function.builtin"] = { fg = dark_grey },
+	["@keyword.function"] = { fg = dark_grey },
+	["@method.function"] = { fg = dark_grey },
 	["@type.javascript"] = { fg = dark_grey },
 	["@comment"] = { fg = medium_grey, bold = false },
 	["@tag.html"] = { link = "htmlTag" },
 	["@tag.svelte"] = { link = "htmlTag" },
 	["@tag.delimiter"] = { bold = false },
 	["@tag.attribute"] = { fg = dark_grey, bold = false },
-	["@lsp.type.parameter"] = { fg = dark_purple, bold = false },
-	["@lsp.type.property"] = { fg = dark_purple, italic = true },
-	["@lsp.type.property.lua"] = { fg = dark_purple, italic = false },
-	["@lsp.type.punctuation.delimiter"] = { fg = dark_purple, bold = true },
-	["@lsp.type.function"] = { fg = black, bold = true },
-	["@lsp.type.function.call"] = { fg = black, bold = true },
-	["@lsp.type.method"] = { fg = black, bold = true },
-	["@lsp.type.method.call"] = { fg = black, bold = true },
-	["@lsp.type.function.builtin"] = { fg = black, bold = true },
-	["@lsp.type.keyword.function"] = { fg = black, bold = true },
-	["@lsp.type.method.function"] = { fg = black, bold = true },
+	["@lsp.type.parameter"] = { fg = black, bold = true },
+	["@lsp.type.property"] = { fg = black, italic = true },
+	["@lsp.type.property.lua"] = { fg = black, italic = false },
+	["@lsp.type.punctuation.delimiter"] = { fg = black, bold = true },
+	["@lsp.type.function"] = { fg = dark_grey },
+	["@lsp.type.function.call"] = { fg = dark_grey },
+	["@lsp.type.method"] = { fg = dark_grey },
+	["@lsp.type.method.call"] = { fg = dark_grey },
+	["@lsp.type.function.builtin"] = { fg = dark_grey },
+	["@lsp.type.keyword.function"] = { fg = dark_grey },
+	["@lsp.type.method.function"] = { fg = dark_grey },
 }
 
 -- Apply highrlight group
@@ -294,9 +290,9 @@ vim.api.nvim_create_autocmd("TermOpen", {
 local mobbuLine = {}
 
 mobbuLine.normal = {
-	a = { bg = dark_purple, fg = background },
-	b = { bg = light_grey, fg = dark_purple },
-	c = { bg = light_grey, fg = dark_purple },
+	a = { bg = black, fg = background },
+	b = { bg = light_grey, fg = black },
+	c = { bg = light_grey, fg = black },
 }
 
 mobbuLine.insert = {
@@ -304,11 +300,11 @@ mobbuLine.insert = {
 }
 --
 mobbuLine.command = {
-	a = { bg = yellow, fg = dark_purple },
+	a = { bg = yellow, fg = black },
 }
 
 mobbuLine.visual = {
-	a = { bg = light_green, fg = dark_purple },
+	a = { bg = light_green, fg = black },
 }
 --
 -- mobbuLine.replace = {
@@ -317,14 +313,14 @@ mobbuLine.visual = {
 -- }
 --
 mobbuLine.terminal = {
-	a = { bg = dark_purple, fg = background },
-	b = { bg = dark_purple, fg = background },
+	a = { bg = black, fg = background },
+	b = { bg = black, fg = background },
 }
 --
 mobbuLine.inactive = {
-	a = { bg = dark_purple, fg = white },
-	b = { bg = dark_purple, fg = white },
-	c = { bg = dark_purple, fg = white },
+	a = { bg = black, fg = white },
+	b = { bg = black, fg = white },
+	c = { bg = black, fg = white },
 }
 
 for _, mode in pairs(mobbuLine) do
