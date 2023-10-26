@@ -14,22 +14,22 @@ g.colors_name = "mobbu"
 local background = "#f2f2f2"
 local light_grey = "#ececec"
 local light_grey_1 = "#e3e3e3"
-local light_grey_2 = "#cccccc"
-local medium_grey = "#6e6e6e"
-local grey = "#b3aaaa"
-local dark_grey = "#706c6c"
+local grey = "#cccccc"
+local medium_grey = "#b3aaaa"
+local dark_grey = "#6e6e6e"
 local cyan = "#007872"
 local grey_blue = "#38618c"
 local blue = "#1561b8"
 local green = "#41ad1c"
 local dark_green = "#1C5708"
 local red = "#c4331d"
-local highlight = "#eeeeee"
 local yellow = "#ede858"
 local dark_yellow = "#bf8f00"
 local brown = "#a55000"
 local purple = "#5c21a5"
 local purple_grey = "#442b48"
+
+-- base color
 local white = "#ffffff"
 local black = "#000000"
 
@@ -40,7 +40,7 @@ g.terminal_color_3 = dark_yellow
 g.terminal_color_4 = blue
 g.terminal_color_5 = purple
 g.terminal_color_6 = cyan
-g.terminal_color_7 = medium_grey
+g.terminal_color_7 = dark_grey
 
 g.terminal_color_8 = purple_grey
 g.terminal_color_9 = red
@@ -49,7 +49,7 @@ g.terminal_color_11 = dark_yellow
 g.terminal_color_12 = blue
 g.terminal_color_13 = purple
 g.terminal_color_14 = cyan
-g.terminal_color_15 = medium_grey
+g.terminal_color_15 = dark_grey
 
 local highlights = {
 	-- This highlight group can be used when one wants to disable a highlight
@@ -59,8 +59,8 @@ local highlights = {
 	Bold = { bold = true },
 	Boolean = { link = "Keyword" },
 	Character = { link = "String" },
-	ColorColumn = { bg = highlight },
-	Comment = { fg = grey },
+	ColorColumn = { bg = light_grey },
+	Comment = { fg = medium_grey },
 	Conceal = {},
 	Constant = { fg = purple_grey },
 	Cursor = { bg = black },
@@ -80,12 +80,12 @@ local highlights = {
 	InstanceVariable = { fg = purple },
 	Keyword = { fg = purple_grey },
 	Label = { link = "Keyword" },
-	LineNr = { fg = grey },
+	LineNr = { fg = medium_grey },
 	Macro = { fg = brown },
 	MatchParen = { bold = true },
 	MoreMsg = { fg = purple_grey },
-	MsgSeparator = { fg = light_grey_2 },
-	NonText = { fg = medium_grey },
+	MsgSeparator = { fg = grey },
+	NonText = { fg = dark_grey },
 	Normal = { fg = purple_grey, bg = background },
 	NormalFloat = { fg = purple_grey, bg = background },
 	TerminalFloat = { fg = purple_grey, bg = light_grey },
@@ -98,7 +98,7 @@ local highlights = {
 	PreCondit = { link = "Macro" },
 	PreProc = { fg = purple_grey },
 	Question = { fg = purple_grey },
-	QuickFixLine = { bg = highlight, bold = true },
+	QuickFixLine = { bg = light_grey, bold = true },
 	Regexp = { fg = brown },
 	Search = { bg = yellow },
 	SignColumn = { link = "FoldColumn" },
@@ -115,18 +115,18 @@ local highlights = {
 	StatusLineTab = { fg = background, bg = purple_grey },
 	WinBar = { fg = purple_grey, bg = light_grey_1, bold = true },
 	WinBarNc = { fg = purple_grey, bold = true },
-	WinBarFill = { fg = light_grey_2 },
+	WinBarFill = { fg = grey },
 	StorageClass = { link = "Keyword" },
 	String = { fg = dark_yellow },
 	Symbol = { fg = brown },
 	TabLine = { fg = purple_grey, bg = light_grey_1 },
-	TabLineFill = { fg = purple_grey, bg = light_grey_2 },
+	TabLineFill = { fg = purple_grey, bg = grey },
 	TabLineSel = { fg = purple_grey, bg = background, bold = true },
 	Title = { fg = purple_grey, bold = true },
-	Todo = { fg = medium_grey, bold = true },
+	Todo = { fg = dark_grey, bold = true },
 	Type = { link = "Constant" },
 	Underlined = { underline = true },
-	VertSplit = { fg = light_grey_2 },
+	VertSplit = { fg = grey },
 	Visual = { bg = light_grey_1 },
 	WarningMsg = { fg = dark_yellow, bold = true },
 	WildMenu = { link = "PmenuSel" },
@@ -136,7 +136,7 @@ local highlights = {
 
 	-- Diffs
 	DiffAdd = { fg = purple_grey, bg = background },
-	DiffChange = { fg = light_grey_2, bg = background },
+	DiffChange = { fg = grey, bg = background },
 	DiffDelete = { fg = red, bg = background },
 	DiffText = { fg = purple_grey, bg = background },
 	diffAdded = { link = "DiffAdd", bg = background },
@@ -155,7 +155,7 @@ local highlights = {
 	DiagnosticFloatingInfo = { fg = blue, bg = background, bold = true },
 	DiagnosticFloatingWarn = { fg = dark_yellow, bg = background, bold = true },
 	DiagnosticError = { fg = red, bold = true },
-	DiagnosticHint = { fg = medium_grey, bold = true },
+	DiagnosticHint = { fg = dark_grey, bold = true },
 	DiagnosticInfo = { fg = blue, bold = true },
 	DiagnosticWarn = { fg = dark_yellow, bold = true },
 
@@ -193,9 +193,9 @@ local highlights = {
 
 	-- Nvimtree
 	NvimTreeNormal = { bg = light_grey },
-	NvimTreeLineNr = { fg = medium_grey },
+	NvimTreeLineNr = { fg = dark_grey },
 	NvimTreeEndOfBuffer = { fg = light_grey, bg = light_grey },
-	NvimTreeRootFolder = { fg = medium_grey },
+	NvimTreeRootFolder = { fg = dark_grey },
 	NvimTreeCursorLine = { bg = white, fg = purple_grey },
 	NvimTreeCursorLineNr = { fg = purple_grey, bg = purple_grey },
 	NvimTreeCursorColumn = { fg = purple_grey },
@@ -249,7 +249,7 @@ local highlights = {
 	["@keyword.function"] = { fg = black, bold = true },
 	["@method.function"] = { fg = black, bold = true },
 	["@type.javascript"] = { fg = dark_grey },
-	["@comment"] = { fg = grey, bold = false },
+	["@comment"] = { fg = medium_grey, bold = false },
 	["@tag.html"] = { link = "htmlTag" },
 	["@tag.delimiter.html"] = { fg = purple_grey },
 	["@tag.svelte"] = { link = "htmlTag" },
