@@ -65,7 +65,8 @@ local highlights = {
 	Constant = { fg = purple_grey },
 	Cursor = { bg = black },
 	-- This is to work around https://github.com/neovim/neovim/issues/9800.
-	CursorLine = { ctermfg = "black" },
+	-- CursorLine = { ctermfg = "black" },
+	CursorLine = { bg = light_grey },
 	CursorLineNr = { fg = purple_grey, bold = true },
 	Directory = { fg = purple_grey },
 	EndOfBuffer = { fg = background, bg = background },
@@ -129,6 +130,9 @@ local highlights = {
 	Visual = { bg = light_grey_1 },
 	WarningMsg = { fg = dark_yellow, bold = true },
 	WildMenu = { link = "PmenuSel" },
+
+	-- IndentBLankline
+	IndentBlankLine = { fg = light_grey_1 },
 
 	-- Diffs
 	DiffAdd = { fg = purple_grey, bg = background },
