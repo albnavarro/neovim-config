@@ -24,6 +24,7 @@ local dark_green = "#1C5708"
 local red = "#c4331d"
 local yellow = "#ede858"
 local dark_yellow = "#bf8f00"
+local light_brown = "#96885d"
 local brown = "#a55000"
 local purple = "#5c21a5"
 local purple_grey = "#442b48"
@@ -91,7 +92,7 @@ local highlights = {
 	Normal = { fg = purple_grey, bg = background },
 	NormalFloat = { fg = purple_grey, bg = background },
 	TerminalFloat = { fg = purple_grey, bg = background },
-	Number = { fg = green },
+	Number = { fg = light_brown },
 	Operator = { fg = purple_grey },
 	Pmenu = { fg = purple_grey, bg = background },
 	PmenuSbar = { bg = background },
@@ -119,7 +120,7 @@ local highlights = {
 	WinBarNc = { fg = purple_grey, bold = true },
 	WinBarFill = { fg = grey },
 	StorageClass = { link = "Keyword" },
-	String = { fg = dark_yellow },
+	String = { fg = light_brown },
 	Symbol = { fg = brown },
 	TabLine = { fg = purple_grey, bg = light_grey },
 	TabLineFill = { fg = purple_grey, bg = grey },
