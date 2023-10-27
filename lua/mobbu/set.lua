@@ -2,7 +2,7 @@ local O = vim.opt
 local G = vim.g
 
 O.guicursor = ""
-O.nu = true
+O.number = true
 O.relativenumber = false
 O.number = true
 O.tabstop = 4

@@ -1,11 +1,12 @@
 return {
-	"shaunsingh/nord.nvim",
-	name = "nord",
+	"gbprod/nord.nvim",
 	lazy = false,
 	priority = 1000,
 	config = function()
-		vim.g.nord_bold = false
-		vim.cmd("colorscheme nord")
+		require("nord").setup({})
+		vim.cmd.colorscheme("nord")
 	end,
-	opts = {},
+	install = {
+		colorscheme = { "nord" },
+	},
 }
