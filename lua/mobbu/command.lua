@@ -20,3 +20,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = highlight_group,
 	pattern = "*",
 })
+
+-- Switch background
+vim.api.nvim_create_user_command("BackgroundLight", ":set background=light", {})
+vim.api.nvim_create_user_command("BackgroundDark", ":set background=dark", {})
