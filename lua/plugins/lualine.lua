@@ -4,11 +4,12 @@ return {
 	dependencies = { "nvim-tree/nvim-web-devicons", lazy = true },
 	lazy = false,
 	config = function()
-		local mobbuLine = require("mobbu.colors")
+		-- local mobbuLine = require("mobbu.colors")
 
 		require("lualine").setup({
 			options = {
-				theme = mobbuLine,
+				-- theme = mobbuLine,
+				theme = "nord",
 				icons_enabled = true,
 				component_separators = "",
 				section_separators = "",
