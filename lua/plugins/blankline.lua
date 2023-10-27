@@ -5,6 +5,7 @@ return {
 	config = function()
 		require("ibl").setup({
 			-- indent = { highlight = { "IndentBlankLine" }, char = "│" },
+			indent = { char = "|" },
 			scope = { enabled = false },
 		})
 	end,
