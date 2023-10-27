@@ -11,9 +11,8 @@ end
 o.background = "light"
 g.colors_name = "mobbu"
 
-local background = "#f2f2f2"
-local light_grey = "#ececec"
-local light_grey_1 = "#e3e3e3"
+local background = "#ececec"
+local light_grey = "#e3e3e3"
 local grey = "#cccccc"
 local medium_grey = "#b3aaaa"
 local dark_grey = "#6e6e6e"
@@ -32,6 +31,9 @@ local purple_grey = "#442b48"
 -- base color
 local white = "#ffffff"
 local black = "#000000"
+
+--special
+local color_column = "#e8e7e7"
 
 g.terminal_color_0 = purple_grey
 g.terminal_color_1 = red
@@ -59,20 +61,20 @@ local highlights = {
 	Bold = { bold = true },
 	Boolean = { link = "Keyword" },
 	Character = { link = "String" },
-	ColorColumn = { bg = light_grey },
+	ColorColumn = { bg = color_column },
 	Comment = { fg = medium_grey },
 	Conceal = {},
 	Constant = { fg = purple_grey },
 	Cursor = { bg = black },
 	-- This is to work around https://github.com/neovim/neovim/issues/9800.
 	-- CursorLine = { ctermfg = "black" },
-	CursorLine = { bg = light_grey },
+	CursorLine = { bg = white },
 	CursorLineNr = { fg = purple_grey, bold = true },
 	Directory = { fg = purple_grey },
 	EndOfBuffer = { fg = background, bg = background },
 	ErrorMsg = { fg = red, bold = true },
 	Error = { link = "ErrorMsg" },
-	FoldColumn = { fg = light_grey_1, bg = background },
+	FoldColumn = { fg = light_grey, bg = background },
 	Folded = { link = "Comment" },
 	Identifier = { fg = purple_grey },
 	IncSearch = { bg = yellow },
@@ -88,17 +90,17 @@ local highlights = {
 	NonText = { fg = dark_grey },
 	Normal = { fg = purple_grey, bg = background },
 	NormalFloat = { fg = purple_grey, bg = background },
-	TerminalFloat = { fg = purple_grey, bg = light_grey },
+	TerminalFloat = { fg = purple_grey, bg = background },
 	Number = { fg = green },
 	Operator = { fg = purple_grey },
-	Pmenu = { fg = purple_grey, bg = light_grey },
-	PmenuSbar = { bg = light_grey },
-	PmenuSel = { fg = purple_grey, bg = light_grey_1, bold = true },
+	Pmenu = { fg = purple_grey, bg = background },
+	PmenuSbar = { bg = background },
+	PmenuSel = { fg = purple_grey, bg = light_grey, bold = true },
 	PmenuThumb = { bg = purple_grey },
 	PreCondit = { link = "Macro" },
 	PreProc = { fg = purple_grey },
 	Question = { fg = purple_grey },
-	QuickFixLine = { bg = light_grey, bold = true },
+	QuickFixLine = { bg = background, bold = true },
 	Regexp = { fg = brown },
 	Search = { bg = yellow },
 	SignColumn = { link = "FoldColumn" },
@@ -113,13 +115,13 @@ local highlights = {
 	-- StatusLine = { fg = background, bg = black },
 	-- StatusLineNC = { fg = background, bg = black },
 	StatusLineTab = { fg = background, bg = purple_grey },
-	WinBar = { fg = purple_grey, bg = light_grey_1, bold = true },
+	WinBar = { fg = purple_grey, bg = light_grey, bold = true },
 	WinBarNc = { fg = purple_grey, bold = true },
 	WinBarFill = { fg = grey },
 	StorageClass = { link = "Keyword" },
 	String = { fg = dark_yellow },
 	Symbol = { fg = brown },
-	TabLine = { fg = purple_grey, bg = light_grey_1 },
+	TabLine = { fg = purple_grey, bg = light_grey },
 	TabLineFill = { fg = purple_grey, bg = grey },
 	TabLineSel = { fg = purple_grey, bg = background, bold = true },
 	Title = { fg = purple_grey, bold = true },
@@ -127,12 +129,12 @@ local highlights = {
 	Type = { link = "Constant" },
 	Underlined = { underline = true },
 	VertSplit = { fg = grey },
-	Visual = { bg = light_grey_1 },
+	Visual = { bg = light_grey },
 	WarningMsg = { fg = dark_yellow, bold = true },
 	WildMenu = { link = "PmenuSel" },
 
 	-- IndentBLankline
-	IndentBlankLine = { fg = light_grey_1 },
+	IndentBlankLine = { fg = grey },
 
 	-- Diffs
 	DiffAdd = { fg = purple_grey, bg = background },
@@ -196,10 +198,10 @@ local highlights = {
 	NvimTreeLineNr = { fg = dark_grey },
 	NvimTreeEndOfBuffer = { fg = light_grey, bg = light_grey },
 	NvimTreeRootFolder = { fg = dark_grey },
-	NvimTreeCursorLine = { bg = white, fg = purple_grey },
+	NvimTreeCursorLine = { bg = background, fg = purple_grey },
 	NvimTreeCursorLineNr = { fg = purple_grey, bg = purple_grey },
 	NvimTreeCursorColumn = { fg = purple_grey },
-	NvimTreeWinSeparator = { bg = light_grey, fg = light_grey },
+	NvimTreeWinSeparator = { bg = background, fg = background },
 	NvimTreeFileIcon = { fg = purple_grey },
 	NvimTreeOpenedFileIcon = { fg = purple_grey },
 	NvimTreeSymlinkIcon = { fg = purple_grey },
@@ -276,7 +278,7 @@ end
 -- Reset lsp semantic Highlight
 -- Is slow and override custom highlight
 -- for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
--- 	vim.api.nvim_set_hl(0, group, {})
+-- vim.api.nvim_set_hl(0, group, {})
 -- end
 
 --- Terminal theme
@@ -291,8 +293,8 @@ local mobbuLine = {}
 
 mobbuLine.normal = {
 	a = { bg = purple_grey, fg = background },
-	b = { bg = light_grey_1, fg = purple_grey },
-	c = { bg = light_grey_1, fg = purple_grey },
+	b = { bg = white, fg = purple_grey },
+	c = { bg = white, fg = purple_grey },
 }
 
 mobbuLine.insert = {
