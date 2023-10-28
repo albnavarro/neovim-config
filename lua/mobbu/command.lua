@@ -22,5 +22,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- Switch background
-vim.api.nvim_create_user_command("BackgroundLight", ":set background=light", {})
-vim.api.nvim_create_user_command("BackgroundDark", ":set background=dark", {})
+vim.api.nvim_create_user_command("ThemeLight", ":set background=light", {})
+vim.api.nvim_create_user_command("ThemeDark", ":set background=dark", {})

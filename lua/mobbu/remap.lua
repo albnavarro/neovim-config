@@ -84,13 +84,13 @@ map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = f
 map("n", "<C-b>", "<C-^>")
 
 -- :q
-map("n", "<Leader>q", ":q<CR>")
+map("n", "<Leader>qa", ":q<CR>")
 
 -- :w
 map("n", "<Leader>w", ":w<CR>")
 
 -- :qa
-map("n", "<Leader>Q", ":qa!<CR>")
+map("n", "<Leader>Qa", ":qa!<CR>")
 
 -- Center horizontally
 map("n", "<Leader>z", "zszH")
