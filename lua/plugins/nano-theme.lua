@@ -5,7 +5,7 @@ return {
 		local opt = vim.opt
 		local cmd = vim.cmd
 
-		opt.background = "dark"
+		opt.background = "light"
 		cmd.colorscheme("nano-theme")
 
 		-- Override
