@@ -151,10 +151,11 @@ return {
 				-- Format
 				local buf_command = vim.api.nvim_buf_create_user_command
 				buf_command(bufnr, "LspFormat", function()
-					for _, client in ipairs(vim.lsp.get_active_clients()) do
-						if client.name == "eslint" then
-							vim.cmd(":EslintFixAll")
-						end
+					local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+					-- eslint
+					if client.name == "eslint" then
+						vim.cmd(":EslintFixAll")
 					end
 
 					-- default format command
