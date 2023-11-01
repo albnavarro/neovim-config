@@ -103,7 +103,7 @@ return {
 				"tsserver",
 				"html",
 				"cssls",
-				"emmet_ls",
+				"emmet_language_server",
 				"lua_ls",
 				"svelte",
 				"eslint",
@@ -147,7 +147,7 @@ return {
 		---
 		-- Extend emmet_ls to twig and javascript
 		---
-		lsp_config.emmet_ls.setup({
+		lsp_config.emmet_language_server.setup({
 			capabilities = capabilities,
 			filetypes = { "html", "php", "twig", "scss" },
 		})
