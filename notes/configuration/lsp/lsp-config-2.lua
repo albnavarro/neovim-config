@@ -18,6 +18,8 @@ return {
 		local lsp_config = require("lspconfig")
 		local lsp_defaults = lsp_config.util.default_config
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local eslintFileType = { "javascript", "typescript", "svelte" }
+		local tables_utils = require("utils/tables_utils")
 
 		lsp_defaults.capabilities =
 			vim.tbl_deep_extend("force", lsp_defaults.capabilities, cmp_nvim_lsp.default_capabilities())
@@ -34,10 +36,12 @@ return {
 				-- Format
 				local buf_command = vim.api.nvim_buf_create_user_command
 				buf_command(bufnr, "LspFormat", function()
-					for _, client in ipairs(vim.lsp.get_active_clients()) do
-						if client.name == "eslint" then
-							vim.cmd(":EslintFixAll")
-						end
+					local filetype = vim.bo.filetype
+
+					-- specific eslint format command
+					if tables_utils.has_value(eslintFileType, filetype) then
+						vim.cmd(":EslintFixAll")
+						return
 					end
 
 					-- default format command
