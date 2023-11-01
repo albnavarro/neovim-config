@@ -148,6 +148,7 @@ return {
 			settings = {
 				stylelintplus = {
 					autoFixOnFormat = true,
+					-- autoFixOnSave = true,
 				},
 			},
 		})
