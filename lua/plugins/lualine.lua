@@ -9,7 +9,8 @@ return {
 		require("lualine").setup({
 			options = {
 				-- theme = mobbuLine,
-				theme = "nano-theme",
+				-- theme = "nano-theme",
+				theme = "nord",
 				icons_enabled = true,
 				component_separators = "",
 				section_separators = "",
