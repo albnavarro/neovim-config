@@ -16,7 +16,11 @@ return {
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
 		local lsp_config = require("lspconfig")
+		local lsp_defaults = lsp_config.util.default_config
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+
+		lsp_defaults.capabilities =
+			vim.tbl_deep_extend("force", lsp_defaults.capabilities, cmp_nvim_lsp.default_capabilities())
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
@@ -27,10 +31,18 @@ return {
 					vim.keymap.set(m, lhs, rhs, opts)
 				end
 
-				-- local buf_command = vim.api.nvim_buf_create_user_command
-				-- buf_command(bufnr, "LspFormat", function()
-				-- 	vim.lsp.buf.format()
-				-- end, { desc = "Format buffer with language server" })
+				-- Format
+				local buf_command = vim.api.nvim_buf_create_user_command
+				buf_command(bufnr, "LspFormat", function()
+					for _, client in ipairs(vim.lsp.get_active_clients()) do
+						if client.name == "eslint" then
+							vim.cmd(":EslintFixAll")
+						end
+					end
+
+					-- default format command
+					vim.lsp.buf.format({ async = true })
+				end, { desc = "Format buffer with language server" })
 
 				-- LSP actions
 				map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
@@ -41,7 +53,7 @@ return {
 				map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
 				map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
 				map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-				map({ "n", "x" }, "<F3>", "<cmd>lua vim.lsp.buf.format({async = true})<cr>")
+				map({ "n", "x" }, "<F3>", "<cmd>LspFormat<cr>")
 				map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
 				map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
 
@@ -62,10 +74,25 @@ return {
 				float = { border = "rounded" },
 			})
 
-			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+			vim.lsp.handlers["textDocument/hover"] =
+				vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", max_width = 80 })
 
 			vim.lsp.handlers["textDocument/signatureHelp"] =
-				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", max_width = 80 })
+
+			local command = vim.api.nvim_create_user_command
+
+			command("LspWorkspaceAdd", function()
+				vim.lsp.buf.add_workspace_folder()
+			end, { desc = "Add folder to workspace" })
+
+			command("LspWorkspaceList", function()
+				vim.notify(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+			end, { desc = "List workspace folders" })
+
+			command("LspWorkspaceRemove", function()
+				vim.lsp.buf.remove_workspace_folder()
+			end, { desc = "Remove folder from workspace" })
 		end
 
 		lsp_settings()
@@ -85,37 +112,54 @@ return {
 				"svelte",
 				"eslint",
 				"stylelint_lsp",
+				"jsonls",
 			},
 		})
-
-		local capabilities = cmp_nvim_lsp.default_capabilities()
 
 		---
 		-- Inizializa servers
 		---
-		lsp_config.tsserver.setup({ capabilities = capabilities })
-		lsp_config.html.setup({ capabilities = capabilities })
-		lsp_config.cssls.setup({ capabilities = capabilities })
-		lsp_config.svelte.setup({ capabilities = capabilities })
-		lsp_config.eslint.setup({ capabilities = capabilities })
+
+		-- local get_servers = mason_lspconfig.get_installed_servers
+		-- for _, server_name in ipairs(get_servers()) do
+		-- 	lsp_config[server_name].setup({})
+		-- end
+
+		lsp_config.tsserver.setup({})
+		lsp_config.html.setup({})
+		lsp_config.cssls.setup({})
+		lsp_config.jsonls.setup({})
+		lsp_config.svelte.setup({})
+		lsp_config.eslint.setup({
+			-- on_attach = function(args)
+			-- 	local bufnr = args.buf
+			-- 	vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 		buffer = bufnr,
+			-- 		command = "EslintFixAll",
+			-- 	})
+			-- end,
+		})
 		lsp_config.stylelint_lsp.setup({
-			capabilities = capabilities,
-			filetypes = { "scss" },
+			filetypes = { "scss", "css" },
+			settings = {
+				stylelintplus = {
+					autoFixOnFormat = true,
+					-- autoFixOnSave = true,
+				},
+			},
 		})
 
 		---
 		-- Extend emmet_ls to twig and javascript
 		---
 		lsp_config.emmet_ls.setup({
-			capabilities = capabilities,
-			filetypes = { "html", "php", "twig" },
+			filetypes = { "html", "php", "twig", "scss" },
 		})
 
 		---
 		-- Remove undefined global vim warning.
 		---
 		lsp_config.lua_ls.setup({
-			capabilities = capabilities,
 			settings = {
 				Lua = {
 					diagnostics = {

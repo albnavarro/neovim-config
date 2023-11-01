@@ -16,11 +16,7 @@ return {
 		local mason = require("mason")
 		local mason_lspconfig = require("mason-lspconfig")
 		local lsp_config = require("lspconfig")
-		local lsp_defaults = lsp_config.util.default_config
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
-		lsp_defaults.capabilities =
-			vim.tbl_deep_extend("force", lsp_defaults.capabilities, cmp_nvim_lsp.default_capabilities())
 
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
@@ -120,17 +116,15 @@ return {
 		-- Inizializa servers
 		---
 
-		-- local get_servers = mason_lspconfig.get_installed_servers
-		-- for _, server_name in ipairs(get_servers()) do
-		-- 	lsp_config[server_name].setup({})
-		-- end
+		local capabilities = cmp_nvim_lsp.default_capabilities()
 
-		lsp_config.tsserver.setup({})
-		lsp_config.html.setup({})
-		lsp_config.cssls.setup({})
-		lsp_config.jsonls.setup({})
-		lsp_config.svelte.setup({})
+		lsp_config.tsserver.setup({ capabilities = capabilities })
+		lsp_config.html.setup({ capabilities = capabilities })
+		lsp_config.cssls.setup({ capabilities = capabilities })
+		lsp_config.jsonls.setup({ capabilities = capabilities })
+		lsp_config.svelte.setup({ capabilities = capabilities })
 		lsp_config.eslint.setup({
+			capabilities = capabilities,
 			-- on_attach = function(args)
 			-- 	local bufnr = args.buf
 			-- 	vim.api.nvim_create_autocmd("BufWritePre", {
@@ -140,6 +134,7 @@ return {
 			-- end,
 		})
 		lsp_config.stylelint_lsp.setup({
+			capabilities = capabilities,
 			filetypes = { "scss", "css" },
 			settings = {
 				stylelintplus = {
@@ -153,6 +148,7 @@ return {
 		-- Extend emmet_ls to twig and javascript
 		---
 		lsp_config.emmet_ls.setup({
+			capabilities = capabilities,
 			filetypes = { "html", "php", "twig", "scss" },
 		})
 
@@ -160,6 +156,7 @@ return {
 		-- Remove undefined global vim warning.
 		---
 		lsp_config.lua_ls.setup({
+			capabilities = capabilities,
 			settings = {
 				Lua = {
 					diagnostics = {
