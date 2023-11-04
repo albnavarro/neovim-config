@@ -21,13 +21,7 @@ return {
 				-- have other formatters configured.
 				["_"] = { "trim_whitespace" },
 			},
-		})
-
-		vim.api.nvim_create_autocmd("BufWritePre", {
-			pattern = "*",
-			callback = function(args)
-				require("conform").format({ bufnr = args.buf })
-			end,
+			format_on_save = {},
 		})
 
 		-- Toggle codeSpell.
