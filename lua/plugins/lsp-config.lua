@@ -17,6 +17,7 @@ return {
 		local mason_lspconfig = require("mason-lspconfig")
 		local lsp_config = require("lspconfig")
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
+		local map = vim.keymap
 
 		---
 		-- Serve configuration
@@ -136,49 +137,40 @@ return {
 			vim.lsp.buf.remove_workspace_folder()
 		end, { desc = "Remove folder from workspace" })
 
+		-- Diagnostics
+		map.set("n", "gl", vim.diagnostic.open_float)
+		map.set("n", "[d", vim.diagnostic.goto_prev)
+		map.set("n", "]d", vim.diagnostic.goto_next)
+
 		---
 		-- LSP attach
 		---
 		vim.api.nvim_create_autocmd("LspAttach", {
 			desc = "LSP actions",
 			callback = function(args)
-				local bufnr = args.buf
-				local map = function(m, lhs, rhs)
-					local opts = { buffer = bufnr }
-					vim.keymap.set(m, lhs, rhs, opts)
-				end
-
-				-- Format
-				local buf_command = vim.api.nvim_buf_create_user_command
-				buf_command(bufnr, "LspFormat", function()
+				-- LSP actions
+				local opts = { buffer = args.buf }
+				map.set("n", "K", vim.lsp.buf.hover, opts)
+				map.set("n", "gd", vim.lsp.buf.definition, opts)
+				map.set("n", "gD", vim.lsp.buf.declaration, opts)
+				map.set("n", "gi", vim.lsp.buf.implementation, opts)
+				map.set("n", "go", vim.lsp.buf.type_definition, opts)
+				map.set("n", "gr", vim.lsp.buf.references, opts)
+				map.set("n", "gs", vim.lsp.buf.signature_help, opts)
+				map.set("n", "<F2>", vim.lsp.buf.rename, opts)
+				map.set("n", "<F4>", vim.lsp.buf.code_action, opts)
+				map.set("n", "<F3>", function()
 					local client = vim.lsp.get_client_by_id(args.data.client_id)
 
 					-- eslint
 					if client.name == "eslint" then
 						vim.cmd(":EslintFixAll")
+						return
 					end
 
 					-- default format command
 					vim.lsp.buf.format({ async = true })
-				end, { desc = "Format buffer with language server" })
-
-				-- LSP actions
-				map("n", "K", "<cmd>lua vim.lsp.buf.hover()<cr>")
-				map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<cr>")
-				map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>")
-				map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<cr>")
-				map("n", "go", "<cmd>lua vim.lsp.buf.type_definition()<cr>")
-				map("n", "gr", "<cmd>lua vim.lsp.buf.references()<cr>")
-				map("n", "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>")
-				map("n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>")
-				map({ "n", "x" }, "<F3>", "<cmd>LspFormat<cr>")
-				map("n", "<F4>", "<cmd>lua vim.lsp.buf.code_action()<cr>")
-				map("x", "<F4>", "<cmd>lua vim.lsp.buf.range_code_action()<cr>")
-
-				-- Diagnostics
-				map("n", "gl", "<cmd>lua vim.diagnostic.open_float()<cr>")
-				map("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<cr>")
-				map("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<cr>")
+				end, opts)
 			end,
 		})
 	end,
