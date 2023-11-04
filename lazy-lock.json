@@ -17,7 +17,7 @@
   "neoscroll.nvim": { "branch": "master", "commit": "4bc0212e9f2a7bc7fe7a6bceb15b33e39f0f41fb" },
   "nord.nvim": { "branch": "main", "commit": "7c92694ee67d0a23ba4071e4e966976b34bccb99" },
   "nvim-cmp": { "branch": "main", "commit": "51260c02a8ffded8e16162dcf41a23ec90cfba62" },
-  "nvim-lint": { "branch": "master", "commit": "8d2bd9a2d1f0b41c96dfa0c998cc22ba152935ed" },
+  "nvim-lint": { "branch": "master", "commit": "7746f952827dabfb70194518c99c93d5651b8f19" },
   "nvim-lsp-file-operations": { "branch": "master", "commit": "1e0ffa0acc92f88f9f2b68df47ccbe1917653a42" },
   "nvim-lspconfig": { "branch": "master", "commit": "b44737605807023d32e6310b87ba69f4dbf10e0e" },
   "nvim-surround": { "branch": "main", "commit": "4f0e1f470595af067eca9b872778d83c7f52f134" },
