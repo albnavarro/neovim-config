@@ -20,7 +20,8 @@ return {
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
-		vim.keymap.set("n", "<leader>fb", builtin.current_buffer_fuzzy_find, {})
+		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+		vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {})
 		vim.keymap.set("n", "<leader>fl", builtin.resume, {})
 		vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
 
@@ -84,6 +85,11 @@ return {
 					color_devicons = false,
 				},
 				diagnostic = {
+					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
+				},
+				buffers = {
 					theme = "ivy",
 					disable_devicons = true,
 					color_devicons = false,
