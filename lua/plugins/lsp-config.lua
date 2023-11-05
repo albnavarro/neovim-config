@@ -20,92 +20,6 @@ return {
 		local map = vim.keymap
 
 		---
-		-- Serve configuration
-		---
-		mason.setup({})
-		mason_lspconfig.setup({
-			ensure_installed = {
-				"tsserver",
-				"html",
-				"cssls",
-				"emmet_language_server",
-				"lua_ls",
-				"svelte",
-				"eslint",
-				"stylelint_lsp",
-				"jsonls",
-			},
-		})
-
-		---
-		-- Inizializa servers
-		---
-
-		local capabilities = cmp_nvim_lsp.default_capabilities()
-
-		lsp_config.tsserver.setup({ capabilities = capabilities })
-		lsp_config.html.setup({ capabilities = capabilities })
-		lsp_config.cssls.setup({ capabilities = capabilities })
-		lsp_config.jsonls.setup({ capabilities = capabilities })
-		lsp_config.svelte.setup({
-			capabilities = capabilities,
-			on_attach = function(client)
-				-- Refresh lsp when js o ts file change.
-				vim.api.nvim_create_autocmd("BufWritePost", {
-					pattern = { "*.js", "*.ts" },
-					callback = function(ctx)
-						if client.name == "svelte" then
-							client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
-						end
-					end,
-				})
-			end,
-		})
-		lsp_config.eslint.setup({
-			capabilities = capabilities,
-			-- on_attach = function(args)
-			-- 	local bufnr = args.buf
-			-- 	vim.api.nvim_create_autocmd("BufWritePre", {
-			-- 		buffer = bufnr,
-			-- 		command = "EslintFixAll",
-			-- 	})
-			-- end,
-		})
-		lsp_config.stylelint_lsp.setup({
-			capabilities = capabilities,
-			filetypes = { "scss", "css" },
-			settings = {
-				stylelintplus = {
-					autoFixOnFormat = true,
-					-- autoFixOnSave = true,
-				},
-			},
-		})
-
-		---
-		-- Extend emmet_ls to twig and javascript
-		---
-		lsp_config.emmet_language_server.setup({
-			capabilities = capabilities,
-			filetypes = { "html", "php", "twig", "scss" },
-		})
-
-		---
-		-- Remove undefined global vim warning.
-		---
-		lsp_config.lua_ls.setup({
-			capabilities = capabilities,
-			settings = {
-				Lua = {
-					diagnostics = {
-						-- Get the language server to recognize the `vim` global
-						globals = { "vim" },
-					},
-				},
-			},
-		})
-
-		---
 		-- Global configuration
 		---
 		vim.diagnostic.config({
@@ -142,36 +56,142 @@ return {
 		map.set("n", "[d", vim.diagnostic.goto_prev)
 		map.set("n", "]d", vim.diagnostic.goto_next)
 
-		---
-		-- LSP attach
-		---
-		vim.api.nvim_create_autocmd("LspAttach", {
-			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
-			callback = function(args)
-				-- LSP actions
-				local opts = { buffer = args.buf }
-				map.set("n", "K", vim.lsp.buf.hover, opts)
-				map.set("n", "gd", vim.lsp.buf.definition, opts)
-				map.set("n", "gD", vim.lsp.buf.declaration, opts)
-				map.set("n", "gi", vim.lsp.buf.implementation, opts)
-				map.set("n", "go", vim.lsp.buf.type_definition, opts)
-				map.set("n", "gr", vim.lsp.buf.references, opts)
-				map.set("n", "gs", vim.lsp.buf.signature_help, opts)
-				map.set("n", "<F2>", vim.lsp.buf.rename, opts)
-				map.set("n", "<F4>", vim.lsp.buf.code_action, opts)
-				map.set("n", "<F3>", function()
-					local client = vim.lsp.get_client_by_id(args.data.client_id)
+		-- on attach.
+		local on_attach = function(client, bufnr)
+			local opts = { buffer = bufnr }
+			map.set("n", "K", vim.lsp.buf.hover, opts)
+			map.set("n", "gd", vim.lsp.buf.definition, opts)
+			map.set("n", "gD", vim.lsp.buf.declaration, opts)
+			map.set("n", "gi", vim.lsp.buf.implementation, opts)
+			map.set("n", "go", vim.lsp.buf.type_definition, opts)
+			map.set("n", "gr", vim.lsp.buf.references, opts)
+			map.set("n", "gs", vim.lsp.buf.signature_help, opts)
+			map.set("n", "<F2>", vim.lsp.buf.rename, opts)
+			map.set("n", "<F4>", vim.lsp.buf.code_action, opts)
+			map.set("n", "<F3>", function()
+				-- eslint
+				if client.name == "eslint" then
+					vim.cmd(":EslintFixAll")
+					return
+				end
 
-					-- eslint
-					if client.name == "eslint" then
-						vim.cmd(":EslintFixAll")
-						return
-					end
+				-- default format command
+				vim.lsp.buf.format({ async = true })
+			end, opts)
 
-					-- default format command
-					vim.lsp.buf.format({ async = true })
-				end, opts)
-			end,
+			--eslint autoFix on save
+			-- if client.name == "eslint" then
+			-- 	vim.api.nvim_create_autocmd("BufWritePre", {
+			-- 		buffer = bufnr,
+			-- 		command = "EslintFixAll",
+			-- 	})
+			-- end
+
+			--svelte refresh lsp
+			if client.name == "svelte" then
+				vim.api.nvim_create_autocmd("BufWritePost", {
+					pattern = { "*.js", "*.ts" },
+					callback = function(ctx)
+						if client.name == "svelte" then
+							client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
+						end
+					end,
+				})
+			end
+		end
+
+		---
+		-- Serve configuration
+		---
+		mason.setup({})
+		mason_lspconfig.setup({
+			ensure_installed = {
+				"tsserver",
+				"html",
+				"cssls",
+				"emmet_language_server",
+				"lua_ls",
+				"svelte",
+				"eslint",
+				"stylelint_lsp",
+				"jsonls",
+			},
+		})
+
+		---
+		-- Inizializa servers
+		---
+
+		local capabilities = cmp_nvim_lsp.default_capabilities()
+
+		-- tsserver
+		lsp_config.tsserver.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- html
+		lsp_config.html.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- cssls
+		lsp_config.cssls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- json
+		lsp_config.jsonls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- svelte
+		lsp_config.svelte.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- eslint
+		lsp_config.eslint.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- stylelint
+		lsp_config.stylelint_lsp.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "scss", "css" },
+			settings = {
+				stylelintplus = {
+					autoFixOnFormat = true,
+					-- autoFixOnSave = true,
+				},
+			},
+		})
+
+		-- Emmet
+		lsp_config.emmet_language_server.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			filetypes = { "html", "php", "twig", "scss" },
+		})
+
+		-- Lua Remove undefined global vim warning.
+		lsp_config.lua_ls.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+			settings = {
+				Lua = {
+					diagnostics = {
+						-- Get the language server to recognize the `vim` global
+						globals = { "vim" },
+					},
+				},
+			},
 		})
 	end,
 }
