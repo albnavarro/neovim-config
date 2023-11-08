@@ -45,7 +45,7 @@ return {
 					i = {
 						-- Open quicklis with multiple files
 						["<C-o>"] = actions.send_selected_to_qflist + actions.open_qflist,
-						["<esc>"] = actions.close,
+						-- ["<esc>"] = actions.close,
 					},
 					n = {
 						-- Open quicklis with multiple files
