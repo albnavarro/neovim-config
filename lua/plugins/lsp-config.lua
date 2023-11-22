@@ -70,10 +70,10 @@ return {
 			map.set("n", "<F4>", vim.lsp.buf.code_action, opts)
 			map.set("n", "<F3>", function()
 				-- eslint
-				if client.name == "eslint" then
-					vim.cmd(":EslintFixAll")
-					return
-				end
+				-- if client.name == "eslint" then
+				-- 	vim.cmd(":EslintFixAll")
+				-- 	return
+				-- end
 
 				-- default format command
 				vim.lsp.buf.format({ async = true })
@@ -90,7 +90,7 @@ return {
 			--svelte refresh lsp
 			if client.name == "svelte" then
 				vim.api.nvim_create_autocmd("BufWritePost", {
-					pattern = { "*.js", "*.ts" },
+					pattern = { "*.js", "*.ts", "*.scss" },
 					callback = function(ctx)
 						if client.name == "svelte" then
 							client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.file })
@@ -112,8 +112,8 @@ return {
 				"emmet_language_server",
 				"lua_ls",
 				"svelte",
-				"eslint",
-				"stylelint_lsp",
+				-- "eslint",
+				-- "stylelint_lsp",
 				"jsonls",
 			},
 		})
@@ -155,23 +155,23 @@ return {
 		})
 
 		-- eslint
-		lsp_config.eslint.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		-- lsp_config.eslint.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- })
 
 		-- stylelint
-		lsp_config.stylelint_lsp.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "scss", "css" },
-			settings = {
-				stylelintplus = {
-					autoFixOnFormat = true,
-					-- autoFixOnSave = true,
-				},
-			},
-		})
+		-- lsp_config.stylelint_lsp.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	filetypes = { "scss", "css" },
+		-- 	settings = {
+		-- 		stylelintplus = {
+		-- 			autoFixOnFormat = true,
+		-- 			-- autoFixOnSave = true,
+		-- 		},
+		-- 	},
+		-- })
 
 		-- Emmet
 		lsp_config.emmet_language_server.setup({

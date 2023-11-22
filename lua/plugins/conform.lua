@@ -37,5 +37,28 @@ return {
 		vim.api.nvim_create_user_command("CodeSpellFormatOff", function()
 			useCodeSpell = false
 		end, {})
+
+		-- Fix eslint/stylelint.
+		local stylelintFileType = { "scss", "css", "sass" }
+		local eslintFileType = { "javascript", "typescript" }
+		local tables_utils = require("utils/tables_utils")
+
+		vim.api.nvim_create_user_command("FixWithLinter", function()
+			local filetype = vim.bo.filetype
+
+			if tables_utils.has_value(stylelintFileType, filetype) then
+				require("conform").format({ formatters = { "stylelint" } }, function()
+					vim.cmd(":write")
+				end)
+			end
+
+			if tables_utils.has_value(eslintFileType, filetype) then
+				require("conform").format({ formatters = { "eslint_d" } }, function()
+					vim.cmd(":write")
+				end)
+			end
+		end, {
+			nargs = 0,
+		})
 	end,
 }
