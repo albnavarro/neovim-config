@@ -11,6 +11,7 @@ return {
 				"javascript",
 				"typescript",
 				"jsdoc",
+				"graphql",
 				"css",
 				"scss",
 				"twig",
