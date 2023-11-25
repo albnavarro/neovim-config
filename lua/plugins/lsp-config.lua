@@ -158,6 +158,10 @@ return {
 		-- lsp_config.eslint.setup({
 		-- 	capabilities = capabilities,
 		-- 	on_attach = on_attach,
+		-- 	settings = {
+		-- 		workingDirectory = { mode = "location" },
+		-- 	},
+		-- 	root_dir = lsp_config.util.find_git_ancestor,
 		-- })
 
 		-- stylelint
