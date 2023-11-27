@@ -1,17 +1,14 @@
--- set conceallevel=0
+-- Retab to four.
 vim.api.nvim_create_user_command(
 	"RetabFour",
 	":set ts=2 sts=2 noet <bar> :retab! <bar> :set ts=4 sts=4 et <bar> :retab",
 	{}
 )
 
--- Switch to html syntax
-vim.api.nvim_create_user_command("SyntaxHtml", ":set filetype=html syntax=html", {})
-
 -- Open terminal
 vim.api.nvim_create_user_command("Terminal", ":botright 20sp |terminal", {})
 
--- highlight on yank
+-- Highlight on yank.
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
 vim.api.nvim_create_autocmd("TextYankPost", {
 	callback = function()
@@ -21,6 +18,5 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	pattern = "*",
 })
 
--- Switch background
-vim.api.nvim_create_user_command("ThemeLight", ":set background=light", {})
-vim.api.nvim_create_user_command("ThemeDark", ":set background=dark", {})
+-- Toggle Word Wrap.
+vim.api.nvim_create_user_command("ToggleWordWrap", ":set wrap! linebreak! breakindent!", {})
