@@ -17,7 +17,7 @@ local function switchState()
 	end
 end
 
-A.nvim_set_keymap("n", "<leader>m", "", {
+A.nvim_set_keymap("n", "<leader>0", "", {
 	noremap = true,
 	silent = true,
 	expr = true,
@@ -26,4 +26,4 @@ A.nvim_set_keymap("n", "<leader>m", "", {
 	end,
 })
 
-A.nvim_set_keymap("v", "<leader>m", ":normal<Space>0@a<CR>", { noremap = true, silent = true })
+A.nvim_set_keymap("v", "<leader>0", ":normal<Space>0@a<CR>", { noremap = true, silent = true })
