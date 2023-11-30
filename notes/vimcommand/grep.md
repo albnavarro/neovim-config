@@ -1,4 +1,8 @@
-## Open quickfix with grep, persistent serach result inside buffer.
+## Open quickfix with grep, persistent search result inside buffer.
 
 - :vimgrep occurrence %
 - :copen
+
+
+## Find and replace from quickfix/quickList.
+:cdo %s/absd/dsba/gc
