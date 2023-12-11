@@ -107,7 +107,8 @@ map("v", "~", "<Right>o<Left>o")
 map("n", "<leader>r", ":e!<CR>")
 
 -- Format with linter for filetype and save. (formatter.nvim)
-map("n", "<leader>=", ":FixWithLinter<CR>", { noremap = true, silent = true })
+-- map("n", "<leader>=", ":FixWithLinter<CR>", { noremap = true, silent = true })
+map("", "<leader>=", ":FixWithLinter<CR>", { noremap = true, silent = true })
 
 -- Run stylelijnt --fix
 -- map("n", "<leader>=s", ":%!stylelint --fix --stdin --stdin-filename %<CR><CR>", { noremap = true, silent = true })
