@@ -43,7 +43,41 @@ return {
 		local eslintFileType = { "javascript", "typescript" }
 		local tables_utils = require("utils/tables_utils")
 
-		vim.api.nvim_create_user_command("FixWithLinter", function(args)
+		-- format function
+		local function customFormat(formatter, range)
+			if range then
+				require("conform").format(
+					{ formatters = { formatter }, async = true, lsp_fallback = true, range = range },
+					function()
+						vim.cmd(":write")
+					end
+				)
+			else
+				require("conform").format({ formatters = { formatter }, async = true, lsp_fallback = true }, function()
+					vim.cmd(":write")
+				end)
+			end
+		end
+
+		-- wholeFile formatter
+		vim.api.nvim_create_user_command("FixWithLinter", function()
+			local filetype = vim.bo.filetype
+
+			-- stylelint.
+			if tables_utils.has_value(stylelintFileType, filetype) then
+				customFormat("stylelint", nil)
+			end
+
+			-- eslint.
+			if tables_utils.has_value(eslintFileType, filetype) then
+				customFormat("eslint_d", nil)
+			end
+		end, {
+			nargs = 0,
+		})
+
+		-- range formatter
+		vim.api.nvim_create_user_command("FixWithLinterRange", function(args)
 			local filetype = vim.bo.filetype
 
 			-- get range.
@@ -58,25 +92,14 @@ return {
 
 			-- stylelint.
 			if tables_utils.has_value(stylelintFileType, filetype) then
-				require("conform").format(
-					{ formatters = { "stylelint" }, async = true, lsp_fallback = true, range = range },
-					function()
-						vim.cmd(":write")
-					end
-				)
+				customFormat("stylelint", range)
 			end
 
 			-- eslint.
 			if tables_utils.has_value(eslintFileType, filetype) then
-				require("conform").format(
-					{ formatters = { "eslint_d" }, async = true, lsp_fallback = true, range = range },
-					function()
-						vim.cmd(":write")
-					end
-				)
+				customFormat("eslint_d", range)
 			end
 		end, {
-			-- nargs = 0,
 			range = true,
 		})
 	end,
