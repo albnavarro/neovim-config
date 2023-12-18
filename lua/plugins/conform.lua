@@ -22,6 +22,12 @@ return {
 				["_"] = { "trim_whitespace" },
 			},
 			format_on_save = {},
+			formatters = {
+				stylelint = {
+					-- Change where to find the command
+					command = "./node_modules/.bin/stylelint",
+				},
+			},
 		})
 
 		-- Toggle codeSpell.

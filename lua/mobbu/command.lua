@@ -30,3 +30,9 @@ vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
 	-- Replace only occurrence in quickFix. ( no % used )
 	return vim.cmd(":cdo s/" .. user_input_from .. "/" .. user_input_to .. "/c | up")
 end, {})
+
+-- npx stylelint
+vim.api.nvim_create_user_command("NpxStyleLint", ":%!npx stylelint --fix --stdin --stdin-filename %<CR><CR>", {})
+
+-- npx eslint
+vim.api.nvim_create_user_command("NpxEslintLint", ":!npx eslint --fix %", {})
