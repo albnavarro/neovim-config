@@ -45,7 +45,7 @@ return {
 		end, {})
 
 		-- Fix eslint/stylelint.
-		local stylelintFileType = { "scss", "css", "sass" }
+		-- local stylelintFileType = { "scss", "css", "sass" }
 		local eslintFileType = { "javascript", "typescript" }
 		local tables_utils = require("utils/tables_utils")
 
@@ -70,9 +70,9 @@ return {
 			local filetype = vim.bo.filetype
 
 			-- stylelint.
-			if tables_utils.has_value(stylelintFileType, filetype) then
-				customFormat("stylelint", nil)
-			end
+			-- if tables_utils.has_value(stylelintFileType, filetype) then
+			-- 	customFormat("stylelint", nil)
+			-- end
 
 			-- eslint.
 			if tables_utils.has_value(eslintFileType, filetype) then
@@ -97,9 +97,9 @@ return {
 			end
 
 			-- stylelint.
-			if tables_utils.has_value(stylelintFileType, filetype) then
-				customFormat("stylelint", range)
-			end
+			-- if tables_utils.has_value(stylelintFileType, filetype) then
+			-- 	customFormat("stylelint", range)
+			-- end
 
 			-- eslint.
 			if tables_utils.has_value(eslintFileType, filetype) then
