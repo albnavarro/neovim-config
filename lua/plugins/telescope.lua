@@ -16,7 +16,20 @@ return {
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-		vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
+
+		-- Search for word.
+		-- vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
+		vim.keymap.set("n", "<leader>fs", function()
+			local word = vim.fn.expand("<cword>")
+			builtin.grep_string({ search = word })
+		end)
+
+		-- Search for blank-separeted word.
+		vim.keymap.set("n", "<leader>fS", function()
+			local word = vim.fn.expand("<cWORD>")
+			builtin.grep_string({ search = word })
+		end)
+
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
