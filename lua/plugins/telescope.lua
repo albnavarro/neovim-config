@@ -11,23 +11,25 @@ return {
 	},
 	keys = { "<leader>f", "<leader>o" },
 	config = function()
+		local utils = require("utils/get_selection")
 		local builtin = require("telescope.builtin")
 		local actions = require("telescope.actions")
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
 
-		-- Search for word.
-		-- vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
-		vim.keymap.set("n", "<leader>fs", function()
-			local word = vim.fn.expand("<cword>")
-			builtin.grep_string({ search = word })
-		end)
+		-- Search for exact word in normal mode
+		vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
 
-		-- Search for blank-separeted word.
-		vim.keymap.set("n", "<leader>fS", function()
-			local word = vim.fn.expand("<cWORD>")
-			builtin.grep_string({ search = word })
+		-- Search for exact word in visual mode
+		vim.keymap.set("v", "<leader>fs", function()
+			require("telescope.builtin").live_grep({
+				default_text = utils.getVisualSelection(),
+				only_sort_text = true,
+				additional_args = function()
+					return { "--pcre2" }
+				end,
+			})
 		end)
 
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
