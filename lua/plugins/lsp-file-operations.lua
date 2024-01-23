@@ -7,6 +7,15 @@ return {
 		"nvim-tree/nvim-tree.lua",
 	},
 	config = function()
-		require("lsp-file-operations").setup()
+		require("lsp-file-operations").setup({
+			operations = {
+				willRenameFiles = true,
+				didRenameFiles = true,
+				willCreateFiles = false,
+				didCreateFiles = false,
+				willDeleteFiles = false,
+				didDeleteFiles = false,
+			},
+		})
 	end,
 }
