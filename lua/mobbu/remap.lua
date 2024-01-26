@@ -80,6 +80,12 @@ map("n", "~", [[?\c<Left><Left>]], { silent = false })
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
 
+-- Repeat last operation to selected line
+map("x", ".", ":norm .<CR>", { noremap = true, silent = true })
+
+-- Execute macro to selected line ( macro on register q )
+map("x", "@", ":norm @q<CR>", { noremap = true, silent = true })
+
 -- Jump to the previous buffer
 map("n", "<C-b>", "<C-^>")
 
@@ -123,5 +129,5 @@ map("v", "<leader>=", ":FixWithLinterRange<CR>", { noremap = true, silent = true
 map("t", "<Esc>", [[ <C-\><C-n> ]], {})
 
 -- Fuck TNF
-map("n", "!", "0f;i!important<C-ESC>g_")
-map("v", "!", ":s/;/!important;/g<CR>")
+-- map("n", "!", "0f;i!important<C-ESC>g_")
+-- map("v", "!", ":s/;/!important;/g<CR>")
