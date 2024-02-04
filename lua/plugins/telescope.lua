@@ -36,6 +36,7 @@ return {
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
+		vim.keymap.set("n", "<leader>fm", builtin.marks, {})
 		vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {})
 		vim.keymap.set("n", "<leader>fl", builtin.resume, {})
 		vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
@@ -115,6 +116,11 @@ return {
 					color_devicons = false,
 				},
 				resume = {
+					theme = "ivy",
+					disable_devicons = true,
+					color_devicons = false,
+				},
+				marks = {
 					theme = "ivy",
 					disable_devicons = true,
 					color_devicons = false,
