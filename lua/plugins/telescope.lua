@@ -11,48 +11,25 @@ return {
 	},
 	keys = { "<leader>f", "<leader>o" },
 	config = function()
-		local utils = require("utils/get_selection")
 		local builtin = require("telescope.builtin")
 		local actions = require("telescope.actions")
+		local custom = require("utils/telescope_custom")
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 		vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-
-		-- Search for exact word in normal mode
-		vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
-
-		-- Search for exact word in visual mode
-		vim.keymap.set("v", "<leader>fs", function()
-			require("telescope.builtin").live_grep({
-				default_text = utils.getVisualSelection(),
-				only_sort_text = true,
-				additional_args = function()
-					return { "--pcre2" }
-				end,
-			})
-		end)
-
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
 		vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
-		vim.keymap.set("n", "<leader>fm", builtin.marks, {})
 		vim.keymap.set("n", "<leader>fc", builtin.current_buffer_fuzzy_find, {})
 		vim.keymap.set("n", "<leader>fl", builtin.resume, {})
 		vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
-
-		-- Live grep inside folder. ( copy path from nvim-tree "Y" )
-		-- vim.keymap.set("n", "<leader>fd", ":Telescope live_grep search_dirs=", { silent = false })
-
-		-- Live grep inside folder.
-		-- Open a file in specific folder and automplete dir without filename.
+		vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
+		vim.keymap.set("v", "<leader>fs", custom.exact_search_visual, {})
+		vim.keymap.set("n", "<leader>fm", custom.live_grep_in_glob, {})
 		vim.api.nvim_set_keymap("n", "<leader>fd", "", {
 			expr = true,
-			callback = function()
-				local fullPath = vim.api.nvim_buf_get_name(0)
-				local fullPathLessName = fullPath:match("(.+)%/.+$")
-				return ":Telescope live_grep search_dirs=" .. fullPathLessName
-			end,
+			callback = custom.find_in_specific_folder,
 		})
 
 		require("telescope").setup({
@@ -116,11 +93,6 @@ return {
 					color_devicons = false,
 				},
 				resume = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				marks = {
 					theme = "ivy",
 					disable_devicons = true,
 					color_devicons = false,
