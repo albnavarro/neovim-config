@@ -27,8 +27,8 @@ return {
 		vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
 		vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
 		vim.keymap.set("v", "<leader>fs", custom.exact_search_visual, {})
-		vim.keymap.set("n", "<leader>fm", custom.live_grep_in_glob, {})
-		vim.keymap.set("n", "<leader>fM", multi_rg, {})
+		-- vim.keymap.set("n", "<leader>fm", custom.live_grep_in_glob, {})
+		vim.keymap.set("n", "<leader>fm", multi_rg, {})
 		vim.api.nvim_set_keymap("n", "<leader>fd", "", {
 			expr = true,
 			callback = custom.find_in_specific_folder,

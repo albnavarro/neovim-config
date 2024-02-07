@@ -5,6 +5,7 @@ local conf = require("telescope.config").values
 local finders = require("telescope.finders")
 local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
+local ivy = require("telescope.themes").get_ivy()
 
 local flatten = vim.tbl_flatten
 
@@ -62,7 +63,8 @@ return function(opts)
 	})
 
 	pickers
-		.new(opts, {
+		-- .new(opts, {
+		.new(ivy, {
 			debounce = 100,
 			prompt_title = "Live Grep (with shortcuts)",
 			finder = custom_grep,
