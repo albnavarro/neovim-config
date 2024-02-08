@@ -23,6 +23,8 @@ return function(opts)
 			["scss"] = "*.scss",
 			["html"] = "*.html",
 			["json"] = "*.json",
+			["pug"] = "*.pug",
+			["twig"] = "*.twig",
 		}
 	opts.pattern = opts.pattern or "%s"
 
