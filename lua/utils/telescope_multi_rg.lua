@@ -1,6 +1,8 @@
 -- Live grep in glob.
 -- https://www.reddit.com/r/neovim/comments/tpnt3c/how_can_i_customize_telescope_to_only_grep_for_1/
 
+local M = {}
+
 local conf = require("telescope.config").values
 local finders = require("telescope.finders")
 local make_entry = require("telescope.make_entry")
@@ -10,7 +12,7 @@ local ivy = require("telescope.themes").get_ivy()
 local flatten = vim.tbl_flatten
 
 -- Smart case default value.
-local caseSearch = "--smart-case"
+local caseSearch = "--fixed-strings"
 
 -- Enable smart case.
 vim.api.nvim_create_user_command("RgSmartCaseOn", function()
@@ -22,10 +24,27 @@ vim.api.nvim_create_user_command("RgSmartCaseOff", function()
 	caseSearch = "--fixed-strings"
 end, {})
 
+-- Replace occurrence in quickFix.
+-- Make a search without smart-case use exact match to void erro with no world match --
+-- cdo %s/absd/dsba/gc | up
+local lastSearch = ""
+vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
+	if caseSearch == "--smart-case" then
+		vim.notify("last grep is in smart-case, run RgSmartCaseOff!")
+		return
+	end
+
+	local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = lastSearch })
+	local user_input_to = vim.fn.input("Replace with: ")
+
+	-- Replace only occurrence in quickFix. ( no % used )
+	return vim.cmd(":cdo s/" .. user_input_from .. "/" .. user_input_to .. "/gc | up")
+end, {})
+
 -- i would like to be able to do telescope
 -- and have telescope do some filtering on files and some grepping
 
-return function(opts)
+function M.multi_rg(opts)
 	opts = opts or {}
 	opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
 	opts.shortcuts = opts.shortcuts
@@ -53,6 +72,7 @@ return function(opts)
 			if prompt_split[1] then
 				table.insert(args, "-e")
 				table.insert(args, prompt_split[1])
+				lastSearch = prompt_split[1]
 			end
 
 			if prompt_split[2] then
@@ -88,3 +108,5 @@ return function(opts)
 		})
 		:find()
 end
+
+return M

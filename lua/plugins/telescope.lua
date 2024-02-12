@@ -14,11 +14,11 @@ return {
 		local builtin = require("telescope.builtin")
 		local actions = require("telescope.actions")
 		local custom = require("utils/telescope_custom")
-		local multi_rg = require("utils/telescope_multi_rg")
+		local custom_rg = require("utils/telescope_multi_rg")
 
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
 		-- vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-		vim.keymap.set("n", "<leader>fg", multi_rg, {})
+		vim.keymap.set("n", "<leader>fg", custom_rg.multi_rg, {})
 		vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
 		vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
 		vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
