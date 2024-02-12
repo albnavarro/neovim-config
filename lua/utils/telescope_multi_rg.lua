@@ -9,6 +9,19 @@ local ivy = require("telescope.themes").get_ivy()
 
 local flatten = vim.tbl_flatten
 
+-- Smart case default value.
+local caseSearch = "--smart-case"
+
+-- Enable smart case.
+vim.api.nvim_create_user_command("RgSmartCaseOn", function()
+	caseSearch = "--smart-case"
+end, {})
+
+-- Disable smart case.
+vim.api.nvim_create_user_command("RgSmartCaseOff", function()
+	caseSearch = "--fixed-strings"
+end, {})
+
 -- i would like to be able to do telescope
 -- and have telescope do some filtering on files and some grepping
 
@@ -57,7 +70,7 @@ return function(opts)
 
 			return flatten({
 				args,
-				{ "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", "--smart-case" },
+				{ "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", caseSearch },
 			})
 		end,
 		entry_maker = make_entry.gen_from_vimgrep(opts),
