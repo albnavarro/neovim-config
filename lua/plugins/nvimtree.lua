@@ -131,7 +131,7 @@ return {
 				-- adaptive_size = true,
 			},
 			renderer = {
-				group_empty = true,
+				group_empty = false,
 				special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md", "package.json" },
 				icons = {
 					show = {
