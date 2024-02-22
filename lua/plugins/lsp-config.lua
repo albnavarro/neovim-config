@@ -115,6 +115,7 @@ return {
 				-- "eslint",
 				"stylelint_lsp",
 				"jsonls",
+				"twiggy_language_server",
 			},
 		})
 
@@ -150,6 +151,12 @@ return {
 
 		-- svelte
 		lsp_config.svelte.setup({
+			capabilities = capabilities,
+			on_attach = on_attach,
+		})
+
+		-- twig
+		lsp_config.twiggy_language_server.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
 		})
