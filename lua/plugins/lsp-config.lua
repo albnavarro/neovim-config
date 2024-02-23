@@ -115,7 +115,7 @@ return {
 				-- "eslint",
 				"stylelint_lsp",
 				"jsonls",
-				"twiggy_language_server",
+				-- "twiggy_language_server",
 			},
 		})
 
@@ -156,10 +156,10 @@ return {
 		})
 
 		-- twig
-		lsp_config.twiggy_language_server.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		-- lsp_config.twiggy_language_server.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- })
 
 		-- eslint
 		-- lsp_config.eslint.setup({
