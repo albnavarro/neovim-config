@@ -6,14 +6,16 @@ return {
 			["javascript"] = { "eslint_d", "codespell" },
 			["typescript"] = { "eslint_d", "codespell" },
 			["html"] = { "codespell" },
-			-- ["scss"] = { "codespell", "stylelint" },
-			["scss"] = { "codespell" },
+			["scss"] = { "codespell", "stylelint" },
 			["json"] = { "codespell" },
 			["jsonc"] = { "codespell" },
 			["svelte"] = { "codespell" },
 			["text"] = { "codespell" },
 			["markdown"] = { "codespell" },
 		}
+
+		local stylelint = require("lint").linters.stylelint
+		stylelint.stream = "both"
 
 		vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
 			callback = function()

@@ -113,7 +113,7 @@ return {
 				"lua_ls",
 				"svelte",
 				-- "eslint",
-				"stylelint_lsp",
+				-- "stylelint_lsp",
 				"jsonls",
 				-- "twiggy_language_server",
 			},
@@ -172,17 +172,17 @@ return {
 		-- })
 
 		-- stylelint
-		lsp_config.stylelint_lsp.setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			filetypes = { "scss", "css" },
-			settings = {
-				stylelintplus = {
-					autoFixOnFormat = true,
-					-- autoFixOnSave = true,
-				},
-			},
-		})
+		-- lsp_config.stylelint_lsp.setup({
+		-- 	capabilities = capabilities,
+		-- 	on_attach = on_attach,
+		-- 	filetypes = { "scss", "css" },
+		-- 	settings = {
+		-- 		stylelintplus = {
+		-- 			autoFixOnFormat = true,
+		-- 			-- autoFixOnSave = true,
+		-- 		},
+		-- 	},
+		-- })
 
 		-- Emmet
 		lsp_config.emmet_language_server.setup({
