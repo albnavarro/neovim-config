@@ -188,7 +188,7 @@ return {
 		lsp_config.emmet_language_server.setup({
 			capabilities = capabilities,
 			on_attach = on_attach,
-			filetypes = { "html", "php", "twig", "scss" },
+			filetypes = { "html", "php", "twig", "scss", "javascript" },
 		})
 
 		-- Lua Remove undefined global vim warning.
