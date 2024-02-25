@@ -90,13 +90,13 @@ map("x", "@", ":norm @q<CR>", { noremap = true, silent = true })
 map("n", "<C-b>", "<C-^>")
 
 -- :q
-map("n", "<Leader>qa", ":q<CR>")
+map("n", "<Leader>q", ":q<CR>")
+--
+-- :qa
+map("n", "<Leader>Q", ":qa!<CR>")
 
 -- :w
 map("n", "<Leader>w", ":w<CR>")
-
--- :qa
-map("n", "<Leader>Qa", ":qa!<CR>")
 
 -- Center horizontally
 map("n", "<Leader>z", "zszH")
