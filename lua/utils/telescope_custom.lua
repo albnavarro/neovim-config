@@ -37,7 +37,8 @@ end
 
 -- Find in specific folder.
 function M.find_in_specific_folder()
-	local fullPath = vim.api.nvim_buf_get_name(0)
+	-- local fullPath = vim.api.nvim_buf_get_name(0)
+	local fullPath = vim.fn.expand("%:.")
 	local fullPathLessName = fullPath:match("(.+)%/.+$")
 	return ":Telescope live_grep search_dirs=" .. fullPathLessName
 end
