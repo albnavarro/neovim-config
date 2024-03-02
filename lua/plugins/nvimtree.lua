@@ -128,7 +128,8 @@ return {
 			},
 			sort_by = "case_sensitive",
 			view = {
-				-- adaptive_size = true,
+				-- float = { enable = true, open_win_config = { height = 40 } },
+				adaptive_size = true,
 			},
 			renderer = {
 				group_empty = false,
