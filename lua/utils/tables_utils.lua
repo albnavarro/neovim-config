@@ -1,6 +1,6 @@
 local M = {} -- initialize an empty table (or object in JS terms)
 
--- Check if value is in table ( like javascript includes )
+-- includes js equivalent
 function M.has_value(tab, val)
 	for _, value in ipairs(tab) do
 		if value == val then
@@ -9,6 +9,15 @@ function M.has_value(tab, val)
 	end
 
 	return false
+end
+
+-- map js equivalent
+function M.map(tbl, f)
+	local t = {}
+	for k, v in pairs(tbl) do
+		t[k] = f(v)
+	end
+	return t
 end
 
 return M -- This line exports the table

@@ -15,6 +15,7 @@ return {
 		local actions = require("telescope.actions")
 		local custom = require("utils/telescope_custom")
 		local custom_rg = require("utils/telescope_multi_rg")
+		local tables_utils = require("utils/tables_utils")
 
 		vim.keymap.set("n", "<leader>fa", builtin.builtin, {})
 		vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
@@ -35,6 +36,16 @@ return {
 			callback = custom.find_in_specific_folder,
 		})
 
+		-- Default pickers setting
+		local pickersSettings = tables_utils.map(builtin, function()
+			return {
+				theme = "ivy",
+				disable_devicons = true,
+				color_devicons = false,
+			}
+		end)
+
+		-- setup
 		require("telescope").setup({
 			defaults = {
 				mappings = {
@@ -49,63 +60,7 @@ return {
 					},
 				},
 			},
-			pickers = {
-				builtin = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				find_files = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				oldfiles = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				live_grep = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				grep_string = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				help_tags = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				lsp_references = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				diagnostic = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				buffers = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				current_buffer_fuzzy_find = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-				resume = {
-					theme = "ivy",
-					disable_devicons = true,
-					color_devicons = false,
-				},
-			},
+			pickers = pickersSettings,
 			extensions = {
 				fzf = {},
 				["ui-select"] = {
