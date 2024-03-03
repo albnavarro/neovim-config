@@ -1,5 +1,5 @@
 require("mobbu.lazy")
 require("mobbu.set")
-require("mobbu.remap")
+require("mobbu.keymap")
 require("mobbu.command")
 require("mobbu.linterError")

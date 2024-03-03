@@ -12,6 +12,13 @@ map("v", "<up>", ":m '<-2<CR>gv=gv")
 map("n", "<down>", ":m .+1<CR>==")
 map("n", "<up>", ":m .-2<CR>==")
 
+-- Indent while remaining in visual mode.
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
+-- Clear search with <esc>.
+map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+
 -- Go to start of line and jump by 5 lines up/down and add to jumplist.
 -- ( add m' to insert in jumplit if needed es: 05jm' )
 map("n", "<C-J>", "05j")
@@ -62,11 +69,12 @@ map("v", "<leader>v", [["+p]])
 map("n", "<leader>*", [[:let @/="<C-r><C-w>"<CR>]], { silent = false })
 map("v", "<leader>r", ":s///g<left><left>", { silent = false })
 
--------------
+-- Make U opposite to u.
+map("n", "U", "<C-r>", { desc = "Redo" })
 
 -- Replace current word under cursor, use n to go next occurrence and . to replace.
 map("n", "<leader>s", "*``cgn")
---
+
 -- Replace current selection under cursor, use n to go next occurrence and . to replace.
 map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 
@@ -79,9 +87,6 @@ map("n", "~", [[?\c<Left><Left>]], { silent = false })
 
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
-
--- Repeat last operation to selected line
-map("x", ".", ":norm .<CR>", { noremap = true, silent = true })
 
 -- Execute macro to selected line ( macro on register q )
 map("x", "@", ":norm @q<CR>", { noremap = true, silent = true })
@@ -116,18 +121,5 @@ map("n", "<leader>r", ":e!<CR>")
 map("n", "<leader>=", ":FixWithLinter<CR>", { noremap = true, silent = true })
 map("v", "<leader>=", ":FixWithLinterRange<CR>", { noremap = true, silent = true })
 
--- Run stylelijnt --fix
--- map("n", "<leader>=s", ":%!stylelint --fix --stdin --stdin-filename %<CR><CR>", { noremap = true, silent = true })
-
--- Run prettier
--- map("n", "<leader>=p", ":%!npx prettier --stdin-filepath %<CR>", { noremap = true, silent = true })
-
--- Run eslint --fix
--- map("n", "<leader>=e", ":%!eslint_d --stdin --fix-to-stdout %<CR>", { noremap = true, silent = true })
-
 -- Terminal
 map("t", "<Esc>", [[ <C-\><C-n> ]], {})
-
--- Fuck TNF
--- map("n", "!", "0f;i!important<C-ESC>g_")
--- map("v", "!", ":s/;/!important;/g<CR>")
