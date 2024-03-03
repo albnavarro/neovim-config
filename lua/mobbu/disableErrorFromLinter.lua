@@ -1,25 +1,27 @@
-local ESLINT = "eslint_d"
+local ESLINT = "eslint"
+local ESLINT_D = "eslint_d"
 local STYLELINT = "stylelint"
 
-local function disableEslintLine(error)
-	return "// eslint-disable-next-line " .. error
+local linters = {
+	[ESLINT] = {
+		pre = "// eslint-disable-next-line",
+		after = "",
+	},
+	[ESLINT_D] = {
+		pre = "// eslint-disable-next-line",
+		after = "",
+	},
+	[STYLELINT] = {
+		pre = "/* stylelint-disable-next-line ",
+		after = " */",
+	},
+}
+
+local function formatErrorByLinter(source, code, spaces)
+	return spaces .. linters[source].pre .. " " .. code .. linters[source].after
 end
 
-local function disableStylelint(error)
-	return "/* stylelint-disable-next-line " .. error .. " */"
-end
-
-local function redirectByLinter(source, code, spaces)
-	if source == ESLINT then
-		return spaces .. disableEslintLine(code)
-	end
-
-	if source == STYLELINT then
-		return spaces .. disableStylelint(code)
-	end
-end
-
-vim.api.nvim_create_user_command("DisableError", function()
+vim.api.nvim_create_user_command("DisableLinterLineError", function()
 	local lineNum = vim.api.nvim_win_get_cursor(0)[1]
 	local colStart = vim.fn.getline("."):find("%S")
 	local diagnostic = vim.diagnostic.get(0, { lnum = lineNum - 1 })
@@ -28,6 +30,11 @@ vim.api.nvim_create_user_command("DisableError", function()
 	local size = 0
 	for _ in pairs(diagnostic) do
 		size = size + 1
+	end
+
+	-- if no error skip
+	if size == 0 then
+		return
 	end
 
 	-- TODO use better way to col start instead spaces
@@ -39,7 +46,7 @@ vim.api.nvim_create_user_command("DisableError", function()
 	local index = 0
 
 	for _, item in ipairs(diagnostic) do
-		if item.source == ESLINT or item.source == STYLELINT then
+		if item.source == ESLINT_D or item.source == STYLELINT then
 			-- Check if there is multiple error
 			-- In case separate every error with a comma
 			local comma = index == 0 and "" or ","
@@ -56,5 +63,5 @@ vim.api.nvim_create_user_command("DisableError", function()
 		end
 	end
 
-	vim.api.nvim_buf_set_lines(0, lineNum - 1, lineNum - 1, false, { redirectByLinter(source, errorResult, spaces) })
+	vim.api.nvim_buf_set_lines(0, lineNum - 1, lineNum - 1, false, { formatErrorByLinter(source, errorResult, spaces) })
 end, {})
