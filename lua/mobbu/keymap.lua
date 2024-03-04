@@ -16,9 +16,6 @@ map("n", "<up>", ":m .-2<CR>==")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
--- Clear search with <esc>.
-map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-
 -- Go to start of line and jump by 5 lines up/down and add to jumplist.
 -- ( add m' to insert in jumplit if needed es: 05jm' )
 map("n", "<C-J>", "05j")

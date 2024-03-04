@@ -57,6 +57,7 @@ function M.multi_rg(opts)
 			["json"] = "*.json",
 			["pug"] = "*.pug",
 			["twig"] = "*.twig",
+			["dir"] = vim.fn.expand("%:."),
 		}
 	opts.pattern = opts.pattern or "%s"
 
