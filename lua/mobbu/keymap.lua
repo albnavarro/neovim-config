@@ -66,9 +66,6 @@ map("v", "<leader>v", [["+p]])
 map("n", "<leader>*", [[:let @/="<C-r><C-w>"<CR>]], { silent = false })
 map("v", "<leader>r", ":s///g<left><left>", { silent = false })
 
--- Make U opposite to u.
-map("n", "U", "<C-r>", { desc = "Redo" })
-
 -- Replace current word under cursor, use n to go next occurrence and . to replace.
 map("n", "<leader>s", "*``cgn")
 

@@ -14,6 +14,9 @@
 
 ## old keymap
 ```
+-- Make U opposite to u.
+map("n", "U", "<C-r>", { desc = "Redo" })
+
 -- Clear search with <esc>.
 map("n", "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
 
