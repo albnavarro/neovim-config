@@ -27,9 +27,10 @@ map("v", "<C-k>", "05k")
 map("n", "<C-l>", "20l")
 map("n", "<C-h>", "20h")
 
--- Move to nex/previous viewport
--- <C-i> use same code of <TAB> use <C-p> instead <C-i>
+-- <C-i> use same code of <TAB> use <C-p> instead <C-i> - Inverse of <C-i>
 map("n", "<C-p>", "<C-i>")
+
+-- Move to nex/previous viewport
 map("n", "<tab>", "<C-w>w")
 map("n", "<S-tab>", "<C-w><S-w>")
 
