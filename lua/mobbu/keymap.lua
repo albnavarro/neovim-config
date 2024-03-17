@@ -23,10 +23,6 @@ map("n", "<C-k>", "05k")
 map("v", "<C-J>", "05j")
 map("v", "<C-k>", "05k")
 
--- Move fast horizontally by 20 char
-map("n", "<C-l>", "20l")
-map("n", "<C-h>", "20h")
-
 -- <C-i> use same code of <TAB> use <C-p> instead <C-i> - Inverse of <C-i>
 map("n", "<C-p>", "<C-i>")
 

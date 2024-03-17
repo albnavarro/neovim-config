@@ -14,6 +14,10 @@
 
 ## old keymap
 ```
+-- Move fast horizontally by 20 char
+map("n", "<C-l>", "20l")
+map("n", "<C-h>", "20h")
+
 -- Make U opposite to u.
 map("n", "U", "<C-r>", { desc = "Redo" })
 
