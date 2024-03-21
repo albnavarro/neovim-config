@@ -125,34 +125,6 @@ return {
 						luasnip.jump(-1)
 					end
 				end, { "i", "s" }),
-
-				-- Old use for transition, will be removed.
-				["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-
-				-- when menu is visible, navigate to next item
-				-- when line is empty, insert a tab character
-				-- else, activate completion
-				["<Tab>"] = cmp.mapping(function(fallback)
-					local col = vim.fn.col(".") - 1
-
-					if cmp.visible() then
-						cmp.select_next_item(cmp_select_opts)
-					elseif col == 0 or vim.fn.getline("."):sub(col, col):match("%s") then
-						fallback()
-					else
-						cmp.complete()
-					end
-				end, { "i", "s" }),
-
-				-- when menu is visible, navigate to previous item on list
-				-- else, revert to default behavior
-				["<S-Tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item(cmp_select_opts)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
 			}),
 		}
 
