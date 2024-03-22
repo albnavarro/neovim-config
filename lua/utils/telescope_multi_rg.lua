@@ -1,6 +1,8 @@
 -- Live grep in glob.
 -- https://www.reddit.com/r/neovim/comments/tpnt3c/how_can_i_customize_telescope_to_only_grep_for_1/
 
+local uv = vim.uv or vim.loop
+
 local M = {}
 
 local conf = require("telescope.config").values
@@ -46,7 +48,7 @@ end, {})
 
 function M.multi_rg(opts)
 	opts = opts or {}
-	opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or vim.loop.cwd()
+	opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or uv.cwd()
 	opts.shortcuts = opts.shortcuts
 		or {
 			["js"] = "*.js",

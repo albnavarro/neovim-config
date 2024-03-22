@@ -1,6 +1,6 @@
 local M = {} -- initialize an empty table (or object in JS terms)
 
-local uv = vim.loop
+local uv = vim.uv or vim.loop
 
 local function get_node_modules(root_dir, target)
 	local root_node = root_dir .. target
