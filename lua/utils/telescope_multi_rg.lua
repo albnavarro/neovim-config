@@ -18,12 +18,12 @@ local caseSearch = "--fixed-strings"
 
 -- Enable smart case.
 vim.api.nvim_create_user_command("RgSmartCaseOn", function()
-	caseSearch = "--smart-case"
+    caseSearch = "--smart-case"
 end, {})
 
 -- Disable smart case.
 vim.api.nvim_create_user_command("RgSmartCaseOff", function()
-	caseSearch = "--fixed-strings"
+    caseSearch = "--fixed-strings"
 end, {})
 
 -- Replace occurrence in quickFix.
@@ -31,85 +31,85 @@ end, {})
 -- cdo %s/absd/dsba/gc | up
 local lastSearch = ""
 vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
-	if caseSearch == "--smart-case" then
-		vim.notify("last grep is in smart-case, run RgSmartCaseOff!")
-		return
-	end
+    if caseSearch == "--smart-case" then
+        vim.notify("last grep is in smart-case, run RgSmartCaseOff!")
+        return
+    end
 
-	local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = lastSearch })
-	local user_input_to = vim.fn.input("Replace with: ")
+    local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = lastSearch })
+    local user_input_to = vim.fn.input("Replace with: ")
 
-	-- Replace only occurrence in quickFix. ( no % used )
-	return vim.cmd(":cdo s/" .. user_input_from .. "/" .. user_input_to .. "/gc | up")
+    -- Replace only occurrence in quickFix. ( no % used )
+    return vim.cmd(":cdo s/" .. user_input_from .. "/" .. user_input_to .. "/gc | up")
 end, {})
 
 -- i would like to be able to do telescope
 -- and have telescope do some filtering on files and some grepping
 
 function M.multi_rg(opts)
-	opts = opts or {}
-	opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or uv.cwd()
-	opts.shortcuts = opts.shortcuts
-		or {
-			["js"] = "*.js",
-			["svelte"] = "*.svelte",
-			["css"] = "*.css",
-			["scss"] = "*.scss",
-			["html"] = "*.html",
-			["json"] = "*.json",
-			["pug"] = "*.pug",
-			["twig"] = "*.twig",
-			["dir"] = vim.fn.expand("%:."),
-		}
-	opts.pattern = opts.pattern or "%s"
+    opts = opts or {}
+    opts.cwd = opts.cwd and vim.fn.expand(opts.cwd) or uv.cwd()
+    opts.shortcuts = opts.shortcuts
+        or {
+            ["js"] = "*.js",
+            ["svelte"] = "*.svelte",
+            ["css"] = "*.css",
+            ["scss"] = "*.scss",
+            ["html"] = "*.html",
+            ["json"] = "*.json",
+            ["pug"] = "*.pug",
+            ["twig"] = "*.twig",
+            ["dir"] = vim.fn.expand("%:."),
+        }
+    opts.pattern = opts.pattern or "%s"
 
-	local custom_grep = finders.new_async_job({
-		command_generator = function(prompt)
-			if not prompt or prompt == "" then
-				return nil
-			end
+    local custom_grep = finders.new_async_job({
+        command_generator = function(prompt)
+            if not prompt or prompt == "" then
+                return nil
+            end
 
-			local prompt_split = vim.split(prompt, "  ")
+            local prompt_split = vim.split(prompt, "  ")
 
-			local args = { "rg" }
-			if prompt_split[1] then
-				table.insert(args, "-e")
-				table.insert(args, prompt_split[1])
-				lastSearch = prompt_split[1]
-			end
+            local args = { "rg" }
+            if prompt_split[1] then
+                table.insert(args, "-e")
+                table.insert(args, prompt_split[1])
+                lastSearch = prompt_split[1]
+            end
 
-			if prompt_split[2] then
-				table.insert(args, "-g")
+            if prompt_split[2] then
+                table.insert(args, "-g")
 
-				local pattern
-				if opts.shortcuts[prompt_split[2]] then
-					pattern = opts.shortcuts[prompt_split[2]]
-				else
-					pattern = prompt_split[2]
-				end
+                local pattern
+                if opts.shortcuts[prompt_split[2]] then
+                    pattern = opts.shortcuts[prompt_split[2]]
+                else
+                    pattern = prompt_split[2]
+                end
 
-				table.insert(args, string.format(opts.pattern, pattern))
-			end
+                table.insert(args, string.format(opts.pattern, pattern))
+            end
 
-			return flatten({
-				args,
-				{ "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", caseSearch },
-			})
-		end,
-		entry_maker = make_entry.gen_from_vimgrep(opts),
-		cwd = opts.cwd,
-	})
+            return flatten({
+                args,
+                { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", caseSearch },
+            })
+        end,
+        entry_maker = make_entry.gen_from_vimgrep(opts),
+        cwd = opts.cwd,
+    })
 
-	pickers
-		-- .new(opts, {
-		.new(ivy, {
-			debounce = 100,
-			prompt_title = "Live Grep (with shortcuts)",
-			finder = custom_grep,
-			previewer = conf.grep_previewer(opts),
-			sorter = require("telescope.sorters").empty(),
-		})
-		:find()
+    pickers
+        -- .new(opts, {
+        .new(ivy, {
+            debounce = 100,
+            prompt_title = "Live Grep (with shortcuts)",
+            finder = custom_grep,
+            previewer = conf.grep_previewer(opts),
+            sorter = require("telescope.sorters").empty(),
+        })
+        :find()
 end
 
 return M

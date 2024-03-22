@@ -26,6 +26,6 @@ G.netrw_banner = 0
 
 -- Allow to move to previous line with arrow.
 O.whichwrap:append({
-	["<"] = true,
-	[">"] = true,
+    ["<"] = true,
+    [">"] = true,
 })
