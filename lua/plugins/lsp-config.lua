@@ -11,7 +11,7 @@ return {
     event = "VeryLazy",
     config = function()
         ---
-        -- LSP Support
+        -- load dependencies
         ---
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
@@ -20,8 +20,9 @@ return {
         local map = vim.keymap
 
         ---
-        -- Serve configuration
+        -- Endsure install
         ---
+
         mason.setup({})
         mason_lspconfig.setup({
             ensure_installed = {
@@ -37,16 +38,28 @@ return {
             },
         })
 
-        ---
-        -- Inizializa servers
-        ---
-
+        --
+        -- cmp capabilities
+        --
         local capabilities = cmp_nvim_lsp.default_capabilities()
 
+        ---
+        -- Serve configuration
+        ---
+
+        -- tsserver
         lsp_config.tsserver.setup({ capabilities = capabilities })
+
+        -- html
         lsp_config.html.setup({ capabilities = capabilities })
+
+        -- cssls
         lsp_config.cssls.setup({ capabilities = capabilities })
+
+        -- jsonls
         lsp_config.jsonls.setup({ capabilities = capabilities })
+
+        -- svelte
         lsp_config.svelte.setup({
             capabilities = capabilities,
             on_attach = function(client)
@@ -60,6 +73,8 @@ return {
                 })
             end,
         })
+
+        -- esLint
         -- lsp_config.eslint.setup({
         --     capabilities = capabilities,
         --     -- on_attach = function(args)
@@ -70,6 +85,8 @@ return {
         --     -- 	})
         --     -- end,
         -- })
+
+        -- stylelint
         -- lsp_config.stylelint_lsp.setup({
         --     capabilities = capabilities,
         --     filetypes = { "scss", "css" },
@@ -81,17 +98,13 @@ return {
         --     },
         -- })
 
-        ---
         -- Extend emmet_ls to twig and javascript
-        ---
         lsp_config.emmet_language_server.setup({
             capabilities = capabilities,
             filetypes = { "html", "php", "twig", "scss", "javascript" },
         })
 
-        ---
         -- Remove undefined global vim warning.
-        ---
         lsp_config.lua_ls.setup({
             capabilities = capabilities,
             settings = {
@@ -104,9 +117,7 @@ return {
             },
         })
 
-        ---
         -- Global configuration
-        ---
         vim.diagnostic.config({
             severity_sort = true,
             virtual_text = false,
