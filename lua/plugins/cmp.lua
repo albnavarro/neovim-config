@@ -39,7 +39,7 @@ return {
         ---
         -- Autocompletion
         ---
-        local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
+        -- local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
         local cmp_config = {
             snippet = {
@@ -67,10 +67,12 @@ return {
                 { name = "luasnip", keyword_length = 2 },
             },
             window = {
+                ---@diagnostic disable-next-line: undefined-field
                 documentation = vim.tbl_deep_extend("force", cmp.config.window.bordered(), {
                     max_height = 15,
                     max_width = 60,
                 }),
+                ---@diagnostic disable-next-line: undefined-field
                 completion = cmp.config.window.bordered(),
             },
             formatting = {
