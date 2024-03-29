@@ -4,12 +4,9 @@ local G = vim.g
 O.guicursor = ""
 O.relativenumber = false
 O.number = true
-
--- use vim/sleuth
--- O.tabstop = 4
--- O.softtabstop = 4
--- O.shiftwidth = 4
-
+O.tabstop = 4
+O.softtabstop = 4
+O.shiftwidth = 4
 O.expandtab = true
 O.mouse:append("a")
 O.autoindent = true

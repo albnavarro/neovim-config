@@ -11,6 +11,17 @@ return {
                     keymaps = {
                         ["af"] = "@function.outer",
                         ["if"] = "@function.inner",
+                        ["ac"] = "@comment.outer",
+                    },
+                },
+                move = {
+                    enable = true,
+                    set_jumps = true, -- whether to set jumps in the jumplist
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer",
+                    },
+                    goto_next_end = {
+                        ["]f"] = "@function.outer",
                     },
                 },
             },
