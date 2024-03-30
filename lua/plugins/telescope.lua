@@ -9,7 +9,7 @@ return {
         { "nvim-telescope/telescope-ui-select.nvim" },
         "nvim-lua/plenary.nvim",
     },
-    keys = { "<leader>f", "<leader>o" },
+    -- keys = { "<leader>f", "<leader>o" },
     config = function()
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
@@ -57,6 +57,8 @@ return {
                     n = {
                         -- Open quicklis with multiple files
                         ["<C-o>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                        ["<C-n>"] = actions.move_selection_next,
+                        ["<C-p>"] = actions.move_selection_previous,
                     },
                 },
             },
