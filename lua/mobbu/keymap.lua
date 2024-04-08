@@ -72,12 +72,13 @@ map("v", "<leader>s", [[y<cmd>let @/=escape(@", '/')<cr>"_cgn]])
 -- replace curent accurrence and fo to next.
 map("n", "<C-n>", "n.")
 
--- more ergonomic serach ingnore case.
+-- more ergonomic serach ingnore case. ( HHKB )
 map("n", "`", [[/\c<Left><Left>]], { silent = false })
 map("n", "~", [[?\c<Left><Left>]], { silent = false })
 
--- Same remap for classic keyboard
+-- Same remap above for classic keyboard ( anne2 )
 map("n", "<BS>", [[/\c<Left><Left>]], { silent = false })
+map("n", "<leader><BS>", [[?\c<Left><Left>]], { silent = false })
 
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
