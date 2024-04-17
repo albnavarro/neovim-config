@@ -36,6 +36,11 @@ return {
             callback = custom.find_in_specific_folder,
         })
 
+        -- Shortcut for searching your Neovim configuration files
+        vim.keymap.set("n", "<leader>fn", function()
+            builtin.find_files({ cwd = vim.fn.stdpath("config") })
+        end, { desc = "[S]earch [N]eovim files" })
+
         -- Default pickers setting
         local pickersSettings = tables_utils.map(builtin, function()
             return {
