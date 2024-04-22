@@ -77,8 +77,8 @@ map("n", "`", [[/\c<Left><Left>]], { silent = false })
 map("n", "~", [[?\c<Left><Left>]], { silent = false })
 
 -- Same remap above for classic keyboard ( anne2 )
-map("n", "<BS>", [[/\c<Left><Left>]], { silent = false })
-map("n", "<leader><BS>", [[?\c<Left><Left>]], { silent = false })
+-- map("n", "<BS>", [[/\c<Left><Left>]], { silent = false })
+-- map("n", "<leader><BS>", [[?\c<Left><Left>]], { silent = false })
 
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
