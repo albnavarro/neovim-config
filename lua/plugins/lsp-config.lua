@@ -48,7 +48,21 @@ return {
         ---
 
         -- tsserver
-        lsp_config.tsserver.setup({ capabilities = capabilities })
+        lsp_config.tsserver.setup({
+            capabilities = capabilities,
+            init_options = {
+                preferences = {
+                    includeInlayParameterNameHints = "all",
+                    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                    includeInlayFunctionParameterTypeHints = true,
+                    includeInlayVariableTypeHints = true,
+                    includeInlayPropertyDeclarationTypeHints = true,
+                    includeInlayFunctionLikeReturnTypeHints = true,
+                    includeInlayEnumMemberValueHints = true,
+                    importModuleSpecifierPreference = "non-relative",
+                },
+            },
+        })
 
         -- html
         lsp_config.html.setup({ capabilities = capabilities })
@@ -146,6 +160,10 @@ return {
         command("LspWorkspaceRemove", function()
             vim.lsp.buf.remove_workspace_folder()
         end, { desc = "Remove folder from workspace" })
+
+        command("InlineHintToggle", function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        end, { desc = "Toggle inline Hint" })
 
         -- Diagnostics
         map.set("n", "gl", vim.diagnostic.open_float)

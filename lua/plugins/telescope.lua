@@ -44,7 +44,7 @@ return {
         -- Default pickers setting
         local pickersSettings = tables_utils.map(builtin, function()
             return {
-                theme = "ivy",
+                -- theme = "ivy",
                 disable_devicons = true,
                 color_devicons = false,
             }
