@@ -101,8 +101,8 @@ function M.multi_rg(opts)
     })
 
     pickers
-        .new(opts, {
-            -- .new(ivy, {
+        -- .new(opts, {
+        .new(ivy, {
             debounce = 100,
             prompt_title = "Live Grep (with shortcuts)",
             finder = custom_grep,

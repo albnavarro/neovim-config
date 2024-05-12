@@ -1,6 +1,6 @@
 return {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
+    -- branch = "0.1.x",
     dependencies = {
         {
             "nvim-telescope/telescope-fzf-native.nvim",
@@ -44,7 +44,7 @@ return {
         -- Default pickers setting
         local pickersSettings = tables_utils.map(builtin, function()
             return {
-                -- theme = "ivy",
+                theme = "ivy",
                 disable_devicons = true,
                 color_devicons = false,
             }
