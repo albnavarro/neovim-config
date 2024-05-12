@@ -22,6 +22,7 @@ return {
         -- vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
         vim.keymap.set("n", "<leader>fg", custom_rg.multi_rg, {})
         vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
+        vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, {})
         vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
         vim.keymap.set("n", "<leader>fe", builtin.diagnostics, {})
         vim.keymap.set("n", "<leader>fb", builtin.buffers, {})
@@ -31,7 +32,7 @@ return {
         vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
         vim.keymap.set("v", "<leader>fs", custom.exact_search_visual, {})
         -- vim.keymap.set("n", "<leader>fm", custom.live_grep_in_glob, {})
-        vim.api.nvim_set_keymap("n", "<leader>fd", "", {
+        vim.api.nvim_set_keymap("n", "<leader>fp", "", {
             expr = true,
             callback = custom.find_in_specific_folder,
         })
