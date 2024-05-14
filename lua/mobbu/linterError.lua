@@ -34,13 +34,15 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     local errorResult = ""
     local source = ""
 
+    -- print(vim.inspect(diagnostic))
+
     -- filter only error from eslint/eslint_d or stylelint
-    local diagnostiFiltered = tables_utils.filter(diagnostic, function(item)
-        -- Excat match ( eslint vs eslint_d )
-        return item.source:match("^" .. ESLINT .. "$")
-            or item.source:match("^" .. ESLINT_D .. "$")
-            or item.source:match("^" .. STYLELINT .. "$")
-    end)
+    local diagnostiFiltered = {}
+    for key, value in pairs(diagnostic) do
+        if value.source == ESLINT or value.source == ESLINT_D or value.source == STYLELINT then
+            table.insert(diagnostiFiltered, value)
+        end
+    end
 
     -- if no error skip
     if tables_utils.tableSize(diagnostiFiltered) == 0 then
@@ -48,6 +50,8 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     end
 
     for index, item in ipairs(diagnostiFiltered) do
+        -- print(vim.inspect(item))
+
         -- Check if there is multiple error
         -- In case separate every error with a comma
         local comma = index == 1 and "" or ","
