@@ -52,4 +52,20 @@ function M.tableSize(tbl)
     return size
 end
 
+---Reduces an array
+function M.reduce(list, fn, init)
+    local acc = init
+    local index = 0
+
+    for k, v in ipairs(list) do
+        if 1 == k and not init then
+            acc = v
+        else
+            acc = fn(acc, v, index)
+        end
+        index = index + 1
+    end
+    return acc
+end
+
 return M -- This line exports the table
