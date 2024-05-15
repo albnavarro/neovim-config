@@ -20,12 +20,23 @@ function M.map(tbl, f)
     return t
 end
 
--- filter js equivalent
+-- filter js equivalent in format key, value
 function M.filter(tbl, f)
     local t = {}
     for k, v in pairs(tbl) do
         if f(v) then
             t[k] = v
+        end
+    end
+    return t
+end
+--
+-- filter js equivalent in format only value
+function M.filterArray(tbl, f)
+    local t = {}
+    for _, v in pairs(tbl) do
+        if f(v) then
+            table.insert(t, v)
         end
     end
     return t

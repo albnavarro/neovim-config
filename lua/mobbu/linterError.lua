@@ -25,27 +25,34 @@ end
 vim.api.nvim_create_user_command("DisableLinterLineError", function()
     local lineNum = vim.api.nvim_win_get_cursor(0)[1]
     local colStart = vim.fn.getline("."):find("%S")
+
+    -- Empty line, exit
+    if colStart == nil then
+        print("empty line")
+        return
+    end
+
     local diagnostic = vim.diagnostic.get(0, { lnum = lineNum - 1 })
 
-    -- TODO use better way to col start instead spaces
+    -- add spaces to indent errorResult
     local spaces = string.rep(" ", colStart - 1)
 
     -- Inizialize local variable
     local errorResult = ""
     local source = ""
 
-    -- print(vim.inspect(diagnostic))
+    local diagnostiFiltered = tables_utils.filterArray(diagnostic, function(item)
+        -- Excat match ( eslint vs eslint_d )
+        return item.source:match("^" .. ESLINT .. "$")
+            or item.source:match("^" .. ESLINT_D .. "$")
+            or item.source:match("^" .. STYLELINT .. "$")
+    end)
 
-    -- filter only error from eslint/eslint_d or stylelint
-    local diagnostiFiltered = {}
-    for key, value in pairs(diagnostic) do
-        if value.source == ESLINT or value.source == ESLINT_D or value.source == STYLELINT then
-            table.insert(diagnostiFiltered, value)
-        end
-    end
+    -- print(vim.inspect(diagnostiFiltered))
 
     -- if no error skip
     if tables_utils.tableSize(diagnostiFiltered) == 0 then
+        print("no error found")
         return
     end
 
