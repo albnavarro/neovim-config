@@ -54,6 +54,9 @@ return {
         -- setup
         require("telescope").setup({
             defaults = {
+                path_display = {
+                    "filename_first",
+                },
                 mappings = {
                     i = {
                         -- Open quicklis with multiple files
