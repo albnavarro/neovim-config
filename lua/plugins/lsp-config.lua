@@ -166,9 +166,12 @@ return {
         end, { desc = "Toggle inline Hint" })
 
         -- Diagnostics
+        -- in 0.10 native keybind is <C-W>d
         map.set("n", "gl", vim.diagnostic.open_float)
-        map.set("n", "[d", vim.diagnostic.goto_prev)
-        map.set("n", "]d", vim.diagnostic.goto_next)
+
+        -- From 0.10 is in core
+        -- map.set("n", "[d", vim.diagnostic.goto_prev)
+        -- map.set("n", "]d", vim.diagnostic.goto_next)
 
         ---
         -- LSP attach
@@ -178,7 +181,9 @@ return {
             callback = function(ev)
                 -- LSP actions
                 local opts = { buffer = ev.buf }
-                map.set("n", "K", vim.lsp.buf.hover, opts)
+
+                -- From 0.10 is in core
+                -- map.set("n", "K", vim.lsp.buf.hover, opts)
                 map.set("n", "gd", vim.lsp.buf.definition, opts)
                 map.set("n", "gD", vim.lsp.buf.declaration, opts)
                 map.set("n", "gi", vim.lsp.buf.implementation, opts)

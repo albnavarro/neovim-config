@@ -83,8 +83,12 @@ map("n", "~", [[?\c<Left><Left>]], { silent = false })
 -- fast replace on whole file.
 map("n", "<leader>S", [[:%s/\<<C-r><C-w>\>//gI<Left><Left><Left>]], { silent = false })
 
--- Execute macro to selected line ( macro on register q )
-map("x", "@", ":norm @q<CR>", { noremap = true, silent = true })
+-- ( deprecaed ) Execute macro to selected line ( macro on register q )
+-- From 0.10 is in core:
+-- qq start
+-- q end
+-- @Q to execute
+-- map("x", "@", ":norm @q<CR>", { noremap = true, silent = true })
 
 -- Jump to the previous buffer
 map("n", "<C-b>", "<C-^>")
