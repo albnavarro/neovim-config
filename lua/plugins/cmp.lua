@@ -42,6 +42,12 @@ return {
         -- local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
         local cmp_config = {
+            -- disable preselct.
+            -- preselect = cmp.PreselectMode.None,
+            completion = {
+                -- highlight first selected item
+                completeopt = "menu,menuone,noinsert",
+            },
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -90,10 +96,14 @@ return {
                 end,
             },
             mapping = cmp.mapping.preset.insert({
-                -- Select the [n]ext item
-                ["<C-n>"] = cmp.mapping.select_next_item(),
-                -- Select the [p]revious item
-                ["<C-p>"] = cmp.mapping.select_prev_item(),
+                -- Select the [n]ext/[p]previous item
+                -- SelectBehavior.Select: select but not change text at cursor
+                -- SelectBehavior.Insert: select but not change text at cursor
+                ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+                ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+
+                -- go top of menu
+                ["<C-t>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert, count = 1000 }),
 
                 -- scroll the documentation window [b]ack / [f]orward
                 ["<C-b>"] = cmp.mapping.scroll_docs(-4),
