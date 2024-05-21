@@ -31,6 +31,7 @@ function M.multi_rg(opts)
         }
     opts.pattern = opts.pattern or "%s"
 
+    -- https://github.com/nvim-telescope/telescope.nvim/blob/master/lua/telescope/finders.lua#L168
     local custom_grep = finders.new_async_job({
         command_generator = function(prompt)
             if not prompt or prompt == "" then
