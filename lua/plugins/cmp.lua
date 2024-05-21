@@ -43,11 +43,11 @@ return {
 
         local cmp_config = {
             -- disable preselct.
-            -- preselect = cmp.PreselectMode.None,
-            completion = {
-                -- highlight first selected item
-                completeopt = "menu,menuone,noinsert",
-            },
+            preselect = cmp.PreselectMode.None,
+            -- completion = {
+            --     -- highlight first selected item
+            --     completeopt = "menu,menuone,noinsert",
+            -- },
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
