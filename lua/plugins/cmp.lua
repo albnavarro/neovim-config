@@ -102,12 +102,12 @@ return {
                 ["<C-n>"] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
                 ["<C-p>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
 
-                -- go top of menu
+                -- go [t]op
                 ["<C-t>"] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert, count = 1000 }),
 
-                -- scroll the documentation window [b]ack / [f]orward
-                ["<C-b>"] = cmp.mapping.scroll_docs(-4),
-                ["<C-f>"] = cmp.mapping.scroll_docs(4),
+                -- scroll the documentation window [u]p / [d]down
+                ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+                ["<C-d>"] = cmp.mapping.scroll_docs(4),
 
                 -- Accept ([y]es) the completion.
                 --  This will auto-import if your LSP supports it.
