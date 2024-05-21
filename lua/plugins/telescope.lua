@@ -13,14 +13,14 @@ return {
     config = function()
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
-        local custom = require("utils/telescope_custom")
-        local custom_rg = require("utils/telescope_multi_rg")
+        local ivy = require("telescope.themes").get_ivy()
+        local custom = require("utils/telescope_utils")
+        local custom_rg = require("custom/telescope_multi_rg")
         local tables_utils = require("utils/tables_utils")
 
         vim.keymap.set("n", "<leader>fa", builtin.builtin, {})
         vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
         -- vim.keymap.set("n", "<leader>fg", builtin.live_grep, {})
-        vim.keymap.set("n", "<leader>fg", custom_rg.multi_rg, {})
         vim.keymap.set("n", "<leader>fh", builtin.help_tags, {})
         vim.keymap.set("n", "<leader>fd", builtin.lsp_definitions, {})
         vim.keymap.set("n", "<leader>fr", builtin.lsp_references, {})
@@ -40,7 +40,12 @@ return {
         -- Shortcut for searching your Neovim configuration files
         vim.keymap.set("n", "<leader>fn", function()
             builtin.find_files({ cwd = vim.fn.stdpath("config") })
-        end, { desc = "[S]earch [N]eovim files" })
+        end, { desc = "[F]earch [N]eovim files" })
+
+        -- Custom live grep with shortcut
+        vim.keymap.set("n", "<leader>fg", function()
+            custom_rg.multi_rg(ivy)
+        end, { desc = "[F]ind [N]eovim grep" })
 
         -- Default pickers setting
         local pickersSettings = tables_utils.map(builtin, function()

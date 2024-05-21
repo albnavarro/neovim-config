@@ -9,39 +9,7 @@ local conf = require("telescope.config").values
 local finders = require("telescope.finders")
 local make_entry = require("telescope.make_entry")
 local pickers = require("telescope.pickers")
-local ivy = require("telescope.themes").get_ivy()
-
-local flatten = vim.tbl_flatten
-
--- Smart case default value.
-local caseSearch = "--fixed-strings"
-
--- Enable smart case.
-vim.api.nvim_create_user_command("RgSmartCaseOn", function()
-    caseSearch = "--smart-case"
-end, {})
-
--- Disable smart case.
-vim.api.nvim_create_user_command("RgSmartCaseOff", function()
-    caseSearch = "--fixed-strings"
-end, {})
-
--- Replace occurrence in quickFix.
--- Make a search without smart-case use exact match to void erro with no world match --
--- cdo %s/absd/dsba/gc | up
-local lastSearch = ""
-vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
-    if caseSearch == "--smart-case" then
-        vim.notify("last grep is in smart-case, run RgSmartCaseOff!")
-        return
-    end
-
-    local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = lastSearch })
-    local user_input_to = vim.fn.input("Replace with: ")
-
-    -- Replace only occurrence in quickFix. ( no % used )
-    return vim.cmd(":cdo s/" .. user_input_from .. "/" .. user_input_to .. "/gc | up")
-end, {})
+local replace = require("custom.replace_in_quickfix")
 
 -- i would like to be able to do telescope
 -- and have telescope do some filtering on files and some grepping
@@ -75,7 +43,7 @@ function M.multi_rg(opts)
             if prompt_split[1] then
                 table.insert(args, "-e")
                 table.insert(args, prompt_split[1])
-                lastSearch = prompt_split[1]
+                replace.updateLastSearch(prompt_split[1])
             end
 
             if prompt_split[2] then
@@ -91,18 +59,27 @@ function M.multi_rg(opts)
                 table.insert(args, string.format(opts.pattern, pattern))
             end
 
-            return flatten({
+            -- from nvim 0.10 vim.tbl_flatten is deprecated ( soft )
+            return vim.iter({
                 args,
-                { "--color=never", "--no-heading", "--with-filename", "--line-number", "--column", caseSearch },
+                {
+                    "--color=never",
+                    "--no-heading",
+                    "--with-filename",
+                    "--line-number",
+                    "--column",
+                    replace.getCaseSearch(),
+                },
             })
+                :flatten(math.huge)
+                :totable()
         end,
         entry_maker = make_entry.gen_from_vimgrep(opts),
         cwd = opts.cwd,
     })
 
     pickers
-        -- .new(opts, {
-        .new(ivy, {
+        .new(opts, {
             debounce = 100,
             prompt_title = "Live Grep (with shortcuts)",
             finder = custom_grep,
