@@ -14,9 +14,10 @@ return {
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
         local ivy = require("telescope.themes").get_ivy()
-        local custom = require("utils/telescope_utils")
+        local utils = require("custom/telescope_utils")
         local custom_rg = require("custom/telescope_multi_rg")
         local tables_utils = require("utils/tables_utils")
+        local replace = require("custom.replace_in_quickfix")
 
         vim.keymap.set("n", "<leader>fa", builtin.builtin, {})
         vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
@@ -30,11 +31,13 @@ return {
         vim.keymap.set("n", "<leader>fl", builtin.resume, {})
         vim.keymap.set("n", "<leader>o", builtin.oldfiles, {})
         vim.keymap.set("n", "<leader>fs", builtin.grep_string, {})
-        vim.keymap.set("v", "<leader>fs", custom.exact_search_visual, {})
-        -- vim.keymap.set("n", "<leader>fm", custom.live_grep_in_glob, {})
+        vim.keymap.set("v", "<leader>fs", utils.exact_search_visual, {})
+        vim.keymap.set("n", "<leader>fm", utils.live_grep_in_glob, {})
+
+        -- Search from current folder where current buffer is
         vim.api.nvim_set_keymap("n", "<leader>fp", "", {
             expr = true,
-            callback = custom.find_in_specific_folder,
+            callback = utils.find_in_specific_folder,
         })
 
         -- Shortcut for searching your Neovim configuration files
@@ -56,6 +59,19 @@ return {
             }
         end)
 
+        -- Update pattern to replace
+        local function updateSearch(prompt_bufnr)
+            local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
+            replace.updateLastSearch(current_picker:_get_prompt())
+        end
+
+        -- Update pattern to replace and send selected to quicklist
+        local function sendSelectedToQfList(prompt_bufnr)
+            updateSearch(prompt_bufnr)
+            actions.send_selected_to_qflist(prompt_bufnr)
+            actions.open_qflist(prompt_bufnr)
+        end
+
         -- setup
         require("telescope").setup({
             defaults = {
@@ -65,12 +81,11 @@ return {
                 mappings = {
                     i = {
                         -- Open quicklis with multiple files
-                        ["<C-o>"] = actions.send_selected_to_qflist + actions.open_qflist,
-                        -- ["<esc>"] = actions.close,
+                        ["<C-o>"] = sendSelectedToQfList,
                     },
                     n = {
                         -- Open quicklis with multiple files
-                        ["<C-o>"] = actions.send_selected_to_qflist + actions.open_qflist,
+                        ["<C-o>"] = sendSelectedToQfList,
                         ["<C-n>"] = actions.move_selection_next,
                         ["<C-p>"] = actions.move_selection_previous,
                     },

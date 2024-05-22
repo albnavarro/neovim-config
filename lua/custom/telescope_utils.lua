@@ -1,4 +1,5 @@
 local utils = require("utils/get_selection")
+local replace = require("custom.replace_in_quickfix")
 
 -- Main module
 local M = {}
@@ -14,7 +15,7 @@ local live_grep_in_glob = function(glob_pattern)
             "--with-filename",
             "--line-number",
             "--column",
-            "--smart-case",
+            replace.getCaseSearch(),
             "--glob=" .. (glob_pattern or ""),
         },
     })

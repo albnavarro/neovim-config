@@ -6,12 +6,12 @@ M.caseSearch = "--fixed-strings"
 M.lastSearch = ""
 
 -- Enable smart case.
-vim.api.nvim_create_user_command("RgSmartCaseOn", function()
+vim.api.nvim_create_user_command("SmartCaseOn", function()
     M.caseSearch = "--smart-case"
 end, {})
 
 -- Disable smart case.
-vim.api.nvim_create_user_command("RgSmartCaseOff", function()
+vim.api.nvim_create_user_command("SmartCaseOff", function()
     M.caseSearch = "--fixed-strings"
 end, {})
 
@@ -20,7 +20,7 @@ end, {})
 -- cdo %s/absd/dsba/gc | up
 vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
     if M.caseSearch == "--smart-case" then
-        vim.notify("last grep is in smart-case, run RgSmartCaseOff!")
+        vim.notify("last grep is in smart-case, run SmartCaseOff!")
         return
     end
 
