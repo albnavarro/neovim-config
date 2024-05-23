@@ -44,7 +44,6 @@ function M.multi_rg(opts)
             if prompt_split[1] then
                 table.insert(args, "-e")
                 table.insert(args, prompt_split[1])
-                replace.updateLastSearch(prompt_split[1])
             end
 
             if prompt_split[2] then
