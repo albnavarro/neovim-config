@@ -117,8 +117,8 @@ map("v", "~", "<Right>o<Left>o")
 map("n", "<leader>r", ":e!<CR>")
 
 -- Format with linter for filetype and save. (formatter.nvim)
--- map("n", "<leader>=", ":FixWithLinter<CR>", { noremap = true, silent = true })
--- map("v", "<leader>=", ":FixWithLinterRange<CR>", { noremap = true, silent = true })
+map("n", "<leader>=", ":FixWithLinter<CR>", { noremap = true, silent = true })
+map("v", "<leader>=", ":FixWithLinterRange<CR>", { noremap = true, silent = true })
 
 -- Terminal
 map("t", "<Esc>", [[ <C-\><C-n> ]], {})

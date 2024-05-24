@@ -1,22 +1,26 @@
 ### PERSONAL NEOVIM CONFIG
 
 ## Install separately ( with Mason ):
+- eslint_d
 - prettierd
+- stylelint
 - stylua
 - codespell
 
 ## Final Mason installed package:
 - css-lsp
 - emmet-ls
+- eslint_d
 - html-lsp
 - lua-language-server
 - prettierd
+- stylelint
 - stylua
 - svelte-language-server
 - typescript-language-server
 - json-lsp
-- stylelint-lsp
-- eslint-lsp
+<!-- - stylelint-lsp -->
+<!-- - eslint-lsp -->
 
 ## Telescope Dependencies:
 

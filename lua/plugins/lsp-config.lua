@@ -32,8 +32,8 @@ return {
                 "emmet_language_server",
                 "lua_ls",
                 "svelte",
-                "eslint",
-                "stylelint_lsp",
+                -- "eslint",
+                -- "stylelint_lsp",
                 "jsonls",
             },
         })
@@ -89,28 +89,28 @@ return {
         })
 
         -- esLint
-        lsp_config.eslint.setup({
-            capabilities = capabilities,
-            -- on_attach = function(args)
-            -- 	local bufnr = args.buf
-            -- 	vim.api.nvim_create_autocmd("BufWritePre", {
-            -- 		buffer = bufnr,
-            -- 		command = "EslintFixAll",
-            -- 	})
-            -- end,
-        })
+        -- lsp_config.eslint.setup({
+        --     capabilities = capabilities,
+        --     -- on_attach = function(args)
+        --     -- 	local bufnr = args.buf
+        --     -- 	vim.api.nvim_create_autocmd("BufWritePre", {
+        --     -- 		buffer = bufnr,
+        --     -- 		command = "EslintFixAll",
+        --     -- 	})
+        --     -- end,
+        -- })
 
         -- stylelint
-        lsp_config.stylelint_lsp.setup({
-            capabilities = capabilities,
-            filetypes = { "scss", "css" },
-            settings = {
-                stylelintplus = {
-                    autoFixOnFormat = true,
-                    -- autoFixOnSave = true,
-                },
-            },
-        })
+        -- lsp_config.stylelint_lsp.setup({
+        --     capabilities = capabilities,
+        --     filetypes = { "scss", "css" },
+        --     settings = {
+        --         stylelintplus = {
+        --             autoFixOnFormat = true,
+        --             -- autoFixOnSave = true,
+        --         },
+        --     },
+        -- })
 
         -- Extend emmet_ls to twig and javascript
         lsp_config.emmet_language_server.setup({

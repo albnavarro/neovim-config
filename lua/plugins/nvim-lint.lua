@@ -3,13 +3,10 @@ return {
     event = "VeryLazy",
     config = function()
         require("lint").linters_by_ft = {
-            -- ["javascript"] = { "eslint_d", "codespell" },
-            -- ["typescript"] = { "eslint_d", "codespell" },
-            ["javascript"] = { "codespell" },
-            ["typescript"] = { "codespell" },
+            ["javascript"] = { "eslint_d", "codespell" },
+            ["typescript"] = { "eslint_d", "codespell" },
             ["html"] = { "codespell" },
-            -- ["scss"] = { "codespell", "stylelint" },
-            ["scss"] = { "codespell" },
+            ["scss"] = { "codespell", "stylelint" },
             ["json"] = { "codespell" },
             ["jsonc"] = { "codespell" },
             ["svelte"] = { "codespell" },
