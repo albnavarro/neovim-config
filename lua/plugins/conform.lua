@@ -23,9 +23,29 @@ return {
             },
             format_on_save = {},
             formatters = {
+                prettierd = {
+                    command = require("conform.util").find_executable(
+                        { "node_modules/.bin/prettierd", "$XDG_DATA_HOME/nvim/mason/bin/prettierd" },
+                        "prettierd"
+                    ),
+                },
+                prettier = {
+                    command = require("conform.util").find_executable(
+                        { "node_modules/.bin/prettier", "$XDG_DATA_HOME/nvim/mason/bin/prettier" },
+                        "prettier"
+                    ),
+                },
                 stylelint = {
-                    -- Change where to find the command
-                    command = "./node_modules/.bin/stylelint",
+                    command = require("conform.util").find_executable(
+                        { "node_modules/.bin/stylelint", "$XDG_DATA_HOME/nvim/mason/bin/stylelint" },
+                        "stylelint"
+                    ),
+                },
+                eslint_d = {
+                    command = require("conform.util").find_executable(
+                        { "node_modules/.bin/eslint_d", "$XDG_DATA_HOME/nvim/mason/bin/eslint_d" },
+                        "eslint_d"
+                    ),
                 },
             },
         })
