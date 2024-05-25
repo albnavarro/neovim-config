@@ -22,5 +22,15 @@ return {
                 require("lint").try_lint()
             end,
         })
+
+        vim.api.nvim_create_user_command("EnableFlatConfig", function()
+            vim.cmd(":!ESLINT_USE_FLAT_CONFIG=true eslint_d restart")
+            vim.cmd(":write")
+        end, {})
+
+        vim.api.nvim_create_user_command("DisableFlatConfig", function()
+            vim.cmd(":!ESLINT_USE_FLAT_CONFIG= eslint_d restart")
+            vim.cmd(":write")
+        end, {})
     end,
 }
