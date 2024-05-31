@@ -14,8 +14,8 @@ return {
             ["markdown"] = { "codespell" },
         }
 
-        local stylelint = require("lint").linters.stylelint
-        stylelint.stream = "both"
+        -- local stylelint = require("lint").linters.stylelint
+        -- stylelint.stream = "both"
 
         vim.api.nvim_create_autocmd({ "BufWritePost", "BufEnter" }, {
             callback = function()
