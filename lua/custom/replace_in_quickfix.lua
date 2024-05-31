@@ -1,3 +1,5 @@
+local treeApi = require("nvim-tree.api")
+
 -- Main module
 local M = {}
 
@@ -23,6 +25,9 @@ vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
         vim.notify("last grep is in smart-case, run SmartCaseOff!")
         return
     end
+
+    -- Close nvim-tree
+    treeApi.tree.close()
 
     local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = M.lastSearch })
     local user_input_to = vim.fn.input("Replace with: ")
