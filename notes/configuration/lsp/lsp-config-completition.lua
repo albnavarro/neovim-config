@@ -201,6 +201,10 @@ return {
 
                 --- COMPLETITION test nvim 0.11
                 --- https://www.reddit.com/r/neovim/comments/1d7j0c1/a_small_gist_to_use_the_new_builtin_completion/
+                ---
+                ---  FUZZY-FINDER on completition nvim 0.11
+                ---  :set completeopt+=fuzzy
+                ---  <C-n> e alla prima lettera scritta si attiva il fuzzy-finder
 
                 local bufnr = ev.buf
                 local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -262,7 +266,8 @@ return {
                         end
                     end, "Trigger/select next completion", "i")
 
-                    -- -- Buffer completions.
+                    -- Buffer completions.
+                    -- funziona solo ul buffere corrente, per i tutti i buffer visibili ?
                     keymap("<C-u>", "<C-x><C-n>", { desc = "Buffer completions" }, "i")
 
                     -- Inside a snippet, use backspace to remove the placeholder.
