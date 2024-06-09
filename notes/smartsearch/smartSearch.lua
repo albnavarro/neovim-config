@@ -64,6 +64,8 @@ local function searchDown(ignoreCase)
         .. [[l\%<]]
         .. getWindowLineNumber(false)
         .. [[l]]
+        -- move curor to last selection
+        .. [[/e]]
         .. t("<C-b>")
 end
 
