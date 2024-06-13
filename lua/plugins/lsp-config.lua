@@ -32,6 +32,7 @@ return {
                 "emmet_language_server",
                 "lua_ls",
                 "svelte",
+                "graphql",
                 -- "eslint",
                 -- "stylelint_lsp",
                 "jsonls",
@@ -72,6 +73,12 @@ return {
 
         -- jsonls
         lsp_config.jsonls.setup({ capabilities = capabilities })
+
+        -- graphql
+        lsp_config.graphql.setup({
+            capabilities = capabilities,
+            filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
+        })
 
         -- svelte
         lsp_config.svelte.setup({
