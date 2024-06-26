@@ -9,7 +9,7 @@ return {
             ["scss"] = { "codespell", "stylelint" },
             ["json"] = { "codespell" },
             ["jsonc"] = { "codespell" },
-            ["svelte"] = { "codespell" },
+            ["svelte"] = { "eslint_d", "codespell" },
             ["text"] = { "codespell" },
             ["markdown"] = { "codespell" },
         }
