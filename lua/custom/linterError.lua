@@ -1,30 +1,54 @@
 local ESLINT = "eslint"
 local ESLINT_D = "eslint_d"
 local STYLELINT = "stylelint"
+local SVELTE = "svelte"
+local DEFAULT = "default"
 local tables_utils = require("utils/tables_utils")
 
 local linters = {
     [ESLINT] = {
-        pre = "// eslint-disable-next-line",
-        after = "",
+        [DEFAULT] = {
+            pre = "// eslint-disable-next-line",
+            after = "",
+        },
+        [SVELTE] = {
+            pre = "<!-- eslint-disable-next-line",
+            after = " -->",
+        },
     },
     [ESLINT_D] = {
-        pre = "// eslint-disable-next-line",
-        after = "",
+        [DEFAULT] = {
+            pre = "// eslint-disable-next-line",
+            after = "",
+        },
+        [SVELTE] = {
+            pre = "<!-- eslint-disable-next-line",
+            after = " -->",
+        },
     },
     [STYLELINT] = {
-        pre = "/* stylelint-disable-next-line ",
-        after = " */",
+        [DEFAULT] = {
+            pre = "/* stylelint-disable-next-line ",
+            after = " */",
+        },
     },
 }
 
-local function formatErrorByLinter(source, code, spaces)
-    return spaces .. linters[source].pre .. " " .. code .. linters[source].after
+local function formatErrorByLinter(source, code, spaces, lang)
+    local pre = linters[source][lang] and linters[source][lang].pre or linters[source][DEFAULT].pre
+    local after = linters[source][lang] and linters[source][lang].after or linters[source][DEFAULT].after
+
+    return spaces .. pre .. " " .. code .. after
 end
 
 vim.api.nvim_create_user_command("DisableLinterLineError", function()
+    -- Get line number && column number
     local lineNum = vim.api.nvim_win_get_cursor(0)[1]
     local colStart = vim.fn.getline("."):find("%S")
+
+    -- Get current lang in line
+    local curline = vim.fn.line(".")
+    local lang = vim.treesitter.get_parser():language_for_range({ curline, 0, curline, 0 }):lang()
 
     -- Empty line, exit
     if colStart == nil then
@@ -61,25 +85,5 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
         return previous .. comma .. current.code
     end, "")
 
-    vim.api.nvim_buf_set_lines(0, lineNum - 1, lineNum - 1, false, { formatErrorByLinter(source, error, spaces) })
+    vim.api.nvim_buf_set_lines(0, lineNum - 1, lineNum - 1, false, { formatErrorByLinter(source, error, spaces, lang) })
 end, {})
-
--- local errorResult = ""
--- local source = ""
-
--- for index, item in ipairs(diagnostiFiltered) do
---     -- print(vim.inspect(item))
---
---     -- Check if there is multiple error
---     -- In case separate every error with a comma
---     local comma = index == 1 and "" or ","
---
---     -- Concatenate errors
---     if item.code then
---         errorResult = errorResult .. comma .. item.code
---     end
---
---     -- get source, eslint or stylelint
---     source = item.source
--- end
---
