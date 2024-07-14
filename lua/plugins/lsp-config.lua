@@ -26,7 +26,8 @@ return {
         mason.setup({})
         mason_lspconfig.setup({
             ensure_installed = {
-                "tsserver",
+                -- "tsserver",
+                "vtsls",
                 "html",
                 "cssls",
                 "emmet_language_server",
@@ -49,18 +50,37 @@ return {
         ---
 
         -- tsserver
-        lsp_config.tsserver.setup({
+        -- lsp_config.tsserver.setup({
+        --     capabilities = capabilities,
+        --     init_options = {
+        --         preferences = {
+        --             includeInlayParameterNameHints = "all",
+        --             includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+        --             includeInlayFunctionParameterTypeHints = true,
+        --             includeInlayVariableTypeHints = true,
+        --             includeInlayPropertyDeclarationTypeHints = true,
+        --             includeInlayFunctionLikeReturnTypeHints = true,
+        --             includeInlayEnumMemberValueHints = true,
+        --             importModuleSpecifierPreference = "non-relative",
+        --         },
+        --     },
+        -- })
+
+        -- typescript
+        lsp_config.vtsls.setup({
             capabilities = capabilities,
-            init_options = {
-                preferences = {
-                    includeInlayParameterNameHints = "all",
-                    includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                    includeInlayFunctionParameterTypeHints = true,
-                    includeInlayVariableTypeHints = true,
-                    includeInlayPropertyDeclarationTypeHints = true,
-                    includeInlayFunctionLikeReturnTypeHints = true,
-                    includeInlayEnumMemberValueHints = true,
-                    importModuleSpecifierPreference = "non-relative",
+            settings = {
+                javascript = {
+                    inlayHints = {
+                        functionLikeReturnTypes = { enabled = true },
+                        parameterNames = { enabled = "all" },
+                        variableTypes = { enabled = true },
+                    },
+                },
+                vtsls = {
+                    experimental = {
+                        maxInlayHintLength = 30,
+                    },
                 },
             },
         })
