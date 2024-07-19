@@ -5,16 +5,16 @@ return {
         require("conform").setup({
             formatters_by_ft = {
                 lua = { "stylua" },
-                javascript = { { "prettierd", "prettier" } },
-                typescript = { { "prettierd", "prettier" } },
-                yaml = { { "prettierd", "prettier" } },
-                json = { { "prettierd", "prettier" } },
-                jsonc = { { "prettierd", "prettier" } },
-                scss = { { "prettierd", "prettier" } },
-                html = { { "prettierd", "prettier" } },
-                twig = { { "prettierd", "prettier" } },
-                svelte = { { "prettierd", "prettier" } },
-                pug = { { "prettierd", "prettier" } },
+                javascript = { "prettierd", "prettier", stop_after_first = true },
+                typescript = { "prettierd", "prettier", stop_after_first = true },
+                yaml = { "prettierd", "prettier", stop_after_first = true },
+                json = { "prettierd", "prettier", stop_after_first = true },
+                jsonc = { "prettierd", "prettier", stop_after_first = true },
+                scss = { "prettierd", "prettier", stop_after_first = true },
+                html = { "prettierd", "prettier", stop_after_first = true },
+                twig = { "prettierd", "prettier", stop_after_first = true },
+                svelte = { "prettierd", "prettier", stop_after_first = true },
+                pug = { "prettierd", "prettier", stop_after_first = true },
                 -- Use the "*" filetype to run formatters on all filetypes.
                 ["*"] = { "codespell" },
                 -- Use the "_" filetype to run formatters on filetypes that don't
