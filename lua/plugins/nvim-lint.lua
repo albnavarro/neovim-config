@@ -23,26 +23,26 @@ return {
             end,
         })
 
-        -- Flat config
-        vim.api.nvim_create_user_command("CheckFlatConfig", function()
-            local root = vim.uv.cwd()
-
-            if
-                vim.fn.filereadable(root .. "/eslint.config.js") == 1
-                or vim.fn.filereadable(root .. "/eslint.config.mjs") == 1
-                or vim.fn.filereadable(root .. "/eslint.config.cjs") == 1
-                or vim.fn.filereadable(root .. "/eslint.config.ts") == 1
-                or vim.fn.filereadable(root .. "/eslint.config.mts") == 1
-                or vim.fn.filereadable(root .. "/eslint.config.cts") == 1
-            then
-                vim.cmd(":!ESLINT_USE_FLAT_CONFIG=true eslint_d restart")
-                -- vim.cmd(":e!")
-                vim.cmd.e()
-            else
-                vim.cmd(":!ESLINT_USE_FLAT_CONFIG= eslint_d restart")
-                -- vim.cmd(":e!")
-                vim.cmd.e()
-            end
-        end, {})
+        -- Flat config eslint_d v 13.x
+        -- vim.api.nvim_create_user_command("CheckFlatConfig", function()
+        --     local root = vim.uv.cwd()
+        --
+        --     if
+        --         vim.fn.filereadable(root .. "/eslint.config.js") == 1
+        --         or vim.fn.filereadable(root .. "/eslint.config.mjs") == 1
+        --         or vim.fn.filereadable(root .. "/eslint.config.cjs") == 1
+        --         or vim.fn.filereadable(root .. "/eslint.config.ts") == 1
+        --         or vim.fn.filereadable(root .. "/eslint.config.mts") == 1
+        --         or vim.fn.filereadable(root .. "/eslint.config.cts") == 1
+        --     then
+        --         vim.cmd(":!ESLINT_USE_FLAT_CONFIG=true eslint_d restart")
+        --         -- vim.cmd(":e!")
+        --         vim.cmd.e()
+        --     else
+        --         vim.cmd(":!ESLINT_USE_FLAT_CONFIG= eslint_d restart")
+        --         -- vim.cmd(":e!")
+        --         vim.cmd.e()
+        --     end
+        -- end, {})
     end,
 }

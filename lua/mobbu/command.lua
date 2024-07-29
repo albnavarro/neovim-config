@@ -25,4 +25,5 @@ vim.api.nvim_create_user_command("ToggleWordWrap", ":set wrap! linebreak! breaki
 vim.api.nvim_create_user_command("NpxStyleLint", ":%!npx stylelint --fix --stdin --stdin-filename %<CR><CR>", {})
 
 -- npx eslint
-vim.api.nvim_create_user_command("NpxEslintLint", ":%!eslint_d --stdin --fix-to-stdout %<CR>", {})
+-- vim.api.nvim_create_user_command("NpxEslintLint", ":%!eslint_d --stdin --fix-to-stdout %<CR>", {})
+vim.api.nvim_create_user_command("NpxEslintLint", ":! eslint_d --stdin --fix %", {})
