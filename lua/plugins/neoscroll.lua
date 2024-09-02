@@ -2,7 +2,9 @@ return {
     "karb94/neoscroll.nvim",
     event = "VeryLazy",
     config = function()
-        require("neoscroll").setup({
+        local neoscroll = require("neoscroll")
+
+        neoscroll.setup({
             mappings = { "<C-u>", "<C-d>", "<C-e>", "<C-y>" },
 
             -- dispatch win/cursror moved only at the end to improve
@@ -22,11 +24,24 @@ return {
             end,
         })
 
-        local t = {}
-        t["<C-u>"] = { "scroll", { "-vim.wo.scroll", "true", "250" } }
-        t["<C-d>"] = { "scroll", { "vim.wo.scroll", "true", "250" } }
-        t["<C-y>"] = { "scroll", { "-0.10", "false", "100" } }
-        t["<C-e>"] = { "scroll", { "0.10", "false", "100" } }
-        require("neoscroll.config").set_mappings(t)
+        local keymap = {
+            ["<C-u>"] = function()
+                neoscroll.ctrl_u({ duration = 250 })
+            end,
+            ["<C-d>"] = function()
+                neoscroll.ctrl_d({ duration = 250 })
+            end,
+            ["<C-y>"] = function()
+                neoscroll.scroll(-0.1, { move_cursor = false, duration = 100 })
+            end,
+            ["<C-e>"] = function()
+                neoscroll.scroll(0.1, { move_cursor = false, duration = 100 })
+            end,
+        }
+
+        local modes = { "n", "v", "x" }
+        for key, func in pairs(keymap) do
+            vim.keymap.set(modes, key, func)
+        end
     end,
 }
