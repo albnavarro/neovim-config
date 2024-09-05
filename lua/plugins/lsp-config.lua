@@ -26,7 +26,7 @@ return {
         mason.setup({})
         mason_lspconfig.setup({
             ensure_installed = {
-                -- "tsserver",
+                -- "tsserver", -- Lsp config use ts_ls not mason
                 "vtsls",
                 "html",
                 "cssls",
@@ -48,16 +48,6 @@ return {
         ---
         -- Serve configuration
         ---
-
-        -- tsserver rename issue
-        -- mason_lspconfig.setup_handlers({
-        --     function(server_name) -- default handler (optional)
-        --         -- https://github.com/neovim/nvim-lspconfig/pull/3232
-        --         if server_name == "tsserver" then
-        --             server_name = "ts_ls"
-        --         end
-        --     end,
-        -- })
 
         -- tsserver
         -- lsp_config.ts_ls.setup({
