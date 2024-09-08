@@ -83,6 +83,22 @@ return {
                     },
                 },
             },
+            on_attach = function()
+                -- Organiza Import
+                vim.api.nvim_create_user_command("OrganizeImports", function()
+                    vim.lsp.buf.execute_command({
+                        command = "typescript.organizeImports",
+                        arguments = { vim.fn.expand("%:p") },
+                    })
+                end, {})
+
+                -- Select typescript version
+                vim.api.nvim_create_user_command("SelectTypeScriptVersion", function()
+                    vim.lsp.buf.execute_command({
+                        command = "typescript.selectTypeScriptVersion",
+                    })
+                end, {})
+            end,
         })
 
         -- html
