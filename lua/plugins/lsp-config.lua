@@ -78,6 +78,7 @@ return {
                     },
                 },
                 vtsls = {
+                    -- autoUseWorkspaceTsdk = true, -- use project ts version by default
                     experimental = {
                         maxInlayHintLength = 30,
                     },
