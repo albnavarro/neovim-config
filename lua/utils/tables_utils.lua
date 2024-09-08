@@ -30,7 +30,21 @@ function M.filter(tbl, f)
     end
     return t
 end
---
+
+-- find js equivalent in format key, value
+-- Returns only first value
+function M.find(tbl, f)
+    local result = nil
+
+    for _, v in pairs(tbl) do
+        if f(v) and result == nil then
+            result = v
+        end
+    end
+
+    return result
+end
+
 -- filter js equivalent in format only value
 function M.filterArray(tbl, f)
     local t = {}
