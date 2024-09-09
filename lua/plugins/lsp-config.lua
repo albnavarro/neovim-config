@@ -26,7 +26,7 @@ return {
         mason.setup({})
         mason_lspconfig.setup({
             ensure_installed = {
-                -- "tsserver", -- Lsp config use ts_ls not mason
+                -- "ts_ls", -- Lsp config use ts_ls not mason
                 "vtsls",
                 "html",
                 "cssls",
@@ -78,7 +78,7 @@ return {
                     },
                 },
                 vtsls = {
-                    -- autoUseWorkspaceTsdk = true, -- use project ts version by default
+                    autoUseWorkspaceTsdk = true,
                     experimental = {
                         maxInlayHintLength = 30,
                     },
