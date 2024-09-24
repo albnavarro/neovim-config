@@ -21,6 +21,7 @@ return {
             },
         })
 
-        vim.keymap.set("n", "<Leader>to", ":Oil --float<CR>")
+        -- vim.keymap.set("n", "<Leader>to", ":Oil --float<CR>")
+        vim.keymap.set("n", "<Leader>to", ":Oil<CR>")
     end,
 }
