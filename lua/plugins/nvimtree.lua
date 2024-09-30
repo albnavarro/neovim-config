@@ -1,6 +1,6 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    version = "1.6.1",
+    version = "*",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
