@@ -1,10 +1,26 @@
-# Road to 0.10
+# Road to 0.11
+- In case hover problem override default:
 
-- vim.loop has been renamed to vim.uv.
-- telescope: ivy bug on find_files.
 
-## Telescope:
+```lua
+-- new
+-- https://github.com/neovim/neovim/pull/31208
+local hover = vim.lsp.buf.hover
+---@diagnostic disable-next-line: duplicate-set-field
 
-Until new release use master:
-- https://github.com/nvim-telescope/telescope.nvim/issues/3070
-- https://github.com/nvim-telescope/telescope.nvim/pull/2986
+vim.lsp.buf.hover = function()
+    return hover({
+        border = "rounded",
+        max_height = math.floor(vim.o.lines * 0.5),
+        max_width = math.floor(vim.o.columns * 0.4),
+    })
+end
+
+
+-- old deprecated
+-- https://github.com/neovim/neovim/pull/30935
+-- vim.lsp.handlers["textDocument/hover"] =
+--     vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", max_width = 80 })
+```
+
+
