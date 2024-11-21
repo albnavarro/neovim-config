@@ -7,9 +7,11 @@ return {
             ["typescript"] = { "eslint_d", "codespell" },
             ["html"] = { "codespell" },
             ["scss"] = { "codespell", "stylelint" },
+            -- ["scss"] = { "codespell" },
             ["json"] = { "codespell" },
             ["jsonc"] = { "codespell" },
             ["svelte"] = { "eslint_d", "codespell" },
+            ["vue"] = { "eslint_d", "codespell" },
             ["text"] = { "codespell" },
             ["markdown"] = { "codespell" },
         }

@@ -33,6 +33,7 @@ return {
                 "emmet_language_server",
                 "lua_ls",
                 "svelte",
+                "volar",
                 -- "graphql",
                 -- "eslint",
                 -- "stylelint_lsp",
@@ -52,6 +53,7 @@ return {
         -- tsserver
         -- lsp_config.ts_ls.setup({
         --     capabilities = capabilities,
+        --     filetypes = { "typescript", "javascript", "vue" },
         --     init_options = {
         --         preferences = {
         --             includeInlayParameterNameHints = "all",
@@ -63,12 +65,25 @@ return {
         --             includeInlayEnumMemberValueHints = true,
         --             importModuleSpecifierPreference = "non-relative",
         --         },
+        --         plugins = {
+        --             {
+        --                 name = "@vue/typescript-plugin",
+        --                 location = require("mason-registry").get_package("vue-language-server"):get_install_path()
+        --                     .. "/node_modules/@vue/language-server",
+        --                 languages = { "vue" },
+        --             },
+        --         },
         --     },
         -- })
 
         -- typescript
+
+        -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+        -- local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
+
         lsp_config.vtsls.setup({
             capabilities = capabilities,
+            filetypes = { "typescript", "javascript", "vue" },
             settings = {
                 javascript = {
                     inlayHints = {
@@ -82,6 +97,21 @@ return {
                     experimental = {
                         maxInlayHintLength = 30,
                     },
+                    tsserver = {
+                        globalPlugins = {
+                            {
+                                name = "@vue/typescript-plugin",
+                                -- location = volar_path,
+                                location = require("mason-registry")
+                                    .get_package("vue-language-server")
+                                    :get_install_path()
+                                    .. "/node_modules/@vue/language-server",
+                                languages = { "vue" },
+                                configNamespace = "typescript",
+                                enableForWorkspaceTypeScriptVersions = true,
+                            },
+                        },
+                    },
                 },
             },
         })
@@ -94,6 +124,9 @@ return {
 
         -- jsonls
         lsp_config.jsonls.setup({ capabilities = capabilities })
+
+        -- volar
+        lsp_config.volar.setup({ capabilities = capabilities })
 
         -- graphql
         -- lsp_config.graphql.setup({
@@ -120,11 +153,11 @@ return {
         -- lsp_config.eslint.setup({
         --     capabilities = capabilities,
         --     -- on_attach = function(args)
-        --     -- 	local bufnr = args.buf
-        --     -- 	vim.api.nvim_create_autocmd("BufWritePre", {
-        --     -- 		buffer = bufnr,
-        --     -- 		command = "EslintFixAll",
-        --     -- 	})
+        --     -- local bufnr = args.buf
+        --     -- vim.api.nvim_create_autocmd("BufWritePre", {
+        --     -- buffer = bufnr,
+        --     -- command = "EslintFixAll",
+        --     -- })
         --     -- end,
         -- })
 
@@ -143,7 +176,7 @@ return {
         -- Extend emmet_ls to twig and javascript
         lsp_config.emmet_language_server.setup({
             capabilities = capabilities,
-            filetypes = { "html", "php", "twig", "scss", "javascript" },
+            filetypes = { "html", "php", "twig", "scss", "javascript", "vue" },
         })
 
         -- Remove undefined global vim warning.
