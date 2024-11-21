@@ -2,8 +2,6 @@ return {
     "stevearc/conform.nvim",
     event = "VeryLazy",
     config = function()
-        local tables_utils = require("utils/tables_utils")
-
         require("conform").setup({
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -19,7 +17,7 @@ return {
                 vue = { "prettierd", "prettier", stop_after_first = true },
                 pug = { "prettierd", "prettier", stop_after_first = true },
                 -- Use the "*" filetype to run formatters on all filetypes.
-                ["*"] = {},
+                ["*"] = { "codespell" },
                 -- Use the "_" filetype to run formatters on filetypes that don't
                 -- have other formatters configured.
                 ["_"] = { "trim_whitespace" },
@@ -53,30 +51,29 @@ return {
             },
         })
 
-        local formatterTable = {
-            {
+        -- Toggle codeSpell.
+        local useCodeSpell = false
+        require("conform.formatters.codespell").condition = function()
+            return useCodeSpell
+        end
 
-                lang = { "scss", "css", "sass" },
-                formatter = "stylelint",
-            },
-            {
+        vim.api.nvim_create_user_command("CodeSpellFormatOn", function()
+            useCodeSpell = true
+        end, {})
 
-                lang = { "javascript", "typescript" },
-                formatter = "eslint_d",
-            },
-        }
+        vim.api.nvim_create_user_command("CodeSpellFormatOff", function()
+            useCodeSpell = false
+        end, {})
+
+        -- Fix eslint/stylelint.
+        local stylelintLanguages = { "scss", "css", "sass" }
+        local eslintLanguages = { "javascript", "typescript" }
+        local tables_utils = require("utils/tables_utils")
 
         -- get treesitter languages
         local function getLanguages()
             local curline = vim.fn.line(".")
             return vim.treesitter.get_parser():language_for_range({ curline, 0, curline, 0 }):lang()
-        end
-
-        -- get formatter by lang
-        local function getFormatter(lang)
-            return tables_utils.find(formatterTable, function(item)
-                return tables_utils.has_value(item.lang, lang)
-            end)
         end
 
         -- format function
@@ -100,13 +97,18 @@ return {
             -- local filetype = vim.bo.filetype
 
             local lang = getLanguages()
-            local item = getFormatter(lang)
 
-            if item == nil then
-                return
+            -- stylelint.
+            -- if tables_utils.has_value(stylelintFileType, filetype) then
+            if tables_utils.has_value(stylelintLanguages, lang) then
+                customFormat("stylelint", nil)
             end
 
-            customFormat(item.formatter, nil)
+            -- eslint.
+            -- if tables_utils.has_value(eslintFileType, filetype) then
+            if tables_utils.has_value(eslintLanguages, lang) then
+                customFormat("eslint_d", nil)
+            end
         end, {
             nargs = 0,
         })
@@ -116,11 +118,6 @@ return {
             -- local filetype = vim.bo.filetype
 
             local lang = getLanguages()
-            local item = getFormatter(lang)
-
-            if item == nil then
-                return
-            end
 
             -- get range.
             local range = nil
@@ -132,7 +129,17 @@ return {
                 }
             end
 
-            customFormat(item.formatter, range)
+            -- stylelint.
+            -- if tables_utils.has_value(stylelintFileType, filetype) then
+            if tables_utils.has_value(stylelintLanguages, lang) then
+                customFormat("stylelint", range)
+            end
+
+            -- eslint.
+            -- if tables_utils.has_value(eslintFileType, filetype) then
+            if tables_utils.has_value(eslintLanguages, lang) then
+                customFormat("eslint_d", range)
+            end
         end, {
             range = true,
         })
