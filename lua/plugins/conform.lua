@@ -14,6 +14,7 @@ return {
                 html = { "prettierd", "prettier", stop_after_first = true },
                 twig = { "prettierd", "prettier", stop_after_first = true },
                 svelte = { "prettierd", "prettier", stop_after_first = true },
+                vue = { "prettierd", "prettier", stop_after_first = true },
                 pug = { "prettierd", "prettier", stop_after_first = true },
                 -- Use the "*" filetype to run formatters on all filetypes.
                 ["*"] = { "codespell" },
@@ -65,9 +66,15 @@ return {
         end, {})
 
         -- Fix eslint/stylelint.
-        local stylelintFileType = { "scss", "css", "sass" }
-        local eslintFileType = { "javascript", "typescript" }
+        local stylelintLanguages = { "scss", "css", "sass" }
+        local eslintLanguages = { "javascript", "typescript" }
         local tables_utils = require("utils/tables_utils")
+
+        -- get treesitter languages
+        local function getLanguages()
+            local curline = vim.fn.line(".")
+            return vim.treesitter.get_parser():language_for_range({ curline, 0, curline, 0 }):lang()
+        end
 
         -- format function
         local function customFormat(formatter, range)
@@ -87,15 +94,19 @@ return {
 
         -- wholeFile formatter
         vim.api.nvim_create_user_command("FixWithLinter", function()
-            local filetype = vim.bo.filetype
+            -- local filetype = vim.bo.filetype
+
+            local lang = getLanguages()
 
             -- stylelint.
-            if tables_utils.has_value(stylelintFileType, filetype) then
+            -- if tables_utils.has_value(stylelintFileType, filetype) then
+            if tables_utils.has_value(stylelintLanguages, lang) then
                 customFormat("stylelint", nil)
             end
 
             -- eslint.
-            if tables_utils.has_value(eslintFileType, filetype) then
+            -- if tables_utils.has_value(eslintFileType, filetype) then
+            if tables_utils.has_value(eslintLanguages, lang) then
                 customFormat("eslint_d", nil)
             end
         end, {
@@ -104,7 +115,9 @@ return {
 
         -- range formatter
         vim.api.nvim_create_user_command("FixWithLinterRange", function(args)
-            local filetype = vim.bo.filetype
+            -- local filetype = vim.bo.filetype
+
+            local lang = getLanguages()
 
             -- get range.
             local range = nil
@@ -117,12 +130,14 @@ return {
             end
 
             -- stylelint.
-            if tables_utils.has_value(stylelintFileType, filetype) then
+            -- if tables_utils.has_value(stylelintFileType, filetype) then
+            if tables_utils.has_value(stylelintLanguages, lang) then
                 customFormat("stylelint", range)
             end
 
             -- eslint.
-            if tables_utils.has_value(eslintFileType, filetype) then
+            -- if tables_utils.has_value(eslintFileType, filetype) then
+            if tables_utils.has_value(eslintLanguages, lang) then
                 customFormat("eslint_d", range)
             end
         end, {
