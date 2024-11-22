@@ -2,7 +2,9 @@ return {
     "stevearc/conform.nvim",
     event = "VeryLazy",
     config = function()
-        local tables_utils = require("utils/tables_utils")
+        local U = require("utils/tables_utils")
+        local N = require("utils/nvim_utils")
+        local TS = require("utils/treesitter_utils")
 
         require("conform").setup({
             formatters_by_ft = {
@@ -66,16 +68,10 @@ return {
             },
         }
 
-        -- get treesitter languages
-        local function getLanguages()
-            local curline = vim.fn.line(".")
-            return vim.treesitter.get_parser():language_for_range({ curline, 0, curline, 0 }):lang()
-        end
-
         -- get formatter by lang
         local function getFormatter(lang)
-            return tables_utils.find(formatterTable, function(item)
-                return tables_utils.has_value(item.lang, lang)
+            return U.find(formatterTable, function(item)
+                return U.has_value(item.lang, lang)
             end)
         end
 
@@ -97,9 +93,7 @@ return {
 
         -- wholeFile formatter
         vim.api.nvim_create_user_command("FixWithLinter", function()
-            -- local filetype = vim.bo.filetype
-
-            local lang = getLanguages()
+            local lang = TS.getTSLanguages()
             local item = getFormatter(lang)
 
             if item == nil then
@@ -113,25 +107,14 @@ return {
 
         -- range formatter
         vim.api.nvim_create_user_command("FixWithLinterRange", function(args)
-            -- local filetype = vim.bo.filetype
-
-            local lang = getLanguages()
+            local lang = TS.getTSLanguages()
             local item = getFormatter(lang)
 
             if item == nil then
                 return
             end
 
-            -- get range.
-            local range = nil
-            if args.count ~= -1 then
-                local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
-                range = {
-                    start = { args.line1, 0 },
-                    ["end"] = { args.line2, end_line:len() },
-                }
-            end
-
+            local range = N.gerRange(args)
             customFormat(item.formatter, range)
         end, {
             range = true,

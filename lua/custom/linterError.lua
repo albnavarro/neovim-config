@@ -3,7 +3,8 @@ local ESLINT_D = "eslint_d"
 local STYLELINT = "stylelint"
 local SVELTE = "svelte"
 local DEFAULT = "default"
-local tables_utils = require("utils/tables_utils")
+local U = require("utils/tables_utils")
+local TS = require("utils/treesitter_utils")
 
 local linters = {
     [ESLINT] = {
@@ -47,8 +48,7 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     local colStart = vim.fn.getline("."):find("%S")
 
     -- Get current lang in line
-    local curline = vim.fn.line(".")
-    local lang = vim.treesitter.get_parser():language_for_range({ curline, 0, curline, 0 }):lang()
+    local lang = TS.getTSLanguages()
 
     -- Empty line, exit
     if colStart == nil then
@@ -60,7 +60,7 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     local spaces = string.rep(" ", colStart - 1)
 
     -- Filter all error for buffer active linter
-    local diagnostiFiltered = tables_utils.filterArray(diagnostic, function(item)
+    local diagnostiFiltered = U.filterArray(diagnostic, function(item)
         -- Excat match ( eslint vs eslint_d )
         return item.source:match("^" .. ESLINT .. "$")
             or item.source:match("^" .. ESLINT_D .. "$")
@@ -70,7 +70,7 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     -- print(vim.inspect(diagnostiFiltered))
 
     -- if no error skip
-    if tables_utils.tableSize(diagnostiFiltered) == 0 then
+    if U.tableSize(diagnostiFiltered) == 0 then
         print("no error found")
         return
     end
@@ -80,7 +80,7 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     local source = diagnostiFiltered[1].source
 
     -- concatenate errors in one string
-    local error = tables_utils.reduce(diagnostiFiltered, function(previous, current, index)
+    local error = U.reduce(diagnostiFiltered, function(previous, current, index)
         local comma = index == 0 and "" or ","
         return previous .. comma .. current.code
     end, "")
