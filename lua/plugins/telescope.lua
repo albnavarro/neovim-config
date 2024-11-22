@@ -16,8 +16,8 @@ return {
         local ivy = require("telescope.themes").get_ivy()
         local utils = require("custom/telescope_utils")
         local custom_rg = require("custom/telescope_multi_rg")
-        local tables_utils = require("utils/tables_utils")
-        local replace = require("custom.replace_in_quickfix")
+        local U = require("utils/tables_utils")
+        local R = require("custom.replace_in_quickfix")
 
         vim.keymap.set("n", "<leader>fa", builtin.builtin, {})
         vim.keymap.set("n", "<leader>ff", builtin.find_files, {})
@@ -51,7 +51,7 @@ return {
         end, { desc = "[F]ind [N]eovim grep" })
 
         -- Default pickers setting
-        local pickersSettings = tables_utils.map(builtin, function()
+        local pickersSettings = U.map(builtin, function()
             return {
                 theme = "ivy",
                 disable_devicons = true,
@@ -62,7 +62,7 @@ return {
         -- Update pattern to replace
         local function updateSearch(prompt_bufnr)
             local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-            replace.updateLastSearch(current_picker:_get_prompt())
+            R.updateLastSearch(current_picker:_get_prompt())
         end
 
         -- Update pattern to replace and send selected to quicklist
