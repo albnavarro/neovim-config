@@ -1,6 +1,5 @@
 # Road to 0.11
-- In case hover problem override default:
-
+- vim.lsp
 
 ```lua
 -- new
@@ -24,3 +23,15 @@ end
 ```
 
 
+- `vim.hl` instead `vim.highlight`
+```lua
+
+local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
+vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function()
+        vim.hl.on_yank({ higroup = "Visual", timeout = 200 })
+    end,
+    group = highlight_group,
+    pattern = "*",
+})
+```
