@@ -1,5 +1,6 @@
 -- Live grep in glob.
 -- https://www.reddit.com/r/neovim/comments/tpnt3c/how_can_i_customize_telescope_to_only_grep_for_1/
+-- https://github.com/tjdevries/config.nvim/blob/master/lua/custom/telescope/multi-ripgrep.lua
 
 local uv = vim.uv or vim.loop
 
