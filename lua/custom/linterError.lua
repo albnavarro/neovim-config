@@ -2,6 +2,7 @@ local ESLINT = "eslint"
 local ESLINT_D = "eslint_d"
 local STYLELINT = "stylelint"
 local SVELTE = "svelte"
+local VUE = "vue"
 local DEFAULT = "default"
 local U = require("utils/tables_utils")
 local TS = require("utils/treesitter_utils")
@@ -23,6 +24,10 @@ local linters = {
             after = "",
         },
         [SVELTE] = {
+            pre = "<!-- eslint-disable-next-line",
+            after = " -->",
+        },
+        [VUE] = {
             pre = "<!-- eslint-disable-next-line",
             after = " -->",
         },
