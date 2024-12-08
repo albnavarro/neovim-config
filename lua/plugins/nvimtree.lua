@@ -1,6 +1,6 @@
 return {
     "nvim-tree/nvim-tree.lua",
-    version = "*",
+    version = "1.8.0",
     dependencies = {
         "nvim-tree/nvim-web-devicons",
     },
@@ -152,6 +152,9 @@ return {
             },
             diagnostics = {
                 enable = true,
+                severity = {
+                    min = vim.diagnostic.severity.ERROR,
+                },
             },
             filters = {
                 dotfiles = true,
