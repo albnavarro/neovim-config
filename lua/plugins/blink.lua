@@ -33,7 +33,7 @@ return {
         },
         completion = {
             menu = {
-                auto_show = true,
+                auto_show = false,
                 min_width = 10,
                 max_height = 10,
                 border = "rounded",
