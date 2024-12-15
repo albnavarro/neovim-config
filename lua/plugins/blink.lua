@@ -35,6 +35,9 @@ return {
             trigger = {
                 show_on_trigger_character = false,
             },
+            list = {
+                selection = "auto_insert",
+            },
             menu = {
                 auto_show = true,
                 min_width = 10,
