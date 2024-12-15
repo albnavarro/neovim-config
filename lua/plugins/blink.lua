@@ -7,11 +7,12 @@ return {
         version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         dependencies = { "rafamadriz/friendly-snippets" },
     },
-    version = "v0.*",
+    version = "v0.7.6",
     opts = {
         keymap = { preset = "default" },
         appearance = {
             use_nvim_cmp_as_default = true,
+            nerd_font_variant = "normal",
         },
         highlight = {
             use_nvim_cmp_as_default = false,
@@ -33,13 +34,13 @@ return {
         completion = {
             menu = {
                 auto_show = true,
-                min_width = 15,
+                min_width = 10,
                 max_height = 10,
                 border = "rounded",
                 winblend = vim.o.pumblend,
                 winhighlight = "Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None",
                 draw = {
-                    columns = { { "label", "label_description", "source_name", gap = 1 }, { "kind" } },
+                    columns = { { "label", "label_description", "source_name", gap = 1 }, { "kind_icon", "kind" } },
                 },
             },
             documentation = {
@@ -66,19 +67,23 @@ return {
             default = { "lsp", "path", "snippets", "buffer" },
             providers = {
                 lsp = {
-                    score_offset = 10,
+                    score_offset = 3,
+                    min_keyword_length = 0, -- on manual trigger from 0 char lenght only LPS is showed
                     fallback_for = {},
                 },
                 path = {
-                    score_offset = 3,
+                    score_offset = 0,
+                    min_keyword_length = 3,
                     fallback_for = {},
                 },
                 snippets = {
                     score_offset = 0,
+                    min_keyword_length = 2,
                     fallback_for = {},
                 },
                 buffer = {
-                    score_offset = 0,
+                    score_offset = 1,
+                    min_keyword_length = 3,
                     fallback_for = {},
                 },
             },

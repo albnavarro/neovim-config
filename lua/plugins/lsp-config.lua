@@ -6,7 +6,8 @@ return {
             build = ":MasonUpdate", -- :MasonUpdate updates registry contents
         },
         "williamboman/mason-lspconfig.nvim",
-        "hrsh7th/cmp-nvim-lsp",
+        -- "hrsh7th/cmp-nvim-lsp",
+        "saghen/blink.cmp",
     },
     event = "VeryLazy",
     config = function()
@@ -41,9 +42,10 @@ return {
         })
 
         --
-        -- cmp capabilities
+        -- completion capabilities
         --
-        local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
         ---
         -- Serve configuration
