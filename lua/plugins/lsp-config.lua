@@ -16,7 +16,6 @@ return {
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
         local lsp_config = require("lspconfig")
-        local cmp_nvim_lsp = require("cmp_nvim_lsp")
         local map = vim.keymap
 
         ---
@@ -44,7 +43,7 @@ return {
         --
         -- cmp capabilities
         --
-        local capabilities = cmp_nvim_lsp.default_capabilities()
+        local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
         ---
         -- Serve configuration
