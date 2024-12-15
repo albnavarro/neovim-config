@@ -32,8 +32,11 @@ return {
             end,
         },
         completion = {
+            trigger = {
+                show_on_trigger_character = false,
+            },
             menu = {
-                auto_show = false,
+                auto_show = true,
                 min_width = 10,
                 max_height = 10,
                 border = "rounded",
