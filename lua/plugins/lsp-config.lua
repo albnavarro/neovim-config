@@ -177,7 +177,20 @@ return {
         -- Extend emmet_ls to twig and javascript
         lsp_config.emmet_language_server.setup({
             capabilities = capabilities,
-            filetypes = { "html", "php", "twig", "scss", "javascript", "vue" },
+            filetypes = {
+                "css",
+                "eruby",
+                "html",
+                "javascript",
+                "javascriptreact",
+                "less",
+                "sass",
+                "scss",
+                "pug",
+                "typescriptreact",
+                "twig",
+                "php",
+            },
         })
 
         -- Remove undefined global vim warning.
