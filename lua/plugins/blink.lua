@@ -7,15 +7,12 @@ return {
         version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         dependencies = { "rafamadriz/friendly-snippets" },
     },
-    version = "v0.7.6",
+    version = "v0.8.0",
     opts = {
         keymap = { preset = "default" },
         appearance = {
             use_nvim_cmp_as_default = true,
             nerd_font_variant = "normal",
-        },
-        highlight = {
-            use_nvim_cmp_as_default = false,
         },
         snippets = {
             expand = function(snippet)
@@ -75,22 +72,22 @@ return {
                 lsp = {
                     score_offset = 3,
                     min_keyword_length = 0, -- on manual trigger from 0 char lenght only LPS is showed
-                    fallback_for = {},
+                    fallbacks = {},
                 },
                 path = {
                     score_offset = 0,
                     min_keyword_length = 3,
-                    fallback_for = {},
+                    fallbacks = {},
                 },
                 snippets = {
                     score_offset = 0,
                     min_keyword_length = 2,
-                    fallback_for = {},
+                    fallbacks = {},
                 },
                 buffer = {
                     score_offset = 1,
                     min_keyword_length = 3,
-                    fallback_for = {},
+                    fallbacks = {},
                 },
             },
         },
