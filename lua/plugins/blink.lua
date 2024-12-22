@@ -29,6 +29,11 @@ return {
             end,
         },
         completion = {
+            accept = {
+                auto_brackets = {
+                    enabled = false,
+                },
+            },
             trigger = {
                 show_on_trigger_character = false,
             },
