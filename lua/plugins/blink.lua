@@ -7,7 +7,7 @@ return {
         version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         dependencies = { "rafamadriz/friendly-snippets" },
     },
-    version = "v0.8.2",
+    version = "v0.9.0",
     opts = {
         keymap = { preset = "default" },
         appearance = {
