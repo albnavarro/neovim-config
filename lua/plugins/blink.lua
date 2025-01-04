@@ -7,7 +7,7 @@ return {
         version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
         dependencies = { "rafamadriz/friendly-snippets" },
     },
-    version = "v0.9.1",
+    version = "v0.9.2",
     opts = {
         keymap = { preset = "default" },
         appearance = {
@@ -38,7 +38,7 @@ return {
                 show_on_trigger_character = false,
             },
             list = {
-                selection = "auto_insert",
+                selection = "preselect",
             },
             menu = {
                 auto_show = true,
