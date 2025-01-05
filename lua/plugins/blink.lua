@@ -38,7 +38,9 @@ return {
                 show_on_trigger_character = false,
             },
             list = {
-                selection = "preselect",
+                selection = function(ctx)
+                    return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+                end,
             },
             menu = {
                 auto_show = true,
