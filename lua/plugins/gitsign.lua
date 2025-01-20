@@ -52,7 +52,6 @@ return {
                     gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
                 end)
                 map("n", "<leader>gS", gs.stage_buffer)
-                map("n", "<leader>gu", gs.undo_stage_hunk)
                 map("n", "<leader>gR", gs.reset_buffer)
                 map("n", "<leader>gp", gs.preview_hunk)
                 map("n", "<leader>gb", function()
@@ -63,7 +62,6 @@ return {
                 map("n", "<leader>gD", function()
                     gs.diffthis("~")
                 end)
-                map("n", "<leader>gd", gs.toggle_deleted)
             end,
         })
     end,
