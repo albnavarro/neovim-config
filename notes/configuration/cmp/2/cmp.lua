@@ -57,8 +57,8 @@ return {
                 end,
             },
             sources = {
-                { name = "path" },
-                { name = "nvim_lsp", keyword_length = 3 },
+                { name = "path", keyword_length = 3 },
+                { name = "nvim_lsp", keyword_length = 0 },
                 {
                     name = "buffer",
                     keyword_length = 3,
@@ -73,7 +73,7 @@ return {
                         end,
                     },
                 },
-                { name = "luasnip", keyword_length = 2 },
+                { name = "luasnip", keyword_length = 3 },
             },
             window = {
                 ---@diagnostic disable-next-line: undefined-field
@@ -120,7 +120,13 @@ return {
                 -- Manually trigger a completion from nvim-cmp.
                 --  Generally you don't need this, because nvim-cmp will display
                 --  completions whenever it has completion options available.
-                ["<C-Space>"] = cmp.mapping.complete({}),
+                ["<C-Space>"] = cmp.mapping.complete({
+                    config = {
+                        sources = {
+                            { name = "nvim_lsp" },
+                        },
+                    },
+                }),
 
                 -- Think of <c-l> as moving to the right of your snippet expansion.
                 --  So if you have a snippet that's like:
