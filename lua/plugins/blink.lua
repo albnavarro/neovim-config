@@ -61,7 +61,6 @@ return {
             },
             ghost_text = {
                 enabled = true,
-                show_with_selection = false,
                 show_without_selection = true,
             },
         },
