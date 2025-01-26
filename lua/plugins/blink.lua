@@ -28,6 +28,13 @@ return {
             trigger = {
                 show_on_trigger_character = true,
                 show_on_accept_on_trigger_character = false,
+                show_on_blocked_trigger_characters = function()
+                    if vim.bo.filetype == "scss" then
+                        return { " ", "\n", "\t", "}" }
+                    end
+
+                    return { " ", "\n", "\t" }
+                end,
             },
             list = {
                 selection = { preselect = true, auto_insert = true },
