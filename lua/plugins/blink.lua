@@ -99,7 +99,7 @@ return {
                     fallbacks = {},
                 },
                 snippets = {
-                    score_offset = 1,
+                    score_offset = 0,
                     min_keyword_length = 3,
                     fallbacks = {},
                 },

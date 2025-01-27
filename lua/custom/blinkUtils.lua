@@ -10,4 +10,11 @@ M.getNextProvider = function()
     return providers[currentProviderIndex]
 end
 
+-- Reset currentProviderIndex
+vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+    callback = function()
+        currentProviderIndex = 1
+    end,
+})
+
 return M
