@@ -1,3 +1,5 @@
+local utils = require("custom.blinkUtils")
+
 return {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
@@ -12,7 +14,15 @@ return {
     },
     version = "v0.11.0",
     opts = {
-        keymap = { preset = "default" },
+        keymap = {
+            preset = "default",
+            ["<C-l>"] = {
+                function(cmp)
+                    -- switch to next provider.
+                    cmp.show({ providers = { utils.getNextProvider() } })
+                end,
+            },
+        },
         appearance = {
             nerd_font_variant = "normal",
         },
@@ -26,15 +36,15 @@ return {
                 },
             },
             trigger = {
-                show_on_trigger_character = true,
+                -- show_on_trigger_character = true,
                 show_on_accept_on_trigger_character = false,
-                show_on_blocked_trigger_characters = function()
-                    if vim.bo.filetype == "scss" then
-                        return { " ", "\n", "\t", "}" }
-                    end
-
-                    return { " ", "\n", "\t" }
-                end,
+                -- show_on_blocked_trigger_characters = function()
+                --     if vim.bo.filetype == "scss" then
+                --         return { " ", "\n", "\t", "}" }
+                --     end
+                --
+                --     return { " ", "\n", "\t" }
+                -- end,
             },
             list = {
                 selection = { preselect = true, auto_insert = true },
@@ -67,16 +77,20 @@ return {
                 },
             },
             ghost_text = {
-                enabled = true,
+                -- enabled = true,
+                enabled = false,
                 show_without_selection = true,
             },
         },
         sources = {
             default = { "lsp", "path", "snippets", "buffer" },
+            cmdline = {}, -- disable cmdline.
             providers = {
                 lsp = {
                     score_offset = 3,
-                    min_keyword_length = 0, -- on manual trigger from 0 char lenght only LPS is showed
+                    min_keyword_length = function(ctx)
+                        return ctx.trigger.kind == "manual" and 0 or 3
+                    end,
                     fallbacks = {},
                 },
                 path = {
@@ -85,8 +99,8 @@ return {
                     fallbacks = {},
                 },
                 snippets = {
-                    score_offset = 0,
-                    min_keyword_length = 2,
+                    score_offset = 1,
+                    min_keyword_length = 3,
                     fallbacks = {},
                 },
                 buffer = {
