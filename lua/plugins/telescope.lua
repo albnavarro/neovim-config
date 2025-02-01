@@ -83,7 +83,7 @@ return {
                         -- Open quicklis with multiple files
                         ["<C-o>"] = sendSelectedToQfList,
                         ["<C-n>"] = actions.move_selection_next,
-                        ["<C-p>"] = actions.select_default,
+                        ["<C-p>"] = actions.move_selection_previous,
                         ["<C-y>"] = actions.select_default,
                     },
                     n = {
