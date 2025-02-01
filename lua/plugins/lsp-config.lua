@@ -96,7 +96,12 @@ return {
                 vtsls = {
                     autoUseWorkspaceTsdk = true,
                     experimental = {
+                        -- Inlay hint truncation.
                         maxInlayHintLength = 30,
+                        -- For completion performance.
+                        completion = {
+                            enableServerSideFuzzyMatch = true,
+                        },
                     },
                     tsserver = {
                         globalPlugins = {
@@ -153,13 +158,15 @@ return {
         -- esLint
         -- lsp_config.eslint.setup({
         --     capabilities = capabilities,
-        --     -- on_attach = function(args)
-        --     -- local bufnr = args.buf
-        --     -- vim.api.nvim_create_autocmd("BufWritePre", {
-        --     -- buffer = bufnr,
-        --     -- command = "EslintFixAll",
-        --     -- })
-        --     -- end,
+        --     settings = { format = false },
+        --     on_attach = function(_, bufnr)
+        --         vim.keymap.set(
+        --             "n",
+        --             "<leader>ce",
+        --             "<cmd>EslintFixAll<cr>",
+        --             { desc = "Fix all ESLint errors", buffer = bufnr }
+        --         )
+        --     end,
         -- })
 
         -- stylelint

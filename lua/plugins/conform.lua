@@ -7,6 +7,7 @@ return {
         local TS = require("utils/treesitter_utils")
 
         require("conform").setup({
+            notify_on_error = false,
             formatters_by_ft = {
                 lua = { "stylua" },
                 javascript = { "prettierd", "prettier", stop_after_first = true },
