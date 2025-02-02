@@ -1,6 +1,6 @@
-require("mobbu.lazy")
 require("mobbu.set")
 require("mobbu.keymap")
+require("mobbu.lazy")
 require("mobbu.command")
 require("custom.linterError")
 require("custom.vtslsCommand")
