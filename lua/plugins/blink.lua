@@ -12,7 +12,7 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load()
         end,
     },
-    version = "v0.11.0",
+    version = "v0.12.2",
     opts = {
         keymap = {
             preset = "default",
@@ -82,9 +82,11 @@ return {
                 show_without_selection = true,
             },
         },
+        cmdline = {
+            -- enabled = false,
+        },
         sources = {
             default = { "lsp", "path", "snippets", "buffer" },
-            cmdline = {}, -- disable cmdline.
             providers = {
                 lsp = {
                     score_offset = 3,
