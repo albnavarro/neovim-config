@@ -12,7 +12,7 @@ return {
             require("luasnip.loaders.from_vscode").lazy_load()
         end,
     },
-    version = "v0.12.2",
+    version = "v0.12.3",
     opts = {
         keymap = {
             preset = "default",
@@ -28,6 +28,9 @@ return {
         },
         snippets = {
             preset = "luasnip",
+        },
+        fuzzy = {
+            sorts = { "exact", "score", "sort_text" },
         },
         completion = {
             accept = {
@@ -83,7 +86,7 @@ return {
             },
         },
         cmdline = {
-            -- enabled = false,
+            enabled = false,
         },
         sources = {
             default = { "lsp", "path", "snippets", "buffer" },
