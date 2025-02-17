@@ -85,6 +85,9 @@ return {
                 show_without_selection = true,
             },
         },
+        term = {
+            enabled = false,
+        },
         cmdline = {
             enabled = false,
         },
