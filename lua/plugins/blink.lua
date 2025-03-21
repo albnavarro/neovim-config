@@ -4,14 +4,17 @@ return {
     "saghen/blink.cmp",
     lazy = false, -- lazy loading handled internally
     dependencies = {
-        "L3MON4D3/LuaSnip",
-        -- follow latest release.
-        version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
-        dependencies = { "rafamadriz/friendly-snippets" },
-        config = function()
-            require("luasnip.loaders.from_vscode").lazy_load()
-        end,
+        "rafamadriz/friendly-snippets",
     },
+    -- dependencies = {
+    --     "L3MON4D3/LuaSnip",
+    --     -- follow latest release.
+    --     version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    --     dependencies = { "rafamadriz/friendly-snippets" },
+    --     config = function()
+    --         require("luasnip.loaders.from_vscode").lazy_load()
+    --     end,
+    -- },
     version = "v0.14.0",
     opts = {
         keymap = {
@@ -27,9 +30,9 @@ return {
             nerd_font_variant = "normal",
             use_nvim_cmp_as_default = true,
         },
-        snippets = {
-            preset = "luasnip",
-        },
+        -- snippets = {
+        --     preset = "luasnip",
+        -- },
         fuzzy = {
             sorts = { "exact", "score", "sort_text" },
         },
