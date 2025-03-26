@@ -1,6 +1,14 @@
 # Road to 0.11
 - https://gpanders.com/blog/whats-new-in-neovim-0-11/
 
+- Si possono eleminare le capabilities da lsp_config:
+
+```lua
+lsp_config.volar.setup({})
+```
+
+### Native:
+
 ```lua
 vim.lsp.enable({ "emmet_language_server" })
 ```
@@ -35,3 +43,5 @@ return {
     single_file_support = true,
 }
 ```
+
+
