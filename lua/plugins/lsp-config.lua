@@ -206,21 +206,12 @@ return {
         vim.diagnostic.config({
             severity_sort = true,
             virtual_text = false,
+            virtual_lines = false,
             signs = true,
             update_in_insert = false,
             underline = true,
             float = { border = "rounded" },
         })
-
-        local hover = vim.lsp.buf.hover
-        vim.lsp.buf.hover = function()
-            ---@diagnostic disable-next-line: redundant-parameter
-            return hover({
-                border = "rounded",
-                max_height = math.floor(vim.o.lines * 0.5),
-                max_width = math.floor(vim.o.columns * 0.4),
-            })
-        end
 
         vim.lsp.handlers["textDocument/signatureHelp"] =
             vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", max_width = 80 })
@@ -248,8 +239,8 @@ return {
         map.set("n", "gl", vim.diagnostic.open_float)
 
         -- From 0.10 is in core
-        -- map.set("n", "[d", vim.diagnostic.goto_prev)
-        -- map.set("n", "]d", vim.diagnostic.goto_next)
+        map.set("n", "[d", vim.diagnostic.goto_prev)
+        map.set("n", "]d", vim.diagnostic.goto_next)
 
         ---
         -- LSP attach
@@ -261,7 +252,15 @@ return {
                 local opts = { buffer = ev.buf }
 
                 -- From 0.10 is in core
-                -- map.set("n", "K", vim.lsp.buf.hover, opts)
+                map.set("n", "K", function()
+                    ---@diagnostic disable-next-line: redundant-parameter
+                    return vim.lsp.buf.hover({
+                        border = "rounded",
+                        max_height = math.floor(vim.o.lines * 0.5),
+                        max_width = math.floor(vim.o.columns * 0.4),
+                    })
+                end)
+
                 map.set("n", "gd", vim.lsp.buf.definition, opts)
                 map.set("n", "gD", vim.lsp.buf.declaration, opts)
                 map.set("n", "gi", vim.lsp.buf.implementation, opts)
