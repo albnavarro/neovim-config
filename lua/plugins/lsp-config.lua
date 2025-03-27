@@ -224,19 +224,14 @@ return {
             float = { border = "rounded" },
         })
 
-        if vim.fn.has("nvim-0.11") == 1 then
-            local hover = vim.lsp.buf.hover
-            vim.lsp.buf.hover = function()
-                ---@diagnostic disable-next-line: redundant-parameter
-                return hover({
-                    border = "rounded",
-                    max_height = math.floor(vim.o.lines * 0.5),
-                    max_width = math.floor(vim.o.columns * 0.4),
-                })
-            end
-        else
-            vim.lsp.handlers["textDocument/hover"] =
-                vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded", max_width = 80 })
+        local hover = vim.lsp.buf.hover
+        vim.lsp.buf.hover = function()
+            ---@diagnostic disable-next-line: redundant-parameter
+            return hover({
+                border = "rounded",
+                max_height = math.floor(vim.o.lines * 0.5),
+                max_width = math.floor(vim.o.columns * 0.4),
+            })
         end
 
         vim.lsp.handlers["textDocument/signatureHelp"] =
@@ -291,13 +286,8 @@ return {
                     vim.lsp.buf.format({ async = true })
                 end, opts)
 
-                -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
                 local function client_supports_method(client, method, bufnr)
-                    if vim.fn.has("nvim-0.11") == 1 then
-                        return client:supports_method(method, bufnr)
-                    else
-                        return client.supports_method(method, { bufnr = bufnr })
-                    end
+                    return client:supports_method(method, bufnr)
                 end
 
                 -- The following two autocommands are used to highlight references of the
