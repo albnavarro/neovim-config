@@ -9,7 +9,7 @@ return {
         -- "hrsh7th/cmp-nvim-lsp",
         "saghen/blink.cmp",
     },
-    version = "v1.7.0",
+    -- version = "v1.7.0",
     event = "VeryLazy",
     config = function()
         ---
