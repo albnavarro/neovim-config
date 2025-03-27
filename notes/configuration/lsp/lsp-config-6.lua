@@ -6,6 +6,8 @@ return {
             build = ":MasonUpdate", -- :MasonUpdate updates registry contents
         },
         "williamboman/mason-lspconfig.nvim",
+        -- "hrsh7th/cmp-nvim-lsp",
+        "saghen/blink.cmp",
     },
     -- version = "v1.7.0",
     event = "VeryLazy",
@@ -39,6 +41,12 @@ return {
                 "jsonls",
             },
         })
+
+        --
+        -- completion capabilities
+        --
+        -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
+        local capabilities = require("blink.cmp").get_lsp_capabilities()
 
         ---
         -- Serve configuration
@@ -76,6 +84,7 @@ return {
         -- local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
         lsp_config.vtsls.setup({
+            capabilities = capabilities,
             filetypes = { "typescript", "javascript", "vue" },
             settings = {
                 javascript = {
@@ -115,16 +124,16 @@ return {
         })
 
         -- html
-        lsp_config.html.setup({})
+        lsp_config.html.setup({ capabilities = capabilities })
 
         -- cssls
-        lsp_config.cssls.setup({})
+        lsp_config.cssls.setup({ capabilities = capabilities })
 
         -- jsonls
-        lsp_config.jsonls.setup({})
+        lsp_config.jsonls.setup({ capabilities = capabilities })
 
         -- volar
-        lsp_config.volar.setup({})
+        lsp_config.volar.setup({ capabilities = capabilities })
 
         -- graphql
         -- lsp_config.graphql.setup({
@@ -134,6 +143,7 @@ return {
 
         -- svelte
         lsp_config.svelte.setup({
+            capabilities = capabilities,
             on_attach = function(client)
                 -- Refresh lsp when js o ts file change.
                 vim.api.nvim_create_autocmd("BufWritePost", {
@@ -174,6 +184,7 @@ return {
 
         -- Extend emmet_ls to twig and javascript
         lsp_config.emmet_language_server.setup({
+            capabilities = capabilities,
             filetypes = {
                 "css",
                 "eruby",
@@ -192,6 +203,7 @@ return {
 
         -- Remove undefined global vim warning.
         lsp_config.lua_ls.setup({
+            capabilities = capabilities,
             settings = {
                 Lua = {
                     diagnostics = {
