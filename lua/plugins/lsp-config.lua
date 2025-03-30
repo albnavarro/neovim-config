@@ -213,9 +213,6 @@ return {
             float = { border = "rounded" },
         })
 
-        vim.lsp.handlers["textDocument/signatureHelp"] =
-            vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded", max_width = 80 })
-
         local command = vim.api.nvim_create_user_command
 
         command("LspWorkspaceAdd", function()
@@ -251,10 +248,20 @@ return {
                 -- LSP actions
                 local opts = { buffer = ev.buf }
 
-                -- From 0.10 is in core
+                -- K is neovim default
                 map.set("n", "K", function()
                     ---@diagnostic disable-next-line: redundant-parameter
                     return vim.lsp.buf.hover({
+                        border = "rounded",
+                        max_height = math.floor(vim.o.lines * 0.5),
+                        max_width = math.floor(vim.o.columns * 0.4),
+                    })
+                end)
+
+                -- <C-s> is neovim default
+                map.set("i", "<C-s>", function()
+                    ---@diagnostic disable-next-line: redundant-parameter
+                    return vim.lsp.buf.signature_help({
                         border = "rounded",
                         max_height = math.floor(vim.o.lines * 0.5),
                         max_width = math.floor(vim.o.columns * 0.4),
