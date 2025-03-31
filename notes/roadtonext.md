@@ -32,7 +32,6 @@ return {
         "less",
         "sass",
         "scss",
-        "pug",
         "typescriptreact",
         "twig",
         "php",
@@ -44,4 +43,23 @@ return {
 }
 ```
 
+- override: `after/lsp/emmet_language_server.lua`
 
+```lua
+return {
+    filetypes = {
+        "css",
+        "eruby",
+        "html",
+        "javascript",
+        "javascriptreact",
+        "less",
+        "sass",
+        "scss",
+        "typescriptreact",
+        "twig",
+        "php",
+        "pug",
+    },
+}
+```
