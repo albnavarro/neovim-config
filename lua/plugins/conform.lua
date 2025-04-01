@@ -65,7 +65,7 @@ return {
             },
             {
 
-                lang = { "javascript", "typescript" },
+                lang = { "javascript", "typescript", "vue" },
                 formatter = "eslint_d",
             },
         }
