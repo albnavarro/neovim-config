@@ -79,10 +79,18 @@ return {
             filetypes = { "typescript", "javascript", "vue" },
             settings = {
                 javascript = {
+                    preferences = {
+                        importModuleSpecifier = "non-relative",
+                    },
                     inlayHints = {
                         functionLikeReturnTypes = { enabled = true },
                         parameterNames = { enabled = "all" },
                         variableTypes = { enabled = true },
+                    },
+                },
+                typescript = {
+                    preferences = {
+                        importModuleSpecifier = "non-relative",
                     },
                 },
                 vtsls = {
@@ -249,24 +257,47 @@ return {
                 local opts = { buffer = ev.buf }
 
                 -- K is neovim default
-                map.set("n", "K", function()
+                local hover = vim.lsp.buf.hover
+                ---@diagnostic disable-next-line: duplicate-set-field
+                vim.lsp.buf.hover = function()
                     ---@diagnostic disable-next-line: redundant-parameter
-                    return vim.lsp.buf.hover({
+                    return hover({
                         border = "rounded",
                         max_height = math.floor(vim.o.lines * 0.5),
                         max_width = math.floor(vim.o.columns * 0.4),
                     })
-                end)
+                end
+
+                -- map.set("n", "K", function()
+                --     ---@diagnostic disable-next-line: redundant-parameter
+                --     return vim.lsp.buf.hover({
+                --         border = "rounded",
+                --         max_height = math.floor(vim.o.lines * 0.5),
+                --         max_width = math.floor(vim.o.columns * 0.4),
+                --     })
+                -- end)
 
                 -- <C-s> is neovim default
-                map.set("i", "<C-s>", function()
+                local signature_help = vim.lsp.buf.signature_help
+                ---@diagnostic disable-next-line: duplicate-set-field
+                vim.lsp.buf.signature_help = function()
                     ---@diagnostic disable-next-line: redundant-parameter
-                    return vim.lsp.buf.signature_help({
+                    return signature_help({
                         border = "rounded",
                         max_height = math.floor(vim.o.lines * 0.5),
                         max_width = math.floor(vim.o.columns * 0.4),
                     })
-                end)
+                end
+
+                -- <C-s> is neovim default
+                -- map.set("i", "<C-s>", function()
+                --     ---@diagnostic disable-next-line: redundant-parameter
+                --     return vim.lsp.buf.signature_help({
+                --         border = "rounded",
+                --         max_height = math.floor(vim.o.lines * 0.5),
+                --         max_width = math.floor(vim.o.columns * 0.4),
+                --     })
+                -- end)
 
                 map.set("n", "gd", vim.lsp.buf.definition, opts)
                 map.set("n", "gD", vim.lsp.buf.declaration, opts)
