@@ -1,0 +1,82 @@
+{
+    "workbench.colorTheme": "Nord",
+    "editor.fontSize": 16,
+    "workbench.settings.applyToAllProfiles": ["editor.fontSize"],
+    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "vim.leader": "<Space>",
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": ["<C-j>"],
+            "after": ["5", "j"]
+        },
+        {
+            "before": ["<C-k>"],
+            "after": ["5", "k"]
+        },
+        {
+            "before": ["leader", "w"],
+            "commands": ["workbench.action.files.save"]
+        },
+        {
+            "before": ["leader", "q"],
+            "commands": ["workbench.action.closeActiveEditor"]
+        },
+        {
+            "before": ["<tab>"],
+            "commands": [":tabnext"]
+        },
+        {
+            "before": ["<s-tab>"],
+            "commands": [":tabprev"]
+        },
+        {
+            "before": ["g", "l"],
+            "commands": ["editor.action.showHover"]
+        },
+        {
+            "before": ["K"],
+            "commands": ["editor.action.showHover"]
+        },
+        {
+            "before": ["leader", "o"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["leader", "a"],
+            "commands": ["editor.action.selectAll"]
+        },
+        {
+            "before": ["leader", "f", "r"],
+            "commands": ["editor.action.goToReferences"]
+        },
+        {
+            "before": ["leader", "p"],
+            "after": ["p"]
+        },
+        {
+            "before": ["leader", "c"],
+            "commands": ["editor.action.clipboardCopyAction"]
+        },
+        {
+            "before": ["leader", "v"],
+            "commands": ["editor.action.clipboardPasteAction"]
+        },
+        {
+            "before": ["leader", "g", "r"],
+            "commands": ["git.revertSelectedRanges"],
+            "when": "editorTextFocus && gitEditorFocus"
+        },
+        {
+            "before": ["]", "d"],
+            "commands": ["editor.action.marker.nextInFiles"],
+            "silent": true
+        },
+        {
+            "before": ["[", "d"],
+            "commands": ["editor.action.marker.prevInFiles"],
+            "silent": true
+        }
+    ]
+}
