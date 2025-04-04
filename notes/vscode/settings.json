@@ -1,19 +1,45 @@
 {
     "workbench.colorTheme": "Nord",
-    "editor.fontSize": 16,
+    "editor.fontSize": 15,
     "workbench.settings.applyToAllProfiles": ["editor.fontSize"],
     "javascript.preferences.importModuleSpecifier": "non-relative",
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true,
+    "workbench.editor.limit.value": 1,
+    "workbench.editor.limit.perEditorGroup": true,
+    "workbench.editor.limit.enabled": true,
+    "editor.minimap.enabled": false,
+    "editor.smoothScrolling": true,
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
     "vim.leader": "<Space>",
+    "vim.highlightedyank.enable": true,
+    "vim.highlightedyank.color": "#a9dc7660",
+    "vim.highlightedyank.duration": 250,
     "vim.normalModeKeyBindingsNonRecursive": [
         {
+            "before": ["<C-e>"],
+            "after": ["1", "0", "<C-e>"]
+        },
+        {
+            "before": ["<C-y>"],
+            "after": ["1", "0", "<C-y>"]
+        },
+        {
             "before": ["<C-j>"],
-            "after": ["5", "j"]
+            "after": ["0", "5", "j"]
         },
         {
             "before": ["<C-k>"],
-            "after": ["5", "k"]
+            "after": ["0", "5", "k"]
+        },
+        {
+            "before": ["<C-l>"],
+            "after": ["2", "0", "l"]
+        },
+        {
+            "before": ["<C-h>"],
+            "after": ["2", "0", "h"]
         },
         {
             "before": ["leader", "w"],
@@ -25,11 +51,27 @@
         },
         {
             "before": ["<tab>"],
-            "commands": [":tabnext"]
+            "commands": ["workbench.action.focusNextGroup"]
         },
         {
             "before": ["<s-tab>"],
-            "commands": [":tabprev"]
+            "commands": ["workbench.action.focusPreviousGroup"]
+        },
+        {
+            "before": ["leader", "l"],
+            "commands": ["workbench.action.moveActiveEditorGroupRight"]
+        },
+        {
+            "before": ["leader", "h"],
+            "commands": ["workbench.action.moveActiveEditorGroupLeft"]
+        },
+        {
+            "before": ["leader", "j"],
+            "commands": ["workbench.action.moveActiveEditorGroupDown"]
+        },
+        {
+            "before": ["leader", "k"],
+            "commands": ["workbench.action.moveActiveEditorGroupUp"]
         },
         {
             "before": ["g", "l"],
@@ -41,6 +83,10 @@
         },
         {
             "before": ["leader", "o"],
+            "commands": ["workbench.action.quickOpen"]
+        },
+        {
+            "before": ["leader", "f", "f"],
             "commands": ["workbench.action.quickOpen"]
         },
         {
@@ -77,6 +123,52 @@
             "before": ["[", "d"],
             "commands": ["editor.action.marker.prevInFiles"],
             "silent": true
+        },
+        {
+            "before": ["leader", "t", "f"],
+            "commands": ["workbench.view.explorer"]
+        },
+        {
+            "before": ["`"],
+            "after": ["/"]
+        },
+        {
+            "before": ["~"],
+            "after": ["?"]
+        },
+        {
+            "before": ["<C-b>"],
+            "commands": ["workbench.action.reopenClosedEditor"]
+        },
+        {
+            "before": ["<C-p>"],
+            "after": ["<C-i>"]
+        }
+    ],
+    "vim.visualModeKeyBindingsNonRecursive": [
+        {
+            "before": ["leader", "c"],
+            "commands": ["editor.action.clipboardCopyAction"]
+        },
+        {
+            "before": ["leader", "v"],
+            "commands": ["editor.action.clipboardPasteAction"]
+        },
+        {
+            "before": ["leader", "p"],
+            "after": ["p"]
+        },
+        {
+            "before": ["leader", "x"],
+            "commands": ["editor.action.clipboardCutAction"]
+        },
+        {
+            "before": ["<C-j>"],
+            "after": ["0", "5", "j"]
+        },
+        {
+            "before": ["<C-k>"],
+            "after": ["0", "5", "k"]
         }
     ]
 }
