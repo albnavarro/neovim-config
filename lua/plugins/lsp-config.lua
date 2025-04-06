@@ -80,7 +80,7 @@ return {
             settings = {
                 javascript = {
                     preferences = {
-                        importModuleSpecifier = "non-relative",
+                        -- importModuleSpecifier = "non-relative",
                     },
                     inlayHints = {
                         functionLikeReturnTypes = { enabled = true },
@@ -90,7 +90,7 @@ return {
                 },
                 typescript = {
                     preferences = {
-                        importModuleSpecifier = "non-relative",
+                        -- importModuleSpecifier = "non-relative",
                     },
                 },
                 vtsls = {
