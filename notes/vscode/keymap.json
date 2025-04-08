@@ -28,5 +28,15 @@
         "key": "p",
         "command": "filesExplorer.paste",
         "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
+    },
+    {
+        "key": "ctrl+v",
+        "command": "periscope.openInHorizontalSplit",
+        "when": "periscopeActive"
+    },
+    {
+        "key": "enter",
+        "command": "list.select",
+        "when": "explorerViewletVisible && filesExplorerFocus && !explorerResourceReadonly && !inputFocus"
     }
 ]
