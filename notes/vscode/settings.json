@@ -131,8 +131,18 @@
             "silent": true
         },
         {
+            "before": ["]", "c"],
+            "commands": ["workbench.action.editor.nextChange"],
+            "when": "editorTextFocus"
+        },
+        {
+            "before": ["[", "c"],
+            "commands": ["workbench.action.editor.previousChange"],
+            "when": "editorTextFocus"
+        },
+        {
             "before": ["leader", "t", "f"],
-            "commands": ["workbench.view.explorer"]
+            "commands": ["workbench.files.action.showActiveFileInExplorer"]
         },
         {
             "before": ["`"],
