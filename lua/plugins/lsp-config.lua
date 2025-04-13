@@ -209,8 +209,7 @@ return {
                         end,
                     })
                 end
-                --
-                -- Svelte update on js/ts file update
+
                 -- if client.name == "esLint" then
                 --     vim.keymap.set(
                 --         "n",
