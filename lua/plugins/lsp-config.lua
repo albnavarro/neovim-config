@@ -33,7 +33,6 @@ return {
                 "lua_ls",
                 "svelte",
                 "volar",
-                -- "graphql",
                 -- "eslint",
                 -- "stylelint_lsp",
                 "jsonls",
@@ -45,123 +44,33 @@ return {
         ---
 
         -- tsserver
-        -- lsp_config.ts_ls.setup({
-        --     capabilities = capabilities,
-        --     filetypes = { "typescript", "javascript", "vue" },
-        --     init_options = {
-        --         preferences = {
-        --             includeInlayParameterNameHints = "all",
-        --             includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-        --             includeInlayFunctionParameterTypeHints = true,
-        --             includeInlayVariableTypeHints = true,
-        --             includeInlayPropertyDeclarationTypeHints = true,
-        --             includeInlayFunctionLikeReturnTypeHints = true,
-        --             includeInlayEnumMemberValueHints = true,
-        --             importModuleSpecifierPreference = "non-relative",
-        --         },
-        --         plugins = {
-        --             {
-        --                 name = "@vue/typescript-plugin",
-        --                 location = require("mason-registry").get_package("vue-language-server"):get_install_path()
-        --                     .. "/node_modules/@vue/language-server",
-        --                 languages = { "vue" },
-        --             },
-        --         },
-        --     },
-        -- })
+        -- vim.lsp.enable("ts_ls")
 
-        -- typescript
-
-        -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
-        -- local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
-
-        lsp_config.vtsls.setup({
-            filetypes = { "typescript", "javascript", "vue" },
-            settings = {
-                javascript = {
-                    preferences = {
-                        -- importModuleSpecifier = "non-relative",
-                    },
-                    inlayHints = {
-                        functionLikeReturnTypes = { enabled = true },
-                        parameterNames = { enabled = "all" },
-                        variableTypes = { enabled = true },
-                    },
-                },
-                typescript = {
-                    preferences = {
-                        -- importModuleSpecifier = "non-relative",
-                    },
-                },
-                vtsls = {
-                    autoUseWorkspaceTsdk = true,
-                    experimental = {
-                        -- Inlay hint truncation.
-                        maxInlayHintLength = 30,
-                        -- For completion performance.
-                        completion = {
-                            enableServerSideFuzzyMatch = true,
-                        },
-                    },
-                    tsserver = {
-                        globalPlugins = {
-                            {
-                                name = "@vue/typescript-plugin",
-                                -- location = volar_path,
-                                location = require("mason-registry")
-                                    .get_package("vue-language-server")
-                                    :get_install_path()
-                                    .. "/node_modules/@vue/language-server",
-                                languages = { "vue" },
-                                configNamespace = "typescript",
-                                enableForWorkspaceTypeScriptVersions = true,
-                            },
-                        },
-                    },
-                },
-            },
-        })
+        vim.lsp.enable("vtsls")
 
         -- html
-        lsp_config.html.setup({})
+        vim.lsp.enable("html")
 
         -- cssls
-        lsp_config.cssls.setup({})
+        vim.lsp.enable("cssls")
 
         -- jsonls
-        lsp_config.jsonls.setup({})
+        vim.lsp.enable("jsonls")
 
         -- volar
+        -- old lsp_config, wait for support
         lsp_config.volar.setup({})
 
-        -- graphql
-        -- lsp_config.graphql.setup({
-        --     capabilities = capabilities,
-        --     filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-        -- })
-
         -- svelte
-        lsp_config.svelte.setup({
-            on_attach = function(client)
-                -- Refresh lsp when js o ts file change.
-                vim.api.nvim_create_autocmd("BufWritePost", {
-                    pattern = { "*.js", "*.ts" },
-                    group = vim.api.nvim_create_augroup("svelte_ondidchangetsorjsfile", { clear = true }),
-                    callback = function(ctx)
-                        client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-                    end,
-                })
-            end,
-        })
+        vim.lsp.enable("svelte")
 
         -- esLint
         -- lsp_config.eslint.setup({
-        --     capabilities = capabilities,
         --     settings = { format = false },
         --     on_attach = function(_, bufnr)
         --         vim.keymap.set(
         --             "n",
-        --             "<leader>ce",
+        --             "<leader>=",
         --             "<cmd>EslintFixAll<cr>",
         --             { desc = "Fix all ESLint errors", buffer = bufnr }
         --         )
@@ -169,46 +78,13 @@ return {
         -- })
 
         -- stylelint
-        -- lsp_config.stylelint_lsp.setup({
-        --     capabilities = capabilities,
-        --     filetypes = { "scss", "css" },
-        --     settings = {
-        --         stylelintplus = {
-        --             autoFixOnFormat = true,
-        --             -- autoFixOnSave = true,
-        --         },
-        --     },
-        -- })
+        -- vim.lsp.enable("stylelint_lsp")
 
         -- Extend emmet_ls to twig and javascript
-        lsp_config.emmet_language_server.setup({
-            filetypes = {
-                "css",
-                "eruby",
-                "html",
-                "javascript",
-                "javascriptreact",
-                "less",
-                "sass",
-                "scss",
-                "pug",
-                "typescriptreact",
-                "twig",
-                "php",
-            },
-        })
+        vim.lsp.enable("emmet_language_server")
 
         -- Remove undefined global vim warning.
-        lsp_config.lua_ls.setup({
-            settings = {
-                Lua = {
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = { "vim" },
-                    },
-                },
-            },
-        })
+        vim.lsp.enable("lua_ls")
 
         -- Global configuration
         vim.diagnostic.config({
@@ -321,6 +197,29 @@ return {
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
                 local client = vim.lsp.get_client_by_id(ev.data.client_id)
+
+                -- Svelte update on js/ts file update
+                if client.name == "svelte" then
+                    -- Refresh lsp when js o ts file change.
+                    vim.api.nvim_create_autocmd("BufWritePost", {
+                        pattern = { "*.js", "*.ts" },
+                        group = vim.api.nvim_create_augroup("svelte_ondidchangetsorjsfile", { clear = true }),
+                        callback = function(ctx)
+                            client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
+                        end,
+                    })
+                end
+                --
+                -- Svelte update on js/ts file update
+                -- if client.name == "esLint" then
+                --     vim.keymap.set(
+                --         "n",
+                --         "<leader>=",
+                --         "<cmd>EslintFixAll<cr>",
+                --         { desc = "Fix all ESLint errors", buffer = ev.buf }
+                --     )
+                -- end
+
                 if
                     client
                     and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_documentHighlight, ev.buf)
