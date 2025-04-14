@@ -43,26 +43,18 @@ return {
         -- Serve configuration
         ---
 
-        -- tsserver
         -- vim.lsp.enable("ts_ls")
-
+        -- vim.lsp.enable("stylelint_lsp")
         vim.lsp.enable("vtsls")
-
-        -- html
         vim.lsp.enable("html")
-
-        -- cssls
         vim.lsp.enable("cssls")
-
-        -- jsonls
         vim.lsp.enable("jsonls")
+        vim.lsp.enable("svelte")
+        vim.lsp.enable("emmet_language_server")
+        vim.lsp.enable("lua_ls")
 
-        -- volar
         -- old lsp_config, wait for support
         lsp_config.volar.setup({})
-
-        -- svelte
-        vim.lsp.enable("svelte")
 
         -- esLint
         -- lsp_config.eslint.setup({
@@ -76,15 +68,6 @@ return {
         --         )
         --     end,
         -- })
-
-        -- stylelint
-        -- vim.lsp.enable("stylelint_lsp")
-
-        -- Extend emmet_ls to twig and javascript
-        vim.lsp.enable("emmet_language_server")
-
-        -- Remove undefined global vim warning.
-        vim.lsp.enable("lua_ls")
 
         -- Global configuration
         vim.diagnostic.config({
