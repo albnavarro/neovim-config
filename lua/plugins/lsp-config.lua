@@ -52,9 +52,10 @@ return {
         vim.lsp.enable("svelte")
         vim.lsp.enable("emmet_language_server")
         vim.lsp.enable("lua_ls")
+        vim.lsp.enable("volar")
 
         -- old lsp_config, wait for support
-        lsp_config.volar.setup({})
+        -- lsp_config.volar.setup({})
 
         -- esLint
         -- lsp_config.eslint.setup({
