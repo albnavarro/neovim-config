@@ -45,6 +45,7 @@ return {
 
         -- vim.lsp.enable("ts_ls")
         -- vim.lsp.enable("stylelint_lsp")
+        -- vim.lsp.enable("eslint")
         vim.lsp.enable("vtsls")
         vim.lsp.enable("html")
         vim.lsp.enable("cssls")
@@ -56,19 +57,6 @@ return {
 
         -- old lsp_config.
         -- lsp_config.volar.setup({})
-
-        -- esLint
-        -- lsp_config.eslint.setup({
-        --     settings = { format = false },
-        --     on_attach = function(_, bufnr)
-        --         vim.keymap.set(
-        --             "n",
-        --             "<leader>=",
-        --             "<cmd>EslintFixAll<cr>",
-        --             { desc = "Fix all ESLint errors", buffer = bufnr }
-        --         )
-        --     end,
-        -- })
 
         -- Global configuration
         vim.diagnostic.config({
@@ -193,15 +181,6 @@ return {
                         end,
                     })
                 end
-
-                -- if client.name == "esLint" then
-                --     vim.keymap.set(
-                --         "n",
-                --         "<leader>=",
-                --         "<cmd>EslintFixAll<cr>",
-                --         { desc = "Fix all ESLint errors", buffer = ev.buf }
-                --     )
-                -- end
 
                 if
                     client
