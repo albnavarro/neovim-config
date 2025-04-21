@@ -15,7 +15,7 @@ return {
         ---
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
-        local lsp_config = require("lspconfig")
+        -- local lsp_config = require("lspconfig")
         local map = vim.keymap
 
         ---
@@ -54,7 +54,7 @@ return {
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("volar")
 
-        -- old lsp_config, wait for support
+        -- old lsp_config.
         -- lsp_config.volar.setup({})
 
         -- esLint
