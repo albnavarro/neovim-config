@@ -32,13 +32,10 @@ return {
 
             if vim.fn.isdirectory(localPath) ~= 0 then
                 config.init_options.typescript.tsdk = localPath
-                return
             elseif vim.fn.isdirectory(vtslsPath) ~= 0 then
                 config.init_options.typescript.tsdk = vtslsPath
-                return
             elseif vim.fn.isdirectory(tslsPath) ~= 0 then
                 config.init_options.typescript.tsdk = tslsPath
-                return
             elseif vim.fn.isdirectory(vuePath) ~= 0 then
                 config.init_options.typescript.tsdk = vuePath
             end
