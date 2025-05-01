@@ -4,6 +4,7 @@ return {
         {
             "williamboman/mason.nvim",
             build = ":MasonUpdate", -- :MasonUpdate updates registry contents
+            version = "v1.11.0",
         },
         "williamboman/mason-lspconfig.nvim",
     },
