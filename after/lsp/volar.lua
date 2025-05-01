@@ -38,7 +38,7 @@ return {
 
             -- Find first valid path in priority order.
             local firstValidPath = U.find(paths, function(path)
-                return vim.fn.isdirectory(path) ~= 0
+                return vim.fn.isdirectory(path) == 1
             end)
 
             -- print(firstValidPath)
