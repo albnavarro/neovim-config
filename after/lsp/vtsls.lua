@@ -44,6 +44,7 @@ return {
                 -- For completion performance.
                 completion = {
                     enableServerSideFuzzyMatch = true,
+                    entriesLimit = 50,
                 },
             },
             tsserver = {
