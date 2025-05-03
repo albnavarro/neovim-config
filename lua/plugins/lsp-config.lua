@@ -117,15 +117,6 @@ return {
                     })
                 end
 
-                -- map.set("n", "K", function()
-                --     ---@diagnostic disable-next-line: redundant-parameter
-                --     return vim.lsp.buf.hover({
-                --         border = "rounded",
-                --         max_height = math.floor(vim.o.lines * 0.5),
-                --         max_width = math.floor(vim.o.columns * 0.4),
-                --     })
-                -- end)
-
                 -- <C-s> is neovim default
                 local signature_help = vim.lsp.buf.signature_help
                 ---@diagnostic disable-next-line: duplicate-set-field
@@ -137,16 +128,6 @@ return {
                         max_width = math.floor(vim.o.columns * 0.4),
                     })
                 end
-
-                -- <C-s> is neovim default
-                -- map.set("i", "<C-s>", function()
-                --     ---@diagnostic disable-next-line: redundant-parameter
-                --     return vim.lsp.buf.signature_help({
-                --         border = "rounded",
-                --         max_height = math.floor(vim.o.lines * 0.5),
-                --         max_width = math.floor(vim.o.columns * 0.4),
-                --     })
-                -- end)
 
                 map.set("n", "gd", vim.lsp.buf.definition, opts)
                 map.set("n", "gD", vim.lsp.buf.declaration, opts)
@@ -170,18 +151,6 @@ return {
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
                 local client = vim.lsp.get_client_by_id(ev.data.client_id)
-
-                -- Svelte update on js/ts file update
-                if client.name == "svelte" then
-                    -- Refresh lsp when js o ts file change.
-                    vim.api.nvim_create_autocmd("BufWritePost", {
-                        pattern = { "*.js", "*.ts" },
-                        group = vim.api.nvim_create_augroup("svelte_ondidchangetsorjsfile", { clear = true }),
-                        callback = function(ctx)
-                            client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-                        end,
-                    })
-                end
 
                 if
                     client
