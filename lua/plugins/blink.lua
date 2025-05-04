@@ -15,7 +15,7 @@ return {
     --         require("luasnip.loaders.from_vscode").lazy_load()
     --     end,
     -- },
-    version = "v1.1.1",
+    version = "v1.2.0",
     opts = {
         keymap = {
             preset = "default",
