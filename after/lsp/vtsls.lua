@@ -1,5 +1,6 @@
 local function get_volar_config()
-    local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+    -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+    local mason_packages = vim.fn.expand("$MASON/packages")
     local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
     return vim.fn.isdirectory(volar_path) == 1

@@ -1,6 +1,7 @@
 local U = require("utils/tables_utils")
 local LspConfigUtils = require("lspconfig.util")
-local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+-- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+local mason_packages = vim.fn.expand("$MASON/packages")
 
 -- local typescript
 -- local function get_local_typescript_server_path(root_dir)
