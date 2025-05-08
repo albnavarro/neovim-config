@@ -1,5 +1,6 @@
 local U = require("utils/tables_utils")
 local LspConfigUtils = require("lspconfig.util")
+local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
 
 -- local typescript
 -- local function get_local_typescript_server_path(root_dir)
@@ -11,21 +12,21 @@ local LspConfigUtils = require("lspconfig.util")
 local pathsTable = {
     {
         package = "vtsls",
-        path = "/node_modules/@vtsls/language-server/node_modules/typescript/lib",
+        path = "/vtsls/node_modules/@vtsls/language-server/node_modules/typescript/lib",
     },
     {
-        package = "typescript-language-server",
-        path = "/node_modules/typescript/lib/",
+        package = "ts_ls",
+        path = "/typescript-language-server/node_modules/typescript/lib/",
     },
     {
-        package = "vue-language-server",
-        path = "/node_modules/typescript/lib",
+        package = "volar",
+        path = "/vue-language-server/node_modules/typescript/lib",
     },
 }
 
 -- get table with lib paths
 local paths = U.map(pathsTable, function(item)
-    return require("mason-registry").get_package(item.package):get_install_path() .. item.path
+    return mason_packages .. item.path
 end)
 
 return {
@@ -41,7 +42,7 @@ return {
                 return vim.fn.isdirectory(path) == 1
             end)
 
-            -- print(firstValidPath)
+            print(firstValidPath)
 
             config.init_options.typescript.tsdk = firstValidPath
         end

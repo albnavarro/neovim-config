@@ -1,7 +1,7 @@
 -- typescript
 
--- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
--- local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
+local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
 return {
     filetypes = { "typescript", "javascript", "vue" },
@@ -19,8 +19,7 @@ return {
         plugins = {
             {
                 name = "@vue/typescript-plugin",
-                location = require("mason-registry").get_package("vue-language-server"):get_install_path()
-                    .. "/node_modules/@vue/language-server",
+                location = volar_path,
                 languages = { "vue" },
             },
         },

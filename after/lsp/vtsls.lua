@@ -1,11 +1,6 @@
--- typescript
-
--- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
--- local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
-
 local function get_volar_config()
-    local volar_path = require("mason-registry").get_package("vue-language-server"):get_install_path()
-        .. "/node_modules/@vue/language-server"
+    local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+    local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
     return vim.fn.isdirectory(volar_path) == 1
             and {

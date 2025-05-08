@@ -1,14 +1,9 @@
 return {
     "neovim/nvim-lspconfig",
     dependencies = {
-        {
-            "williamboman/mason.nvim",
-            build = ":MasonUpdate", -- :MasonUpdate updates registry contents
-            version = "v1.11.0",
-        },
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason.nvim",
+        "mason-org/mason-lspconfig.nvim",
     },
-    -- version = "v1.7.0",
     event = "VeryLazy",
     config = function()
         ---
@@ -16,15 +11,15 @@ return {
         ---
         local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
-        -- local lsp_config = require("lspconfig")
         local map = vim.keymap
 
         ---
         -- Endsure install
         ---
 
-        mason.setup({})
+        mason.setup()
         mason_lspconfig.setup({
+            automatic_enable = false,
             ensure_installed = {
                 -- "ts_ls", -- Lsp config use ts_ls not mason
                 "vtsls",
