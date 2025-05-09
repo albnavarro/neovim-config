@@ -43,7 +43,7 @@ return {
                 return vim.fn.isdirectory(path) == 1
             end)
 
-            print(firstValidPath)
+            vim.notify("volar TSDK: " .. firstValidPath)
 
             config.init_options.typescript.tsdk = firstValidPath
         end
