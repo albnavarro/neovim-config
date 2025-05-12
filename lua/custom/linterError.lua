@@ -72,17 +72,28 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
             or item.source:match("^" .. STYLELINT .. "$")
     end)
 
-    -- print(vim.inspect(diagnostiFiltered))
+    -- vim.notify(vim.inspect(diagnostiFiltered))
 
     -- if no error skip
-    if U.tableSize(diagnostiFiltered) == 0 then
+    if #diagnostiFiltered == 0 then
         print("no error found")
         return
     end
 
+    -- get first element of table
+    -- use next() ? TODO: capire meglio.
+    local _, first_item = next(diagnostiFiltered)
+
+    if first_item == nil then
+        return
+    end
+
+    -- vim.notify(vim.inspect(first_item))
+
     -- get source ( eslint etc.. ), suppose is unoque per buffer
     -- so get source at fist item
-    local source = diagnostiFiltered[1].source
+    local source = first_item.source
+    -- vim.notify(source)
 
     -- concatenate errors in one string
     local error = U.reduce(diagnostiFiltered, function(previous, current, index)
