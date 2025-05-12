@@ -20,12 +20,12 @@ function M.map(tbl, f)
     return t
 end
 
--- filter js equivalent in format key, value
+-- filter js equivalent in format only value
 function M.filter(tbl, f)
     local t = {}
-    for k, v in pairs(tbl) do
+    for _, v in pairs(tbl) do
         if f(v) then
-            t[k] = v
+            table.insert(t, v)
         end
     end
     return t
@@ -43,16 +43,6 @@ function M.find(tbl, f)
     end
 
     return result
-end
-
--- get size of a table.
-function M.tableSize(tbl)
-    local size = 0
-    for _ in pairs(tbl) do
-        size = size + 1
-    end
-
-    return size
 end
 
 ---Reduces an array
