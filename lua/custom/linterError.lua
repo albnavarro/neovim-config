@@ -65,7 +65,7 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     local spaces = string.rep(" ", colStart - 1)
 
     -- Filter all error for buffer active linter
-    local diagnostiFiltered = U.filterArray(diagnostic, function(item)
+    local diagnostiFiltered = U.filter(diagnostic, function(item)
         -- Excat match ( eslint vs eslint_d )
         return item.source:match("^" .. ESLINT .. "$")
             or item.source:match("^" .. ESLINT_D .. "$")

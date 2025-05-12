@@ -45,17 +45,6 @@ function M.find(tbl, f)
     return result
 end
 
--- filter js equivalent in format only value
-function M.filterArray(tbl, f)
-    local t = {}
-    for _, v in pairs(tbl) do
-        if f(v) then
-            table.insert(t, v)
-        end
-    end
-    return t
-end
-
 -- get size of a table.
 function M.tableSize(tbl)
     local size = 0
