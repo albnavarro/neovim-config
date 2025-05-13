@@ -51,13 +51,15 @@ return {
             custom_rg.multi_rg(ivy)
         end, { desc = "[F]ind [N]eovim grep" })
 
-        -- Default pickers setting
-        local pickersSettings = U.map(builtin, function()
-            return {
+        -- print(vim.inspect(builtin))
+
+        local pickersSettings = vim.iter(builtin):fold({}, function(previous, key)
+            previous[key] = {
                 theme = "ivy",
                 disable_devicons = true,
                 color_devicons = false,
             }
+            return previous
         end)
 
         -- Update pattern to replace
