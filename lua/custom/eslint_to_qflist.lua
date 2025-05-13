@@ -4,8 +4,9 @@ local is_running = false
 
 local on_out = function(data)
     -- use pcall to avoid error of parsing
-    local success, jsonData = pcall(vim.json.decode, vim.json.encode(data, { object = true, array = true }))
+    local success, jsonData = pcall(vim.json.decode, vim.json.encode(data))
     if not success then
+        is_running = false
         return
     end
 
@@ -39,6 +40,11 @@ local on_out = function(data)
         end
     end
 
+    if #entries == 0 then
+        is_running = false
+        vim.notify("no error found")
+    end
+
     -- vim.print(vim.inspect(entries))
 
     -- Create quilist
@@ -58,17 +64,35 @@ vim.api.nvim_create_user_command("EslintRun", function()
         return
     end
 
-    local path = vim.fn.input({ prompt = "path: ", default = "./src/js" })
+    local path = ""
+    vim.ui.input({ prompt = "Enter path: ", default = "./src/js", completion = "file" }, function(input)
+        if input ~= nil then
+            path = input
+
+            -- clear input propt
+            vim.cmd(":redraw")
+            vim.print("wait ...")
+        end
+    end)
+
     local pathParsed = "npx eslint " .. path .. " --f json"
     is_running = true
+
+    if path == "" then
+        is_running = false
+        vim.notify("missing path")
+        return
+    end
 
     vim.fn.jobstart(pathParsed, {
         stdout_buffered = true,
         on_stdout = function(_, output)
             on_out(output)
         end,
-        on_stderr = function(err)
-            print(err)
+        on_stderr = function()
+            vim.cmd(":redraw")
+            is_running = false
+            vim.notify("no error found")
         end,
     })
 end, {})
