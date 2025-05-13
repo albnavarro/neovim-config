@@ -1,3 +1,5 @@
+-- https://neovim.io/doc/user/lua.html#vim.iter
+
 local treeApi = require("nvim-tree.api")
 local is_running = false
 
@@ -42,7 +44,7 @@ local on_out = function(data)
         :flatten()
         :totable()
 
-    vim.print(vim.inspect(entries))
+    -- vim.print(vim.inspect(entries))
 
     if #entries == 0 then
         is_running = false
