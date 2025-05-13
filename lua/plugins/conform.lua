@@ -72,7 +72,7 @@ return {
 
         -- get formatter by lang
         local function getFormatter(lang)
-            return U.find(formatterTable, function(item)
+            return vim.iter(formatterTable):find(function(item)
                 return U.has_value(item.lang, lang)
             end)
         end

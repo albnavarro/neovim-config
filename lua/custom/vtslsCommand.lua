@@ -2,9 +2,9 @@ local U = require("utils/tables_utils")
 --
 -- check uf current buffer has vtsls
 local function hasVtsls(bufnr)
-    local clients = vim.lsp.buf_get_clients(bufnr)
+    local clients = vim.lsp.get_clients(bufnr)
 
-    return U.find(clients, function(client)
+    return vim.iter(clients):find(function(client)
         return client.name == "vtsls"
     end)
 end
