@@ -1,4 +1,3 @@
-local U = require("utils/tables_utils")
 local LspConfigUtils = require("lspconfig.util")
 -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
 local mason_packages = vim.fn.expand("$MASON/packages")
@@ -26,9 +25,11 @@ local pathsTable = {
 }
 
 -- get table with lib paths
-local paths = U.map(pathsTable, function(item)
-    return mason_packages .. item.path
-end)
+local paths = vim.iter(pathsTable)
+    :map(function(item)
+        return mason_packages .. item.path
+    end)
+    :totable()
 
 return {
     before_init = function(_, config)
@@ -38,8 +39,7 @@ return {
 
             -- print(vim.inspect(paths))
 
-            -- Find first valid path in priority order.
-            local firstValidPath = U.find(paths, function(path)
+            local firstValidPath = vim.iter(paths):find(function(path)
                 return vim.fn.isdirectory(path) == 1
             end)
 
