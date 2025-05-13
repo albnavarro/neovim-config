@@ -4,7 +4,6 @@ local STYLELINT = "stylelint"
 local SVELTE = "svelte"
 local VUE = "vue"
 local DEFAULT = "default"
-local U = require("utils/tables_utils")
 local TS = require("utils/treesitter_utils")
 
 local linters = {
@@ -65,12 +64,14 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     local spaces = string.rep(" ", colStart - 1)
 
     -- Filter all error for buffer active linter
-    local diagnostiFiltered = U.filter(diagnostic, function(item)
-        -- Excat match ( eslint vs eslint_d )
-        return item.source:match("^" .. ESLINT .. "$")
-            or item.source:match("^" .. ESLINT_D .. "$")
-            or item.source:match("^" .. STYLELINT .. "$")
-    end)
+    local diagnostiFiltered = vim.iter(diagnostic)
+        :filter(function(item)
+            -- Excat match ( eslint vs eslint_d )
+            return item.source:match("^" .. ESLINT .. "$")
+                or item.source:match("^" .. ESLINT_D .. "$")
+                or item.source:match("^" .. STYLELINT .. "$")
+        end)
+        :totable()
 
     -- vim.notify(vim.inspect(diagnostiFiltered))
 
@@ -96,10 +97,10 @@ vim.api.nvim_create_user_command("DisableLinterLineError", function()
     -- vim.notify(source)
 
     -- concatenate errors in one string
-    local error = U.reduce(diagnostiFiltered, function(previous, current, index)
-        local comma = index == 0 and "" or ","
+    local error = vim.iter(diagnostiFiltered):enumerate():fold("", function(previous, index, current)
+        local comma = index == 1 and "" or ","
         return previous .. comma .. current.code
-    end, "")
+    end)
 
     vim.api.nvim_buf_set_lines(0, lineNum - 1, lineNum - 1, false, { formatErrorByLinter(source, error, spaces, lang) })
 end, {})
