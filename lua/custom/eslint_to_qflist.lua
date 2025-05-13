@@ -1,4 +1,3 @@
-local U = require("utils/tables_utils")
 local treeApi = require("nvim-tree.api")
 local is_running = false
 
@@ -11,34 +10,39 @@ local on_out = function(data)
     end
 
     -- get all result
-    local results = {}
-    for _, item in pairs(jsonData) do
-        -- use pcall to avoid error of parsing
-        local row_success, row = pcall(vim.json.decode, item)
-        if row_success then
-            for _, item2 in pairs(row) do
-                table.insert(results, item2)
+    local results = vim.iter(jsonData)
+        :map(function(item)
+            local row_success, row = pcall(vim.json.decode, item)
+            if row_success then
+                return row
             end
-        end
-    end
 
-    -- filter result with error counter > 0
-    local raw_errors = U.filter(results, function(item)
-        return item.errorCount > 0
-    end)
+            return {}
+        end)
+        :flatten()
+        :filter(function(item)
+            return item.errorCount > 0
+        end)
+        :totable()
 
     -- create quilist entries
-    local entries = {}
-    for _, row in pairs(raw_errors) do
-        for _, item in pairs(row.messages) do
-            table.insert(entries, {
-                filename = row.filePath,
-                lnum = item.line,
-                col = item.column,
-                text = item.message,
-            })
-        end
-    end
+    local entries = vim.iter(results)
+        :map(function(group)
+            return vim.iter(group.messages)
+                :map(function(item)
+                    return {
+                        filename = group.filePath,
+                        lnum = item.line,
+                        col = item.column,
+                        text = item.message,
+                    }
+                end)
+                :totable()
+        end)
+        :flatten()
+        :totable()
+
+    vim.print(vim.inspect(entries))
 
     if #entries == 0 then
         is_running = false
