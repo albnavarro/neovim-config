@@ -17,7 +17,6 @@ return {
         local ivy = require("telescope.themes").get_ivy()
         local utils = require("custom/telescope_utils")
         local custom_rg = require("custom/telescope_multi_rg")
-        local U = require("utils/tables_utils")
         local R = require("custom.replace_in_quickfix")
 
         vim.keymap.set("n", "<leader>fa", builtin.builtin, {})
