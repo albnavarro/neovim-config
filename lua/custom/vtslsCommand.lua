@@ -9,6 +9,7 @@ end
 
 -- Organiz Import
 vim.api.nvim_create_user_command("OrganizeImports", function(evt)
+    ---@diagnostic disable-next-line: undefined-field
     if not hasVtsls(evt.bufnr) then
         return
     end
@@ -25,6 +26,7 @@ end, {})
 
 -- Select typescript version
 vim.api.nvim_create_user_command("SelectTypeScriptVersion", function(evt)
+    ---@diagnostic disable-next-line: undefined-field
     if not hasVtsls(evt.bufnr) then
         return
     end
