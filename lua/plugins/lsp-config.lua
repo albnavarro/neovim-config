@@ -100,7 +100,6 @@ return {
                 -- LSP actions
                 local opts = { buffer = ev.buf }
 
-                -- K is neovim default
                 local hover = vim.lsp.buf.hover
                 ---@diagnostic disable-next-line: duplicate-set-field
                 vim.lsp.buf.hover = function()
@@ -124,6 +123,7 @@ return {
                     })
                 end
 
+                map.set("n", "K", vim.lsp.buf.hover, opts)
                 map.set("n", "gd", vim.lsp.buf.definition, opts)
                 map.set("n", "gD", vim.lsp.buf.declaration, opts)
                 map.set("n", "gi", vim.lsp.buf.implementation, opts)
