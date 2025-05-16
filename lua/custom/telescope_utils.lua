@@ -38,14 +38,15 @@ end
 
 -- Find in specific folder.
 function M.find_in_specific_folder()
-    -- local fullPath = vim.api.nvim_buf_get_name(0)
-    local fullPath = vim.fn.expand("%:.")
-    local fullPathLessName = fullPath:match("(.+)%/.+$")
-    if fullPathLessName == nil then
-        return
-    end
+    local path = ""
 
-    return ":Telescope live_grep search_dirs=" .. fullPathLessName
+    vim.ui.input({ prompt = "Enter path: ", default = vim.fn.expand("%:h"), completion = "file" }, function(input)
+        if input ~= nil then
+            path = input
+        end
+    end)
+
+    return ":Telescope live_grep search_dirs=" .. path
 end
 
 return M
