@@ -12,6 +12,7 @@ local function loop_spin(message)
     vim.notify("" .. next_spin() .. " " .. message)
 
     if not shouldSpin then
+        vim.notify("")
         return
     end
 
@@ -30,11 +31,6 @@ end
 function M.stop()
     shouldSpin = false
     spinner_idx = 1
-
-    -- Clear message.
-    vim.defer_fn(function()
-        vim.notify("")
-    end, 125)
 end
 
 return M

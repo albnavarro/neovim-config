@@ -49,7 +49,11 @@ local on_out = function(data)
 
     if #entries == 0 then
         is_running = false
-        vim.notify("no error found")
+
+        -- wait spinner cycle.
+        vim.defer_fn(function()
+            vim.notify("no error found")
+        end, 125)
     end
 
     -- vim.print(vim.inspect(entries))
@@ -67,7 +71,6 @@ end
 
 vim.api.nvim_create_user_command("Eslint", function()
     if is_running then
-        vim.notify("eslint is already running")
         return
     end
 
@@ -98,9 +101,9 @@ vim.api.nvim_create_user_command("Eslint", function()
             on_out(output)
         end,
         on_stderr = function()
-            vim.cmd(":redraw")
             is_running = false
-            vim.notify("no error found")
+            vim.cmd(":redraw")
+            vim.notify("error")
         end,
     })
 end, {})
