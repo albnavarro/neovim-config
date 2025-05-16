@@ -87,9 +87,13 @@ return {
         -- in 0.10 native keybind is <C-W>d
         map.set("n", "gl", vim.diagnostic.open_float)
 
-        -- From 0.10 is in core
-        map.set("n", "[d", vim.diagnostic.goto_prev)
-        map.set("n", "]d", vim.diagnostic.goto_next)
+        vim.keymap.set("n", "[d", function()
+            vim.diagnostic.jump({ count = -1 })
+        end)
+
+        vim.keymap.set("n", "]d", function()
+            vim.diagnostic.jump({ count = 1 })
+        end)
 
         ---
         -- LSP attach
