@@ -2,7 +2,6 @@ return {
     "stevearc/conform.nvim",
     event = "VeryLazy",
     config = function()
-        local U = require("utils/tables_utils")
         local N = require("utils/nvim_utils")
         local TS = require("utils/treesitter_utils")
 

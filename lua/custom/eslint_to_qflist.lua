@@ -2,6 +2,7 @@
 
 local treeApi = require("nvim-tree.api")
 local is_running = false
+local S = require("utils/spinner")
 
 local on_out = function(data)
     -- use pcall to avoid error of parsing
@@ -64,7 +65,7 @@ local on_out = function(data)
     is_running = false
 end
 
-vim.api.nvim_create_user_command("EslintRun", function()
+vim.api.nvim_create_user_command("Eslint", function()
     if is_running then
         vim.notify("eslint is already running")
         return
@@ -77,7 +78,7 @@ vim.api.nvim_create_user_command("EslintRun", function()
 
             -- clear input propt
             vim.cmd(":redraw")
-            vim.print("wait ...")
+            S.start("eslint parsing: " .. path)
         end
     end)
 
@@ -93,6 +94,7 @@ vim.api.nvim_create_user_command("EslintRun", function()
     vim.fn.jobstart(pathParsed, {
         stdout_buffered = true,
         on_stdout = function(_, output)
+            S.stop()
             on_out(output)
         end,
         on_stderr = function()
