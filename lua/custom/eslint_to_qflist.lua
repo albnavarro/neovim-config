@@ -79,21 +79,27 @@ vim.api.nvim_create_user_command("Eslint", function()
     vim.ui.input({ prompt = "Enter path: ", default = "./src/js", completion = "file" }, function(input)
         if input ~= nil then
             path = input
-
-            -- clear input propt
-            vim.cmd(":redraw")
-            S.start("eslint parsing: " .. path)
         end
     end)
 
-    local pathParsed = "npx eslint " .. path .. " --f json"
-    is_running = true
-
-    if path == "" then
+    -- check if directory is valid
+    if vim.fn.isdirectory(path) == 0 then
         is_running = false
-        vim.notify("missing path")
+
+        -- schedule notify to not append multiple notify
+        vim.schedule(function()
+            vim.notify("path: " .. path .. " is not valid")
+        end)
         return
     end
+
+    is_running = true
+    local pathParsed = "npx eslint " .. path .. " --f json"
+
+    -- schedule notify to not append multiple notify
+    vim.schedule(function()
+        S.start("eslint parsing: " .. path)
+    end)
 
     vim.fn.jobstart(pathParsed, {
         stdout_buffered = true,

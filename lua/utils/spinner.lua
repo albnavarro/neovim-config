@@ -20,7 +20,7 @@ local function loop_spin(options)
         return
     end
 
-    vim.notify("" .. next_spin() .. " " .. message)
+    vim.notify(" " .. next_spin() .. " " .. message)
     spinner_idx = spinner_idx + 1
 
     vim.defer_fn(function()
