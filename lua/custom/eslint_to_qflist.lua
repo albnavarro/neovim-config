@@ -53,13 +53,17 @@ local on_out = function(data)
         -- wait spinner cycle.
         vim.defer_fn(function()
             vim.notify("no error found")
+            vim.cmd.cclose()
         end, 125)
+
+        return
     end
 
     -- vim.print(vim.inspect(entries))
 
     -- Create quilist
-    vim.fn.setqflist(entries)
+    -- vim.fn.setqflist(entries)
+    vim.fn.setqflist({}, "r", { title = "ESLINT", items = entries })
 
     -- Close nvim-tree
     treeApi.tree.close()
