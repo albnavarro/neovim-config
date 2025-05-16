@@ -30,14 +30,14 @@ local on_out = function(data)
 
     -- create quilist entries
     local entries = vim.iter(results)
-        :map(function(group)
-            return vim.iter(group.messages)
-                :map(function(item)
+        :map(function(file)
+            return vim.iter(file.messages)
+                :map(function(error)
                     return {
-                        filename = group.filePath,
-                        lnum = item.line,
-                        col = item.column,
-                        text = item.message,
+                        filename = file.filePath,
+                        lnum = error.line,
+                        col = error.column,
+                        text = error.message,
                     }
                 end)
                 :totable()
