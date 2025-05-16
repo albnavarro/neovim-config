@@ -101,10 +101,6 @@ vim.api.nvim_create_user_command("Eslint", function()
             S.stop()
             on_out(output)
         end,
-        on_stderr = function()
-            is_running = false
-            -- vim.cmd(":redraw")
-            -- vim.notify("error")
-        end,
+        -- on_stderr = function() end,
     })
 end, {})
