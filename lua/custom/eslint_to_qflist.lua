@@ -49,12 +49,8 @@ local on_out = function(data)
 
     if #entries == 0 then
         is_running = false
-
-        -- wait spinner cycle.
-        vim.defer_fn(function()
-            vim.notify("no error found")
-            vim.cmd.cclose()
-        end, 125)
+        vim.notify("no error found")
+        vim.cmd.cclose()
 
         return
     end
@@ -64,6 +60,7 @@ local on_out = function(data)
     -- Create quilist
     -- vim.fn.setqflist(entries)
     vim.fn.setqflist({}, "r", { title = "ESLINT", items = entries })
+    vim.notify(#entries .. " error found")
 
     -- Close nvim-tree
     treeApi.tree.close()
@@ -106,8 +103,8 @@ vim.api.nvim_create_user_command("Eslint", function()
         end,
         on_stderr = function()
             is_running = false
-            vim.cmd(":redraw")
-            vim.notify("error")
+            -- vim.cmd(":redraw")
+            -- vim.notify("error")
         end,
     })
 end, {})
