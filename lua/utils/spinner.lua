@@ -1,6 +1,6 @@
 local M = {}
 local spinner = { "⣾", "⣽", "⣻", "⢿", "⡿", "⣟", "⣯", "⣷" }
-local shouldSpin = false
+local should_spin = false
 local spinner_idx = 1
 
 local function next_spin()
@@ -9,7 +9,7 @@ local function next_spin()
 end
 
 local function loop_spin(message)
-    if not shouldSpin then
+    if not should_spin then
         return
     end
 
@@ -22,12 +22,12 @@ local function loop_spin(message)
 end
 
 function M.start(message)
-    shouldSpin = true
+    should_spin = true
     loop_spin(message)
 end
 
 function M.stop()
-    shouldSpin = false
+    should_spin = false
     spinner_idx = 1
 end
 
