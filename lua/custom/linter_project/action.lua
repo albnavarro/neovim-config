@@ -2,6 +2,17 @@ local M = {}
 local tree_api = require("nvim-tree.api")
 local STATE = require("custom/linter_project/state")
 
+function M.decode_output(output)
+    -- use pcall to avoid error of parsing
+    local success, jsonData = pcall(vim.json.decode, vim.json.encode(output))
+    if not success then
+        STATE.set_active(false)
+        return false, nil
+    end
+
+    return true, jsonData
+end
+
 function M.setqflist(options)
     local name = options.name
     local entries = options.entries
