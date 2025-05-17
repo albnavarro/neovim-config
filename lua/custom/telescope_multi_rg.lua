@@ -69,7 +69,7 @@ function M.multi_rg(opts)
                     "--with-filename",
                     "--line-number",
                     "--column",
-                    replace.getCaseSearch(),
+                    replace.get_case_search(),
                 },
             })
                 :flatten(math.huge)

@@ -64,7 +64,7 @@ return {
         -- Update pattern to replace
         local function updateSearch(prompt_bufnr)
             local current_picker = require("telescope.actions.state").get_current_picker(prompt_bufnr)
-            R.updateLastSearch(current_picker:_get_prompt())
+            R.update_current_search(current_picker:_get_prompt())
         end
 
         -- Update pattern to replace and send selected to quicklist

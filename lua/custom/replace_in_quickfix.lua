@@ -1,47 +1,45 @@
-local treeApi = require("nvim-tree.api")
-
--- Main module
+local TREE_API = require("nvim-tree.api")
 local M = {}
 
 -- Smart case default value.
-M.caseSearch = "--fixed-strings"
-M.lastSearch = ""
+local case_search = "--fixed-strings"
+local current_search = ""
 
 -- Enable smart case.
 vim.api.nvim_create_user_command("SmartCaseOn", function()
-    M.caseSearch = "--smart-case"
+    case_search = "--smart-case"
 end, {})
 
 -- Disable smart case.
 vim.api.nvim_create_user_command("SmartCaseOff", function()
-    M.caseSearch = "--fixed-strings"
+    case_search = "--fixed-strings"
 end, {})
 
 -- Replace occurrence in quickFix.
 -- Make a search without smart-case use exact match to void erro with no world match --
 -- cdo %s/absd/dsba/gc | up
 vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
-    if M.caseSearch == "--smart-case" then
+    if case_search == "--smart-case" then
         vim.notify("last grep is in smart-case, run SmartCaseOff!")
         return
     end
 
     -- Close nvim-tree
-    treeApi.tree.close()
+    TREE_API.tree.close()
 
-    local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = M.lastSearch })
+    local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = current_search })
     local user_input_to = vim.fn.input("Replace with: ")
 
     -- Replace only occurrence in quickFix. ( no % used )
     return vim.cmd(":cdo s/" .. user_input_from .. "/" .. user_input_to .. "/gc | up")
 end, {})
 
-M.updateLastSearch = function(value)
-    M.lastSearch = value
+M.update_current_search = function(value)
+    current_search = value
 end
 
-M.getCaseSearch = function()
-    return M.caseSearch
+M.get_case_search = function()
+    return case_search
 end
 
 return M

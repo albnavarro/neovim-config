@@ -15,7 +15,7 @@ local live_grep_in_glob = function(glob_pattern)
             "--with-filename",
             "--line-number",
             "--column",
-            replace.getCaseSearch(),
+            replace.get_case_search(),
             "--glob=" .. (glob_pattern or ""),
         },
     })
