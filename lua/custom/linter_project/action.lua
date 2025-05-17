@@ -22,7 +22,7 @@ function M.setqflist(options)
 
     -- Create quilist
     -- vim.fn.setqflist(entries)
-    vim.fn.setqflist({}, "r", { title = "TSC", items = entries })
+    vim.fn.setqflist({}, "r", { title = name, items = entries })
     vim.notify(#entries .. " error found")
 
     -- Close nvim-tree
