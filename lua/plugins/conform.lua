@@ -2,8 +2,8 @@ return {
     "stevearc/conform.nvim",
     event = "VeryLazy",
     config = function()
-        local N = require("utils/nvim_utils")
-        local TS = require("utils/treesitter_utils")
+        local NVIM_UTILS = require("utils/nvim_utils")
+        local TREESITTER_UTILS = require("utils/treesitter_utils")
 
         require("conform").setup({
             notify_on_error = false,
@@ -94,7 +94,7 @@ return {
 
         -- wholeFile formatter
         vim.api.nvim_create_user_command("FixWithLinter", function()
-            local lang = TS.getTSLanguages()
+            local lang = TREESITTER_UTILS.getTSLanguages()
             local item = getFormatter(lang)
 
             if item == nil then
@@ -108,14 +108,14 @@ return {
 
         -- range formatter
         vim.api.nvim_create_user_command("FixWithLinterRange", function(args)
-            local lang = TS.getTSLanguages()
+            local lang = TREESITTER_UTILS.getTSLanguages()
             local item = getFormatter(lang)
 
             if item == nil then
                 return
             end
 
-            local range = N.gerRange(args)
+            local range = NVIM_UTILS.gerRange(args)
             customFormat(item.formatter, range)
         end, {
             range = true,

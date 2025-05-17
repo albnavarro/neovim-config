@@ -1,4 +1,6 @@
 local SPINNER = require("utils/spinner")
+local COMMON_ACTION = require("custom/linter_project/action")
+local NVIM_UTILS = require("utils/nvim_utils")
 
 -- shared state
 local STATE = require("custom/linter_project/state")
@@ -10,8 +12,21 @@ vim.api.nvim_create_user_command("TSCParse", function()
         return
     end
 
+    local tsc_path = COMMON_ACTION.find_tsc_bin()
+
+    if not NVIM_UTILS.is_executable(tsc_path) then
+        vim.schedule(function()
+            vim.notify(
+                "tsc was not available or found in your node_modules or $PATH. Please run install and try again."
+            )
+        end)
+
+        return
+    end
+
     STATE.set_active(true)
     STATE.set_aborted(false)
+
     local command = "npx tsc"
 
     -- schedule notify to not append multiple notify

@@ -27,4 +27,8 @@ function M.gerRange(args)
     return range
 end
 
+M.is_executable = function(cmd)
+    return cmd and vim.fn.executable(cmd) == 1 or false
+end
+
 return M -- This line exports the table

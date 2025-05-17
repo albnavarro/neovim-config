@@ -1,4 +1,4 @@
-local U = require("utils/nvim_utils")
+local NVIM_UTILS = require("utils/nvim_utils")
 local replace = require("custom.replace_in_quickfix")
 
 -- Main module
@@ -28,7 +28,7 @@ end
 -- Search for exact word in visual mode.
 function M.exact_search_visual()
     require("telescope.builtin").live_grep({
-        default_text = U.getVisualSelection(),
+        default_text = NVIM_UTILS.getVisualSelection(),
         only_sort_text = true,
         additional_args = function()
             return { "--pcre2" }
