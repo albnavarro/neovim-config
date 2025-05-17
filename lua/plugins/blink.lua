@@ -1,4 +1,4 @@
-local utils = require("custom.blinkUtils")
+local NEXT_PROVIDER = require("custom.blink.next_provider")
 
 return {
     "saghen/blink.cmp",
@@ -33,7 +33,7 @@ return {
             ["<C-l>"] = {
                 function(cmp)
                     -- switch to next provider.
-                    cmp.show({ providers = { utils.getNextProvider() } })
+                    cmp.show({ providers = { NEXT_PROVIDER.next() } })
                 end,
             },
         },

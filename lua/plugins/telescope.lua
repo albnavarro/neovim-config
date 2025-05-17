@@ -15,8 +15,8 @@ return {
         local builtin = require("telescope.builtin")
         local actions = require("telescope.actions")
         local ivy = require("telescope.themes").get_ivy()
-        local utils = require("custom/telescope_utils")
-        local custom_rg = require("custom/telescope_multi_rg")
+        local utils = require("custom.telescope.telescope_utils")
+        local custom_rg = require("custom.telescope.telescope_multi_rg")
         local R = require("custom.replace_in_quickfix")
 
         vim.keymap.set("n", "<leader>fa", builtin.builtin, {})
