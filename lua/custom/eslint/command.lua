@@ -33,14 +33,14 @@ vim.api.nvim_create_user_command("EslintStart", function()
 
     STATE.set_active(true)
     STATE.set_aborted(false)
-    local path_parsed = "npx eslint " .. path .. " --f json"
+    local command = "npx eslint " .. path .. " --f json"
 
     -- schedule notify to not append multiple notify
     vim.schedule(function()
         SPINNER.start("eslint parsing: " .. path)
     end)
 
-    current_job_id = vim.fn.jobstart(path_parsed, {
+    current_job_id = vim.fn.jobstart(command, {
         stdout_buffered = true,
         on_stdout = function(_, output)
             SPINNER.stop()
