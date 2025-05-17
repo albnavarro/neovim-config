@@ -37,14 +37,14 @@ vim.api.nvim_create_user_command("EslintStart", function()
 
     -- schedule notify to not append multiple notify
     vim.schedule(function()
-        SPINNER.start("eslint parsing: " .. path .. current_job_id)
+        SPINNER.start("eslint parsing: " .. path)
     end)
 
     current_job_id = vim.fn.jobstart(path_parsed, {
         stdout_buffered = true,
         on_stdout = function(_, output)
             SPINNER.stop()
-            ACTION.on_stdout_callback(output)
+            ACTION.on_stdout(output)
         end,
     })
 end, {})

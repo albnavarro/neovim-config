@@ -2,7 +2,7 @@ local M = {}
 local tree_api = require("nvim-tree.api")
 local STATE = require("custom/eslint/state")
 
-function M.on_stdout_callback(data)
+function M.on_stdout(data)
     -- use pcall to avoid error of parsing
     local success, jsonData = pcall(vim.json.decode, vim.json.encode(data))
     if not success then
