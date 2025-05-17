@@ -1,10 +1,12 @@
 -- https://neovim.io/doc/user/lua.html#vim.iter
 
-local treeApi = require("nvim-tree.api")
-local is_running = false
+local tree_api = require("nvim-tree.api")
 local S = require("utils/spinner")
+local is_running = false
+local current_job_id = 0
+local force_stop = false
 
-local on_out = function(data)
+local on_stdout_callback = function(data)
     -- use pcall to avoid error of parsing
     local success, jsonData = pcall(vim.json.decode, vim.json.encode(data))
     if not success then
@@ -47,11 +49,13 @@ local on_out = function(data)
 
     -- vim.print(vim.inspect(entries))
 
-    if #entries == 0 then
-        is_running = false
-        vim.notify("no error found")
-        vim.cmd.cclose()
+    if #entries == 0 or force_stop then
+        vim.schedule(function()
+            vim.notify(force_stop and "Eslint stop" or "no error found")
+        end)
 
+        is_running = false
+        vim.cmd.cclose()
         return
     end
 
@@ -63,14 +67,15 @@ local on_out = function(data)
     vim.notify(#entries .. " error found")
 
     -- Close nvim-tree
-    treeApi.tree.close()
+    tree_api.tree.close()
 
     -- Open quilist
     vim.cmd.copen()
     is_running = false
 end
 
-vim.api.nvim_create_user_command("Eslint", function()
+-- Start new job
+vim.api.nvim_create_user_command("EslintStart", function()
     if is_running then
         return
     end
@@ -94,19 +99,29 @@ vim.api.nvim_create_user_command("Eslint", function()
     end
 
     is_running = true
-    local pathParsed = "npx eslint " .. path .. " --f json"
+    force_stop = false
+    local path_parsed = "npx eslint " .. path .. " --f json"
 
     -- schedule notify to not append multiple notify
     vim.schedule(function()
         S.start("eslint parsing: " .. path)
     end)
 
-    vim.fn.jobstart(pathParsed, {
+    current_job_id = vim.fn.jobstart(path_parsed, {
         stdout_buffered = true,
         on_stdout = function(_, output)
             S.stop()
-            on_out(output)
+            on_stdout_callback(output)
         end,
-        -- on_stderr = function() end,
     })
+end, {})
+
+-- Stop current job
+vim.api.nvim_create_user_command("EslintStop", function()
+    if not is_running then
+        return
+    end
+
+    force_stop = true
+    vim.fn.jobstop(current_job_id)
 end, {})
