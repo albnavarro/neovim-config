@@ -1,5 +1,7 @@
 local SPINNER = require("utils/spinner")
+local COMMON_ACTION = require("custom/linter_project/action")
 local ACTION = require("custom/linter_project/eslint/action")
+local NVIM_UTILS = require("utils/nvim_utils")
 
 -- shared state
 local STATE = require("custom/linter_project/state")
@@ -28,16 +30,27 @@ vim.api.nvim_create_user_command("EslintParse", function()
         return
     end
 
+    local command = COMMON_ACTION.find_bin_in_node_modules("eslint")
+
+    if not NVIM_UTILS.is_executable(command) then
+        vim.schedule(function()
+            vim.notify(
+                "eslint was not available or found in your node_modules or $PATH. Please run install and try again."
+            )
+        end)
+
+        return
+    end
+
     STATE.set_active(true)
     STATE.set_aborted(false)
-    local command = "npx eslint " .. path .. " --f json"
 
     -- schedule notify to not append multiple notify
     vim.schedule(function()
         SPINNER.start("eslint parsing: " .. path)
     end)
 
-    local id = vim.fn.jobstart(command, {
+    local id = vim.fn.jobstart(command .. " " .. path .. " --f json", {
         stdout_buffered = true,
         on_stdout = function(_, output)
             SPINNER.stop()
