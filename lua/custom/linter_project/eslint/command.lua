@@ -1,14 +1,11 @@
 local SPINNER = require("utils/spinner")
-local ACTION = require("custom/eslint/action")
+local ACTION = require("custom/linter_project/eslint/action")
 
 -- shared state
-local STATE = require("custom/eslint/state")
-
--- private
-local current_job_id = 0
+local STATE = require("custom/linter_project/state")
 
 -- Start new job
-vim.api.nvim_create_user_command("EslintStart", function()
+vim.api.nvim_create_user_command("EslintParse", function()
     if STATE.get_active() then
         return
     end
@@ -40,22 +37,13 @@ vim.api.nvim_create_user_command("EslintStart", function()
         SPINNER.start("eslint parsing: " .. path)
     end)
 
-    current_job_id = vim.fn.jobstart(command, {
+    local id = vim.fn.jobstart(command, {
         stdout_buffered = true,
         on_stdout = function(_, output)
             SPINNER.stop()
             ACTION.on_stdout(output)
         end,
     })
-end, {})
 
--- Stop current job
-vim.api.nvim_create_user_command("EslintStop", function()
-    -- if not is_running then
-    if not STATE.get_active() then
-        return
-    end
-
-    STATE.set_aborted(true)
-    vim.fn.jobstop(current_job_id)
+    STATE.set_current_job_id(id)
 end, {})

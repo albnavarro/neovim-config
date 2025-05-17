@@ -1,6 +1,6 @@
 local M = {}
-local tree_api = require("nvim-tree.api")
-local STATE = require("custom/eslint/state")
+local STATE = require("custom/linter_project/state")
+local COMMON_ACTION = require("custom/linter_project/action")
 
 function M.on_stdout(data)
     -- use pcall to avoid error of parsing
@@ -43,33 +43,10 @@ function M.on_stdout(data)
         :flatten()
         :totable()
 
-    -- vim.print(vim.inspect(entries))
-
-    local is_aborted = STATE.get_aborted()
-
-    if #entries == 0 or is_aborted then
-        vim.schedule(function()
-            vim.notify(is_aborted and "Eslint stop" or "no error found")
-        end)
-
-        STATE.set_active(false)
-        vim.cmd.cclose()
-        return
-    end
-
-    -- vim.print(vim.inspect(entries))
-
-    -- Create quilist
-    -- vim.fn.setqflist(entries)
-    vim.fn.setqflist({}, "r", { title = "ESLINT", items = entries })
-    vim.notify(#entries .. " error found")
-
-    -- Close nvim-tree
-    tree_api.tree.close()
-
-    -- Open quilist
-    vim.cmd.copen()
-    STATE.set_active(false)
+    COMMON_ACTION.setqflist({
+        name = "ESlint",
+        entries = entries,
+    })
 end
 
 return M
