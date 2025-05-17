@@ -1,5 +1,4 @@
 local SPINNER = require("utils/spinner")
-local COMMON_ACTION = require("custom/linter_project/action")
 local ACTION = require("custom/linter_project/eslint/action")
 local NVIM_UTILS = require("utils/nvim_utils")
 
@@ -30,15 +29,8 @@ vim.api.nvim_create_user_command("EslintParse", function()
         return
     end
 
-    local command = COMMON_ACTION.find_bin_in_node_modules("eslint")
-
-    if not NVIM_UTILS.is_executable(command) then
-        vim.schedule(function()
-            vim.notify(
-                "eslint was not available or found in your node_modules or $PATH. Please run install and try again."
-            )
-        end)
-
+    local is_exutable, command = NVIM_UTILS.is_executable_with_warning("eslint")
+    if not is_exutable then
         return
     end
 

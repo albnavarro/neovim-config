@@ -44,14 +44,4 @@ function M.setqflist(options)
     STATE.set_active(false)
 end
 
-M.find_bin_in_node_modules = function(name)
-    local node_modules_binary = vim.fn.findfile("node_modules/.bin/" .. name, ".;")
-
-    if node_modules_binary ~= "" then
-        return node_modules_binary
-    end
-
-    return name
-end
-
 return M

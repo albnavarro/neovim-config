@@ -1,5 +1,6 @@
 local M = {} -- initialize an empty table (or object in JS terms)
 
+-- get visual selection
 function M.getVisualSelection()
     vim.cmd('noau normal! "vy"')
     local text = vim.fn.getreg("v")
@@ -13,6 +14,7 @@ function M.getVisualSelection()
     end
 end
 
+-- get range
 function M.gerRange(args)
     local range = nil
 
@@ -27,8 +29,37 @@ function M.gerRange(args)
     return range
 end
 
-M.is_executable = function(cmd)
+-- find executable in node modules, return path or name ( global fallback )
+M.find_bin_in_node_modules = function(name)
+    local node_modules_binary = vim.fn.findfile("node_modules/.bin/" .. name, ".;")
+
+    if node_modules_binary ~= "" then
+        return node_modules_binary
+    end
+
+    return name
+end
+
+-- check if command is excutable
+function M.is_executable(cmd)
     return cmd and vim.fn.executable(cmd) == 1 or false
+end
+
+-- check if command is excutable and noty if not
+function M.is_executable_with_warning(name)
+    local cmd = M.find_bin_in_node_modules(name)
+
+    if not M.is_executable(cmd) then
+        vim.schedule(function()
+            vim.notify(
+                name .. " was not available or found in your node_modules or $PATH. Please run install and try again."
+            )
+        end)
+
+        return false, cmd
+    end
+
+    return true, cmd
 end
 
 return M -- This line exports the table
