@@ -45,11 +45,11 @@ function M.on_stdout_callback(data)
 
     -- vim.print(vim.inspect(entries))
 
-    local is_stopped = STATE.get_aborted()
+    local is_aborted = STATE.get_aborted()
 
-    if #entries == 0 or is_stopped then
+    if #entries == 0 or is_aborted then
         vim.schedule(function()
-            vim.notify(is_stopped and "Eslint stop" or "no error found")
+            vim.notify(is_aborted and "Eslint stop" or "no error found")
         end)
 
         STATE.set_active(false)
