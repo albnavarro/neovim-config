@@ -1,6 +1,11 @@
 local SPINNER = require("utils/spinner")
 local ACTION = require("custom/eslint/action")
+
+-- shared state
 local STATE = require("custom/eslint/state")
+
+-- private
+local current_job_id = 0
 
 -- Start new job
 vim.api.nvim_create_user_command("EslintStart", function()
@@ -32,18 +37,16 @@ vim.api.nvim_create_user_command("EslintStart", function()
 
     -- schedule notify to not append multiple notify
     vim.schedule(function()
-        SPINNER.start("eslint parsing: " .. path)
+        SPINNER.start("eslint parsing: " .. path .. current_job_id)
     end)
 
-    local id = vim.fn.jobstart(path_parsed, {
+    current_job_id = vim.fn.jobstart(path_parsed, {
         stdout_buffered = true,
         on_stdout = function(_, output)
             SPINNER.stop()
             ACTION.on_stdout_callback(output)
         end,
     })
-
-    STATE.set_current_job(id)
 end, {})
 
 -- Stop current job
@@ -54,5 +57,5 @@ vim.api.nvim_create_user_command("EslintStop", function()
     end
 
     STATE.set_aborted(true)
-    vim.fn.jobstop(STATE.get_current_job())
+    vim.fn.jobstop(current_job_id)
 end, {})
