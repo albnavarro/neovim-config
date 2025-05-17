@@ -28,7 +28,7 @@ vim.api.nvim_create_user_command("ReplaceInQuickFix", function()
     TREE_API.tree.close()
 
     local user_input_from = vim.fn.input({ prompt = "Occurrence to replace: ", default = current_search })
-    local user_input_to = vim.fn.input("Replace with: ")
+    local user_input_to = vim.fn.input({ prompt = "Replace with: ", default = current_search })
 
     -- Replace only occurrence in quickFix. ( no % used )
     return vim.cmd(":cdo s/" .. user_input_from .. "/" .. user_input_to .. "/gc | up")
