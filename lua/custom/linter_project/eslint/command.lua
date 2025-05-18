@@ -25,8 +25,7 @@ vim.api.nvim_create_user_command("EslintParse", function()
         return
     end
 
-    STATE.set_active(true)
-    STATE.set_aborted(false)
+    STATE.reset_state()
 
     -- schedule notify to not append multiple notify
     vim.schedule(function()
@@ -45,15 +44,5 @@ vim.api.nvim_create_user_command("EslintParse", function()
 
         local cmd = vim.system({ command, path, "--f", "json" }, { text = false }, on_exit)
         STATE.set_current_process(cmd)
-
-        -- local id = vim.fn.jobstart(command .. " " .. path .. " --f json", {
-        --     stdout_buffered = true,
-        --     on_stdout = function(_, output)
-        --         SPINNER.stop()
-        --         ACTION.on_stdout(output)
-        --     end,
-        -- })
-        --
-        -- STATE.set_current_job_id(id)
     end)
 end, {})

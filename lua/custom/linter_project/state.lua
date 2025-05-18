@@ -2,8 +2,13 @@ local M = {}
 
 local active = false
 local aborted = false
-local current_job_id = 0
 local current_process = nil
+
+-- Reset global state
+function M.reset_state()
+    M.set_active(true)
+    M.set_aborted(false)
+end
 
 -- Active state.
 function M.set_active(value)
@@ -23,18 +28,7 @@ function M.get_aborted()
     return aborted
 end
 
--- with vim.fn.jobstart()
--- Job aborted by user.
-function M.set_current_job_id(value)
-    current_job_id = value
-end
-
-function M.get_current_job_id()
-    return current_job_id
-end
-
--- with vim.system()
--- Job aborted by user.
+-- Job
 function M.set_current_process(process)
     current_process = process
 end
@@ -44,11 +38,21 @@ function M.kill_current_process()
         return
     end
 
+    M.set_aborted(true)
     return current_process:kill()
 end
 
 function M.clear_current_process()
     current_process = nil
+end
+
+function M.kill()
+    if not M.get_active() then
+        return
+    end
+
+    M.kill_current_process()
+    M.clear_current_process()
 end
 
 return M
