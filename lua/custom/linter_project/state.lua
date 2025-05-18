@@ -3,7 +3,7 @@ local M = {}
 local active = false
 local aborted = false
 local current_job_id = 0
-local current_process
+local current_process = nil
 
 -- Active state.
 function M.set_active(value)
@@ -40,7 +40,15 @@ function M.set_current_process(process)
 end
 
 function M.kill_current_process()
+    if current_process == nil then
+        return
+    end
+
     return current_process:kill()
+end
+
+function M.clear_current_process()
+    current_process = nil
 end
 
 return M
