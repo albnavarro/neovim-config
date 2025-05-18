@@ -25,6 +25,18 @@ vim.api.nvim_create_user_command("TSCParse", function()
     end)
 
     vim.schedule(function()
+        -- TODO: vim.system(): how to kill while running ?
+        -- local on_exit = function(result)
+        --     local stdout = result.stdout and vim.split(result.stdout, "\n") or {}
+        --
+        --     vim.schedule(function()
+        --         ACTION.on_stdout(stdout)
+        --         SPINNER.stop()
+        --     end)
+        -- end
+        --
+        -- vim.system({ command }, { text = true }, on_exit)
+
         local id = vim.fn.jobstart(command, {
             stdout_buffered = true,
             on_stdout = function(_, output)
