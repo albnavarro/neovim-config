@@ -12,12 +12,7 @@ vim.api.nvim_create_user_command("EslintParse", function()
         return
     end
 
-    local path = ""
-    vim.ui.input({ prompt = "Enter path: ", default = "./src/js", completion = "file" }, function(input)
-        if input ~= nil then
-            path = input
-        end
-    end)
+    local path = NVIM_UTILS.use_vim_input_file("./src/js")
 
     -- check if directory is valid
     local directory_is_valid = COMMON_ACTION.is_directory_with_warning(path)

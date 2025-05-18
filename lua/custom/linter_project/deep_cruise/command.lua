@@ -12,15 +12,10 @@ vim.api.nvim_create_user_command("DepcruiseParse", function()
         return
     end
 
-    local path = ""
-    vim.ui.input({ prompt = "Enter path: ", default = "./src", completion = "file" }, function(input)
-        if input ~= nil then
-            path = input
-        end
-    end)
+    local path = NVIM_UTILS.use_vim_input_file("./src")
 
-    local directory_is_valid = COMMON_ACTION.is_directory_with_warning(path)
-    if not directory_is_valid then
+    local path_is_valid = COMMON_ACTION.is_directory_with_warning(path)
+    if not path_is_valid then
         return
     end
 

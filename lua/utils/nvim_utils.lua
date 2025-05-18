@@ -62,4 +62,13 @@ function M.is_executable_with_warning(name)
     return true, cmd
 end
 
+function M.use_vim_input_file(default_path)
+    local path = ""
+    vim.ui.input({ prompt = "Enter path: ", default = default_path, completion = "file" }, function(input)
+        path = input
+    end)
+
+    return path
+end
+
 return M -- This line exports the table
