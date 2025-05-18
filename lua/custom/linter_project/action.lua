@@ -2,6 +2,7 @@ local M = {}
 local tree_api = require("nvim-tree.api")
 local STATE = require("custom/linter_project/state")
 
+-- Decode job output
 function M.decode_output(output)
     -- use pcall to avoid error of parsing
     local success, jsonData = pcall(vim.json.decode, vim.json.encode(output))
@@ -13,6 +14,22 @@ function M.decode_output(output)
     return true, jsonData
 end
 
+-- check if directory is valid with warning
+function M.is_directory_with_warning(path)
+    if vim.fn.isdirectory(path) == 0 then
+        STATE.set_active(false)
+
+        -- schedule notify to not append multiple notify
+        vim.schedule(function()
+            vim.notify("path: " .. path .. " is not valid")
+        end)
+        return false
+    end
+
+    return true
+end
+
+-- Open qflist
 function M.setqflist(options)
     local name = options.name
     local entries = options.entries

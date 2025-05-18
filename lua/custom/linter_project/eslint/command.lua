@@ -1,5 +1,6 @@
 local SPINNER = require("utils/spinner")
 local ACTION = require("custom/linter_project/eslint/action")
+local COMMON_ACTION = require("custom/linter_project/action")
 local NVIM_UTILS = require("utils/nvim_utils")
 
 -- shared state
@@ -19,13 +20,8 @@ vim.api.nvim_create_user_command("EslintParse", function()
     end)
 
     -- check if directory is valid
-    if vim.fn.isdirectory(path) == 0 then
-        STATE.set_active(false)
-
-        -- schedule notify to not append multiple notify
-        vim.schedule(function()
-            vim.notify("path: " .. path .. " is not valid")
-        end)
+    local directory_is_valid = COMMON_ACTION.is_directory_with_warning(path)
+    if not directory_is_valid then
         return
     end
 
