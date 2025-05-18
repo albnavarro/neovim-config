@@ -11,7 +11,7 @@ vim.api.nvim_create_user_command("TSCParse", function()
         return
     end
 
-    local is_exutable, command = NVIM_UTILS.is_executable_with_warning("tsc")
+    local is_exutable, command = NVIM_UTILS.get_bin_with_warning("tsc")
     if not is_exutable then
         return
     end

@@ -46,7 +46,7 @@ function M.is_executable(cmd)
 end
 
 -- check if command is excutable and noty if not
-function M.is_executable_with_warning(name)
+function M.get_bin_with_warning(name)
     local cmd = M.find_bin_in_node_modules(name)
 
     if not M.is_executable(cmd) then

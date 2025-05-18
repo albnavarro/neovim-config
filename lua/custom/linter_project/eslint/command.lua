@@ -20,7 +20,7 @@ vim.api.nvim_create_user_command("EslintParse", function()
         return
     end
 
-    local is_exutable, command = NVIM_UTILS.is_executable_with_warning("eslint")
+    local is_exutable, command = NVIM_UTILS.get_bin_with_warning("eslint")
     if not is_exutable then
         return
     end

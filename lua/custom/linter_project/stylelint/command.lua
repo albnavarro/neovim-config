@@ -20,7 +20,7 @@ vim.api.nvim_create_user_command("StylelintParse", function()
         return
     end
 
-    local is_exutable, command = NVIM_UTILS.is_executable_with_warning("stylelint")
+    local is_exutable, command = NVIM_UTILS.get_bin_with_warning("stylelint")
     if not is_exutable then
         return
     end

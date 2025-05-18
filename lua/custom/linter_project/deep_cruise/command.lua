@@ -19,7 +19,7 @@ vim.api.nvim_create_user_command("DepcruiseParse", function()
         return
     end
 
-    local is_exutable, command = NVIM_UTILS.is_executable_with_warning("depcruise")
+    local is_exutable, command = NVIM_UTILS.get_bin_with_warning("depcruise")
     if not is_exutable then
         return
     end
