@@ -1,14 +1,24 @@
 local STATE = require("custom/linter_project/state")
-local kill_key = "kill current parser"
+local kill_key = "kill current command"
 
-local choices = {
+-- Main table, automatic add [idx]
+local choices = vim.iter({
     { key = "Eslint", command = "EslintParse" },
     { key = "TSC", command = "TSCParse" },
     { key = "Stylelint", command = "StylelintParse" },
     { key = "DeepCruise", command = "DepcruiseParse" },
-    { key = kill_key, command = nil },
-}
+    { key = kill_key, command = "Kill" },
+})
+    :enumerate()
+    :map(function(index, item)
+        return {
+            key = "[" .. index .. "]" .. " " .. item.key,
+            command = item.command,
+        }
+    end)
+    :totable()
 
+-- Extract keys for select value
 local keys = vim.iter(choices)
     :map(function(item)
         return item.key
@@ -18,15 +28,17 @@ local keys = vim.iter(choices)
 -- Select Command
 vim.api.nvim_create_user_command("ProjectCheck", function()
     vim.ui.select(keys, {
-        prompt = "Select command to run",
+        prompt = "ProjectCheck: select command to run",
     }, function(key)
-        -- kill current job
-        if key == kill_key then
+        if not key then
+            return
+        end
+
+        if string.find(key, kill_key) then
             STATE.kill()
             return
         end
 
-        -- start new job
         local current_choice = vim.iter(choices):find(function(item)
             return item.key == key
         end)
