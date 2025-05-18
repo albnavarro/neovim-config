@@ -65,7 +65,9 @@ end
 function M.use_vim_input_file(default_path)
     local path = ""
     vim.ui.input({ prompt = "Enter path: ", default = default_path, completion = "file" }, function(input)
-        path = input
+        if input ~= nil then
+            path = input
+        end
     end)
 
     return path
