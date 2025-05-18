@@ -32,13 +32,15 @@ vim.api.nvim_create_user_command("DepcruiseParse", function()
         SPINNER.start("depcruise parsing: " .. path)
     end)
 
-    local id = vim.fn.jobstart(command .. " " .. path, {
-        stdout_buffered = true,
-        on_stdout = function(_, output)
-            SPINNER.stop()
-            ACTION.on_stdout(output)
-        end,
-    })
+    vim.schedule(function()
+        local id = vim.fn.jobstart(command .. " " .. path, {
+            stdout_buffered = true,
+            on_stdout = function(_, output)
+                SPINNER.stop()
+                ACTION.on_stdout(output)
+            end,
+        })
 
-    STATE.set_current_job_id(id)
+        STATE.set_current_job_id(id)
+    end)
 end, {})

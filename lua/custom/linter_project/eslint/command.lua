@@ -33,13 +33,15 @@ vim.api.nvim_create_user_command("EslintParse", function()
         SPINNER.start("eslint parsing: " .. path)
     end)
 
-    local id = vim.fn.jobstart(command .. " " .. path .. " --f json", {
-        stdout_buffered = true,
-        on_stdout = function(_, output)
-            SPINNER.stop()
-            ACTION.on_stdout(output)
-        end,
-    })
+    vim.schedule(function()
+        local id = vim.fn.jobstart(command .. " " .. path .. " --f json", {
+            stdout_buffered = true,
+            on_stdout = function(_, output)
+                SPINNER.stop()
+                ACTION.on_stdout(output)
+            end,
+        })
 
-    STATE.set_current_job_id(id)
+        STATE.set_current_job_id(id)
+    end)
 end, {})
