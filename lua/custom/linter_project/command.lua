@@ -8,5 +8,10 @@ vim.api.nvim_create_user_command("StopParse", function()
     end
 
     STATE.set_aborted(true)
-    vim.fn.jobstop(STATE.get_current_job_id())
+
+    -- vim.system
+    STATE.kill_current_process()
+
+    -- vim.fn.jobstart
+    -- vim.fn.jobstop(STATE.get_current_job_id())
 end, {})
