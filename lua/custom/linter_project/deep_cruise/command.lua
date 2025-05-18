@@ -24,7 +24,7 @@ vim.api.nvim_create_user_command("DepcruiseParse", function()
         return
     end
 
-    STATE.reset_state()
+    STATE.reset_state_before()
 
     -- schedule notify to not append multiple notify
     vim.schedule(function()

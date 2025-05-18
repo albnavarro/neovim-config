@@ -4,24 +4,21 @@ local active = false
 local aborted = false
 local current_process = nil
 
--- Reset global state
-function M.reset_state()
-    M.set_active(true)
-    M.set_aborted(false)
+-- Reset global state bofore job run
+function M.reset_state_before()
+    active = true
+    aborted = false
 end
 
--- Active state.
-function M.set_active(value)
-    active = value
+-- Reset global state after job end
+function M.reset_state_after()
+    active = false
+    aborted = false
 end
 
+-- Getter
 function M.get_active()
     return active
-end
-
--- Job aborted by user.
-function M.set_aborted(value)
-    aborted = value
 end
 
 function M.get_aborted()
@@ -29,21 +26,21 @@ function M.get_aborted()
 end
 
 -- Job
-function M.set_current_process(process)
-    current_process = process
-end
-
-function M.kill_current_process()
+local function kill_current_process()
     if current_process == nil then
         return
     end
 
-    M.set_aborted(true)
+    aborted = true
     current_process:kill()
 end
 
-function M.clear_current_process()
+local function clear_current_process()
     current_process = nil
+end
+
+function M.set_current_process(process)
+    current_process = process
 end
 
 function M.kill()
@@ -51,8 +48,8 @@ function M.kill()
         return
     end
 
-    M.kill_current_process()
-    M.clear_current_process()
+    kill_current_process()
+    clear_current_process()
 end
 
 return M

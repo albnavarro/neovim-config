@@ -7,7 +7,7 @@ function M.decode_output(output)
     -- use pcall to avoid error of parsing
     local success, jsonData = pcall(vim.json.decode, vim.json.encode(output))
     if not success then
-        STATE.set_active(false)
+        STATE.reset_state_after()
         return false, nil
     end
 
@@ -17,7 +17,7 @@ end
 -- check if directory is valid with warning
 function M.is_directory_with_warning(path)
     if vim.fn.isdirectory(path) == 0 then
-        STATE.set_active(false)
+        STATE.reset_state_after()
 
         -- schedule notify to not append multiple notify
         vim.schedule(function()
@@ -41,12 +41,10 @@ function M.setqflist(options)
             vim.notify(is_aborted and name .. " stop" or "no error found")
         end)
 
-        STATE.set_active(false)
+        STATE.reset_state_after()
         vim.cmd.cclose()
         return
     end
-
-    -- vim.print(vim.inspect(entries))
 
     -- Create quilist
     -- vim.fn.setqflist(entries)
@@ -58,7 +56,7 @@ function M.setqflist(options)
 
     -- Open quilist
     vim.cmd.copen()
-    STATE.set_active(false)
+    STATE.reset_state_after()
 end
 
 return M
