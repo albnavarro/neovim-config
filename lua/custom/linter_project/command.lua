@@ -4,6 +4,7 @@ local kill_key = "kill current parser"
 local choices = {
     { key = "Eslint", command = "EslintParse" },
     { key = "TSC", command = "TSCParse" },
+    { key = "Stylelint", command = "StylelintParse" },
     { key = "DeepCruise", command = "DepcruiseParse" },
     { key = kill_key, command = nil },
 }

@@ -1,4 +1,5 @@
 require("custom.linter_project.tsc")
 require("custom.linter_project.eslint")
+require("custom.linter_project.stylelint")
 require("custom.linter_project.deep_cruise")
 require("custom.linter_project.command")
