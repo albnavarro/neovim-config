@@ -39,7 +39,7 @@ function M.kill_current_process()
     end
 
     M.set_aborted(true)
-    return current_process:kill()
+    current_process:kill()
 end
 
 function M.clear_current_process()
