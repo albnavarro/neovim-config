@@ -14,6 +14,7 @@ end
 function M.reset_state_after()
     active = false
     aborted = false
+    current_process = nil
 end
 
 -- Getter
