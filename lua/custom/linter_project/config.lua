@@ -18,7 +18,7 @@ M.config = {
             end,
             output = "stdout",
             callback = function(output)
-                ESLINT_ACTION.on_stdout(output)
+                return ESLINT_ACTION.on_stdout(output)
             end,
         },
     },
@@ -32,7 +32,7 @@ M.config = {
             end,
             output = "stdout",
             callback = function(output)
-                TSC_ACTION.on_stdout(output)
+                return TSC_ACTION.on_stdout(output)
             end,
         },
     },
@@ -46,7 +46,7 @@ M.config = {
             end,
             output = "stderr",
             callback = function(output)
-                STYLELINT_ACTION.on_stderr(output)
+                return STYLELINT_ACTION.on_stderr(output)
             end,
         },
     },
@@ -60,7 +60,7 @@ M.config = {
             end,
             output = "stdout",
             callback = function(output)
-                DEEP_CRUISE_ACTION.on_stdout(output)
+                return DEEP_CRUISE_ACTION.on_stdout(output)
             end,
         },
     },

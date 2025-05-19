@@ -1,9 +1,7 @@
 local M = {}
-local UTILS = require("custom/linter_project/utils")
 
 function M.on_stdout(output)
-    -- -- get all result
-    local entries = vim.iter(output)
+    return vim.iter(output)
         :map(function(item)
             local filename, lineno, colno, message = item:match("^(.+)%((%d+),(%d+)%)%s*:%s*(.+)$")
             return {
@@ -17,11 +15,6 @@ function M.on_stdout(output)
             return item.filename ~= nil
         end)
         :totable()
-
-    UTILS.setqflist({
-        name = "TSC",
-        entries = entries,
-    })
 end
 
 return M

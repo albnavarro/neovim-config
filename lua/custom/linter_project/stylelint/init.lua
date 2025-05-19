@@ -1,5 +1,4 @@
 local M = {}
-local UTILS = require("custom/linter_project/utils")
 
 function M.on_stderr(output)
     -- get all result
@@ -18,8 +17,7 @@ function M.on_stderr(output)
         end)
         :totable()
 
-    -- create quilist entries
-    local entries = vim.iter(results)
+    return vim.iter(results)
         :map(function(file)
             return vim.iter(file.warnings)
                 :map(function(warining)
@@ -34,11 +32,6 @@ function M.on_stderr(output)
         end)
         :flatten()
         :totable()
-
-    UTILS.setqflist({
-        name = "Stylelint",
-        entries = entries,
-    })
 end
 
 return M

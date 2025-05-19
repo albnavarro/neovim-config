@@ -39,8 +39,13 @@ function M.start(options)
             local output = options.output == "stderr" and UTILS.parse_std_err(result) or UTILS.parse_std_out(result)
 
             vim.schedule(function()
-                options.callback(output)
                 SPINNER.stop()
+                local entries = options.callback(output)
+
+                UTILS.setqflist({
+                    name = options.command,
+                    entries = entries or {},
+                })
             end)
         end
 
