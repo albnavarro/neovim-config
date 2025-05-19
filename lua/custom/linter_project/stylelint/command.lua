@@ -1,6 +1,6 @@
 local SPINNER = require("utils/spinner")
 local ACTION = require("custom/linter_project/stylelint/action")
-local COMMON_ACTION = require("custom/linter_project/action")
+local UTILS = require("custom/linter_project/utils")
 local NVIM_UTILS = require("utils/nvim_utils")
 
 -- shared state
@@ -12,10 +12,10 @@ vim.api.nvim_create_user_command("StylelintParse", function()
         return
     end
 
-    local path = NVIM_UTILS.use_vim_input_file("./src/scss")
+    local path = NVIM_UTILS.use_vim_input_file({ path = "./src/scss" })
 
     -- check if directory is valid
-    local directory_is_valid = COMMON_ACTION.is_directory_with_warning(path)
+    local directory_is_valid = UTILS.is_directory_with_warning(path)
     if not directory_is_valid then
         return
     end
@@ -34,10 +34,10 @@ vim.api.nvim_create_user_command("StylelintParse", function()
 
     vim.schedule(function()
         local on_exit = function(result)
-            local stderr = result.stderr and vim.split(result.stderr, "\n") or {}
+            local stderr = UTILS.parse_std_err(result)
 
             vim.schedule(function()
-                ACTION.on_stdout(stderr)
+                ACTION.on_stderr(stderr)
                 SPINNER.stop()
             end)
         end

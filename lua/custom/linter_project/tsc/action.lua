@@ -1,14 +1,9 @@
 local M = {}
-local COMMON_ACTION = require("custom/linter_project/action")
+local UTILS = require("custom/linter_project/utils")
 
 function M.on_stdout(output)
-    local success, jsonData = COMMON_ACTION.decode_output(output)
-    if not success then
-        return
-    end
-
     -- -- get all result
-    local entries = vim.iter(jsonData)
+    local entries = vim.iter(output)
         :map(function(item)
             local filename, lineno, colno, message = item:match("^(.+)%((%d+),(%d+)%)%s*:%s*(.+)$")
             return {
@@ -23,7 +18,7 @@ function M.on_stdout(output)
         end)
         :totable()
 
-    COMMON_ACTION.setqflist({
+    UTILS.setqflist({
         name = "TSC",
         entries = entries,
     })

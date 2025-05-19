@@ -1,14 +1,9 @@
 local M = {}
-local COMMON_ACTION = require("custom/linter_project/action")
+local UTILS = require("custom/linter_project/utils")
 
 function M.on_stdout(output)
-    local success, jsonData = COMMON_ACTION.decode_output(output)
-    if not success then
-        return
-    end
-
     -- get all result
-    local results = vim.iter(jsonData)
+    local results = vim.iter(output)
         :map(function(item)
             local row_success, row = pcall(vim.json.decode, item)
             if row_success then
@@ -40,7 +35,7 @@ function M.on_stdout(output)
         :flatten()
         :totable()
 
-    COMMON_ACTION.setqflist({
+    UTILS.setqflist({
         name = "ESlint",
         entries = entries,
     })

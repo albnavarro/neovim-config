@@ -1,14 +1,9 @@
 local M = {}
-local COMMON_ACTION = require("custom/linter_project/action")
+local UTILS = require("custom/linter_project/utils")
 
 function M.on_stdout(output)
-    local success, jsonData = COMMON_ACTION.decode_output(output)
-    if not success then
-        return
-    end
-
     -- -- get all result
-    local results = vim.iter(jsonData)
+    local results = vim.iter(output)
         :map(function(item)
             local string_to_parse = vim.split(item, ":")
 
@@ -43,7 +38,7 @@ function M.on_stdout(output)
         end)
         :totable()
 
-    COMMON_ACTION.setqflist({
+    UTILS.setqflist({
         name = "depcruise",
         entries = entries,
     })

@@ -62,9 +62,14 @@ function M.get_bin_with_warning(name)
     return true, cmd
 end
 
-function M.use_vim_input_file(default_path)
+function M.use_vim_input_file(options)
+    options = options or {}
+
+    local default_path = options.path or ""
+    local message = options.message or "Enter path:"
+
     local path = ""
-    vim.ui.input({ prompt = "Enter path: ", default = default_path, completion = "file" }, function(input)
+    vim.ui.input({ prompt = message .. " ", default = default_path, completion = "file" }, function(input)
         if input ~= nil then
             path = input
         end
