@@ -62,7 +62,7 @@ function M.get_bin_with_warning(name)
     return true, cmd
 end
 
-function M.use_vim_input_file(options)
+function M.use_vim_input_path(options)
     options = options or {}
 
     local default_path = options.path or ""

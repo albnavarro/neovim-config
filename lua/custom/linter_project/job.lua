@@ -14,7 +14,7 @@ function M.start(options)
         return
     end
 
-    local path = NVIM_UTILS.use_vim_input_file({ path = options.path })
+    local path = NVIM_UTILS.use_vim_input_path({ path = options.path })
 
     -- check if directory is valid
     local directory_is_valid = UTILS.is_directory_with_warning(path)
