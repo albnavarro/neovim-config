@@ -1,19 +1,14 @@
 local STATE = require("custom/linter_project/state")
-local kill_key = "kill current command"
+local CONFIG = require("custom/linter_project/config")
+local JOB = require("custom/linter_project/job")
 
 -- Main table, automatic add [idx]
-local choices = vim.iter({
-    { key = "Eslint", command = "EslintParse" },
-    { key = "TSC", command = "TSCParse" },
-    { key = "Stylelint", command = "StylelintParse" },
-    { key = "DeepCruise", command = "DepcruiseParse" },
-    { key = kill_key, command = "Kill" },
-})
+local choices = vim.iter(CONFIG.config)
     :enumerate()
     :map(function(index, item)
         return {
             key = "[" .. index .. "]" .. " " .. item.key,
-            command = item.command,
+            options = item.options,
         }
     end)
     :totable()
@@ -34,7 +29,7 @@ vim.api.nvim_create_user_command("ProjectCheck", function()
             return
         end
 
-        if string.find(key, kill_key) then
+        if string.find(key, CONFIG.kill_key) then
             STATE.kill()
             return
         end
@@ -48,6 +43,6 @@ vim.api.nvim_create_user_command("ProjectCheck", function()
             return
         end
 
-        vim.cmd(current_choice.command)
+        JOB.start(current_choice.options)
     end)
 end, {})
