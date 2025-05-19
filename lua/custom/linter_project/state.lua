@@ -26,30 +26,18 @@ function M.get_aborted()
 end
 
 -- Job
-local function kill_current_process()
-    if current_process == nil then
-        return
-    end
-
-    aborted = true
-    current_process:kill()
-end
-
-local function clear_current_process()
-    current_process = nil
-end
-
 function M.set_current_process(process)
     current_process = process
 end
 
 function M.kill()
-    if not M.get_active() then
+    if not active or current_process == nil then
         return
     end
 
-    kill_current_process()
-    clear_current_process()
+    aborted = true
+    current_process:kill()
+    current_process = nil
 end
 
 return M
