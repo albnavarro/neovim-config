@@ -13,8 +13,8 @@ M.config = {
         options = {
             path = "./src/js",
             command = "eslint",
-            job = function(command, path, callback)
-                return vim.system({ command, "--f", "json", path }, {}, callback)
+            job_options = function(command, path)
+                return { command, "--f", "json", path }
             end,
             output = "stdout",
             callback = function(output)
@@ -27,8 +27,8 @@ M.config = {
         options = {
             path = "./",
             command = "tsc",
-            job = function(command, path, callback)
-                return vim.system({ command, "--project", path }, {}, callback)
+            job_options = function(command, path)
+                return { command, "--project", path }
             end,
             output = "stdout",
             callback = function(output)
@@ -41,8 +41,8 @@ M.config = {
         options = {
             path = "./src/scss",
             command = "stylelint",
-            job = function(command, path, callback)
-                return vim.system({ command, "-f", "json", path }, {}, callback)
+            job_options = function(command, path)
+                return { command, "-f", "json", path }
             end,
             output = "stderr",
             callback = function(output)
@@ -55,8 +55,8 @@ M.config = {
         options = {
             path = "./src",
             command = "depcruise",
-            job = function(command, path, callback)
-                return vim.system({ command, path }, {}, callback)
+            job_options = function(command, path)
+                return { command, path }
             end,
             output = "stdout",
             callback = function(output)
