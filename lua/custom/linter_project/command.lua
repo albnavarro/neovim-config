@@ -42,7 +42,7 @@ vim.api.nvim_create_user_command("ProjectCheck", function()
         end)
 
         -- option is not valid
-        if not current_choice then
+        if not current_choice or current_choice.options == nil then
             return
         end
 
