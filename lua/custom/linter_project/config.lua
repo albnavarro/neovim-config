@@ -16,7 +16,7 @@ M.config = {
             command = "eslint",
             error_code = { 2 },
             job_options = function(command, path)
-                return { command, "--f", "json", path }
+                return { command, "--exit-on-fatal-error", "--f", "json", path }
             end,
             output = "stdout",
             callback = function(output)
