@@ -37,8 +37,17 @@ function M.start(options)
 
     vim.schedule(function()
         local on_exit = function(result)
-            -- something whent wrong
-            if vim.tbl_contains(options.error_code, result.code) then
+            -- get fatal error by code
+            local error_code = vim.tbl_contains(options.error_code, result.code)
+
+            -- get fatal error by stdout/stderr content
+            local stdall = (result.stdout or "") .. (result.stderr or "")
+            local fatal_string = vim.iter(options.fatal_string):any(function(item)
+                -- find string with : or a space before
+                return string.find(stdall, "[%s:]" .. item) ~= nil
+            end)
+
+            if error_code or fatal_string then
                 SPINNER.stop()
                 STATE.reset_state_after()
 

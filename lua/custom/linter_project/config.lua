@@ -15,6 +15,7 @@ M.config = {
             path = "./src/js",
             command = "eslint",
             error_code = { 2 },
+            fatal_string = {},
             job_options = function(command, path)
                 return { command, "--exit-on-fatal-error", "--f", "json", path }
             end,
@@ -29,7 +30,17 @@ M.config = {
         options = {
             path = "./",
             command = "tsc",
-            error_code = { 1 },
+            error_code = {},
+            fatal_string = {
+                "TS5057", -- Cannot find tsconfig.json / invalid configuration
+                "TS1803", -- Cannot find project file
+                "ENOENT", -- File system error
+                "EEXIST", -- Permission error
+                "Debug Failure", -- Internal compiler error
+                "Maximum call stack size exceeded", -- Stack overflow
+                "Cannot read property", -- JS runtime error in tsc
+                "Cannot find module", -- Missing dependency
+            },
             job_options = function(command, path)
                 return { command, "--project", path }
             end,
@@ -45,6 +56,7 @@ M.config = {
             path = "./src/scss",
             command = "stylelint",
             error_code = { 1, 64, 78 },
+            fatal_string = {},
             job_options = function(command, path)
                 return { command, "-f", "json", path }
             end,
@@ -59,7 +71,8 @@ M.config = {
         options = {
             path = "./src",
             command = "depcruise",
-            error_code = { 1 },
+            fatal_string = {},
+            error_code = { 1, 2, 3 },
             job_options = function(command, path)
                 return { command, path }
             end,

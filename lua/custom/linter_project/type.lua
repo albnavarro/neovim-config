@@ -6,6 +6,7 @@
 ---     path: string,
 ---     command: string,
 ---     error_code: number[],
+---     fatal_string: string[],
 ---     job_options: LinterProjectConfigJobOptions,
 ---     output: string,
 ---     callback: LinterProjectConfigCallback,
