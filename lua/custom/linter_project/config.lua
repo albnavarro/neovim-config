@@ -14,6 +14,7 @@ M.config = {
         options = {
             path = "./src/js",
             command = "eslint",
+            error_code = { 2 },
             job_options = function(command, path)
                 return { command, "--f", "json", path }
             end,
@@ -28,6 +29,7 @@ M.config = {
         options = {
             path = "./",
             command = "tsc",
+            error_code = { 1 },
             job_options = function(command, path)
                 return { command, "--project", path }
             end,
@@ -42,6 +44,7 @@ M.config = {
         options = {
             path = "./src/scss",
             command = "stylelint",
+            error_code = { 1, 64, 78 },
             job_options = function(command, path)
                 return { command, "-f", "json", path }
             end,
@@ -56,6 +59,7 @@ M.config = {
         options = {
             path = "./src",
             command = "depcruise",
+            error_code = { 1 },
             job_options = function(command, path)
                 return { command, path }
             end,

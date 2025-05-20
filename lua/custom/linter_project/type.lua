@@ -5,6 +5,7 @@
 --- @alias LinterProjectConfigOptions {
 ---     path: string,
 ---     command: string,
+---     error_code: number[],
 ---     job_options: LinterProjectConfigJobOptions,
 ---     output: string,
 ---     callback: LinterProjectConfigCallback,

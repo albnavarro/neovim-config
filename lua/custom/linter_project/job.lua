@@ -37,6 +37,19 @@ function M.start(options)
 
     vim.schedule(function()
         local on_exit = function(result)
+            -- something whent wrong
+            if vim.tbl_contains(options.error_code, result.code) then
+                SPINNER.stop()
+                STATE.reset_state_after()
+
+                vim.schedule(function()
+                    vim.cmd.cclose()
+                    vim.notify(vim.inspect(result))
+                end)
+
+                return
+            end
+
             local output = options.output == "stderr" and UTILS.parse_std_err(result) or UTILS.parse_std_out(result)
 
             vim.schedule(function()
