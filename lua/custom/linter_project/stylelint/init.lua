@@ -1,5 +1,7 @@
 local M = {}
 
+--- @param output string[]
+--- @return LinterProjectEntries
 function M.on_stderr(output)
     -- get all result
     local results = vim.iter(output)

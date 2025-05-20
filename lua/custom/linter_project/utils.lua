@@ -28,6 +28,7 @@ function M.is_directory_with_warning(path)
 end
 
 -- Open qflist
+--- @param options {name: string, entries: LinterProjectEntries|{}}
 function M.setqflist(options)
     options = options or {}
 

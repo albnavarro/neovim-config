@@ -1,6 +1,7 @@
 local M = {} -- initialize an empty table (or object in JS terms)
 
--- get visual selection
+--- get visual selection
+--- @return string
 function M.getVisualSelection()
     vim.cmd('noau normal! "vy"')
     local text = vim.fn.getreg("v")
@@ -29,7 +30,9 @@ function M.gerRange(args)
     return range
 end
 
--- find executable in node modules, return path or name ( global fallback )
+--- find executable in node modules, return path or name ( global fallback )
+--- @param name string
+--- @return string
 M.find_bin_in_node_modules = function(name)
     local node_modules_binary = vim.fn.findfile("node_modules/.bin/" .. name, ".;")
 
@@ -40,12 +43,15 @@ M.find_bin_in_node_modules = function(name)
     return name
 end
 
--- check if command is excutable
+--- check if command is excutable
+--- @return boolean
 function M.is_executable(cmd)
     return cmd and vim.fn.executable(cmd) == 1 or false
 end
 
--- check if command is excutable and noty if not
+--- check if command is excutable and noty if not
+--- @param name string
+--- @return boolean, string
 function M.get_bin_with_warning(name)
     local cmd = M.find_bin_in_node_modules(name)
 
@@ -62,6 +68,8 @@ function M.get_bin_with_warning(name)
     return true, cmd
 end
 
+--- @param options {path: string, message: string}
+--- @return string
 function M.use_vim_input_path(options)
     options = options or {}
 

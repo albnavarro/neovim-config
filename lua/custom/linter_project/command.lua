@@ -2,7 +2,8 @@ local STATE = require("custom/linter_project/state")
 local CONFIG = require("custom/linter_project/config")
 local JOB = require("custom/linter_project/job")
 
--- Main table, automatic add [idx]
+--- Main table, automatic add [idx]
+--- @type LinterProjectConfig
 local choices = vim.iter(CONFIG.config)
     :enumerate()
     :map(function(index, item)
@@ -13,7 +14,8 @@ local choices = vim.iter(CONFIG.config)
     end)
     :totable()
 
--- Extract keys for select value
+--- Extract keys for select value
+--- @type string[]
 local keys = vim.iter(choices)
     :map(function(item)
         return item.key
@@ -34,6 +36,7 @@ vim.api.nvim_create_user_command("ProjectCheck", function()
             return
         end
 
+        --- @type {key: string, options?: LinterProjectConfigOptions}
         local current_choice = vim.iter(choices):find(function(item)
             return item.key == key
         end)

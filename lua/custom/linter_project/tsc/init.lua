@@ -1,5 +1,7 @@
 local M = {}
 
+--- @param output string[]
+--- @return LinterProjectEntries
 function M.on_stdout(output)
     return vim.iter(output)
         :map(function(item)

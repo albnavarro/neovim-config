@@ -1,0 +1,11 @@
+--- @alias LinterProjectEntries {filename:string, lnum: string, col: string, text: string}[]
+--- @alias LinterProjectConfig {key: string, options?: LinterProjectConfigOptions}[]
+--- @alias LinterProjectConfigJobOptions fun(command: string, path:string): string[]
+--- @alias LinterProjectConfigCallback fun(output: string[]): LinterProjectEntries[]
+--- @alias LinterProjectConfigOptions {
+---     path: string,
+---     command: string,
+---     job_options: LinterProjectConfigJobOptions,
+---     output: string,
+---     callback: LinterProjectConfigCallback,
+---  }

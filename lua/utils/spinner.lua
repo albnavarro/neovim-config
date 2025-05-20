@@ -10,6 +10,7 @@ local function next_spin()
     return spinner[spinner_idx]
 end
 
+--- @param options {message: string, id: string}
 local function loop_spin(options)
     local message = options.message
     local id = options.id
@@ -28,6 +29,7 @@ local function loop_spin(options)
     end, 125)
 end
 
+--- @param message string
 function M.start(message)
     should_spin = true
     current_instance_id = UUID.generate()

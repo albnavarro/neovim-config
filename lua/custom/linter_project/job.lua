@@ -7,6 +7,7 @@ local STATE = require("custom/linter_project/state")
 
 local M = {}
 
+--- @param options LinterProjectConfigOptions
 function M.start(options)
     options = options or {}
 

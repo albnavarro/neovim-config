@@ -7,6 +7,7 @@ local M = {}
 
 M.kill_key = "kill current command"
 
+--- @type LinterProjectConfig
 M.config = {
     {
         key = "Eslint",
@@ -64,7 +65,7 @@ M.config = {
             end,
         },
     },
-    { key = M.kill_key, options = nil },
+    { key = M.kill_key },
 }
 
 return M
