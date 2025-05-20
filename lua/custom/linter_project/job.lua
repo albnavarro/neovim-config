@@ -72,7 +72,7 @@ function M.start(options)
             end)
         end
 
-        local cmd = vim.system(options.job_options(command, path), {}, on_exit)
+        local cmd = vim.system(options.job_options(command, path), { text = true }, on_exit)
         STATE.set_current_process(cmd)
     end)
 end
