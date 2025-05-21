@@ -28,7 +28,7 @@ return {
                 "emmet_language_server",
                 "lua_ls",
                 "svelte",
-                "volar",
+                "vue_ls",
                 -- "eslint",
                 -- "stylelint_lsp",
                 "jsonls",
@@ -49,10 +49,7 @@ return {
         vim.lsp.enable("svelte")
         vim.lsp.enable("emmet_language_server")
         vim.lsp.enable("lua_ls")
-        vim.lsp.enable("volar")
-
-        -- old lsp_config.
-        -- lsp_config.volar.setup({})
+        vim.lsp.enable("vue_ls")
 
         -- Global configuration
         vim.diagnostic.config({

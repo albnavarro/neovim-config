@@ -19,7 +19,7 @@ local pathsTable = {
         path = "/typescript-language-server/node_modules/typescript/lib/",
     },
     {
-        package = "volar",
+        package = "vue_ls",
         path = "/vue-language-server/node_modules/typescript/lib",
     },
 }
@@ -43,7 +43,7 @@ return {
                 return vim.fn.isdirectory(path) == 1
             end)
 
-            vim.notify("volar TSDK: " .. firstValidPath)
+            vim.notify("vue_ls TSDK: " .. firstValidPath)
 
             config.init_options.typescript.tsdk = firstValidPath
         end

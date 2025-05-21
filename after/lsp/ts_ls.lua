@@ -2,7 +2,7 @@
 
 -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
 local mason_packages = vim.fn.expand("$MASON/packages")
-local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
+local vue_ls_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
 return {
     filetypes = { "typescript", "javascript", "vue" },
@@ -20,7 +20,7 @@ return {
         plugins = {
             {
                 name = "@vue/typescript-plugin",
-                location = volar_path,
+                location = vue_ls_path,
                 languages = { "vue" },
             },
         },

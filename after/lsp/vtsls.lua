@@ -1,12 +1,12 @@
-local function get_volar_config()
+local function get_vue_ls_config()
     -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
     local mason_packages = vim.fn.expand("$MASON/packages")
-    local volar_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
+    local vue_ls_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
-    return vim.fn.isdirectory(volar_path) == 1
+    return vim.fn.isdirectory(vue_ls_path) == 1
             and {
                 name = "@vue/typescript-plugin",
-                location = volar_path,
+                location = vue_ls_path,
                 languages = { "vue" },
                 configNamespace = "typescript",
                 enableForWorkspaceTypeScriptVersions = true,
@@ -45,7 +45,7 @@ return {
             },
             tsserver = {
                 globalPlugins = {
-                    get_volar_config(),
+                    get_vue_ls_config(),
                 },
             },
         },
