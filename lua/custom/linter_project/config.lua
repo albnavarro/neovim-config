@@ -32,14 +32,7 @@ M.config = {
             command = "tsc",
             error_code = {},
             fatal_string = {
-                "TS5057", -- Cannot find tsconfig.json / invalid configuration
-                "TS1803", -- Cannot find project file
-                "ENOENT", -- File system error
-                "EEXIST", -- Permission error
-                "Debug Failure", -- Internal compiler error
-                "Maximum call stack size exceeded", -- Stack overflow
-                "Cannot read property", -- JS runtime error in tsc
-                "Cannot find module", -- Missing dependency
+                "error TS5057", -- Cannot find tsconfig.json
             },
             job_options = function(command, path)
                 return { command, "--project", path }

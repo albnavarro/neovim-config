@@ -43,8 +43,7 @@ function M.start(options)
             -- get fatal error by stdout/stderr content
             local stdall = (result.stdout or "") .. (result.stderr or "")
             local fatal_string = vim.iter(options.fatal_string):any(function(item)
-                -- find string with : or a space before
-                return string.find(stdall, "[%s:]" .. item) ~= nil
+                return string.find(stdall, item) ~= nil
             end)
 
             if error_code or fatal_string then
