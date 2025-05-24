@@ -35,7 +35,7 @@ M.config = {
                 "error TS5057", -- Cannot find tsconfig.json
             },
             job_options = function(command, path)
-                return { command, "--project", path }
+                return { command, "--noEmit", "--project", path }
             end,
             output = "stdout",
             callback = function(output)
