@@ -30,7 +30,7 @@ setmetatable(proxi_table, {
 })
 
 --
-proxi_table.name = "myName"
-proxi_table.surname = "mySurname"
+proxi_table.name = "my Name"
+proxi_table.surname = "my Surname"
 proxi_table.other = "illegal value"
 print(vim.inspect(my_table))
