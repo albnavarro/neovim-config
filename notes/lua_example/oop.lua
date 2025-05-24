@@ -1,23 +1,44 @@
--- Test: try object oriented basic
-local M = {
-    chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-={}|[]`~",
-    lenght = 40,
-}
+-- Meta class
+local Person = {}
 
--- Imposta il "seed" per il generatore di numeri pseudo-casuali.
-math.randomseed(os.time())
+-- Create new methods for instance
+function Person:new(data)
+    data = data or {}
+    local name = data.name or "default name"
 
-function M.generate(self)
-    local charsTable = vim.iter(vim.gsplit(self.chars, "")):totable()
+    -- Implement prototypes
+    local o = {}
 
-    return vim.iter(charsTable):fold("", function(previous)
-        return previous .. charsTable[math.random(1, self.lenght)]
-    end)
+    -- self is Person becouse use of :
+    ---
+    --- `__index`: The indexing access operation table[key].
+    --- This event happens when table is not a table or when key is not present in table.
+    --- The metavalue is looked up in the metatable of table.
+    -- eg: :getName() is not in person so get it from metatable ( similat ot javascritp prototypes )
+    setmetatable(o, { __index = self })
+
+    self.name = name
+    return o
 end
 
-return M
+-- Methods
+function Person:getName()
+    print("name is:", self.name)
+end
 
--- `:` -> implicit pass `self` to generate() method
---
--- then:
--- current_instance_id = UUID:generate()
+function Person:addSuffix(suffix)
+    self.name = self.name .. (suffix or "")
+end
+
+-- test
+local pippo = Person:new({ name = "pippo" })
+pippo:addSuffix("--1")
+pippo:getName()
+
+local pluto = Person:new({ name = "pluto" })
+pluto:addSuffix("--2")
+pluto:getName()
+
+local paperino = Person:new()
+paperino:addSuffix("--3")
+paperino:getName()
