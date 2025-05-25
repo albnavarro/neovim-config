@@ -1,49 +1,50 @@
----@diagnostic disable: missing-fields
-
 return {
     "nvim-treesitter/nvim-treesitter",
-    branch = "master",
+    lazy = false,
+    branch = "main",
     build = ":TSUpdate",
-    event = { "BufReadPost", "BufNewFile" },
     config = function()
-        require("nvim-treesitter.configs").setup({
-            ensure_installed = {
-                "c",
-                "query",
-                "html",
-                "javascript",
-                "typescript",
-                "jsdoc",
-                "graphql",
-                "css",
-                "scss",
-                "twig",
-                "pug",
-                "php",
-                "json",
-                "lua",
-                "vimdoc",
-                "vim",
-                "svelte",
-                "vue",
-            },
-            sync_install = false,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = false,
-            },
-            indent = {
-                enable = true,
-            },
-            incremental_selection = {
-                enable = true,
-                keymaps = {
-                    init_selection = "+",
-                    node_incremental = "+",
-                    scope_incremental = false,
-                    node_decremental = "_",
-                },
-            },
+        require("nvim-treesitter").install({
+            "html",
+            "javascript",
+            "typescript",
+            "jsdoc",
+            "graphql",
+            "css",
+            "scss",
+            "twig",
+            "pug",
+            "php",
+            "json",
+            "lua",
+            "svelte",
+            "vue",
         })
+
+        -- local ensureInstalled = {
+        --     "query",
+        --     "html",
+        --     "javascript",
+        --     "typescript",
+        --     "jsdoc",
+        --     "graphql",
+        --     "css",
+        --     "scss",
+        --     "twig",
+        --     "pug",
+        --     "php",
+        --     "json",
+        --     "lua",
+        --     "svelte",
+        --     "vue",
+        -- }
+        --
+        -- local alreadyInstalled = require("nvim-treesitter.config").installed_parsers()
+        -- local parsersToInstall = vim.iter(ensureInstalled)
+        --     :filter(function(parser)
+        --         return not vim.tbl_contains(alreadyInstalled, parser)
+        --     end)
+        --     :totable()
+        -- require("nvim-treesitter").install(parsersToInstall)
     end,
 }

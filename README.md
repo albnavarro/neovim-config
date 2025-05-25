@@ -30,3 +30,6 @@
 
 ## Blink Dependencies
 - curl
+
+## Treesitter dependencies:
+npm install -g tree-sitter-cli
