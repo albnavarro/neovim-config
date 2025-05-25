@@ -3,6 +3,8 @@
 -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
 local mason_packages = vim.fn.expand("$MASON/packages")
 local vue_ls_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
+local svelte_ls_path = mason_packages
+    .. "/svelte-language-server/node_modules/typescript-svelte-plugin/node_modules/typescript/lib"
 
 return {
     filetypes = { "typescript", "javascript", "vue" },
@@ -22,6 +24,11 @@ return {
                 name = "@vue/typescript-plugin",
                 location = vue_ls_path,
                 languages = { "vue" },
+            },
+            {
+                name = "typescript-svelte-plugin",
+                location = svelte_ls_path,
+                languages = { "javascript", "typescript", "svelte" },
             },
         },
     },
