@@ -17,8 +17,7 @@ end
 local function get_svelte_ls_config()
     -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
     local mason_packages = vim.fn.expand("$MASON/packages")
-    local svelte_ls_path = mason_packages
-        .. "/svelte-language-server/node_modules/typescript-svelte-plugin/node_modules/typescript/lib"
+    local svelte_ls_path = mason_packages .. "/svelte-language-server"
 
     return vim.fn.isdirectory(svelte_ls_path) == 1
             and {
