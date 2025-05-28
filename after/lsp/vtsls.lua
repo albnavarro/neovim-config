@@ -1,6 +1,7 @@
+-- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+local mason_packages = vim.fn.expand("$MASON/packages")
+
 local function get_vue_ls_config()
-    -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
-    local mason_packages = vim.fn.expand("$MASON/packages")
     local vue_ls_path = mason_packages .. "/vue-language-server/node_modules/@vue/language-server"
 
     return vim.fn.isdirectory(vue_ls_path) == 1
@@ -15,8 +16,6 @@ local function get_vue_ls_config()
 end
 
 local function get_svelte_ls_config()
-    -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
-    local mason_packages = vim.fn.expand("$MASON/packages")
     local svelte_ls_path = mason_packages .. "/svelte-language-server"
 
     return vim.fn.isdirectory(svelte_ls_path) == 1
