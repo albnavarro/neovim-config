@@ -14,6 +14,23 @@ local function get_vue_ls_config()
         or {}
 end
 
+local function get_svelte_ls_config()
+    -- local mason_packages = vim.fn.stdpath("data") .. "/mason/packages"
+    local mason_packages = vim.fn.expand("$MASON/packages")
+    local svelte_ls_path = mason_packages
+        .. "/svelte-language-server/node_modules/typescript-svelte-plugin/node_modules/typescript/lib"
+
+    return vim.fn.isdirectory(svelte_ls_path) == 1
+            and {
+                name = "typescript-svelte-plugin",
+                location = svelte_ls_path,
+                languages = { "svelte" },
+                configNamespace = "typescript",
+                enableForWorkspaceTypeScriptVersions = true,
+            }
+        or {}
+end
+
 return {
     filetypes = { "typescript", "javascript", "vue" },
     settings = {
@@ -46,6 +63,7 @@ return {
             tsserver = {
                 globalPlugins = {
                     get_vue_ls_config(),
+                    get_svelte_ls_config(),
                 },
             },
         },
