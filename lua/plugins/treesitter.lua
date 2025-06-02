@@ -19,6 +19,7 @@ return {
             "lua",
             "svelte",
             "vue",
+            "markdown",
         })
 
         -- local ensureInstalled = {
