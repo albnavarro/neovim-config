@@ -16,6 +16,7 @@ return {
             "pug",
             "php",
             "json",
+            "jsonc",
             "lua",
             "svelte",
             "vue",
