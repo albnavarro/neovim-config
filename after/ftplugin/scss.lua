@@ -7,7 +7,4 @@ O.expandtab = true
 
 -- treesitter
 vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-vim.schedule(function()
-    vim.treesitter.start()
-end)
+vim.treesitter.start()

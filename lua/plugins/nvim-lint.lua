@@ -25,6 +25,18 @@ return {
             end,
         })
 
+        -- Diasable lint for current fileType.
+        vim.api.nvim_create_user_command("DisableLinterByFt", function()
+            local ft = vim.filetype.match({ buf = 0 })
+
+            if not ft then
+                return
+            end
+
+            require("lint").linters_by_ft[ft] = {}
+            vim.diagnostic.reset(nil, 0)
+        end, {})
+
         -- Flat config eslint_d v 13.x
         -- vim.api.nvim_create_user_command("CheckFlatConfig", function()
         --     local root = vim.uv.cwd()
