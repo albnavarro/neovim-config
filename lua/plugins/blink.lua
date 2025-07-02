@@ -137,6 +137,14 @@ return {
                     score_offset = 1,
                     min_keyword_length = 3,
                     fallbacks = {},
+                    opts = {
+                        get_bufnrs = function()
+                            -- or filter to only "normal" buffers and NvimTree
+                            return vim.tbl_filter(function(bufnr)
+                                return vim.bo[bufnr].buftype == "" or vim.bo[bufnr].filetype == "NvimTree"
+                            end, vim.api.nvim_list_bufs())
+                        end,
+                    },
                 },
             },
         },
