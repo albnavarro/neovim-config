@@ -18,6 +18,7 @@ return {
             local id, command, payload = unpack(param)
             ---@diagnostic disable-next-line: missing-fields
             ts_client:exec_cmd({
+                title = "vue_request_forward", -- You can give title anything as it's used to represent a command in the UI, `:h Client:exec_cmd`
                 command = "typescript.tsserverRequest",
                 arguments = {
                     command,
