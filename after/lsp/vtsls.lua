@@ -30,7 +30,13 @@ local function get_svelte_ls_config()
 end
 
 return {
-    filetypes = { "typescript", "javascript", "vue" },
+    filetypes = {
+        "javascript",
+        "javascriptreact",
+        "typescript",
+        "typescriptreact",
+        "vue",
+    },
     settings = {
         javascript = {
             preferences = {
