@@ -32,6 +32,9 @@ return {
                 -- "eslint",
                 -- "stylelint_lsp",
                 "jsonls",
+
+                -- work only lsp
+                "unocss",
             },
         })
 
@@ -50,6 +53,9 @@ return {
         vim.lsp.enable("emmet_language_server")
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("vue_ls")
+
+        -- work only lsp
+        vim.lsp.enable("unocss")
 
         -- Global configuration
         vim.diagnostic.config({
