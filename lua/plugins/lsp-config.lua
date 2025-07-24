@@ -107,36 +107,37 @@ return {
                 -- LSP actions
                 local opts = { buffer = ev.buf }
 
-                local hover = vim.lsp.buf.hover
-                ---@diagnostic disable-next-line: duplicate-set-field
-                vim.lsp.buf.hover = function()
-                    ---@diagnostic disable-next-line: redundant-parameter
-                    return hover({
+                -- hover
+                map.set("n", "K", function()
+                    vim.lsp.buf.hover({
                         border = "rounded",
                         max_height = math.floor(vim.o.lines * 0.5),
                         max_width = math.floor(vim.o.columns * 0.4),
                     })
-                end
+                end, opts)
 
-                -- <C-s> is neovim default
-                local signature_help = vim.lsp.buf.signature_help
-                ---@diagnostic disable-next-line: duplicate-set-field
-                vim.lsp.buf.signature_help = function()
-                    ---@diagnostic disable-next-line: redundant-parameter
-                    return signature_help({
+                -- signature help
+                map.set("n", "gs", function()
+                    vim.lsp.buf.signature_help({
                         border = "rounded",
                         max_height = math.floor(vim.o.lines * 0.5),
                         max_width = math.floor(vim.o.columns * 0.4),
                     })
-                end
+                end, opts)
 
-                map.set("n", "K", vim.lsp.buf.hover, opts)
+                map.set("i", "<C-s>", function()
+                    vim.lsp.buf.signature_help({
+                        border = "rounded",
+                        max_height = math.floor(vim.o.lines * 0.5),
+                        max_width = math.floor(vim.o.columns * 0.4),
+                    })
+                end, opts)
+
                 map.set("n", "gd", vim.lsp.buf.definition, opts)
                 map.set("n", "gD", vim.lsp.buf.declaration, opts)
                 map.set("n", "gi", vim.lsp.buf.implementation, opts)
                 map.set("n", "go", vim.lsp.buf.type_definition, opts)
                 map.set("n", "gr", vim.lsp.buf.references, opts)
-                map.set("n", "gs", vim.lsp.buf.signature_help, opts)
                 map.set("n", "<F2>", vim.lsp.buf.rename, opts)
                 map.set("n", "<F4>", vim.lsp.buf.code_action, opts)
                 map.set("n", "<F3>", function()
