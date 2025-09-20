@@ -25,6 +25,8 @@
 ## Fzf-lua Dependencies:
 
 - zfz: https://github.com/junegunn/fzf
+- BurntSushi/ripgrep.
+- sharkdp/fd ( optional )
 
 ## Blink Dependencies
 - curl

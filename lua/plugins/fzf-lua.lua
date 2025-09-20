@@ -45,6 +45,11 @@ return {
         })
 
         -- Old files
+        keymap.set("n", "<leader>fb", function()
+            FzfLua.builtin()
+        end, {})
+
+        -- Old files
         keymap.set("n", "<leader>o", function()
             FzfLua.oldfiles()
         end, {})
