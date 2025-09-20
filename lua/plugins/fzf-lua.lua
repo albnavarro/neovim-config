@@ -66,11 +66,15 @@ return {
 
         -- grep string smart case
         keymap.set("n", "<leader>fg", function()
+            ReplaceQf.update_search_fixed(false)
+
             FzfLua.live_grep({})
         end, {})
 
         -- grep string exact match
         keymap.set("n", "<leader>fG", function()
+            ReplaceQf.update_search_fixed(true)
+
             FzfLua.live_grep({
                 rg_opts = "--column --line-number --no-heading --color=always --fixed-strings --max-columns=4096 -e",
             })
