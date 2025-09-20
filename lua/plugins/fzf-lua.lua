@@ -4,12 +4,13 @@ return {
     config = function()
         local fzf = require("fzf-lua")
         local keymap = vim.keymap
-        local R = require("custom.replace_in_quickfix")
+        local ReplaceQf = require("custom.replace_in_quickfix")
 
         -- Glob: <text> -- *.js
 
+        -- Update replace in quickfix module.
         local send_to_qf = function(selected, opts)
-            R.update_current_search(opts.last_query)
+            ReplaceQf.update_current_search(opts.last_query)
             require("fzf-lua.actions").file_sel_to_qf(selected, opts)
         end
 
