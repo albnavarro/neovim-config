@@ -15,31 +15,31 @@ return {
         end
 
         fzf.setup({
-            winopts = {
-                split = "bo new",
-                preview = {
-                    layout = "flex",
-                    default = "builtin",
-                    winopts = {
-                        split = "vert new",
-                    },
-                },
-            },
+            -- ivy like
+            -- winopts = {
+            --     split = "bo new",
+            --     preview = {
+            --         layout = "flex",
+            --         default = "builtin",
+            --         winopts = {
+            --             split = "vert new",
+            --         },
+            --     },
+            -- },
             defaults = {
                 color_icons = false,
                 formatter = "path.filename_first",
             },
             actions = {
                 files = {
-                    ["enter"] = FzfLua.actions.file_edit_or_qf,
-                    ["ctrl-s"] = FzfLua.actions.file_split,
-                    ["ctrl-v"] = FzfLua.actions.file_vsplit,
-                    ["ctrl-t"] = FzfLua.actions.file_tabedit,
+                    true,
                     ["ctrl-o"] = send_to_qf,
-                    ["alt-Q"] = FzfLua.actions.file_sel_to_ll,
-                    ["alt-i"] = FzfLua.actions.toggle_ignore,
-                    ["alt-h"] = FzfLua.actions.toggle_hidden,
-                    ["alt-f"] = FzfLua.actions.toggle_follow,
+                },
+            },
+            keymap = {
+                fzf = {
+                    true,
+                    ["ctrl-a"] = "toggle-all",
                 },
             },
         })
