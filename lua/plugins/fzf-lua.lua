@@ -108,13 +108,8 @@ return {
             FzfLua.lsp_references()
         end, {})
 
-        -- Find definition
-        keymap.set("n", "<leader>fd", function()
-            FzfLua.lsp_definitions()
-        end, {})
-
         -- Find diagnosti in current document
-        keymap.set("n", "<leader>fe", function()
+        keymap.set("n", "<leader>fd", function()
             FzfLua.lsp_document_diagnostics()
         end, {})
 
