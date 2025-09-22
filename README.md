@@ -1,10 +1,5 @@
 ### PERSONAL NEOVIM CONFIG
 
-#### Use appImage alias example (.bashrc/.zshrc):
-```
-alias neovim='/home/user/appimage/nvim.appimage'
-```
-
 ## Install separately ( with Mason ):
 - eslint_d
 - prettierd
@@ -32,22 +27,6 @@ alias neovim='/home/user/appimage/nvim.appimage'
 - zfz: https://github.com/junegunn/fzf
 - BurntSushi/ripgrep.
 - sharkdp/fd ( optional )
-
-#### fzf terminal (.bashrc/.zshrc), open directory.
-```
-fcd() {
-    local file
-    file=$(fzf) && cd $(dirname "$file") && pwd && ls -la
-}
-```
-
-#### fzf terminal (.bashrc/.zshrc), open file in neovim.
-```
-ffo() {
-    local file
-    file=$(fzf) && neovim "$file"
-}
-```
 
 ## Blink Dependencies
 - curl
