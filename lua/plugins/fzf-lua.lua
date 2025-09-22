@@ -42,6 +42,9 @@ return {
                     ["ctrl-a"] = "toggle-all",
                 },
             },
+            oldfiles = {
+                include_current_session = true,
+            },
         })
 
         -- Old files
@@ -52,6 +55,11 @@ return {
         -- Old files
         keymap.set("n", "<leader>o", function()
             FzfLua.oldfiles()
+        end, {})
+
+        -- Open buffer
+        keymap.set("n", "<leader>fb", function()
+            FzfLua.buffers()
         end, {})
 
         -- files
