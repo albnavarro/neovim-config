@@ -6,6 +6,9 @@ return {
         local keymap = vim.keymap
         local ReplaceQf = require("custom.replace_in_quickfix")
 
+        -- Use fzf for vim.ui.select
+        fzf.register_ui_select()
+
         -- Glob: <text> -- *.js
 
         -- Update replace in quickfix module.
