@@ -116,9 +116,14 @@ return {
             FzfLua.lsp_document_diagnostics()
         end, {})
 
-        -- Find reference
+        -- Find reference.
         keymap.set("n", "<leader>fl", function()
             FzfLua.resume()
+        end, {})
+
+        -- Find in neovim config.
+        keymap.set("n", "<leader>fn", function()
+            FzfLua.files({ cwd = vim.fn.stdpath("config") })
         end, {})
 
         -- Find in current file folder
