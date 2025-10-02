@@ -10,6 +10,7 @@ return {
         fzf.register_ui_select()
 
         -- Glob: <text> -- *.js
+        -- Paste from register: <C-\><C-N> <leader>v/p
 
         -- Update replace in quickfix module.
         local send_to_qf = function(selected, opts)
