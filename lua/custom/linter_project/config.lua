@@ -65,7 +65,8 @@ M.config = {
             path = "./src",
             command = "depcruise",
             fatal_string = {},
-            error_code = { 1, 2, 3 },
+            -- error_code = { 1, 2, 3 },
+            error_code = { 2, 3 },
             job_options = function(command, path)
                 return { command, path }
             end,
