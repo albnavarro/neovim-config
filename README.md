@@ -33,3 +33,6 @@
 
 ## Treesitter dependencies:
 npm install -g tree-sitter-cli
+
+#### By version es:
+npm install -g tree-sitter-cli@0.25.10
