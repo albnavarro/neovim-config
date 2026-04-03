@@ -24,7 +24,7 @@ return {
                 -- "ts_ls", -- Lsp config use ts_ls not mason
                 "vtsls",
                 "html",
-                "cssls",
+                -- "cssls",
                 "emmet_language_server",
                 "lua_ls",
                 "svelte",
@@ -47,7 +47,7 @@ return {
         -- vim.lsp.enable("eslint")
         vim.lsp.enable("vtsls")
         vim.lsp.enable("html")
-        vim.lsp.enable("cssls")
+        -- vim.lsp.enable("cssls")
         vim.lsp.enable("jsonls")
         vim.lsp.enable("svelte")
         vim.lsp.enable("emmet_language_server")
