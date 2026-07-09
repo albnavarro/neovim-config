@@ -29,6 +29,7 @@ return {
                 "lua_ls",
                 "svelte",
                 "vue_ls",
+                "tailwindcss",
                 -- "eslint",
                 -- "stylelint_lsp",
                 "jsonls",
@@ -53,6 +54,7 @@ return {
         vim.lsp.enable("emmet_language_server")
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("vue_ls")
+        vim.lsp.enable("tailwindcss")
 
         -- work only lsp
         -- vim.lsp.enable("unocss")
