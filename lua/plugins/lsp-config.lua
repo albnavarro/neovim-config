@@ -23,7 +23,7 @@ return {
             ensure_installed = {
                 -- "ts_ls", -- Lsp config use ts_ls not mason
                 "vtsls",
-                "tsgo",
+                -- "tsc",
                 "html",
                 "cssls",
                 "emmet_language_server",
@@ -48,7 +48,7 @@ return {
         -- vim.lsp.enable("stylelint_lsp")
         -- vim.lsp.enable("eslint")
         -- vim.lsp.enable("vtsls")
-        vim.lsp.enable("tsgo")
+        vim.lsp.enable("tsc")
         vim.lsp.enable("html")
         vim.lsp.enable("cssls")
         vim.lsp.enable("jsonls")
