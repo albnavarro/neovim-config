@@ -48,6 +48,15 @@ map("n", "<C-Down>", "<cmd>resize -4<cr>", { desc = "Decrease window height" })
 map("n", "<C-Left>", "<cmd>vertical resize -4<cr>", { desc = "Decrease window width" })
 map("n", "<C-Right>", "<cmd>vertical resize +4<cr>", { desc = "Increase window width" })
 
+-- Close multicursor.
+local function multicursors_clear_all()
+    vim.api.nvim_buf_clear_namespace(0, vim.api.nvim_create_namespace("nvim.multicursor"), 0, -1)
+end
+
+vim.keymap.set("n", "<C-q>", multicursors_clear_all, {
+    desc = "clear all (multi)cursors",
+})
+
 --  Paste from register 0
 map("n", "<Leader>p", '"0p')
 map("n", "<Leader>P", '"0P')
