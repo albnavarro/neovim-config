@@ -68,7 +68,7 @@ return {
             virtual_lines = false,
             signs = true,
             update_in_insert = false,
-            underline = true,
+            underline = false,
             float = { border = "rounded" },
         })
 
