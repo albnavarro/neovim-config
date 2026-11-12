@@ -20,6 +20,7 @@ return {
             "svelte",
             "vue",
             "blade",
+            "liquid",
         })
     end,
 }

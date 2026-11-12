@@ -12,5 +12,6 @@ return {
         "typescriptreact",
         "twig",
         "php",
+        "liquid",
     },
 }

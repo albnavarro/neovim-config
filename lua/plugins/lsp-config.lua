@@ -34,6 +34,7 @@ return {
                 -- "eslint",
                 -- "stylelint_lsp",
                 "jsonls",
+                "shopify_theme_ls",
 
                 -- work only lsp
                 -- "unocss",
@@ -56,6 +57,7 @@ return {
         vim.lsp.enable("emmet_language_server")
         vim.lsp.enable("lua_ls")
         vim.lsp.enable("vue_ls")
+        vim.lsp.enable("shopify_theme_ls")
         -- vim.lsp.enable("tailwindcss")
 
         -- work only lsp
